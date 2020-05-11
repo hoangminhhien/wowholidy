@@ -67,11 +67,6 @@
 	</style>
 </head>
 <body>
-	@if (session('status'))
-	    <div class="alert alert-success">
-	        {{ session('status') }}
-	    </div>
-	@endif
 	<div id="wrapper">
 		<!-- <div class="header"> -->
 			<label class="title">Quản trị đơn hàng</label>

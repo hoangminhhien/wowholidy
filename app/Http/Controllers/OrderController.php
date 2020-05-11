@@ -42,9 +42,17 @@ class OrderController extends Controller
     	return view('order.index', compact('listOrder', 'request'));
     }
     public function create(){
-    	return view('order._formCreate');
+        if(Auth::user() == null){
+            return redirect()->route('login');
+        }
+        $role = Auth::user()->role;
+    	return view('order._formCreate', compact('role'));
     }
     public function edit($id){
+        if(Auth::user() == null){
+            return redirect()->route('login');
+        }
+        $role = Auth::user()->role;
         $response = Order::where('id', $id)->first();
         // dd($response->other);
         $couthHotel = 0;
@@ -65,7 +73,7 @@ class OrderController extends Controller
                 $coutPayment += (int)$payment['valuePayment'];
             }
         }
-        return view('order._formEdit', compact('response', 'couthHotel', 'countOther', 'coutPayment'));
+        return view('order._formEdit', compact('response', 'couthHotel', 'countOther', 'coutPayment', 'role'));
     }
     public function store(Request $request){
         // dd($request->all());
@@ -100,6 +108,7 @@ class OrderController extends Controller
     	return response()->json(['httpCode'=>200,'message'=>'Tạo thành công']);
     }
     public function update(Request $request){
+        // dd($request->all());
         $id = $request['id'];
         $update = Order::find($id)->update([
             'nameSaler' => $request['nameSaler'],

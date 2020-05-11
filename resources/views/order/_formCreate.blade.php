@@ -401,6 +401,9 @@
                         <th>Tiền <button type="button" class="btn btn-link addPayment"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></th>
                         <th>Ngày</th>
                         <th>Đính kèm file</th>
+                        <th>Nhập mã FT</th>
+                        <th>Xác nhận cho nợ</th>
+                        <th>Ghi chú</th>
                         <th></th>
                     </tr>
                     </thead>
@@ -414,6 +417,19 @@
                 		</td>
                 		<td>
                 			<input type="file" name="imagePayment" class="form-control imagePayment">
+                		</td>
+                		<td>
+                			<input type="text" name="codeFT" class="form-control codeFT" @if($role == 1) disabled @endif>
+                		</td>
+                		<td>
+                			<select class="browser-default custom-select confirm" name="confirm" @if($role == 1) disabled @endif>
+							  	<option value="" selected>--Lựa chọn--</option>
+							  	<option value="0">Xác nhận</option>
+							  	<option value="1">Không xác nhận</option>
+							</select>
+                		</td>
+                		<td>
+                			<input type="text" name="notePayment" class="form-control notePayment">
                 		</td>
                 	</tr>
                     </tbody>
@@ -596,8 +612,11 @@
 	    	$('.countPayment').val(parseInt(valuePayment) + parseInt(countValue));
 	    	var datePayment = $('.datePayment').val();
 	    	var imagePayment = $('.imagePayment').val();
+	    	var codeFT = $('.codeFT').val();
+	    	var confirm = $('.confirm').val();
+	    	var notePayment = $('.notePayment').val();
 	    	$('#tblPayment tbody').append(`<tr class='data'>
-	    		<td>`+valuePayment+`</td><td>`+datePayment+`</td><td>`+imagePayment.substr(12, imagePayment.length-1)+`</td><td><i class="remove fa fa-times removeRow`+index+`" aria-hidden="true" style="cursor: pointer;"></i></td>
+	    		<td>`+valuePayment+`</td><td>`+datePayment+`</td><td>`+imagePayment.substr(12, imagePayment.length-1)+`<td>`+codeFT+`</td><td>`+confirm+`</td><td>`+notePayment+`</td></td><td><i class="remove fa fa-times removeRow`+index+`" aria-hidden="true" style="cursor: pointer;"></i></td>
 	    		</tr>`);
 	    	$('.valuePayment, .datePayment, .imagePayment').val('');
 	    });
@@ -696,6 +715,9 @@
 					valuePayment: $(this).find("td:eq(0)").text(),
 					datePayment: $(this).find("td:eq(1)").text(),
 					imagePayment: $(this).find("td:eq(2)").text(),
+					codeFT: $(this).find("td:eq(3)").text(),
+					confirm: $(this).find("td:eq(4)").text(),
+					notePayment: $(this).find("td:eq(5)").text(),
 				});
 	        });
 		    $.ajax({

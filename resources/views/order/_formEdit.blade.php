@@ -495,6 +495,9 @@
                         <th>Tiền <button type="button" class="btn btn-link addPayment"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></th>
                         <th>Ngày</th>
                         <th>Đính kèm file</th>
+                        <th>Nhập mã FT</th>
+                        <th>Xác nhận cho nợ</th>
+                        <th>Ghi chú</th>
                         <th></th>
                     </tr>
                     </thead>
@@ -509,20 +512,53 @@
                 		<td>
                 			<input type="file" name="imagePayment" class="form-control imagePayment">
                 		</td>
+                		<td>
+                			<input type="text" name="codeFT" class="form-control codeFT" @if($role == 1) disabled @endif>
+                		</td>
+                		<td>
+                			<select class="browser-default custom-select confirm" name="confirm" @if($role == 1) disabled @endif>
+							  	<option value="" selected>--Lựa chọn--</option>
+							  	<option value="0">Chưa xác nhận</option>
+							  	<option value="1">Đã xác nhận</option>
+							</select>
+                		</td>
+                		<td>
+                			<input type="text" name="notePayment" class="form-control notePayment">
+                		</td>
                 	</tr>
                 	@if($response['payment'] != null)
-                	@foreach($response['payment'] as $res)
-                	<tr class="payment data">
+                	@foreach($response['payment'] as $key=>$res)
+                	<tr class="payment{!! $key !!} updatePayment data">
                 		<td>
-                			<label> {!! $res['valuePayment'] !!}</label>
+                			<input type="text" name="" class="form-control valuePayment{!! $key !!} common-currency" value="{!! $res['valuePayment'] !!}">
+	                		<label class="valuePayments{!! $key !!}"> {!! $res['valuePayment'] !!}</label>
                 		</td>
 	                	<td>
-            				<label> {!! $res['datePayment'] !!}</label>
+	                		<input type="text" name="" class="form-control datePayment{!! $key !!} date" value="{!! $res['datePayment'] !!}">
+	                		<label class="datePayments{!! $key !!}"> {!! $res['datePayment'] !!}</label>
 	                	</td>
 	                	<td>
-            				<label> {!! $res['imagePayment'] !!}</label>
+	                		<input type="file" name="" class="form-control imagePayment{!! $key !!}" value="{!! $res['imagePayment'] !!}">
+	                		<label class="imagePayments{!! $key !!}"> {!! $res['imagePayment'] !!}</label>
 	                	</td>
 	                	<td>
+	                		<input type="text" name="" class="form-control codeFT{!! $key !!}" value="{!! $res['codeFT'] !!}">
+	                		<label class="codeFTs{!! $key !!}"> {!! $res['codeFT'] !!}</label>
+	                	</td>
+	                	<td>
+	                		<label class="confirms{!! $key !!}"> {!! $res['confirm'] !!}</label>
+	                	</td>
+	                	<td>
+	                		<input type="text" name="" class="form-control notePayment{!! $key !!}" value="{!! $res['notePayment'] !!}">
+	                		<label class="notePayments{!! $key !!}"> {!! $res['notePayment'] !!}</label>
+	                	</td>
+	                	<td>
+	                		<button type="button" class="btn btn-link savePayment savePayment{!! $key !!}" data-id="{!! $key !!}" title="Lưu" style="display: none;">
+                			<i class="fa fa-check-circle" aria-hidden="true"></i>
+	                		</button>
+	                		<button type="button" class="btn btn-link editPayment" data-id="{!! $key !!}" title="Sửa">
+	                			<i class="fa fa-minus-circle" aria-hidden="true"></i>
+	                		</button>
 	                	</td>
                 	</tr>
                 	@endforeach
@@ -703,6 +739,30 @@
 	    	$('.other'+id+' label').toggle();
             $('.other'+id+' input:text').toggle();
 	    });
+
+	    $('.updatePayment label').show();
+	    $('.updatePayment input:text, .updatePayment input:file').hide();
+	    $('.editPayment').click(function(){
+	    	var id = $(this).data('id');
+            $('.payment'+id+' label').toggle();
+            $('.payment'+id+' input:text').toggle();
+            $('.savePayment'+id).toggle();
+	    });
+	    $('.savePayment').click(function(){
+	    	var id = $(this).data('id');
+	    	$(this).toggle();
+	    	console.log(id);
+	    	$('.countPayment').val(parseInt($('.countPayment').val()) - parseInt($('.valuePayments'+id).text()) + parseInt($('.valuePayment'+id).val()));
+	    	$('.valuePayments'+id).text($('.valuePayment'+id).val());
+	    	$('.datePayments'+id).text($('.datePayment'+id).val());
+	    	$('.imagePayments'+id).text($('.imagePayment'+id).val());
+	    	$('.codeFTs'+id).text($('.codeFT'+id).val());
+	    	$('.valueLable'+id).text($('.valueOther'+id).val());
+	    	$('.notePayments'+id).text($('.notePayment'+id).val());
+	    	$('.payment'+id+' label').toggle();
+            $('.payment'+id+' input:text, .payment'+id+' input:file').toggle();
+	    });
+
 	    $('body').delegate('.update_order', 'click', function (){
 	    	countOrder = countOrder + parseInt($('.totalValueHotel').text()) + parseInt($('.totalValueOther').text()) + parseInt($('.airValue').val());
 	    	console.log(countOrder);
@@ -751,6 +811,9 @@
 					valuePayment: $(this).find("td:eq(0)").text(),
 					datePayment: $(this).find("td:eq(1)").text(),
 					imagePayment: $(this).find("td:eq(2)").text(),
+					codeFT: $(this).find("td:eq(3)").text(),
+					confirm: $(this).find("td:eq(4)").text(),
+					notePayment: $(this).find("td:eq(5)").text(),
 				});
 	        });
 		    $.ajax({
