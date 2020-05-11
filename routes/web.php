@@ -23,3 +23,7 @@ Route::group(['prefix' => 'order'], function () {
     Route::post('/read', 'OrderController@read')->name('order.read');
     Route::get('/export', 'OrderController@export')->name('order.export');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

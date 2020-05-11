@@ -6,9 +6,13 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Helpers\FileHelper;
 use Symfony\Component\HttpFoundation\StreamedResponse;
+use Illuminate\Support\Facades\Auth;
 class OrderController extends Controller
 {
     public function index(Request $request){
+        if(Auth::user() == null){
+            return redirect()->route('login');
+        }
         $request = $request->all();
         $data = [];
         $order = isset($request['order']) ? $request['order'] : '';
