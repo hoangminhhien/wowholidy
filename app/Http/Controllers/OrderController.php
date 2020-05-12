@@ -13,6 +13,7 @@ class OrderController extends Controller
         if(Auth::user() == null){
             return redirect()->route('login');
         }
+        $role = Auth::user()->role;
         $request = $request->all();
         $data = [];
         $order = isset($request['order']) ? $request['order'] : '';
@@ -39,7 +40,7 @@ class OrderController extends Controller
         }
         $listOrder = $query->orderBy('updated_at', 'desc')->paginate(15);
         // dd($query);
-    	return view('order.index', compact('listOrder', 'request'));
+    	return view('order.index', compact('listOrder', 'request', 'role'));
     }
     public function create(){
         if(Auth::user() == null){
@@ -54,7 +55,7 @@ class OrderController extends Controller
         }
         $role = Auth::user()->role;
         $response = Order::where('id', $id)->first();
-        // dd($response->other);
+        // dd($response->payment);
         $couthHotel = 0;
         $countOther = 0;
         $coutPayment = 0;

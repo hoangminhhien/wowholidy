@@ -163,14 +163,18 @@
 				<div class="col-4">
 				</div>
 				<div class="col-4">
+					@if($role == 2 || $role == 3)
 					<button type="button" style="margin: 2px" onclick="window.location = '{{route('order.export')}}'" class="btn bg-success btn-sm mr-2"><i class="icon-add-to-list"></i>
                     Xuất excel
                 	</button>
+                	@endif
+                	@if($role == 1 || $role == 2)
                 	<a href="{!! route('order.create') !!}">
 	                	<button type="button" style="margin: 2px" class="btn bg-primary btn-sm mr-2">
 	                    <i class="fa fa-plus" aria-hidden="true"></i>Đơn hàng mới
 	                	</button>
                 	</a>
+                	@endif
 				</div>
 			</div>
 			<table id="tblDataTable" class="table table-xs data-table table-bordered">
@@ -222,9 +226,14 @@
 	            			{!! $order->countValue !!}
 	            		</td>
 	            		<td>
+	            			@php
+	            				$countValuePay = 0;
+	            			@endphp
 	            			@if($order->payment != null)
 	            				@foreach($order->payment as $payment)
-	            				Lần {!!  $payment['number'] !!}: {!!  $payment['valuePayment'] !!}<br>
+	            				@if(isset($payment['codeFT']) && $payment['codeFT'] != null)
+	            					{!! $countValuePay += $payment['valuePayment'] !!}
+	            				@endif
 	            				@endforeach
 	            			@endif
 	            		</td>
@@ -259,7 +268,25 @@
 	            				@endforeach
 	            			@endif
 	            		</td>
-	            		<td></td>
+	            		<td>
+	            			Sales 
+	            			<br>
+	            			Kế toán 
+	            			@foreach($order->payment as $payments)
+	            				@if($payments == null || $payments['confirm'] == 0)
+	            				<div style="background-color: #6c757d; width: 10px; height: 10px; border-radius: 5px"></div>
+	            				@elseif($payments != null || $payments['confirm'] != 0)
+	            				<div style="background-color: red; width: 10px; height: 10px; border-radius: 5px"></div>
+	            				@elseif($payments['codeFT'] != null)
+	            				<div style="background-color: green; width: 10px; height: 10px; border-radius: 5px"></div>
+	            				@endif
+	            			@endforeach
+	            			<br>
+	            			VH vé
+	            			@if($order->airStatus == 0)
+	            				<div style="background-color: #6c757d; width: 10px; height: 10px; border-radius: 5px"></div>
+	            			@endif
+	            		</td>
 	            		<td></td>
 	            		<td>
 	            			<a href="{!! route('order.edit', $order->id) !!}">

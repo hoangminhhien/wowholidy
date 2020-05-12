@@ -126,7 +126,7 @@
 			<div class="col-3"></div>
 			<div class="col-3"></div>
 			<div class="col-3">
-				<input type="checkbox" id="paymentAirline" name="paymentAirline" class="form-check-input paymentAirline">
+				<input type="checkbox" id="paymentAirline" name="paymentAirline" class="form-check-input paymentAirline" disabled="true">
 				<label>Thanh toán cho phần này</label>
 			</div>
 		</div>
@@ -177,7 +177,7 @@
 				<div class="col-3"></div>
 				<div class="col-3"></div>
 				<div class="col-3">
-					<input type="checkbox" id="paymentHotel" name="paymentHotel" class="form-check-input paymentHotel">
+					<input type="checkbox" id="paymentHotel" name="paymentHotel" class="form-check-input paymentHotel" disabled="true">
 					<label style="">Thanh toán cho phần này</label>
 				</div>
 			</div>
@@ -321,7 +321,7 @@
 				<div class="col-3"></div>
 				<div class="col-3"></div>
 				<div class="col-3">
-					<input type="checkbox" id="paymentOther" name="paymentOther" class="form-check-input paymentOther">
+					<input type="checkbox" id="paymentOther" name="paymentOther" class="form-check-input paymentOther" disabled="true">
 					<label>Thanh toán cho phần này</label>
 				</div>
 				<table id="tblOther" class="table table-xs data-table table-bordered">
@@ -419,10 +419,10 @@
                 			<input type="file" name="imagePayment" class="form-control imagePayment">
                 		</td>
                 		<td>
-                			<input type="text" name="codeFT" class="form-control codeFT" @if($role == 1) disabled @endif>
+                			<input type="text" name="codeFT" class="form-control codeFT" @if($role != 3) disabled @endif>
                 		</td>
                 		<td>
-                			<select class="browser-default custom-select confirm" name="confirm" @if($role == 1) disabled @endif>
+                			<select class="browser-default custom-select confirm" name="confirm" @if($role != 2) disabled @endif>
 							  	<option value="" selected>--Lựa chọn--</option>
 							  	<option value="0">Xác nhận</option>
 							  	<option value="1">Không xác nhận</option>
@@ -620,6 +620,7 @@
 	    		</tr>`);
 	    	$('.valuePayment, .datePayment, .imagePayment').val('');
 	    });
+	    
 	    $('body').delegate('#tblhotel .remove', 'click', function (){
 	    	var countValue = $('.totalValueHotel').text();
 	    	console.log(countValue);
@@ -708,10 +709,8 @@
 			});
 	        var payment = [];
 	        var $payment = $('#tblPayment .data');
-	        var number = 0;
 	        $payment.each(function(){
 	        	payment.push({
-	        		number: ++number,
 					valuePayment: $(this).find("td:eq(0)").text(),
 					datePayment: $(this).find("td:eq(1)").text(),
 					imagePayment: $(this).find("td:eq(2)").text(),

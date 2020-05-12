@@ -553,12 +553,14 @@
 	                		<label class="notePayments{!! $key !!}"> {!! $res['notePayment'] !!}</label>
 	                	</td>
 	                	<td>
+	                		@if($res['codeFT'] == null)
 	                		<button type="button" class="btn btn-link savePayment savePayment{!! $key !!}" data-id="{!! $key !!}" title="Lưu" style="display: none;">
                 			<i class="fa fa-check-circle" aria-hidden="true"></i>
 	                		</button>
 	                		<button type="button" class="btn btn-link editPayment" data-id="{!! $key !!}" title="Sửa">
 	                			<i class="fa fa-minus-circle" aria-hidden="true"></i>
 	                		</button>
+	                		@endif
 	                	</td>
                 	</tr>
                 	@endforeach
