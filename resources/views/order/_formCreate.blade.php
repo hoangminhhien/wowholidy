@@ -619,6 +619,26 @@
 	    		<td>`+valuePayment+`</td><td>`+datePayment+`</td><td>`+imagePayment.substr(12, imagePayment.length-1)+`<td>`+codeFT+`</td><td>`+confirm+`</td><td>`+notePayment+`</td></td><td><i class="remove fa fa-times removeRow`+index+`" aria-hidden="true" style="cursor: pointer;"></i></td>
 	    		</tr>`);
 	    	$('.valuePayment, .datePayment, .imagePayment').val('');
+	    	// check input checkbox
+	    	var countValuePayment = $('.countPayment').val();
+	    	if(parseInt($('.airValue').val()) <= parseInt(countValuePayment)){
+	    		$( ".paymentAirline" ).prop( "disabled", false );
+	    	}else{
+	    		$( ".paymentAirline" ).prop( "disabled", true );
+	    		$( ".paymentAirline" ).prop( "checked", false );
+	    	}
+	    	if(parseInt($('.totalValueHotel').text()) <= parseInt(countValuePayment)){
+	    		$( ".paymentHotel" ).prop( "disabled", false );
+	    	}else{
+	    		$( ".paymentHotel" ).prop( "disabled", true );
+	    		$( ".paymentHotel" ).prop( "checked", false );
+	    	}
+	    	if(parseInt($('.totalValueOther').text()) <= parseInt(countValuePayment)){
+	    		$( ".paymentOther" ).prop( "disabled", false );
+	    	}else{
+	    		$( ".paymentOther" ).prop( "disabled", true );
+	    		$( ".paymentOther" ).prop( "checked", false );
+	    	}
 	    });
 	    
 	    $('body').delegate('#tblhotel .remove', 'click', function (){
@@ -640,6 +660,25 @@
 	    	// xóa tổng giá trị đơn hàng
 	    	$('.countPayment').val(parseInt(countValue) - parseInt($(this).closest("tr").find("td:eq(0)").text()));
 	    	$(this).closest("tr").remove();
+	    	var countValuePayment = $('.countPayment').val();
+	    	if(parseInt($('.airValue').val()) <= parseInt(countValuePayment)){
+	    		$( ".paymentAirline" ).prop( "disabled", false );
+	    	}else{
+	    		$( ".paymentAirline" ).prop( "disabled", true );
+	    		$( ".paymentAirline" ).prop( "checked", false );
+	    	}
+	    	if(parseInt($('.totalValueHotel').text()) <= parseInt(countValuePayment)){
+	    		$( ".paymentHotel" ).prop( "disabled", false );
+	    	}else{
+	    		$( ".paymentHotel" ).prop( "disabled", true );
+	    		$( ".paymentHotel" ).prop( "checked", false );
+	    	}
+	    	if(parseInt($('.totalValueOther').text()) <= parseInt(countValuePayment)){
+	    		$( ".paymentOther" ).prop( "disabled", false );
+	    	}else{
+	    		$( ".paymentOther" ).prop( "disabled", true );
+	    		$( ".paymentOther" ).prop( "checked", false );
+	    	}
 	    });
 	    var countOrder = 0;
 	    var airlineStatus = 0;
