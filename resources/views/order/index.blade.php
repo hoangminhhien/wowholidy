@@ -269,23 +269,43 @@
 	            			@endif
 	            		</td>
 	            		<td>
-	            			Sales 
+	            			<!-- Sales  -->
+	            			@if($order->payment == null)
+	            			<span class="badge badge-secondary">Kế toán</span>
+	            			@else
+		            			@foreach($order->payment as $payments)
+		            				@if($payments['confirm'] == 0)
+		            				<span class="badge badge-secondary">Kế toán</span>
+		            				@elseif($payments['codeFT'] == null  && $payments['confirm'] != 1)
+		            				<span class="badge badge-danger">Kế toán</span>
+		            				@elseif($payments['codeFT'] != null)
+		            				<span class="badge badge-success">Kế toán</span>
+		            				@endif
+		            			@endforeach
+	            			@endif
 	            			<br>
-	            			Kế toán 
-	            			@foreach($order->payment as $payments)
-	            				@if($payments == null || $payments['confirm'] == 0)
-	            				<div style="background-color: #6c757d; width: 10px; height: 10px; border-radius: 5px"></div>
-	            				@elseif($payments != null || $payments['confirm'] != 0)
-	            				<div style="background-color: red; width: 10px; height: 10px; border-radius: 5px"></div>
-	            				@elseif($payments['codeFT'] != null)
-	            				<div style="background-color: green; width: 10px; height: 10px; border-radius: 5px"></div>
-	            				@endif
-	            			@endforeach
+	            			@if($order->statusAir == 1)
+	            				<span class="badge badge-success">VH vé</span>
+	            			@elseif($countValuePay != 0 && $order->statusAir != 1)
+	            				<span class="badge badge-danger">VH vé</span>
+	            			@else
+	            				<span class="badge badge-secondary">VH vé</span>
+	            			@endif
 	            			<br>
-	            			VH vé
-	            			@if($order->airStatus == 0 || $order->airStatus == 1 && $countValuePay == 0)
-	            				<div style="background-color: #6c757d; width: 10px; height: 10px; border-radius: 5px"></div>
-	            			@elseif($countValuePay != 0 && $order->airStatus == 1)
+	            			@if($order->statusHotel == 1)
+	            				<span class="badge badge-success">VH phòng</span>
+	            			@elseif($countValuePay != 0 && $order->statusHotel != 1)
+	            				<span class="badge badge-danger">VH phòng</span>
+	            			@else
+	            				<span class="badge badge-secondary">VH phòng</span>
+	            			@endif
+	            			<br>
+	            			@if($order->statusOther == 1)
+	            				<span class="badge badge-success">VH DV khác</span>
+	            			@elseif($countValuePay != 0 && $order->statusOther != 1)
+	            				<span class="badge badge-danger">VH DV khác</span>
+	            			@else
+	            				<span class="badge badge-secondary">VH DV khác</span>
 	            			@endif
 	            		</td>
 	            		<td></td>

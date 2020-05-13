@@ -128,7 +128,10 @@ class OrderController extends Controller
             'countValue' => $request['countValue'],
             'airlineStatus' => (int)$request['airlineStatus'],
             'hotelStatus' => (int)$request['hotelStatus'],
-            'otherStatus' => (int)$request['otherStatus']
+            'otherStatus' => (int)$request['otherStatus'],
+            'statusAir' => (int)$request['statusAir'],
+            'statusHotel' => (int)$request['statusHotel'],
+            'statusOther' => (int)$request['statusOther'],
         ]);
         return response()->json(['httpCode'=>200, 'message'=>'Cập nhật thành công']);
     }

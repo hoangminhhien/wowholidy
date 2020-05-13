@@ -171,17 +171,17 @@
 				</div>
 			</div>
 		</div>
-		<div class="row">
-				<div class="col-3" @if($role != 4) style="display: none" @endif>
+		<div class="row" @if($role != 4) style="display: none" @endif>
+				<div class="col-3">
 				<label>Trạng thái</label>
 				<div class="input-group mb-3">
-	  				<select class="browser-default custom-select" name="statusAir">
-					  	<option value="0">Chưa xử lý</option>
-					  	<option value="1">Đã xử lý</option>
+	  				<select class="browser-default custom-select statusAir" name="statusAir">
+					  	<option {!! $response['statusAir'] == 0  ? 'selected' : '' !!} value="0">Chưa xử lý</option>
+					  	<option {!! $response['statusAir'] == 1  ? 'selected' : '' !!} value="1">Đã xử lý</option>
 					</select>
 				</div>
 				</div>
-				<div class="col-3" @if($role != 4) style="display: none" @endif>
+				<div class="col-3">
 					<label>Ghi chú vận hành</label>
 					<div class="input-group mb-3">
 		  				<input type="text" name="noteAdminAir" class="form-control noteAdminHotel">
@@ -389,17 +389,17 @@
                 <label>Ghi chú</label>
                 <input type="text" name="noteHotel" class="form-control">
 			</div>
-			<div class="row">
-				<div class="col-3" @if($role != 5) style="display: none" @endif>
+			<div class="row" @if($role != 5) style="display: none" @endif>
+				<div class="col-3">
 					<label>Trạng thái</label>
 					<div class="input-group mb-3">
 		  				<select class="browser-default custom-select statusHotel" name="statusHotel">
-						  	<option value="0">Chưa xử lý</option>
-						  	<option value="1">Đã xử lý</option>
+						  	<option {!! $response['statusHotel'] == 0  ? 'selected' : '' !!} value="0">Chưa xử lý</option>
+						  	<option {!! $response['statusHotel'] == 1  ? 'selected' : '' !!} value="1">Đã xử lý</option>
 						</select>
 					</div>
 				</div>
-				<div class="col-3" @if($role != 5) style="display: none" @endif>
+				<div class="col-3">
 					<label>Ghi chú vận hành</label>
 					<div class="input-group mb-3">
 		  				<input type="text" name="noteAdminHotel" class="form-control noteAdminHotel">
@@ -501,17 +501,17 @@
 			<div class="row">
 				<div class="">Tổng giá trị: <label class="totalValueOther">{!! $countOther !!}</label> VNĐ</div>
 			</div>
-			<div class="row">
-				<div class="col-3" @if($role != 6) style="display: none" @endif>
+			<div class="row" @if($role != 6) style="display: none" @endif>
+				<div class="col-3">
 					<label>Trạng thái</label>
 					<div class="input-group mb-3">
 		  				<select class="browser-default custom-select statusOther" name="statusOther">
-						  	<option value="0">Chưa xử lý</option>
-						  	<option value="1">Đã xử lý</option>
+						  	<option {!! $response['statusOther'] == 0  ? 'selected' : '' !!} value="0">Chưa xử lý</option>
+						  	<option {!! $response['statusOther'] == 1  ? 'selected' : '' !!} value="1">Đã xử lý</option>
 						</select>
 					</div>
 				</div>
-				<div class="col-3" @if($role != 6) style="display: none" @endif>
+				<div class="col-3">
 					<label>Ghi chú vận hành</label>
 					<div class="input-group mb-3">
 		  				<input type="text" name="noteAdminOther" class="form-control noteAdminHotel">
@@ -708,8 +708,61 @@
             }
 	    });
 	    var countOrder = 0;
-	    
-	    
+
+	    $('.paymentAirline').click(function(){
+	    	if($(this).prop("checked") == true){
+                if($('.paymentHotel').is(':checked')){
+                	var totalValueHotel = $('.totalValueHotel').text();
+                	var airValue = $('.airValue ').val();
+                	if(totalValueHotel + airValue > $('.countPayment').val()){
+                		$('.paymentHotel').prop('checked', false);
+                	}
+                }
+                if($('.paymentOther').is(':checked')){
+                	var totalValueOther = $('.totalValueOther').text();
+                	var airValue = $('.airValue ').val();
+                	if(totalValueOther + airValue > $('.countPayment').val()){
+                		$('.paymentOther').prop('checked', false);
+                	}
+                }
+            }
+	    });
+	    $('.paymentHotel').click(function(){
+	    	if($(this).prop("checked") == true){
+                if($('.paymentAirline').is(':checked')){
+                	var airValue = $('.airValue').val();
+                	var totalValueHotel = $('.totalValueHotel ').text();
+                	if(totalValueHotel + airValue > $('.countPayment').val()){
+                		$('.paymentAirline').prop('checked', false);
+                	}
+                }
+                if($('.paymentOther').is(':checked')){
+                	var totalValueOther = $('.totalValueOther').text();
+                	var totalValueHotel = $('.totalValueHotel ').text();
+                	if(totalValueHotel + totalValueOther > $('.countPayment').val()){
+                		$('.paymentOther').prop('checked', false);
+                	}
+                }
+            }
+	    });
+	    $('.paymentOther').click(function(){
+	    	if($(this).prop("checked") == true){
+                if($('.paymentAirline').is(':checked')){
+                	var airValue = $('.airValue').val();
+                	var totalValueOther = $('.totalValueOther').text();
+                	if(airValue + totalValueOther > $('.countPayment').val()){
+                		$('.paymentAirline').prop('checked', false);
+                	}
+                }
+                if($('.paymentHotel').is(':checked')){
+                	var totalValueOther = $('.totalValueOther').text();
+                	var totalValueHotel = $('.totalValueHotel ').text();
+                	if(totalValueOther + totalValueHotel > $('.countPayment').val()){
+                		$('.paymentHotel').prop('checked', false);
+                	}
+                }
+            }
+	    });
 
 
 	    $('.updateHotel label').show();
@@ -868,7 +921,10 @@
 		            payment: payment,
 		            airlineStatus: airlineStatus,
 				    hotelStatus: hotelStatus,
-				    otherStatus: otherStatus
+				    otherStatus: otherStatus,
+				    statusAir: $('.statusAir').val(),
+				    statusHotel: $('.statusHotel').val(),
+				    statusOther: $('.statusOther').val()
 		        },
 	        }).done(function(res){
 	        	if(res.httpCode == 200){
