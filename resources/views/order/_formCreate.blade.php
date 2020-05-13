@@ -424,8 +424,8 @@
                 		<td>
                 			<select class="browser-default custom-select confirm" name="confirm" @if($role != 2) disabled @endif>
 							  	<option value="" selected>--Lựa chọn--</option>
-							  	<option value="0">Xác nhận</option>
-							  	<option value="1">Không xác nhận</option>
+							  	<option value="1">Xác nhận</option>
+							  	<option value="0">Không xác nhận</option>
 							</select>
                 		</td>
                 		<td>
@@ -640,7 +640,66 @@
 	    		$( ".paymentOther" ).prop( "checked", false );
 	    	}
 	    });
-	    
+
+
+
+	    $('.paymentAirline').click(function(){
+	    	if($(this).prop("checked") == true){
+                if($('.paymentHotel').is(':checked')){
+                	var totalValueHotel = $('.totalValueHotel').text();
+                	var airValue = $('.airValue ').val();
+                	if(totalValueHotel + airValue > $('.countPayment').val()){
+                		$('.paymentHotel').prop('checked', false);
+                	}
+                }
+                if($('.paymentOther').is(':checked')){
+                	var totalValueOther = $('.totalValueOther').text();
+                	var airValue = $('.airValue ').val();
+                	if(totalValueOther + airValue > $('.countPayment').val()){
+                		$('.paymentOther').prop('checked', false);
+                	}
+                }
+            }
+	    });
+	    $('.paymentHotel').click(function(){
+	    	if($(this).prop("checked") == true){
+                if($('.paymentAirline').is(':checked')){
+                	var airValue = $('.airValue').val();
+                	var totalValueHotel = $('.totalValueHotel ').text();
+                	if(totalValueHotel + airValue > $('.countPayment').val()){
+                		$('.paymentAirline').prop('checked', false);
+                	}
+                }
+                if($('.paymentOther').is(':checked')){
+                	var totalValueOther = $('.totalValueOther').text();
+                	var totalValueHotel = $('.totalValueHotel ').text();
+                	if(totalValueHotel + totalValueOther > $('.countPayment').val()){
+                		$('.paymentOther').prop('checked', false);
+                	}
+                }
+            }
+	    });
+	    $('.paymentOther').click(function(){
+	    	if($(this).prop("checked") == true){
+                if($('.paymentAirline').is(':checked')){
+                	var airValue = $('.airValue').val();
+                	var totalValueOther = $('.totalValueOther').text();
+                	if(airValue + totalValueOther > $('.countPayment').val()){
+                		$('.paymentAirline').prop('checked', false);
+                	}
+                }
+                if($('.paymentHotel').is(':checked')){
+                	var totalValueOther = $('.totalValueOther').text();
+                	var totalValueHotel = $('.totalValueHotel ').text();
+                	if(totalValueOther + totalValueHotel > $('.countPayment').val()){
+                		$('.paymentHotel').prop('checked', false);
+                	}
+                }
+            }
+	    });
+
+
+
 	    $('body').delegate('#tblhotel .remove', 'click', function (){
 	    	var countValue = $('.totalValueHotel').text();
 	    	console.log(countValue);
@@ -681,35 +740,10 @@
 	    	}
 	    });
 	    var countOrder = 0;
-	    var airlineStatus = 0;
-	    var hotelStatus = 0;
-	    var otherStatus = 0;
-	    $('.paymentAirline').click(function(){
-	    	if($(this).prop("checked") == true){
-                airlineStatus = 1;
-            }
-            else if($(this).prop("checked") == false){
-                airlineStatus = 0;
-            }
-	    });
-	    $('.paymentHotel').click(function(){
-	    	if($(this).prop("checked") == true){
-                hotelStatus = 1;
-            }
-            else if($(this).prop("checked") == false){
-                hotelStatus = 0;
-            }
-	    });
-	    $('.paymentOther').click(function(){
-	    	if($(this).prop("checked") == true){
-                otherStatus = 1;
-            }
-            else if($(this).prop("checked") == false){
-                otherStatus = 0;
-            }
-	    });
-
 	    $('body').delegate('.create_order', 'click', function (){
+	    	$('.paymentAirline').is(":checked") ? airlineStatus = 1 : airlineStatus = 0;
+		    $('.paymentHotel').is(":checked") ? hotelStatus = 1 : hotelStatus = 0;
+		    $('.paymentOther').is(":checked") ? otherStatus = 1 : otherStatus = 0;
 	    	countOrder = countOrder + parseInt($('.totalValueHotel').text()) + parseInt($('.totalValueOther').text()) + parseInt($('.airValue').val());
 	    	var url = '{!! route('order.store') !!}';
 	    	var airLine = {

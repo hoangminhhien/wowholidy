@@ -171,6 +171,23 @@
 				</div>
 			</div>
 		</div>
+		<div class="row">
+				<div class="col-3" @if($role != 4) style="display: none" @endif>
+				<label>Trạng thái</label>
+				<div class="input-group mb-3">
+	  				<select class="browser-default custom-select" name="statusAir">
+					  	<option value="0">Chưa xử lý</option>
+					  	<option value="1">Đã xử lý</option>
+					</select>
+				</div>
+				</div>
+				<div class="col-3" @if($role != 4) style="display: none" @endif>
+					<label>Ghi chú vận hành</label>
+					<div class="input-group mb-3">
+		  				<input type="text" name="noteAdminAir" class="form-control noteAdminHotel">
+					</div>
+				</div>
+			</div>
 		<hr>
 		
 			<div class="row">
@@ -368,10 +385,27 @@
                 	<button type="button" class="btn-add addHotel"><i class="fa fa-plus" aria-hidden="true"></i>Thêm</button>
 				</div>
             </div>
-				<div class="row">
-	                <label>Ghi chú</label>
-	                <input type="text" name="noteHotel" class="form-control">
+			<div class="row">
+                <label>Ghi chú</label>
+                <input type="text" name="noteHotel" class="form-control">
+			</div>
+			<div class="row">
+				<div class="col-3" @if($role != 5) style="display: none" @endif>
+					<label>Trạng thái</label>
+					<div class="input-group mb-3">
+		  				<select class="browser-default custom-select statusHotel" name="statusHotel">
+						  	<option value="0">Chưa xử lý</option>
+						  	<option value="1">Đã xử lý</option>
+						</select>
+					</div>
 				</div>
+				<div class="col-3" @if($role != 5) style="display: none" @endif>
+					<label>Ghi chú vận hành</label>
+					<div class="input-group mb-3">
+		  				<input type="text" name="noteAdminHotel" class="form-control noteAdminHotel">
+					</div>
+				</div>
+			</div>
 			<hr>
 			<div class="row">
 				<div class="col-3">
@@ -468,6 +502,23 @@
 				<div class="">Tổng giá trị: <label class="totalValueOther">{!! $countOther !!}</label> VNĐ</div>
 			</div>
 			<div class="row">
+				<div class="col-3" @if($role != 6) style="display: none" @endif>
+					<label>Trạng thái</label>
+					<div class="input-group mb-3">
+		  				<select class="browser-default custom-select statusOther" name="statusOther">
+						  	<option value="0">Chưa xử lý</option>
+						  	<option value="1">Đã xử lý</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-3" @if($role != 6) style="display: none" @endif>
+					<label>Ghi chú vận hành</label>
+					<div class="input-group mb-3">
+		  				<input type="text" name="noteAdminOther" class="form-control noteAdminHotel">
+					</div>
+				</div>
+			</div>
+			<div class="row">
 				<div class="col-4"></div>
 				<div class="col-4"></div>
             </div>
@@ -542,7 +593,7 @@
 	                		<label class="imagePayments{!! $key !!}"> {!! $res['imagePayment'] !!}</label>
 	                	</td>
 	                	<td>
-	                		<input type="text" name="" class="form-control codeFT{!! $key !!}" value="{!! $res['codeFT'] !!}">
+	                		<input type="text" name="" class="form-control codeFT{!! $key !!}" value="{!! $res['codeFT'] !!}" @if($role != 3) disabled @endif>
 	                		<label class="codeFTs{!! $key !!}"> {!! $res['codeFT'] !!}</label>
 	                	</td>
 	                	<td>
@@ -657,33 +708,8 @@
             }
 	    });
 	    var countOrder = 0;
-	    $('.paymentAirline').is(":checked") ? airlineStatus = 1 : airlineStatus = 0;
-	    $('.paymentHotel').is(":checked") ? hotelStatus = 1 : hotelStatus = 0;
-	    $('.paymentOther').is(":checked") ? otherStatus = 1 : otherStatus = 0;
-	    $('.paymentAirline').click(function(){
-	    	if($(this).prop("checked") == true){
-                airlineStatus = 1;
-            }
-            else if($(this).prop("checked") == false){
-                airlineStatus = 0;
-            }
-	    });
-	    $('.paymentHotel').click(function(){
-	    	if($(this).prop("checked") == true){
-                hotelStatus = 1;
-            }
-            else if($(this).prop("checked") == false){
-                hotelStatus = 0;
-            }
-	    });
-	    $('.paymentOther').click(function(){
-	    	if($(this).prop("checked") == true){
-                otherStatus = 1;
-            }
-            else if($(this).prop("checked") == false){
-                otherStatus = 0;
-            }
-	    });
+	    
+	    
 
 
 	    $('.updateHotel label').show();
@@ -766,6 +792,9 @@
 	    });
 
 	    $('body').delegate('.update_order', 'click', function (){
+	    	$('.paymentAirline').is(":checked") ? airlineStatus = 1 : airlineStatus = 0;
+		    $('.paymentHotel').is(":checked") ? hotelStatus = 1 : hotelStatus = 0;
+		    $('.paymentOther').is(":checked") ? otherStatus = 1 : otherStatus = 0;
 	    	countOrder = countOrder + parseInt($('.totalValueHotel').text()) + parseInt($('.totalValueOther').text()) + parseInt($('.airValue').val());
 	    	console.log(countOrder);
 	    	var url = '{!! route('order.update') !!}';
@@ -809,7 +838,6 @@
 	        var number = 0;
 	        $payment.each(function(){
 	        	payment.push({
-	        		number: ++number,
 					valuePayment: $(this).find("td:eq(0)").text(),
 					datePayment: $(this).find("td:eq(1)").text(),
 					imagePayment: $(this).find("td:eq(2)").text(),

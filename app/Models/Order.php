@@ -8,7 +8,7 @@ class Order extends Model
 {
     protected $table = 'order';
     protected $fillable = [
-        'id', 'nameSaler', 'teamSaler', 'typeCustomer', 'typeCombo', 'contactCode', 'nameCustomer', 'phoneCustomer', 'mailCustomer', 'country', 'airLine', 'hotel', 'other', 'payment', 'countValue', 'status', 'airlineStatus', 'hotelStatus', 'otherStatus'
+        'id', 'nameSaler', 'teamSaler', 'typeCustomer', 'typeCombo', 'contactCode', 'nameCustomer', 'phoneCustomer', 'mailCustomer', 'country', 'airLine', 'hotel', 'other', 'payment', 'countValue', 'status', 'airlineStatus', 'hotelStatus', 'otherStatus', 'statusAir', 'statusHotel', 'statusOther'
     ];
     protected $casts = [
         'airLine' => 'array',

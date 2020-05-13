@@ -283,8 +283,9 @@
 	            			@endforeach
 	            			<br>
 	            			VH vé
-	            			@if($order->airStatus == 0)
+	            			@if($order->airStatus == 0 || $order->airStatus == 1 && $countValuePay == 0)
 	            				<div style="background-color: #6c757d; width: 10px; height: 10px; border-radius: 5px"></div>
+	            			@elseif($countValuePay != 0 && $order->airStatus == 1)
 	            			@endif
 	            		</td>
 	            		<td></td>
