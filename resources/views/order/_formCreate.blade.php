@@ -306,7 +306,7 @@
 				<div class="col-4"></div>
 				<div class="col-4"></div>
 				<div class="col-4">
-                	<button type="button" class="btn-add addHotel"><i class="fa fa-plus" aria-hidden="true"></i>Thêm</button>
+                	<button type="button" class="btn-add addHotel" disabled="true"><i class="fa fa-plus" aria-hidden="true"></i>Thêm</button>
 				</div>
             </div>
 				<div class="row">
@@ -327,7 +327,7 @@
 				<table id="tblOther" class="table table-xs data-table table-bordered">
                     <thead>
                     <tr>
-                        <th>Tên dịch vụ <button type="button" class="btn btn-link addOther"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></th>
+                        <th>Tên dịch vụ <button type="button" class="btn btn-link addOther" disabled="true"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></th>
                         <th>Chi tiết dịch vụ</th>
                         <th>Số lượng</th>
                         <th>Đơn giá</th>
@@ -398,7 +398,7 @@
 				<table id="tblPayment" class="table table-xs data-table table-bordered">
                     <thead>
                     <tr>
-                        <th>Tiền <button type="button" class="btn btn-link addPayment"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></th>
+                        <th>Tiền <button type="button" class="btn btn-link addPayment" disabled="true"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></th>
                         <th>Ngày</th>
                         <th>Đính kèm file</th>
                         <th>Nhập mã FT</th>
@@ -572,8 +572,34 @@
                 $('.create_order').prop('disabled', true);
             }
         });
+
+        $('.numberHotel, .valueHotel').keyup(function(){
+        	if($('.numberHotel').val() != 0 && $('.valueHotel').val() != 0){
+        		$('.addHotel').prop('disabled', false);
+        	}else{
+        		$('.addHotel').prop('disabled', true);
+        	}
+        });
+
+        $('.amountOther, .princeOther').keyup(function(){
+        	if($('.amountOther').val() != 0 && $('.princeOther').val() != 0){
+        		$('.addOther').prop('disabled', false);
+        	}else{
+        		$('.addOther').prop('disabled', true);
+        	}
+        });
+
+        $('.valuePayment ').keyup(function(){
+        	if($(this).val() != 0){
+        		$('.addPayment').prop('disabled', false);
+        	}else{
+        		$('.addPayment').prop('disabled', true);
+        	}
+        });
+
 	    var index = 0;
 	    $('.addHotel').click(function(){
+	    	$(this).prop('disabled', true);
 	    	++index;
 	    	var dateHotel = $('.dateHotel').val();
 	    	var nameHotel = $('.nameHotel').val();
@@ -592,6 +618,7 @@
 	    	$('.dateHotel, .nameHotel, .levelHotel, .bedHotel, .comboHotel, .numberHotel, .valueHotel, .amountHotel, .typeSurcharge, .surcharge').val('');
 	    });
 	    $('.addOther').click(function(){
+	    	$(this).prop('disabled', true);
 	    	++index;
 	    	var nameOther = $('.nameOther').val();
 	    	var detailOther = $('.detailOther').val();
@@ -606,6 +633,7 @@
 	    	$('.nameOther, .detailOther, .amountOther, .princeOther, .valueOther, .noteOther').val('');
 	    });
 	    $('.addPayment').click(function(){
+	    	$(this).prop('disabled', true);
 	    	++index;
 	    	var countValue = $('.countPayment').val();
 	    	var valuePayment = $('.valuePayment').val();

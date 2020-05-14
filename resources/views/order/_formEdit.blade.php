@@ -382,7 +382,7 @@
 				<div class="col-4"></div>
 				<div class="col-4"></div>
 				<div class="col-4">
-                	<button type="button" class="btn-add addHotel"><i class="fa fa-plus" aria-hidden="true"></i>Thêm</button>
+                	<button type="button" class="btn-add addHotel" disabled="true" style="display: none;"><i class="fa fa-plus" aria-hidden="true"></i>Thêm</button>
 				</div>
             </div>
 			<div class="row">
@@ -420,7 +420,7 @@
 				<table id="tblOther" class="table table-xs data-table table-bordered">
                     <thead>
                     <tr>
-                        <th>Tên dịch vụ <button type="button" class="btn btn-link addOther"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></th>
+                        <th>Tên dịch vụ <button type="button" class="btn btn-link addOther" disabled="true" style="display: none;"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></th>
                         <th>Chi tiết dịch vụ</th>
                         <th>Số lượng</th>
                         <th>Đơn giá</th>
@@ -543,7 +543,7 @@
 				<table id="tblPayment" class="table table-xs data-table table-bordered">
                     <thead>
                     <tr>
-                        <th>Tiền <button type="button" class="btn btn-link addPayment"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></th>
+                        <th>Tiền <button type="button" class="btn btn-link addPayment" disabled="true" style="display: none;"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></th>
                         <th>Ngày</th>
                         <th>Đính kèm file</th>
                         <th>Nhập mã FT</th>
@@ -706,6 +706,141 @@
             else if($(this).prop("checked") == false){
                 $('.dateCheck').val('');
             }
+	    });
+
+	    $('.numberHotel, .valueHotel').keyup(function(){
+        	if($('.numberHotel').val() != 0 && $('.valueHotel').val() != 0){
+        		$('.addHotel').prop('disabled', false);
+        	}else{
+        		$('.addHotel').prop('disabled', true);
+        	}
+        });
+
+        $('.amountOther, .princeOther').keyup(function(){
+        	if($('.amountOther').val() != 0 && $('.princeOther').val() != 0){
+        		$('.addOther').prop('disabled', false);
+        	}else{
+        		$('.addOther').prop('disabled', true);
+        	}
+        });
+
+        $('.valuePayment ').keyup(function(){
+        	if($(this).val() != 0){
+        		$('.addPayment').prop('disabled', false);
+        	}else{
+        		$('.addPayment').prop('disabled', true);
+        	}
+        });
+
+	    var index = 0;
+	    $('.addHotel').click(function(){
+	    	$(this).prop('disabled', true);
+	    	++index;
+	    	var dateHotel = $('.dateHotel').val();
+	    	var nameHotel = $('.nameHotel').val();
+	    	var levelHotel = $('.levelHotel').val();
+	    	var bedHotel = $('.bedHotel').val();
+	    	var comboHotel = $('.comboHotel').val();
+	    	var numberHotel = $('.numberHotel').val();
+	    	var valueHotel = $('.valueHotel').val();
+	    	var typeSurcharge = $('.typeSurcharge').val();
+	    	var amountHotel = $('.amountHotel').val();
+	    	var surcharge = $('.surcharge').val();
+	    	$('.totalValueHotel').text(parseInt($('.totalValueHotel').text()) + parseInt(valueHotel) * parseInt(numberHotel));
+	    	$('#tblhotel tbody').append(`<tr class='data'>
+	    		<td>`+dateHotel+`</td><td>`+nameHotel+`</td><td>`+levelHotel+`</td><td>`+bedHotel+`</td><td>`+comboHotel+`</td><td>`+numberHotel+`</td><td>`+valueHotel+`</td><td>`+typeSurcharge+`</td><td>`+amountHotel+`</td><td>`+surcharge+`</td><td><i class="remove fa fa-times removeRow`+index+`" aria-hidden="true" style="cursor: pointer;"></i></td>
+	    		</tr>`);
+	    	$('.dateHotel, .nameHotel, .levelHotel, .bedHotel, .comboHotel, .numberHotel, .valueHotel, .amountHotel, .typeSurcharge, .surcharge').val('');
+	    });
+	    $('.addOther').click(function(){
+	    	$(this).prop('disabled', true);
+	    	++index;
+	    	var nameOther = $('.nameOther').val();
+	    	var detailOther = $('.detailOther').val();
+	    	var amountOther = $('.amountOther').val();
+	    	var princeOther = $('.princeOther').val();
+	    	var valueOther = $('.valueOther').val();
+	    	var noteOther = $('.noteOther').val();
+	    	$('.totalValueOther').text(parseInt($('.totalValueOther').text()) + parseInt(valueOther));
+	    	$('#tblOther tbody').append(`<tr class='data'>
+	    		<td>`+nameOther+`</td><td>`+detailOther+`</td><td>`+amountOther+`</td><td>`+princeOther+`</td><td>`+valueOther+`</td><td>`+noteOther+`</td><td><i class="remove fa fa-times removeRow`+index+`" aria-hidden="true" style="cursor: pointer;"></i></td>
+	    		</tr>`);
+	    	$('.nameOther, .detailOther, .amountOther, .princeOther, .valueOther, .noteOther').val('');
+	    });
+	    $('.addPayment').click(function(){
+	    	$(this).prop('disabled', true);
+	    	++index;
+	    	var countValue = $('.countPayment').val();
+	    	var valuePayment = $('.valuePayment').val();
+	    	$('.countPayment').val(parseInt(valuePayment) + parseInt(countValue));
+	    	var datePayment = $('.datePayment').val();
+	    	var imagePayment = $('.imagePayment').val();
+	    	var codeFT = $('.codeFT').val();
+	    	var confirm = $('.confirm').val();
+	    	var notePayment = $('.notePayment').val();
+	    	$('#tblPayment tbody').append(`<tr class='data'>
+	    		<td>`+valuePayment+`</td><td>`+datePayment+`</td><td>`+imagePayment.substr(12, imagePayment.length-1)+`<td>`+codeFT+`</td><td>`+confirm+`</td><td>`+notePayment+`</td></td><td><i class="remove fa fa-times removeRow`+index+`" aria-hidden="true" style="cursor: pointer;"></i></td>
+	    		</tr>`);
+	    	$('.valuePayment, .datePayment, .imagePayment').val('');
+	    	// check input checkbox
+	    	var countValuePayment = $('.countPayment').val();
+	    	if(parseInt($('.airValue').val()) <= parseInt(countValuePayment)){
+	    		$( ".paymentAirline" ).prop( "disabled", false );
+	    	}else{
+	    		$( ".paymentAirline" ).prop( "disabled", true );
+	    		$( ".paymentAirline" ).prop( "checked", false );
+	    	}
+	    	if(parseInt($('.totalValueHotel').text()) <= parseInt(countValuePayment)){
+	    		$( ".paymentHotel" ).prop( "disabled", false );
+	    	}else{
+	    		$( ".paymentHotel" ).prop( "disabled", true );
+	    		$( ".paymentHotel" ).prop( "checked", false );
+	    	}
+	    	if(parseInt($('.totalValueOther').text()) <= parseInt(countValuePayment)){
+	    		$( ".paymentOther" ).prop( "disabled", false );
+	    	}else{
+	    		$( ".paymentOther" ).prop( "disabled", true );
+	    		$( ".paymentOther" ).prop( "checked", false );
+	    	}
+	    });
+	    $('body').delegate('#tblhotel .remove', 'click', function (){
+	    	var countValue = $('.totalValueHotel').text();
+	    	console.log(countValue);
+	    	// xóa tổng giá trị đơn hàng
+	    	$('.totalValueHotel').text(parseInt(countValue) - parseInt($(this).closest("tr").find("td:eq(5)").text()) * parseInt($(this).closest("tr").find("td:eq(6)").text()));
+	    	$(this).closest("tr").remove();
+	    });
+	    $('body').delegate('#tblOther .remove', 'click', function (){
+	    	var countValue = $('.totalValueOther').text();
+	    	// xóa tổng giá trị đơn hàng
+	    	$('.totalValueOther').text(parseInt(countValue) - parseInt($(this).closest("tr").find("td:eq(4)").text()));
+	    	$(this).closest("tr").remove();
+	    });
+	    $('body').delegate('#tblPayment .remove', 'click', function (){
+	    	var countValue = $('.countPayment').val();
+	    	var value = $(this).attr('class');
+	    	// xóa tổng giá trị đơn hàng
+	    	$('.countPayment').val(parseInt(countValue) - parseInt($(this).closest("tr").find("td:eq(0)").text()));
+	    	$(this).closest("tr").remove();
+	    	var countValuePayment = $('.countPayment').val();
+	    	if(parseInt($('.airValue').val()) <= parseInt(countValuePayment)){
+	    		$( ".paymentAirline" ).prop( "disabled", false );
+	    	}else{
+	    		$( ".paymentAirline" ).prop( "disabled", true );
+	    		$( ".paymentAirline" ).prop( "checked", false );
+	    	}
+	    	if(parseInt($('.totalValueHotel').text()) <= parseInt(countValuePayment)){
+	    		$( ".paymentHotel" ).prop( "disabled", false );
+	    	}else{
+	    		$( ".paymentHotel" ).prop( "disabled", true );
+	    		$( ".paymentHotel" ).prop( "checked", false );
+	    	}
+	    	if(parseInt($('.totalValueOther').text()) <= parseInt(countValuePayment)){
+	    		$( ".paymentOther" ).prop( "disabled", false );
+	    	}else{
+	    		$( ".paymentOther" ).prop( "disabled", true );
+	    		$( ".paymentOther" ).prop( "checked", false );
+	    	}
 	    });
 	    var countOrder = 0;
 
