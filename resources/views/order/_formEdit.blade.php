@@ -564,10 +564,10 @@
                 			<input type="file" name="imagePayment" class="form-control imagePayment">
                 		</td>
                 		<td>
-                			<input type="text" name="codeFT" class="form-control codeFT" @if($role == 1) disabled @endif>
+                			<input type="text" name="codeFT" class="form-control codeFT" @if($role != 3) disabled @endif>
                 		</td>
                 		<td>
-                			<select class="browser-default custom-select confirm" name="confirm" @if($role == 1) disabled @endif>
+                			<select class="browser-default custom-select confirm" name="confirm" @if($role != 2) disabled @endif>
 							  	<option value="" selected>--Lựa chọn--</option>
 							  	<option value="0">Chưa xác nhận</option>
 							  	<option value="1">Đã xác nhận</option>
@@ -710,55 +710,76 @@
 	    var countOrder = 0;
 
 	    $('.paymentAirline').click(function(){
-	    	if($(this).prop("checked") == true){
-                if($('.paymentHotel').is(':checked')){
+	    	if($(this).is(':checked')){
+                if($('.paymentHotel').is(":checked") && $('.paymentOther').is(":not(:checked)")){
                 	var totalValueHotel = $('.totalValueHotel').text();
                 	var airValue = $('.airValue ').val();
-                	if(totalValueHotel + airValue > $('.countPayment').val()){
+                	if(parseInt(totalValueHotel) + parseInt(airValue) > parseInt($('.countPayment').val())){
                 		$('.paymentHotel').prop('checked', false);
                 	}
-                }
-                if($('.paymentOther').is(':checked')){
+                }else if($('.paymentHotel').is(":not(:checked)") && $('.paymentOther').is(":checked")){
                 	var totalValueOther = $('.totalValueOther').text();
                 	var airValue = $('.airValue ').val();
-                	if(totalValueOther + airValue > $('.countPayment').val()){
+                	if(parseInt(totalValueOther) + parseInt(airValue) > parseInt($('.countPayment').val())){
                 		$('.paymentOther').prop('checked', false);
+                	}
+                }else{
+                	var totalValueHotel = $('.totalValueHotel').text();
+                	var airValue = $('.airValue ').val();
+                	var totalValueOther = $('.totalValueOther').text();
+                	if(parseInt(totalValueHotel) + parseInt(airValue) + parseInt(totalValueOther) > parseInt($('.countPayment').val())){
+                		$('.paymentOther').prop('checked', false);
+                		$('.paymentHotel').prop('checked', false);
                 	}
                 }
             }
 	    });
 	    $('.paymentHotel').click(function(){
-	    	if($(this).prop("checked") == true){
-                if($('.paymentAirline').is(':checked')){
+	    	if($(this).is(":checked")){
+                if($('.paymentAirline').is(":checked") && $('.paymentOther').is(":not(:checked)")){
                 	var airValue = $('.airValue').val();
                 	var totalValueHotel = $('.totalValueHotel ').text();
-                	if(totalValueHotel + airValue > $('.countPayment').val()){
+                	if(parseInt(totalValueHotel) + parseInt(airValue) > parseInt($('.countPayment').val())){
                 		$('.paymentAirline').prop('checked', false);
                 	}
-                }
-                if($('.paymentOther').is(':checked')){
+                }else if($('.paymentAirline').is(":not(:checked)") && $('.paymentOther').is(":checked")){
                 	var totalValueOther = $('.totalValueOther').text();
                 	var totalValueHotel = $('.totalValueHotel ').text();
-                	if(totalValueHotel + totalValueOther > $('.countPayment').val()){
+                	if(parseInt(totalValueHotel) + parseInt(totalValueOther) > parseInt($('.countPayment').val())){
                 		$('.paymentOther').prop('checked', false);
+                	}
+                }else{
+                	var totalValueHotel = $('.totalValueHotel').text();
+                	var airValue = $('.airValue ').val();
+                	var totalValueOther = $('.totalValueOther').text();
+                	if(parseInt(totalValueHotel) + parseInt(airValue) + parseInt(totalValueOther) > parseInt($('.countPayment').val())){
+	                	$('.paymentAirline').prop('checked', false);
+	                	$('.paymentOther').prop('checked', false);
                 	}
                 }
             }
 	    });
 	    $('.paymentOther').click(function(){
-	    	if($(this).prop("checked") == true){
-                if($('.paymentAirline').is(':checked')){
+	    	if($(this).is(":checked")){
+                if($('.paymentAirline').is(":checked") && $('.paymentHotel').is(":not(:checked)")){
                 	var airValue = $('.airValue').val();
                 	var totalValueOther = $('.totalValueOther').text();
-                	if(airValue + totalValueOther > $('.countPayment').val()){
+                	if(parseInt(airValue) + parseInt(totalValueOther) > parseInt($('.countPayment').val())){
                 		$('.paymentAirline').prop('checked', false);
                 	}
-                }
-                if($('.paymentHotel').is(':checked')){
+                }else if($('.paymentAirline').is(":not(:checked)") && $('.paymentHotel').is(":checked")){
                 	var totalValueOther = $('.totalValueOther').text();
                 	var totalValueHotel = $('.totalValueHotel ').text();
-                	if(totalValueOther + totalValueHotel > $('.countPayment').val()){
+                	if(parseInt(totalValueOther) + parseInt(totalValueHotel) > parseInt($('.countPayment').val())){
                 		$('.paymentHotel').prop('checked', false);
+                	}
+                }else{
+                	var totalValueHotel = $('.totalValueHotel').text();
+                	var airValue = $('.airValue ').val();
+                	var totalValueOther = $('.totalValueOther').text();
+                	if(parseInt(totalValueHotel) + parseInt(airValue) + parseInt(totalValueOther) > parseInt($('.countPayment').val())){
+	                	$('.paymentAirline').prop('checked', false);
+	                	$('.paymentHotel').prop('checked', false);
                 	}
                 }
             }
