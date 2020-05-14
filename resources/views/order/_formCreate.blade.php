@@ -649,19 +649,19 @@
 	    	$('.valuePayment, .datePayment, .imagePayment').val('');
 	    	// check input checkbox
 	    	var countValuePayment = $('.countPayment').val();
-	    	if(parseInt($('.airValue').val()) <= parseInt(countValuePayment)){
+	    	if(parseInt($('.airValue').val()) <= parseInt(countValuePayment) && parseInt($('.airValue').val()) > 0){
 	    		$( ".paymentAirline" ).prop( "disabled", false );
 	    	}else{
 	    		$( ".paymentAirline" ).prop( "disabled", true );
 	    		$( ".paymentAirline" ).prop( "checked", false );
 	    	}
-	    	if(parseInt($('.totalValueHotel').text()) <= parseInt(countValuePayment)){
+	    	if(parseInt($('.totalValueHotel').text()) <= parseInt(countValuePayment) && parseInt($('.totalValueHotel').text()) > 0){
 	    		$( ".paymentHotel" ).prop( "disabled", false );
 	    	}else{
 	    		$( ".paymentHotel" ).prop( "disabled", true );
 	    		$( ".paymentHotel" ).prop( "checked", false );
 	    	}
-	    	if(parseInt($('.totalValueOther').text()) <= parseInt(countValuePayment)){
+	    	if(parseInt($('.totalValueOther').text()) <= parseInt(countValuePayment) && parseInt($('.totalValueOther').text()) > 0){
 	    		$( ".paymentOther" ).prop( "disabled", false );
 	    	}else{
 	    		$( ".paymentOther" ).prop( "disabled", true );
@@ -755,12 +755,20 @@
 	    	// xóa tổng giá trị đơn hàng
 	    	$('.totalValueHotel').text(parseInt(countValue) - parseInt($(this).closest("tr").find("td:eq(5)").text()) * parseInt($(this).closest("tr").find("td:eq(6)").text()));
 	    	$(this).closest("tr").remove();
+	    	if(parseInt($('.totalValueHotel').text()) == 0){
+	    		$('.paymentHotel').prop('disabled', true);
+	    		$('.paymentHotel').prop( "checked", false );
+	    	}
 	    });
 	    $('body').delegate('#tblOther .remove', 'click', function (){
 	    	var countValue = $('.totalValueOther').text();
 	    	// xóa tổng giá trị đơn hàng
 	    	$('.totalValueOther').text(parseInt(countValue) - parseInt($(this).closest("tr").find("td:eq(4)").text()));
 	    	$(this).closest("tr").remove();
+	    	if(parseInt($('.totalValueOther').text()) == 0){
+	    		$('.paymentOther').prop('disabled', true);
+	    		$('.paymentOther').prop( "checked", false );
+	    	}
 	    });
 	    $('body').delegate('#tblPayment .remove', 'click', function (){
 	    	var countValue = $('.countPayment').val();

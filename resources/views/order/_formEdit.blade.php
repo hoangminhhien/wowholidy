@@ -707,7 +707,12 @@
                 $('.dateCheck').val('');
             }
 	    });
-
+	    if(parseInt($('.totalValueHotel').text()) == 0){
+	    	$('.paymentHotel').prop('disabled', true);
+	    }
+	    if(parseInt($('.totalValueOther').text()) == 0){
+	    	$('.paymentOther').prop('disabled', true);
+	    }
 	    $('.numberHotel, .valueHotel').keyup(function(){
         	if($('.numberHotel').val() != 0 && $('.valueHotel').val() != 0){
         		$('.addHotel').prop('disabled', false);
