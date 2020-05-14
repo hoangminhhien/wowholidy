@@ -748,7 +748,7 @@
 	    	var surcharge = $('.surcharge').val();
 	    	$('.totalValueHotel').text(parseInt($('.totalValueHotel').text()) + parseInt(valueHotel) * parseInt(numberHotel));
 	    	$('#tblhotel tbody').append(`<tr class='data'>
-	    		<td>`+dateHotel+`</td><td>`+nameHotel+`</td><td>`+levelHotel+`</td><td>`+bedHotel+`</td><td>`+comboHotel+`</td><td>`+numberHotel+`</td><td>`+valueHotel+`</td><td>`+typeSurcharge+`</td><td>`+amountHotel+`</td><td>`+surcharge+`</td><td><i class="remove fa fa-times removeRow`+index+`" aria-hidden="true" style="cursor: pointer;"></i></td>
+	    		<td>`+dateHotel+`</td><td>`+nameHotel+`</td><td>`+levelHotel+`</td><td>`+bedHotel+`</td><td>`+comboHotel+`</td><td>`+numberHotel+`</td><td>`+valueHotel+`</td><td>`+typeSurcharge+`</td><td>`+amountHotel+`</td><td>`+surcharge+`</td><td><button type="button" class="btn btn-link removeRow`+index+`"><i class="remove fa fa-times" aria-hidden="true" style="cursor: pointer;"></i></button></td>
 	    		</tr>`);
 	    	$('.dateHotel, .nameHotel, .levelHotel, .bedHotel, .comboHotel, .numberHotel, .valueHotel, .amountHotel, .typeSurcharge, .surcharge').val('');
 	    });
@@ -763,7 +763,7 @@
 	    	var noteOther = $('.noteOther').val();
 	    	$('.totalValueOther').text(parseInt($('.totalValueOther').text()) + parseInt(valueOther));
 	    	$('#tblOther tbody').append(`<tr class='data'>
-	    		<td>`+nameOther+`</td><td>`+detailOther+`</td><td>`+amountOther+`</td><td>`+princeOther+`</td><td>`+valueOther+`</td><td>`+noteOther+`</td><td><i class="remove fa fa-times removeRow`+index+`" aria-hidden="true" style="cursor: pointer;"></i></td>
+	    		<td>`+nameOther+`</td><td>`+detailOther+`</td><td>`+amountOther+`</td><td>`+princeOther+`</td><td>`+valueOther+`</td><td>`+noteOther+`</td><td><button type="button" class="btn btn-link removeRow`+index+`"><i class="remove fa fa-times" aria-hidden="true" style="cursor: pointer;"></i></button></td>
 	    		</tr>`);
 	    	$('.nameOther, .detailOther, .amountOther, .princeOther, .valueOther, .noteOther').val('');
 	    });
@@ -779,7 +779,7 @@
 	    	var confirm = $('.confirm').val();
 	    	var notePayment = $('.notePayment').val();
 	    	$('#tblPayment tbody').append(`<tr class='data'>
-	    		<td>`+valuePayment+`</td><td>`+datePayment+`</td><td>`+imagePayment.substr(12, imagePayment.length-1)+`<td>`+codeFT+`</td><td>`+confirm+`</td><td>`+notePayment+`</td></td><td><i class="remove fa fa-times removeRow`+index+`" aria-hidden="true" style="cursor: pointer;"></i></td>
+	    		<td>`+valuePayment+`</td><td>`+datePayment+`</td><td>`+imagePayment.substr(12, imagePayment.length-1)+`<td>`+codeFT+`</td><td>`+confirm+`</td><td>`+notePayment+`</td></td><td><button type="button" class="btn btn-link removeRow`+index+`"><i class="remove fa fa-times" aria-hidden="true" style="cursor: pointer;"></i></button></td>
 	    		</tr>`);
 	    	$('.valuePayment, .datePayment, .imagePayment').val('');
 	    	// check input checkbox
