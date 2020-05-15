@@ -423,9 +423,8 @@
                 		</td>
                 		<td>
                 			<select class="browser-default custom-select confirm" name="confirm" @if($role != 2) disabled @endif>
-							  	<option value="" selected>--Lựa chọn--</option>
-							  	<option value="1">Xác nhận</option>
-							  	<option value="0">Không xác nhận</option>
+							  	<option value="0">Không cho nợ</option>
+							  	<option value="1">Cho nợ</option>
 							</select>
                 		</td>
                 		<td>

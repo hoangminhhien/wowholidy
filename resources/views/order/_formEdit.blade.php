@@ -129,7 +129,7 @@
 			<div class="col-3"></div>
 			<div class="col-3"></div>
 			<div class="col-3">
-				<input type="checkbox" id="paymentAirline" name="paymentAirline" class="form-check-input paymentAirline" {!! $response['airlineStatus'] == 1  ? 'checked' : '' !!}>
+				<input type="checkbox" id="paymentAirline" name="paymentAirline" class="form-check-input paymentAirline" {!! $response['airlineStatus'] == 1  ? 'checked' : '' !!} @if($role !=	 1 && $role != 2) disabled="true"   @endif>
 				<label>Thanh toán cho phần này</label>
 			</div>
 		</div>
@@ -175,7 +175,7 @@
 				<div class="col-3">
 				<label>Trạng thái</label>
 				<div class="input-group mb-3">
-	  				<select class="browser-default custom-select statusAir" name="statusAir">
+	  				<select class="browser-default custom-select statusAir" name="statusAir" @if($response->airlineStatus == 0) disabled="true"   @endif>
 					  	<option {!! $response['statusAir'] == 0  ? 'selected' : '' !!} value="0">Chưa xử lý</option>
 					  	<option {!! $response['statusAir'] == 1  ? 'selected' : '' !!} value="1">Đã xử lý</option>
 					</select>
@@ -197,7 +197,7 @@
 				<div class="col-3"></div>
 				<div class="col-3"></div>
 				<div class="col-3">
-					<input type="checkbox" id="paymentHotel" name="paymentHotel" class="form-check-input paymentHotel" {!! $response['hotelStatus'] == 1  ? 'checked' : '' !!}>
+					<input type="checkbox" id="paymentHotel" name="paymentHotel" class="form-check-input paymentHotel" {!! $response['hotelStatus'] == 1  ? 'checked' : '' !!} @if($role != 1 && $role != 2) disabled="true"   @endif>
 					<label style="">Thanh toán cho phần này</label>
 				</div>
 			</div>
@@ -393,7 +393,7 @@
 				<div class="col-3">
 					<label>Trạng thái</label>
 					<div class="input-group mb-3">
-		  				<select class="browser-default custom-select statusHotel" name="statusHotel">
+		  				<select class="browser-default custom-select statusHotel" name="statusHotel" @if($response->hotelStatus == 0) disabled="true" @endif>
 						  	<option {!! $response['statusHotel'] == 0  ? 'selected' : '' !!} value="0">Chưa xử lý</option>
 						  	<option {!! $response['statusHotel'] == 1  ? 'selected' : '' !!} value="1">Đã xử lý</option>
 						</select>
@@ -414,7 +414,7 @@
 				<div class="col-3"></div>
 				<div class="col-3"></div>
 				<div class="col-3">
-					<input type="checkbox" id="paymentOther" name="paymentOther" class="form-check-input paymentOther" {!! $response['otherStatus'] == 1  ? 'checked' : '' !!}>
+					<input type="checkbox" id="paymentOther" name="paymentOther" class="form-check-input paymentOther" {!! $response['otherStatus'] == 1  ? 'checked' : '' !!} @if($role != 1 && $role != 2) disabled="true"   @endif>
 					<label>Thanh toán cho phần này</label>
 				</div>
 				<table id="tblOther" class="table table-xs data-table table-bordered">
@@ -505,7 +505,7 @@
 				<div class="col-3">
 					<label>Trạng thái</label>
 					<div class="input-group mb-3">
-		  				<select class="browser-default custom-select statusOther" name="statusOther">
+		  				<select class="browser-default custom-select statusOther" name="statusOther" @if($response->otherStatus == 0) disabled="true" @endif>
 						  	<option {!! $response['statusOther'] == 0  ? 'selected' : '' !!} value="0">Chưa xử lý</option>
 						  	<option {!! $response['statusOther'] == 1  ? 'selected' : '' !!} value="1">Đã xử lý</option>
 						</select>

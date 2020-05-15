@@ -270,18 +270,38 @@
 	            		</td>
 	            		<td>
 	            			<!-- Sales  -->
+	            			@if($order->statusAir == 1 && $order->statusHotel == 1 && $order->statusOther == 1)
+	            			<span class="badge badge-success">Sales</span>
+	            			@elseif($order->statusAir == 1 || $order->statusHotel == 1 || $order->statusOther == 1)
+	            			<span class="badge badge-danger">Sales</span>
+	            			@else
+	            			<span class="badge badge-secondary">Sales</span>
+	            			@endif
+	            			<br>
 	            			@if($order->payment == null)
 	            			<span class="badge badge-secondary">Kế toán</span>
 	            			@else
-		            			@foreach($order->payment as $payments)
-		            				@if($payments['confirm'] == 0)
-		            				<span class="badge badge-secondary">Kế toán</span>
-		            				@elseif($payments['codeFT'] == null  && $payments['confirm'] != 1)
-		            				<span class="badge badge-danger">Kế toán</span>
-		            				@elseif($payments['codeFT'] != null)
-		            				<span class="badge badge-success">Kế toán</span>
+	            				@php
+	            					$check = 0;
+	            					$count = 0;
+	            				@endphp
+		            			@foreach($order->payment as $key => $payments)
+		            				@php
+		            					$count += $payments['valuePayment'];
+		            				@endphp
+		            				@if($payments['codeFT'] != null)
+			            				@php
+			            					$check += $payments['valuePayment'];
+			            				@endphp
 		            				@endif
 		            			@endforeach
+		            			@if($check == $count)
+		            				<span class="badge badge-success">Kế toán</span>
+		            			@elseif($check < $count)
+		            				<span class="badge badge-danger">Kế toán</span>
+		            			@else
+		            				<span class="badge badge-secondary">Kế toán</span>
+		            			@endif
 	            			@endif
 	            			<br>
 	            			@if($order->statusAir == 1)
