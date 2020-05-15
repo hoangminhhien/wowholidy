@@ -142,6 +142,13 @@
                 </div>
 			</div>
 			<div class="col-3">
+				<label>Số lượng vé máy bay</label>
+				<input type="input" name="airQuantity" class="form-control common-numeric airQuantity" value="{!! $response->airLine != null ? $response->airLine['airQuantity'] : '' !!}">
+                <div class="form-control-feedback">
+                    <i class="icon-search4 font-size-base text-muted"></i>
+                </div>
+			</div>
+			<div class="col-3">
 				<label>Tiền vé máy bay</label>
 				<div class="input-group mb-3">
 	  				<input type="text" name="airValue" class="form-control common-currency airValue" value="{!! $response->airLine != null ? $response->airLine['airValue'] : '' !!}">
@@ -257,8 +264,8 @@
 				<table id="tblhotel" class="table table-xs data-table table-bordered">
                     <thead>
                     <tr>
-                        <th width="15%">Ngày</th>
-                        <th width="15%">Tên khách sạn</th>
+                        <th width="13%">Ngày</th>
+                        <th width="10%">Tên khách sạn</th>
                         <th width="10%">Hạng phòng</th>
                         <th width="10%">Giường</th>
                         <th width="10%">Gói mua</th>
@@ -311,7 +318,7 @@
                 		<td>
                 			<input type="text" name="amountHotel" class="form-control amountHotel common-numeric">
                 		</td>
-                		<td><input type="text" name="surcharge" placeholder="nhập tiền" class="form-control surcharge"></td>
+                		<td><input type="text" name="surcharge" placeholder="nhập tiền" class="form-control common-currency surcharge"></td>
                 		<td></td>
                 	</tr>
                 	@if($response['hotel'] != null)
@@ -358,7 +365,7 @@
 	                			<label class="amountlable{!! $key !!}"> {!! $res['amountHotel'] !!}</label>
 		                	</td>
 	                		<td>
-		                		<input type="text" name="" class="form-control surchargeHotel{!! $key !!}" value="{!! $res['surcharge'] !!}">
+		                		<input type="text" name="" class="form-control common-currency surchargeHotel{!! $key !!}" value="{!! $res['surcharge'] !!}">
 	                			<label class="surcharge{!! $key !!}"> {!! $res['surcharge'] !!}</label>
 		                	</td>
 	                		<td>
@@ -622,6 +629,142 @@
 			<div class="row">
 				<div class="col-4"></div>
 				<div class="col-4"></div>
+            </div>
+            <hr>
+            <div class="form-group">
+				<label style="font: Bold 16px Avenir Next Rounded Pro;">Thông tin margin</label>
+            </div>
+            <div class="form-group">
+				<label style="font: Bold 14px Avenir Next Rounded Pro;">Vé máy bay</label>
+            </div>
+            <div class="row">
+            	<div class="col-3">
+            		<label>Tổng giá nhập vé máy bay</label>
+            		<input type="" name="" class="form-control airNhap common-currency" disabled="true" value="{!! $response->airLine != null ? $response->airLine['airValue'] - $profit : 0 !!}">
+            	</div>
+            	<div class="col-3">
+            		<label>Tổng giá bán vé máy bay</label>
+            		<input type="" name="" class="form-control airBan common-currency" disabled="true" value="{!! $response->airLine != null ? $response->airLine['airValue'] : 0 !!}">
+            	</div>
+            	<div class="col-3">
+            		<label>Tổng lợi nhuận vé máy bay</label>
+            		<input type="" name="" class="form-control airPrifit common-currency" disabled="true" value="{!! $profit !!}">
+            	</div>
+            </div>
+            <div class="form-group">
+				<label style="font: Bold 14px Avenir Next Rounded Pro;">Vé Khách sạn</label>
+            </div>
+            <table id="tblhotel" class="table table-xs data-table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Ngày</th>
+                        <th>Tên khách sạn</th>
+                        <th>Hạng phòng</th>
+                        <th>Giường</th>
+                        <th>Gói mua</th>
+                        <th>Tiền phòng (Giá cost)</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                	@if($response['hotel'] != null)
+	                	@foreach($response['hotel'] as $key => $res)
+	                	<tr class="hotel{!! $key !!} updateHotel data">
+	                		<td>
+	                			<label class="dateLable{!! $key !!}"> {!! $res['date'] !!}</label>
+		                	</td>
+	                		<td>
+	                			<label class="name{!! $key !!}"> {!! $res['name'] !!}</label>
+		                	</td>
+	                		<td>
+	                			<label class="level{!! $key !!}"> {!! $res['level'] !!}</label>
+		                	</td>
+	                		<td>
+	                			<label class="bed{!! $key !!}"> {!! $res['bed'] !!}</label>
+		                	</td>
+	                		<td>
+	                			<label class="combo{!! $key !!}"> {!! $res['combo'] !!}</label>
+		                	</td>
+	                		<td>
+	                			<input type="" name="" class="form-control common-currency countProfitHotel">
+		                	</td>
+	                	</tr>
+	                	@endforeach
+	                	@endif
+                    </tbody>
+                </table>
+                <div class="row">
+	            	<div class="col-3">
+	            		<label>Tổng giá nhập khách sạn</label>
+	            		<input type="" name="" class="form-control marginHotel common-currency" disabled="true" value="{!! $couthHotel !!}">
+	            	</div>
+	            	<div class="col-3">
+	            		<label>Tổng giá bán khách sạn</label>
+	            		<input type="" name="" class="form-control cin common-currency" disabled="true" value="{!! $countSurcharge !!}">
+	            	</div>
+	            	<div class="col-3">
+	            		<label>Tổng lợi nhuận khách sạn</label>
+	            		<input type="" name="" class="form-control profitHotel common-currency" disabled="true">
+	            	</div>
+	            </div>
+	        <div class="form-group">
+				<label style="font: Bold 14px Avenir Next Rounded Pro;">Dịch vụ khác</label>
+            </div>
+            <table id="tblOther" class="table table-xs data-table table-bordered">
+                <thead>
+                <tr>
+                    <th style="width: 30%">Tên dịch vụ</th>
+                    <th style="width: 30%">Giá bán</th>
+                    <th style="width: 40%">Giá tiền (Giá cost)</th>
+                </tr>
+                </thead>
+                <tbody>
+            		@if($response['other'] != null)
+                	@foreach($response['other'] as $key => $res)
+            		<tr class='other{!! $key !!} updateOther data'>
+	                	<td>
+                			<label class="name{!! $key !!}"> {!! $res['nameOther'] !!}</label>
+	                	</td>
+	                	<td>
+            				<label class="amount{!! $key !!}"> {!! $res['valueOther'] !!}</label>
+	                	</td>
+	                	<td>
+	                		<input type="" name="" class="form-control inCostOther common-currency">
+	                	</td>
+            		</tr>
+                	@endforeach
+                	@endif
+                </tbody>
+            </table>
+            <div class="row">
+            	<div class="col-3">
+            		<label>Tổng giá dịch vụ</label>
+            		<input type="" name="" class="form-control marginOther common-currency" disabled="true" value="{!! $countOther !!}">
+            	</div>
+            	<div class="col-3">
+            		<label>Tổng giá nhập dịch vụ</label>
+            		<input type="" name="" class="form-control costOther common-currency" disabled="true">
+            	</div>
+            	<div class="col-3">
+            		<label>Tổng lợi nhuận dịch vụ</label>
+            		<input type="" name="" class="form-control profitOther common-currency" disabled="true">
+            	</div>
+            </div>
+            <div class="form-group">
+				<label style="font: Bold 14px Avenir Next Rounded Pro;">Tổng lợi nhuận đơn hàng</label>
+            </div>
+            <div class="row">
+            	<div class="col-3">
+            		<label>Tổng giá nhập</label>
+            		<input type="" name="" class="form-control countNhap common-currency" disabled="true">
+            	</div>
+            	<div class="col-3">
+            		<label>Tổng giá bán</label>
+            		<input type="" name="" class="form-control countBan common-currency" disabled="true">
+            	</div>
+            	<div class="col-3">
+            		<label>Tổng lợi nhuận đơn hàng</label>
+            		<input type="" name="" class="form-control countProfit common-currency" disabled="true">
+            	</div>
             </div>
 			<div class="row">
 				<div class="col-3"></div>
@@ -1014,6 +1157,7 @@
 	    	var url = '{!! route('order.update') !!}';
 	    	var airLine = {
 	    		'airCode' : $('.airCode').val(),
+	    		'airQuantity' : $('.airQuantity').val(),
     			'airValue' : $('.airValue').val(),
     			'fromDate' : $('.fromDate').val(),
     			'toDate' : $('.toDate').val()
@@ -1100,5 +1244,20 @@
 
 	        });
 	    });
+	});
+	var aaa = $('.cin').val();
+	$('.countProfitHotel').keyup(function(){
+		$('.cin').val(parseInt($(this).val()) + parseInt(aaa));
+		$('.profitHotel').val(parseInt($('.marginHotel').val()) - parseInt( parseInt($(this).val()) + parseInt(aaa)))
+	});
+	var marginOther = $('.marginOther').val();
+	$('.inCostOther').keyup(function(){
+		$('.costOther').val(parseInt($(this).val()));
+		$('.profitOther').val(parseInt(marginOther) - parseInt($(this).val()));
+	});
+	$('.countProfitHotel, .inCostOther').keyup(function(){
+		$('.countNhap').val(parseInt($('.airNhap').val()) + parseInt($('.marginHotel').val()) + parseInt($('.marginOther').val()));
+		$('.countBan').val(parseInt($('.airBan').val()) + parseInt($('.cin').val()) + parseInt($('.costOther').val()));
+		$('.countProfit').val(parseInt($('.countBan').val()) - parseInt($('.countNhap').val()))
 	});
 </script>

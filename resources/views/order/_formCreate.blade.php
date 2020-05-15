@@ -139,6 +139,13 @@
                 </div>
 			</div>
 			<div class="col-3">
+				<label>Số lượng vé máy bay</label>
+				<input type="input" name="airQuantity" class="form-control common-numeric airQuantity">
+                <div class="form-control-feedback">
+                    <i class="icon-search4 font-size-base text-muted"></i>
+                </div>
+			</div>
+			<div class="col-3">
 				<label>Tiền vé máy bay</label>
 				<div class="input-group mb-3">
 	  				<input type="text" name="airValue" class="form-control common-currency airValue">
@@ -147,6 +154,8 @@
 					</div>
 				</div>
 			</div>
+		</div>
+		<div class="row form-group">
 			<div class="col-3">
 				<label>Ngày bay đi</label>
 				<div class="input-group mb-3">
@@ -237,8 +246,8 @@
 				<table id="tblhotel" class="table table-xs data-table table-bordered">
                     <thead>
                     <tr>
-                        <th width="15%">Ngày</th>
-                        <th width="15%">Tên khách sạn</th>
+                        <th width="13%">Ngày</th>
+                        <th width="10%">Tên khách sạn</th>
                         <th width="10%">Hạng phòng</th>
                         <th width="10%">Giường</th>
                         <th width="10%">Gói mua</th>
@@ -291,7 +300,7 @@
                 		<td>
                 			<input type="text" name="amountHotel" class="form-control amountHotel common-numeric">
                 		</td>
-                		<td><input type="text" name="surcharge" placeholder="nhập tiền" class="form-control surcharge"></td>
+                		<td><input type="text" name="surcharge" placeholder="nhập tiền" class="form-control common-currency surcharge"></td>
                 		<td>
                 			
                 		</td>
@@ -804,6 +813,7 @@
 	    	var url = '{!! route('order.store') !!}';
 	    	var airLine = {
 	    		'airCode' : $('.airCode').val(),
+	    		'airQuantity' : $('.airQuantity').val(),
     			'airValue' : $('.airValue').val(),
     			'fromDate' : $('.fromDate').val(),
     			'toDate' : $('.toDate').val()

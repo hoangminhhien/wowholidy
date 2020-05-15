@@ -59,9 +59,11 @@ class OrderController extends Controller
         $couthHotel = 0;
         $countOther = 0;
         $coutPayment = 0;
+        $countSurcharge = 0;
         if($response->hotel != null){
             foreach($response->hotel as $hotel){
                 $couthHotel += (int)$hotel['number'] * (int)$hotel['value'];
+                $countSurcharge += (int)$hotel['amountHotel'] * (int)$hotel['surcharge'];
             }
         }
         if($response->other != null){
@@ -74,7 +76,9 @@ class OrderController extends Controller
                 $coutPayment += (int)$payment['valuePayment'];
             }
         }
-        return view('order._formEdit', compact('response', 'couthHotel', 'countOther', 'coutPayment', 'role'));
+        $response->airLine != null ? $quantity = $response->airLine['airQuantity'] : $quantity = 0;
+        $profit = (int)$quantity * 15000;
+        return view('order._formEdit', compact('response', 'couthHotel', 'countOther', 'coutPayment', 'countSurcharge','profit' , 'role'));
     }
     public function store(Request $request){
         // dd($request->all());
