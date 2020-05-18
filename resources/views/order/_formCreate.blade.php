@@ -211,7 +211,7 @@
 				</div>
 				<div class="col-3">
 					<label>Danh sách khách hàng</label>
-					<textarea cols="30" rows="2"></textarea>
+					<textarea cols="30" rows="3" name="listCustomer" class="form-control listCustomer"></textarea>
 				</div>
 				<!-- <label>Danh sách khách hàng</label> -->
 			</div>
@@ -858,6 +858,7 @@
 					notePayment: $(this).find("td:eq(5)").text(),
 				});
 	        });
+	        var listCustomer = $('.listCustomer').val().split('\n');
 		    $.ajax({
 	            url: url,
 	            method: 'POST',
@@ -879,7 +880,8 @@
 		            payment: payment,
 		            airlineStatus: airlineStatus,
 				    hotelStatus: hotelStatus,
-				    otherStatus: otherStatus
+				    otherStatus: otherStatus,
+				    listCustomer: listCustomer
 		        },
 	        }).done(function(res){
 	        	if(res.httpCode == 200){

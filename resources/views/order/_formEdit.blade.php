@@ -157,6 +157,8 @@
 					</div>
 				</div>
 			</div>
+		</div>
+		<div class="row form-group">
 			<div class="col-3">
 				<label>Ngày bay đi</label>
 				<div class="input-group mb-3">
@@ -229,7 +231,9 @@
 				</div>
 				<div class="col-3">
 					<label>Danh sách khách hàng</label>
-					<textarea cols="30" rows="2"></textarea>
+					<textarea cols="30" rows="3" name="listCustomer" class="form-control listCustomer">@if($response['listCustomer'] != null)@foreach($response['listCustomer'] as $customer){!! $customer !!}&#13;&#10;@endforeach @endif
+					</textarea>
+
 				</div>
 				<!-- <label>Danh sách khách hàng</label> -->
 			</div>
@@ -1206,6 +1210,7 @@
 					notePayment: $(this).find("td:eq(5)").text(),
 				});
 	        });
+	        var listCustomer = $('.listCustomer').val().split('\n');
 		    $.ajax({
 	            url: url,
 	            method: 'POST',
@@ -1231,7 +1236,8 @@
 				    otherStatus: otherStatus,
 				    statusAir: $('.statusAir').val(),
 				    statusHotel: $('.statusHotel').val(),
-				    statusOther: $('.statusOther').val()
+				    statusOther: $('.statusOther').val(),
+				    listCustomer: listCustomer
 		        },
 	        }).done(function(res){
 	        	if(res.httpCode == 200){

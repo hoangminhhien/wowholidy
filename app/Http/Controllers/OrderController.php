@@ -108,12 +108,20 @@ class OrderController extends Controller
     		'countValue' => $request['countValue'],
             'airlineStatus' => (int)$request['airlineStatus'],
             'hotelStatus' => (int)$request['hotelStatus'],
-            'otherStatus' => (int)$request['otherStatus']
+            'otherStatus' => (int)$request['otherStatus'],
+            'listCustomer' => $request['listCustomer']
     	]);
     	return response()->json(['httpCode'=>200,'message'=>'Tạo thành công']);
     }
     public function update(Request $request){
-        // dd($request->all());
+        $listCustomer = [];
+        if(isset($request['listCustomer'])){
+            foreach($request['listCustomer'] as $list){
+                if($list != null){
+                    array_push($listCustomer, $list);
+                }
+            }
+        }
         $id = $request['id'];
         $update = Order::find($id)->update([
             'nameSaler' => $request['nameSaler'],
@@ -136,6 +144,7 @@ class OrderController extends Controller
             'statusAir' => (int)$request['statusAir'],
             'statusHotel' => (int)$request['statusHotel'],
             'statusOther' => (int)$request['statusOther'],
+            'listCustomer' => $listCustomer
         ]);
         return response()->json(['httpCode'=>200, 'message'=>'Cập nhật thành công']);
     }
