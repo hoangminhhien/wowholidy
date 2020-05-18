@@ -657,62 +657,62 @@
             <div class="form-group">
 				<label style="font: Bold 14px Avenir Next Rounded Pro;">Vé Khách sạn</label>
             </div>
-            <table id="tblhotel" class="table table-xs data-table table-bordered">
-                    <thead>
-                    <tr>
-                        <th>Ngày</th>
-                        <th>Tên khách sạn</th>
-                        <th>Hạng phòng</th>
-                        <th>Giường</th>
-                        <th>Gói mua</th>
-                        <th>Tiền phòng (Giá cost)</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                	@if($response['hotel'] != null)
-	                	@foreach($response['hotel'] as $key => $res)
-	                	<tr class="hotel{!! $key !!} updateHotel data">
-	                		<td>
-	                			<label class="dateLable{!! $key !!}"> {!! $res['date'] !!}</label>
-		                	</td>
-	                		<td>
-	                			<label class="name{!! $key !!}"> {!! $res['name'] !!}</label>
-		                	</td>
-	                		<td>
-	                			<label class="level{!! $key !!}"> {!! $res['level'] !!}</label>
-		                	</td>
-	                		<td>
-	                			<label class="bed{!! $key !!}"> {!! $res['bed'] !!}</label>
-		                	</td>
-	                		<td>
-	                			<label class="combo{!! $key !!}"> {!! $res['combo'] !!}</label>
-		                	</td>
-	                		<td>
-	                			<input type="" name="" class="form-control common-currency countProfitHotel">
-		                	</td>
-	                	</tr>
-	                	@endforeach
-	                	@endif
-                    </tbody>
-                </table>
-                <div class="row">
-	            	<div class="col-3">
-	            		<label>Tổng giá nhập khách sạn</label>
-	            		<input type="" name="" class="form-control marginHotel common-currency" disabled="true" value="{!! $countSurcharge !!}">
-	            	</div>
-	            	<div class="col-3">
-	            		<label>Tổng giá bán khách sạn</label>
-	            		<input type="" name="" class="form-control cin common-currency" disabled="true" value="{!! $couthHotel !!}">
-	            	</div>
-	            	<div class="col-3">
-	            		<label>Tổng lợi nhuận khách sạn</label>
-	            		<input type="" name="" class="form-control profitHotel common-currency" disabled="true">
-	            	</div>
-	            </div>
+            <table id="tblhotelMargin" class="table table-xs data-table table-bordered">
+                <thead>
+                <tr>
+                    <th>Ngày</th>
+                    <th>Tên khách sạn</th>
+                    <th>Hạng phòng</th>
+                    <th>Giường</th>
+                    <th>Gói mua</th>
+                    <th>Tiền phòng (Giá cost)</th>
+                </tr>
+                </thead>
+                <tbody>
+            	@if($response['hotel'] != null)
+                	@foreach($response['hotel'] as $key => $res)
+                	<tr class="hotel{!! $key !!} updateHotel data">
+                		<td>
+                			<label class="dateLable{!! $key !!}"> {!! $res['date'] !!}</label>
+	                	</td>
+                		<td>
+                			<label class="name{!! $key !!}"> {!! $res['name'] !!}</label>
+	                	</td>
+                		<td>
+                			<label class="level{!! $key !!}"> {!! $res['level'] !!}</label>
+	                	</td>
+                		<td>
+                			<label class="bed{!! $key !!}"> {!! $res['bed'] !!}</label>
+	                	</td>
+                		<td>
+                			<label class="combo{!! $key !!}"> {!! $res['combo'] !!}</label>
+	                	</td>
+                		<td>
+                			<input type="" name="" class="form-control common-currency countProfitHotel">
+	                	</td>
+                	</tr>
+                	@endforeach
+                	@endif
+                </tbody>
+            </table>
+            <div class="row">
+            	<div class="col-3">
+            		<label>Tổng giá nhập khách sạn</label>
+            		<input type="" name="" class="form-control marginHotel common-currency" disabled="true" value="{!! $countSurcharge !!}">
+            	</div>
+            	<div class="col-3">
+            		<label>Tổng giá bán khách sạn</label>
+            		<input type="" name="" class="form-control cin common-currency" disabled="true" value="{!! $couthHotel !!}">
+            	</div>
+            	<div class="col-3">
+            		<label>Tổng lợi nhuận khách sạn</label>
+            		<input type="" name="" class="form-control profitHotel common-currency" disabled="true">
+            	</div>
+            </div>
 	        <div class="form-group">
 				<label style="font: Bold 14px Avenir Next Rounded Pro;">Dịch vụ khác</label>
             </div>
-            <table id="tblOther" class="table table-xs data-table table-bordered">
+            <table id="tblOtherMargin" class="table table-xs data-table table-bordered">
                 <thead>
                 <tr>
                     <th style="width: 30%">Tên dịch vụ</th>
@@ -1181,7 +1181,6 @@
 					surcharge: $(this).find("td:eq(9)").text(),
 				});
 			});
-			console.log(hotel);
 			var other = [];
 			var $other = $('#tblOther .data');
 			$other.each(function(){
