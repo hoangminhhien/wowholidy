@@ -630,6 +630,9 @@
 				<div class="col-4"></div>
 				<div class="col-4"></div>
             </div>
+            <div @if($role != 3 || $role != 4 || $role != 5 || $role != 6) style="display: none" @endif>
+            	{!! $role !!}
+            </div>
             <hr>
             <div class="form-group">
 				<label style="font: Bold 16px Avenir Next Rounded Pro;">Thông tin margin</label>
@@ -695,11 +698,11 @@
                 <div class="row">
 	            	<div class="col-3">
 	            		<label>Tổng giá nhập khách sạn</label>
-	            		<input type="" name="" class="form-control marginHotel common-currency" disabled="true" value="{!! $couthHotel !!}">
+	            		<input type="" name="" class="form-control marginHotel common-currency" disabled="true" value="{!! $countSurcharge !!}">
 	            	</div>
 	            	<div class="col-3">
 	            		<label>Tổng giá bán khách sạn</label>
-	            		<input type="" name="" class="form-control cin common-currency" disabled="true" value="{!! $countSurcharge !!}">
+	            		<input type="" name="" class="form-control cin common-currency" disabled="true" value="{!! $couthHotel !!}">
 	            	</div>
 	            	<div class="col-3">
 	            		<label>Tổng lợi nhuận khách sạn</label>
@@ -1245,17 +1248,21 @@
 	        });
 	    });
 	});
-	var aaa = $('.cin').val();
-	$('.countProfitHotel').keyup(function(){
-		$('.cin').val(parseInt($(this).val()) + parseInt(aaa));
-		$('.profitHotel').val(parseInt($('.marginHotel').val()) - parseInt( parseInt($(this).val()) + parseInt(aaa)))
+	var aaa  = $('.marginHotel').val();
+	var _hotel = 0;
+	$('.countProfitHotel').focusout(function(){
+		_hotel += parseInt($(this).val());
+		$('.marginHotel').val(parseInt(_hotel) + parseInt(aaa));
+		$('.profitHotel').val(parseInt($('.cin').val()) - parseInt($('.marginHotel ').val()))
 	});
 	var marginOther = $('.marginOther').val();
-	$('.inCostOther').keyup(function(){
-		$('.costOther').val(parseInt($(this).val()));
-		$('.profitOther').val(parseInt(marginOther) - parseInt($(this).val()));
+	var _other = 0;
+	$('.inCostOther').focusout(function(){
+		_other += parseInt($(this).val());
+		$('.costOther').val(parseInt(_other));
+		$('.profitOther').val(parseInt(marginOther) - parseInt(_other));
 	});
-	$('.countProfitHotel, .inCostOther').keyup(function(){
+	$('.countProfitHotel, .inCostOther').focusout(function(){
 		$('.countNhap').val(parseInt($('.airNhap').val()) + parseInt($('.marginHotel').val()) + parseInt($('.marginOther').val()));
 		$('.countBan').val(parseInt($('.airBan').val()) + parseInt($('.cin').val()) + parseInt($('.costOther').val()));
 		$('.countProfit').val(parseInt($('.countBan').val()) - parseInt($('.countNhap').val()))
