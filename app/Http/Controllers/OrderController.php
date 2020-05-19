@@ -38,16 +38,17 @@ class OrderController extends Controller
                     ->orWhere('mailCustomer', $customer);
             });
         }
+        $count = $query->count();
         $listOrder = $query->orderBy('updated_at', 'desc')->paginate(15);
-        // dd($query);
-    	return view('order.index', compact('listOrder', 'request', 'role'));
+    	return view('order.index', compact('listOrder', 'request', 'role', 'count'));
     }
     public function create(){
         if(Auth::user() == null){
             return redirect()->route('login');
         }
         $role = Auth::user()->role;
-    	return view('order._formCreate', compact('role'));
+        $user_name = Auth::user()->name;
+    	return view('order._formCreate', compact('role', 'user_name'));
     }
     public function edit($id){
         if(Auth::user() == null){
@@ -81,7 +82,6 @@ class OrderController extends Controller
         return view('order._formEdit', compact('response', 'couthHotel', 'countOther', 'coutPayment', 'countSurcharge','profit' , 'role'));
     }
     public function store(Request $request){
-        // dd($request->all());
     	// if($request['payment'] != null){
 	    // 	foreach($request['payment'] as $image){
 		   //  	$image_url = '';
@@ -101,6 +101,8 @@ class OrderController extends Controller
             'phoneCustomer'=> $request['phoneCustomer'],
             'mailCustomer'=> $request['mailCustomer'],
             'country'=> $request['country'],
+            'codeCombo'=> $request['codeCombo'],
+            'levelOrder'=> $request['levelOrder'],
     		'airLine' => $request['airLine'],
     		'hotel' => $request['hotel'],
     		'other' => $request['other'],
@@ -133,6 +135,8 @@ class OrderController extends Controller
             'phoneCustomer' => $request['phoneCustomer'],
             'mailCustomer' => $request['mailCustomer'],
             'country' => $request['country'],
+            'codeCombo'=> $request['codeCombo'],
+            'levelOrder'=> $request['levelOrder'],
             'airLine' => $request['airLine'],
             'hotel' => $request['hotel'],
             'other' => $request['other'],

@@ -8,11 +8,11 @@
 		body{
 			font-size: 12px;
 		}
+		.custom-select{
+			font-size: 12px;
+		}
 		input[type="text"] {
 		    font-size:12px;
-		}
-		select option{
-		    font-size: 12px;
 		}
 		#wrapper{
 			top: 0px;
@@ -44,6 +44,7 @@
 		.body{
 			top: 111px;
 			height: auto;
+			width: 1340px;
 			background: #FFFFFF 0% 0% no-repeat padding-box;
 			box-shadow: 0px 1px 2px #00000014;
 			border: 1px solid #F0F0F0;
@@ -53,7 +54,7 @@
 		.btn-search{
 			background: #FFC82E 0% 0% no-repeat padding-box;
 			width: 120px;
-			height: 40px;
+			height: 34px;
 			border-radius: 4px;
 			opacity: 1;
 		}
@@ -62,7 +63,7 @@
 		}
 		table thead{
 			background-color: #f8e7b4;
-			font-size: 14px
+			font-size: 11px
 		}
 	</style>
 </head>
@@ -73,6 +74,16 @@
 			<hr>
 			<form action="{!! route('order.list') !!}">
 				<div class="row">
+					<div class="col-3">
+						<label>Kiểu ngày</label>
+						<div class="input-group mb-3">
+			  				<select class="browser-default custom-select">
+							  	<option value="created_at">Ngày tạo form</option>
+							  	<option value="updated_at">Ngày chăm sóc gần nhất</option>
+							  	<option value="start_date">Ngày khởi hành</option>
+							</select>
+						</div>
+					</div>
 					<div class="col-3">
 						<label>Ngày tạo form</label>
 						<div class="input-group mb-3">
@@ -98,27 +109,24 @@
 						<div class="input-group mb-3">
 			  				<input type="text" name="customer" class="form-control" placeholder="Số điện thoại, email..." value="{!! isset($request['customer']) ? $request['customer'] : '' !!}">
 							<div class="input-group-append">
-							    <span class="input-group-text" id="basic-addon2"><i class="fa fa-phone" aria-hidden="true"></i>
+							    <span class="input-group-text" id="basic-addon2"><i class="fa fa-user-circle" aria-hidden="true"></i>
 								</span>
 							</div>
 						</div>
 					</div>
+				</div>
+				<div class="row">
 					<div class="col-3">
 						<label>Level đơn hàng</label>
 						<div class="input-group mb-3">
 			  				<select class="browser-default custom-select">
 							  	<option value="" selected>--Tất cả--</option>
-							  	<option value="L6">L6</option>
-							  	<option value="L7">L7</option>
-							  	<option value="L8">L8</option>
-							  	<option value="L6B">L6B</option>
-							  	<option value="L7B">L7B</option>
-							  	<option value="L8B">L8B</option>
+							  	<option value="L6">L6->L3</option>
+							  	<option value="L7">L7->L4</option>
+							  	<option value="L8">L8->L5</option>
 							</select>
 						</div>
 					</div>
-				</div>
-				<div class="row">
 					<div class="col-3">
 						<label>Chương trình khuyến mãi</label>
 						<div class="input-group mb-3">
@@ -146,10 +154,21 @@
 							</select>
 						</div>
 					</div>
+				</div>
+				<div class="row">
+					<div class="col-3">
+						<label>Loại đơn hàng</label>
+						<div class="input-group mb-3">
+			  				<select class="browser-default custom-select" name="especiallyOrder">
+			  					<option value="especially">Tất cả</option>
+							  	<option value="especially">Đơn hàng đặc biệt</option>
+							  	<option value="especially">Đơn hàng thường</option>
+							</select>
+						</div>
+					</div>
 					<div class="col-3">
 						<div class="input-group mb-3">
-							<button class="btn-search" style="margin-top: 30px;">Tìm kiếm</button>
-							<button type="button" class="btn btn-secondary" onclick="window.location='{{route('order.list')}}'" style="margin-top: 30px;"><i class="icon-reset"></i>Làm mới</button>
+							<button class="btn-search" style="margin-top: 25px;">Tìm kiếm</button>
 						</div>
 					</div>
 				</div>
@@ -158,7 +177,9 @@
 		<div class="body">
 			<div class="row">
 				<div class="col-4">
-					<label>Danh sách</label>
+					<label>Danh sách</label><br>
+					<small>Kết quả tìm kiếm được: {!! $count !!}</small>
+					<br>
 				</div>
 				<div class="col-4">
 				</div>
@@ -170,26 +191,25 @@
                 	@endif
                 	@if($role == 1 || $role == 2)
                 	<a href="{!! route('order.create') !!}">
-	                	<button type="button" style="margin: 2px" class="btn bg-primary btn-sm mr-2">
+	                	<button type="button" style="margin: 2px" class="btn btn-search btn-sm mr-2">
 	                    <i class="fa fa-plus" aria-hidden="true"></i>Đơn hàng mới
 	                	</button>
                 	</a>
                 	@endif
 				</div>
 			</div>
-			<table id="tblDataTable" class="table table-xs data-table table-bordered">
+			<table id="tblTable" class="table table-xs data-table table-bordered">
                 <thead>
                 <tr>
-                    <th>STT</th>
                     <th>Ngày</th>
-                    <th>Mã/Loại</th>
-                    <th>Thông tin sale</th>
+                    <th style="width: 15%;">Mã/Loại</th>
+                    <th style="width: 10%">Thông tin sale</th>
                     <th>Thông tin người đại diện</th>
                     <th>Tổng giá trị đơn hàng</th>
-                    <th>Số tiền đã thanh toán</th>
-                    <th>Vé máy bay</th>
-                    <th>Phòng khách sạn</th>
-                    <th>Dịch vụ khác</th>
+                    <th>Đã thanh toán</th>
+                    <th style="width: 15%">Vé máy bay</th>
+                    <th style="width: 15%">Phòng khách sạn</th>
+                    <th style="width: 10%">Dịch vụ khác</th>
                     <th>Vận hành</th>
                     <th>Trạng thái</th>
                     <th>Tác vụ</th>
@@ -198,16 +218,19 @@
                 <tbody>
                 @foreach($listOrder as $key => $order)
 	            	<tr>
-	            		<td>{{ ++$key }}</td>
 	            		<td>
-	            			Ngày tạo: {{$order->created_at}}<br>
-	            			Ngày Sửa gần nhất: {{$order->updated_at}}
+	            			Ngày tạo: {{ date('d/m/Y', strtotime($order->created_at))}}<br>
+	            			Sửa gần nhất: {{date('d/m/Y', strtotime($order->updated_at))}}
 	            		</td>
 	            		<td>
 	            			Mã contact:
 	            				{!! $order->contactCode !!}<br>
-	            			Mã combo:
+	            			Mã combo: 
+	            			{!! $order->codeCombo !!}<br>
+	            			Loại combo:
 	            				{!! $order->typeCombo !!}<br>
+	            			Level:
+	            				 {!! $order->levelOrder !!}<br>
 	            		</td>
 	            		<td>
 	            			Sale:
@@ -218,45 +241,54 @@
 	            				{!! $order->typeCustomer !!}
 	            		</td>
 	            		<td>
-	            			Họ tên: {!! $order->nameCustomer !!}<br>
+	            			{!! $order->nameCustomer !!}<br>
 	            			SĐT: {!! $order->phoneCustomer !!}<br>
 	            			Email: {!! $order->mailCustomer !!}<br>
 	            		</td>
 	            		<td>
+	            			<div class="common-currency">
 	            			{!! $order->countValue !!}
+	            			</div>
 	            		</td>
 	            		<td>
-	            			@php
-	            				$countValuePay = 0;
-	            			@endphp
-	            			@if($order->payment != null)
-	            				@foreach($order->payment as $payment)
-	            				@if(isset($payment['codeFT']) && $payment['codeFT'] != null)
-	            					{!! $countValuePay += $payment['valuePayment'] !!}
-	            				@endif
-	            				@endforeach
-	            			@endif
+	            			<div class="common-currency">
+		            			@php
+		            				$countValuePay = 0;
+		            			@endphp
+		            			@if($order->payment != null)
+		            				@foreach($order->payment as $payment)
+		            				@if(isset($payment['codeFT']) && $payment['codeFT'] != null)
+		            					{!! $countValuePay += $payment['valuePayment'] !!}
+		            				@endif
+		            				@endforeach
+		            			@endif
+	            			</div>
 	            		</td>
 	            		<td>
 	            			Mã:  @if($order->airLine != null)
 	            				{!! $order->airLine['airCode'] !!}
 	            			@endif<br>
 	            			Ngày đi: @if($order->airLine != null)
-	            				{!! $order->airLine['fromDate'] !!}
+	            			{{ date('d/m/Y' , strtotime($order->airLine['fromDate']))}}
 	            			@endif<br>
 	            			Ngày về: @if($order->airLine != null)
-	            				{!! $order->airLine['toDate'] !!}
+	            			{{ date('d/m/Y' , strtotime($order->airLine['toDate']))}}
 	            			@endif<br>
 	            			Tổng tiền: @if($order->airLine != null)
+	            			<label class="common-currency">
 	            				{!! $order->airLine['airValue'] !!}
+	            			</label>
 	            			@endif<br>
 	            		</td>
 	            		<td>
 	            			@if($order->hotel != null)
 	            				@foreach($order->hotel as $hotel)
-	            				Check in: {!!  $hotel['date'] !!}<br>
 	            				Tên khách sạn : {!!  $hotel['name'] !!}<br>
-	            				Tổng tiền : {!!  $hotel['value'] !!}<br>
+	            				Check in: {!!  $hotel['date'] !!}<br>
+	            				Tổng tiền : 
+	            				<lable class="common-currency">
+	            				{!!  $hotel['value'] !!}<br>
+	            				</lable>
 	            				@endforeach
 	            			@endif
 	            		</td>
@@ -264,7 +296,10 @@
 	            			@if($order->other != null)
 	            				@foreach($order->other as $other)
 	            				Dịch vụ: {!!  $other['nameOther'] !!}<br>
-	            				Tổng tiền: {!!  $other['valueOther'] !!}<br>
+	            				Tổng tiền: 
+	            				<lable class="common-currency">
+	            				{!!  $other['valueOther'] !!}<br>
+	            				</lable>
 	            				@endforeach
 	            			@endif
 	            		</td>
@@ -348,6 +383,7 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
+<script src="{{ asset('js/inputmask/jquery.inputmask.bundle.min.js') }}"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <script type="text/javascript">
 	$(function() {
@@ -365,6 +401,15 @@
   	$('input[name="created_at"]').on('cancel.daterangepicker', function(ev, picker) {
       	$(this).val('');
   	});
-
+  	$(document).find('.common-currency').inputmask({
+        'alias': 'decimal',
+        'groupSeparator': ',',
+        'placeholder': "0",
+        'autoGroup': true,
+        'removeMaskOnSubmit': true,
+        'autoUnmask': true,
+        'suffix': ' ₫',
+        'allowMinus': false
+    });
 });
 </script>

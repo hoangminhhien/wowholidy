@@ -8,6 +8,15 @@
 		body{
 			font-size: 12px;
 		}
+		input[type="text"] {
+		    font-size:12px;
+		}
+		input[type="date"] {
+		    font-size:12px;
+		}
+		.custom-select{
+			font-size: 12px;
+		}
 		#wrapper{
 			top: 0px;
 			left: 0px;
@@ -47,6 +56,9 @@
 		.error{
 			color: red
 		}
+		table thead{
+			font-size: 11px
+		}
 	</style>
 </head>
 <body>
@@ -69,7 +81,7 @@
 				  	<option value="2">Nguyễn Văn C</option>
 				  	<option value="3">Nguyễn Văn D</option>
 				</select> -->
-				<input type="text" name="nameSaler" class="form-control nameSaler" >
+				<input type="text" name="nameSaler" class="form-control nameSaler" value="{!! $user_name !!}" disabled="true">
 			</div>
 			<div class="col-3">
 				<input type="text" name="nameTeam" class="form-control nameTeam" >
@@ -117,6 +129,14 @@
 				<label>Quốc tịch <strong>*</strong></label>
 				<input type="text" name="country" class="form-control country">
 			</div>
+			<div class="col-3">
+				<label>Mã combo</label>
+				<input type="text" name="codeCombo" class="form-control codeCombo">
+			</div>
+			<div class="col-3">
+				<label>Level đơn hàng</label>
+				<input type="text" name="levelOrder" class="form-control levelOrder">
+			</div>
 		</div>
 		<hr>
 		<div class="row">
@@ -133,14 +153,14 @@
 		<div class="row form-group">
 			<div class="col-3">
 				<label>Mã đơn máy bay</label>
-				<input type="input" name="airCode" class="form-control airCode">
+				<input type="text" type="input" name="airCode" class="form-control airCode">
                 <div class="form-control-feedback">
                     <i class="icon-search4 font-size-base text-muted"></i>
                 </div>
 			</div>
 			<div class="col-3">
 				<label>Số lượng vé máy bay</label>
-				<input type="input" name="airQuantity" class="form-control common-numeric airQuantity">
+				<input type="text" type="input" name="airQuantity" class="form-control common-numeric airQuantity">
                 <div class="form-control-feedback">
                     <i class="icon-search4 font-size-base text-muted"></i>
                 </div>
@@ -150,7 +170,7 @@
 				<div class="input-group mb-3">
 	  				<input type="text" name="airValue" class="form-control common-currency airValue">
 					<div class="input-group-append">
-					    <span class="input-group-text" id="basic-addon2">VNĐ</span>
+					    <span class="input-group-text" id="basic-addon2" style="font-size: 12px">VNĐ</span>
 					</div>
 				</div>
 			</div>
@@ -211,7 +231,7 @@
 				</div>
 				<div class="col-3">
 					<label>Danh sách khách hàng</label>
-					<textarea cols="30" rows="3" name="listCustomer" class="form-control listCustomer"></textarea>
+					<textarea cols="30" rows="3" name="listCustomer" class="form-control listCustomer" style="font-size: 12px"></textarea>
 				</div>
 				<!-- <label>Danh sách khách hàng</label> -->
 			</div>
@@ -399,7 +419,7 @@
 						<div class="input-group mb-3">
 						  	<input type="text" class="form-control countPayment" disabled="" value="0">
 						  	<div class="input-group-append">
-						    	<span class="input-group-text" id="basic-addon2">VNĐ</span>
+						    	<span class="input-group-text" id="basic-addon2" style="font-size: 12px">VNĐ</span>
 						  	</div>
 						</div>
 					</div>
@@ -873,6 +893,8 @@
 	    			phoneCustomer : $('.phoneCustomer').val(),
 	    			mailCustomer : $('.mailCustomer').val(),
 	    			country : $('.country').val(),
+	    			codeCombo: $('.codeCombo').val(),
+	    			levelOrder: $('.levelOrder').val(),
 		            airLine: airLine,
 		            hotel: hotel,
 		            other: other,

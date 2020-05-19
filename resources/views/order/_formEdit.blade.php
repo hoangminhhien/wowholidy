@@ -8,6 +8,15 @@
 		body{
 			font-size: 12px;
 		}
+		input[type="text"] {
+		    font-size:12px;
+		}
+		input[type="date"] {
+		    font-size:12px;
+		}
+		.custom-select{
+			font-size: 12px;
+		}
 		#wrapper{
 			top: 0px;
 			left: 0px;
@@ -30,14 +39,14 @@
 		.btn-create-order{
 			background: #FFC82E 0% 0% no-repeat padding-box;
 			width: 240px;
-			height: 40px;
+			height: 36;
 			border-radius: 4px;
 			opacity: 1;
 		}
 		.btn-add{
 			background: #FFC82E 0% 0% no-repeat padding-box;
 			width: 120px;
-			height: 40px;
+			height: 36;
 			border-radius: 4px;
 			opacity: 1;
 		}
@@ -46,6 +55,9 @@
 		}
 		.error{
 			color: red
+		}
+		table thead{
+			font-size: 11px
 		}
 	</style>
 </head>
@@ -120,6 +132,14 @@
 				<label>Quốc tịch <strong>*</strong></label>
 				<input type="text" name="country" class="form-control country" value="{!! $response['country'] !!}">
 			</div>
+			<div class="col-3">
+				<label>Mã combo</label>
+				<input type="text" name="codeCombo" class="form-control codeCombo" value="{!! isset($response['codeCombo']) ? $response['codeCombo'] : '' !!}">
+			</div>
+			<div class="col-3">
+				<label>level đơn hàng</label>
+				<input type="text" name="levelOrder" class="form-control levelOrder" value="{!! isset($response['levelOrder']) ? $response['levelOrder'] : '' !!}">
+			</div>
 		</div>
 		<hr>
 		<div class="row">
@@ -136,14 +156,14 @@
 		<div class="row form-group">
 			<div class="col-3">
 				<label>Mã đơn máy bay</label>
-				<input type="input" name="airCode" class="form-control airCode" value="{!! $response->airLine != null ? $response->airLine['airCode'] : '' !!}">
+				<input type="text" type="input" name="airCode" class="form-control airCode" value="{!! $response->airLine != null ? $response->airLine['airCode'] : '' !!}">
                 <div class="form-control-feedback">
                     <i class="icon-search4 font-size-base text-muted"></i>
                 </div>
 			</div>
 			<div class="col-3">
 				<label>Số lượng vé máy bay</label>
-				<input type="input" name="airQuantity" class="form-control common-numeric airQuantity" value="{!! $response->airLine != null ? $response->airLine['airQuantity'] : '' !!}">
+				<input type="text" name="airQuantity" class="form-control common-numeric airQuantity" value="{!! $response->airLine != null ? $response->airLine['airQuantity'] : '' !!}">
                 <div class="form-control-feedback">
                     <i class="icon-search4 font-size-base text-muted"></i>
                 </div>
@@ -153,7 +173,7 @@
 				<div class="input-group mb-3">
 	  				<input type="text" name="airValue" class="form-control common-currency airValue" value="{!! $response->airLine != null ? $response->airLine['airValue'] : '' !!}">
 					<div class="input-group-append">
-					    <span class="input-group-text" id="basic-addon2">VNĐ</span>
+					    <span class="input-group-text" id="basic-addon2" style="font-size: 12px">VNĐ</span>
 					</div>
 				</div>
 			</div>
@@ -231,7 +251,7 @@
 				</div>
 				<div class="col-3">
 					<label>Danh sách khách hàng</label>
-					<textarea cols="30" rows="3" name="listCustomer" class="form-control listCustomer">@if($response['listCustomer'] != null)@foreach($response['listCustomer'] as $customer){!! $customer !!}&#13;&#10;@endforeach @endif
+					<textarea cols="30" rows="3" name="listCustomer" class="form-control listCustomer" style="font-size: 12px">@if($response['listCustomer'] != null)@foreach($response['listCustomer'] as $customer){!! $customer !!}&#13;&#10;@endforeach @endif
 					</textarea>
 
 				</div>
@@ -546,7 +566,7 @@
 						<div class="input-group mb-3">
 						  	<input type="text" class="form-control countPayment" disabled="" value="{!! $coutPayment !!}">
 						  	<div class="input-group-append">
-						    	<span class="input-group-text" id="basic-addon2">VNĐ</span>
+						    	<span class="input-group-text" id="basic-addon2" style="font-size: 12px">VNĐ</span>
 						  	</div>
 						</div>
 					</div>
@@ -647,15 +667,15 @@
             <div class="row">
             	<div class="col-3">
             		<label>Tổng giá nhập vé máy bay</label>
-            		<input type="" name="" class="form-control airNhap common-currency" disabled="true" value="{!! $response->airLine != null ? $response->airLine['airValue'] - $profit : 0 !!}">
+            		<input type="text" name="" class="form-control airNhap common-currency" disabled="true" value="{!! $response->airLine != null ? $response->airLine['airValue'] - $profit : 0 !!}">
             	</div>
             	<div class="col-3">
             		<label>Tổng giá bán vé máy bay</label>
-            		<input type="" name="" class="form-control airBan common-currency" disabled="true" value="{!! $response->airLine != null ? $response->airLine['airValue'] : 0 !!}">
+            		<input type="text" name="" class="form-control airBan common-currency" disabled="true" value="{!! $response->airLine != null ? $response->airLine['airValue'] : 0 !!}">
             	</div>
             	<div class="col-3">
             		<label>Tổng lợi nhuận vé máy bay</label>
-            		<input type="" name="" class="form-control airPrifit common-currency" disabled="true" value="{!! $profit !!}">
+            		<input type="text" name="" class="form-control airPrifit common-currency" disabled="true" value="{!! $profit !!}">
             	</div>
             </div>
             <div class="form-group">
@@ -692,7 +712,7 @@
                 			<label class="combo{!! $key !!}"> {!! $res['combo'] !!}</label>
 	                	</td>
                 		<td>
-                			<input type="" name="" class="form-control common-currency countProfitHotel">
+                			<input type="" name="" class="form-control common-currency countProfitHotel" style="font-size: 12px">
 	                	</td>
                 	</tr>
                 	@endforeach
@@ -702,15 +722,15 @@
             <div class="row">
             	<div class="col-3">
             		<label>Tổng giá nhập khách sạn</label>
-            		<input type="" name="" class="form-control marginHotel common-currency" disabled="true" value="{!! $countSurcharge !!}">
+            		<input type="text" name="" class="form-control marginHotel common-currency" disabled="true" value="{!! $countSurcharge !!}">
             	</div>
             	<div class="col-3">
             		<label>Tổng giá bán khách sạn</label>
-            		<input type="" name="" class="form-control cin common-currency" disabled="true" value="{!! $couthHotel !!}">
+            		<input type="text" name="" class="form-control cin common-currency" disabled="true" value="{!! $couthHotel !!}">
             	</div>
             	<div class="col-3">
             		<label>Tổng lợi nhuận khách sạn</label>
-            		<input type="" name="" class="form-control profitHotel common-currency" disabled="true">
+            		<input type="text" name="" class="form-control profitHotel common-currency" disabled="true">
             	</div>
             </div>
 	        <div class="form-group">
@@ -735,7 +755,7 @@
             				<label class="amount{!! $key !!}"> {!! $res['valueOther'] !!}</label>
 	                	</td>
 	                	<td>
-	                		<input type="" name="" class="form-control inCostOther common-currency">
+	                		<input type="" name="" class="form-control inCostOther common-currency" style="font-size: 12px">
 	                	</td>
             		</tr>
                 	@endforeach
@@ -745,15 +765,15 @@
             <div class="row">
             	<div class="col-3">
             		<label>Tổng giá dịch vụ</label>
-            		<input type="" name="" class="form-control marginOther common-currency" disabled="true" value="{!! $countOther !!}">
+            		<input type="text" name="" class="form-control marginOther common-currency" disabled="true" value="{!! $countOther !!}">
             	</div>
             	<div class="col-3">
             		<label>Tổng giá nhập dịch vụ</label>
-            		<input type="" name="" class="form-control costOther common-currency" disabled="true">
+            		<input type="text" name="" class="form-control costOther common-currency" disabled="true">
             	</div>
             	<div class="col-3">
             		<label>Tổng lợi nhuận dịch vụ</label>
-            		<input type="" name="" class="form-control profitOther common-currency" disabled="true">
+            		<input type="text" name="" class="form-control profitOther common-currency" disabled="true">
             	</div>
             </div>
             <div class="form-group">
@@ -762,15 +782,15 @@
             <div class="row">
             	<div class="col-3">
             		<label>Tổng giá nhập</label>
-            		<input type="" name="" class="form-control countNhap common-currency" disabled="true">
+            		<input type="text" name="" class="form-control countNhap common-currency" disabled="true">
             	</div>
             	<div class="col-3">
             		<label>Tổng giá bán</label>
-            		<input type="" name="" class="form-control countBan common-currency" disabled="true">
+            		<input type="text" name="" class="form-control countBan common-currency" disabled="true">
             	</div>
             	<div class="col-3">
             		<label>Tổng lợi nhuận đơn hàng</label>
-            		<input type="" name="" class="form-control countProfit common-currency" disabled="true">
+            		<input type="text" name="" class="form-control countProfit common-currency" disabled="true">
             	</div>
             </div>
 			<div class="row">
@@ -778,7 +798,7 @@
 				<div class="col-3"></div>
 				<div class="col-3"></div>
 				<div class="col-3">
-	                <button type="button" class="btn-create-order update_order">Cập nhật</button>
+	                <button type="button" class="btn-create-order update_order" style="height: 36px">Cập nhật</button>
 	                <!-- <button class="btn-create-order">Cập nhật</button> -->
 				</div>
 			</div>
@@ -1226,6 +1246,8 @@
 	    			phoneCustomer : $('.phoneCustomer').val(),
 	    			mailCustomer : $('.mailCustomer').val(),
 	    			country : $('.country').val(),
+	    			codeCombo: $('.codeCombo').val(),
+	    			levelOrder: $('.levelOrder').val(),
 		            airLine: airLine,
 		            hotel: hotel,
 		            other: other,
@@ -1268,8 +1290,14 @@
 		$('.profitOther').val(parseInt(marginOther) - parseInt(_other));
 	});
 	$('.countProfitHotel, .inCostOther').focusout(function(){
+		// console.log($('.costOther').val() != 0);
+		if($('.costOther').val() == 0){
+			var cost = 0;
+		}else{
+			var cost = $('.costOther').val();
+		}
 		$('.countNhap').val(parseInt($('.airNhap').val()) + parseInt($('.marginHotel').val()) + parseInt($('.marginOther').val()));
-		$('.countBan').val(parseInt($('.airBan').val()) + parseInt($('.cin').val()) + parseInt($('.costOther').val()));
+		$('.countBan').val(parseInt($('.airBan').val()) + parseInt($('.cin').val()) + parseInt(cost));
 		$('.countProfit').val(parseInt($('.countBan').val()) - parseInt($('.countNhap').val()))
 	});
 </script>
