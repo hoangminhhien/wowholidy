@@ -289,7 +289,7 @@
 	            				<lable class="common-currency">
 	            				{!!  $hotel['value'] !!}<br>
 	            				</lable>
-	            				@endforeach
+	            				@endforeach<br>
 	            			@endif
 	            		</td>
 	            		<td>
@@ -300,7 +300,7 @@
 	            				<lable class="common-currency">
 	            				{!!  $other['valueOther'] !!}<br>
 	            				</lable>
-	            				@endforeach
+	            				@endforeach<br>
 	            			@endif
 	            		</td>
 	            		<td>

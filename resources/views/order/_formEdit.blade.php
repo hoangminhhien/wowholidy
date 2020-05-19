@@ -413,7 +413,7 @@
 				<div class="col-4"></div>
 				<div class="col-4"></div>
 				<div class="col-4">
-                	<button type="button" class="btn-add addHotel" disabled="true" style="display: none;"><i class="fa fa-plus" aria-hidden="true"></i>Thêm</button>
+                	<button type="button" class="btn-add addHotel" disabled="true" style="height: 36px"><i class="fa fa-plus" aria-hidden="true"></i>Thêm</button>
 				</div>
             </div>
 			<div class="row">
@@ -451,7 +451,7 @@
 				<table id="tblOther" class="table table-xs data-table table-bordered">
                     <thead>
                     <tr>
-                        <th>Tên dịch vụ <button type="button" class="btn btn-link addOther" disabled="true" style="display: none;"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></th>
+                        <th>Tên dịch vụ <button type="button" class="btn btn-link addOther" disabled="true"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></th>
                         <th>Chi tiết dịch vụ</th>
                         <th>Số lượng</th>
                         <th>Đơn giá</th>
@@ -574,7 +574,7 @@
 				<table id="tblPayment" class="table table-xs data-table table-bordered">
                     <thead>
                     <tr>
-                        <th>Tiền <button type="button" class="btn btn-link addPayment" disabled="true" style="display: none;"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></th>
+                        <th>Tiền <button type="button" class="btn btn-link addPayment" disabled="true"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></th>
                         <th>Ngày</th>
                         <th>Đính kèm file</th>
                         <th>Nhập mã FT</th>
