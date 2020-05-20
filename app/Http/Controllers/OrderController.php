@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Order;
+use App\Models\Margin;
 use App\Helpers\FileHelper;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Illuminate\Support\Facades\Auth;
+use DB;
 class OrderController extends Controller
 {
     public function index(Request $request){
@@ -51,12 +53,16 @@ class OrderController extends Controller
     	return view('order._formCreate', compact('role', 'user_name'));
     }
     public function edit($id){
+        $check = Order::find($id);
+        $margin = null;
+        if($check != null){
+            $margin = $check->margin()->first();
+        }
         if(Auth::user() == null){
             return redirect()->route('login');
         }
         $role = Auth::user()->role;
         $response = Order::where('id', $id)->first();
-        // dd($response->payment);
         $couthHotel = 0;
         $countOther = 0;
         $coutPayment = 0;
@@ -79,7 +85,7 @@ class OrderController extends Controller
         }
         $response->airLine != null ? $quantity = $response->airLine['airQuantity'] : $quantity = 0;
         $profit = (int)$quantity * 15000;
-        return view('order._formEdit', compact('response', 'couthHotel', 'countOther', 'coutPayment', 'countSurcharge','profit' , 'role'));
+        return view('order._formEdit', compact('response', 'couthHotel', 'countOther', 'coutPayment', 'countSurcharge','profit' , 'role', 'margin'));
     }
     public function store(Request $request){
     	// if($request['payment'] != null){
@@ -116,7 +122,9 @@ class OrderController extends Controller
     	return response()->json(['httpCode'=>200,'message'=>'Tạo thành công']);
     }
     public function update(Request $request){
+        $role = Auth::user()->role;
         $listCustomer = [];
+        $id = $request['id'];
         if(isset($request['listCustomer'])){
             foreach($request['listCustomer'] as $list){
                 if($list != null){
@@ -124,33 +132,64 @@ class OrderController extends Controller
                 }
             }
         }
-        $id = $request['id'];
-        $update = Order::find($id)->update([
-            'nameSaler' => $request['nameSaler'],
-            'teamSaler' => $request['teamSaler'],
-            'typeCustomer' => $request['typeCustomer'],
-            'typeCombo' => $request['typeCombo'],
-            'contactCode' => $request['contactCode'],
-            'nameCustomer' => $request['nameCustomer'],
-            'phoneCustomer' => $request['phoneCustomer'],
-            'mailCustomer' => $request['mailCustomer'],
-            'country' => $request['country'],
-            'codeCombo'=> $request['codeCombo'],
-            'levelOrder'=> $request['levelOrder'],
-            'airLine' => $request['airLine'],
-            'hotel' => $request['hotel'],
-            'other' => $request['other'],
-            'payment' => $request['payment'],
-            'countValue' => $request['countValue'],
-            'airlineStatus' => (int)$request['airlineStatus'],
-            'hotelStatus' => (int)$request['hotelStatus'],
-            'otherStatus' => (int)$request['otherStatus'],
-            'statusAir' => (int)$request['statusAir'],
-            'statusHotel' => (int)$request['statusHotel'],
-            'statusOther' => (int)$request['statusOther'],
-            'listCustomer' => $listCustomer
-        ]);
-        return response()->json(['httpCode'=>200, 'message'=>'Cập nhật thành công']);
+        DB::beginTransaction();
+        try {
+            if($role == 3 || $role == 4 || $role == 5 || $role == 6){
+                $check = Margin::where('id_order', $id)->first();
+                if($check == null){
+                    // dd($request['_marginHotel'], $request['_marginOther']);
+                    Margin::create([
+                        'id_order' => $id,
+                        'hotel'=> $request['_marginHotel'],
+                        'other'=> $request['_marginOther'],
+                        'countAirline' => $request['countAirline'],
+                        'countHotel' => $request['countHotel'],
+                        'countOther' => $request['countOther'],
+                        'count' => $request['count'],
+                    ]);
+                }else{
+                    $update = Margin::where('id_order', $id)->first();
+                    $update->hotel = $request['_marginHotel'];
+                    $update->other = $request['_marginOther'];
+                    $update->countAirline = $request['countAirline'];
+                    $update->countHotel = $request['countHotel'];
+                    $update->countOther = $request['countOther'];
+                    $update->count = $request['count'];
+                    $update->save();
+                }
+            }
+            $update = Order::find($id)->update([
+                'nameSaler' => $request['nameSaler'],
+                'teamSaler' => $request['teamSaler'],
+                'typeCustomer' => $request['typeCustomer'],
+                'typeCombo' => $request['typeCombo'],
+                'contactCode' => $request['contactCode'],
+                'nameCustomer' => $request['nameCustomer'],
+                'phoneCustomer' => $request['phoneCustomer'],
+                'mailCustomer' => $request['mailCustomer'],
+                'country' => $request['country'],
+                'codeCombo'=> $request['codeCombo'],
+                'levelOrder'=> $request['levelOrder'],
+                'airLine' => $request['airLine'],
+                'hotel' => $request['hotel'],
+                'other' => $request['other'],
+                'payment' => $request['payment'],
+                'countValue' => $request['countValue'],
+                'airlineStatus' => (int)$request['airlineStatus'],
+                'hotelStatus' => (int)$request['hotelStatus'],
+                'otherStatus' => (int)$request['otherStatus'],
+                'statusAir' => (int)$request['statusAir'],
+                'statusHotel' => (int)$request['statusHotel'],
+                'statusOther' => (int)$request['statusOther'],
+                'listCustomer' => $listCustomer
+            ]);
+            // all good
+            DB::commit();
+            return response()->json(['httpCode'=>200, 'message'=>'Cập nhật thành công']);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['httpCode'=>500, 'message'=>'Đã có lỗi xảy ra']);
+        }
     }
     public function read(Request $request){
         $response = Order::all();

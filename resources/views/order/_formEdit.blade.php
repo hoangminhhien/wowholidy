@@ -711,7 +711,7 @@
 	                			<label class="combo{!! $key !!}"> {!! $res['combo'] !!}</label>
 		                	</td>
 	                		<td>
-	                			<input type="" name="" class="form-control common-currency countProfitHotel" style="font-size: 12px">
+	                			<input type="" name="" class="form-control common-currency countProfitHotel" style="font-size: 12px" value="{!! ($margin != null) ? $margin->hotel[$key]['cost'] : '' !!}">
 		                	</td>
 	                	</tr>
 	                	@endforeach
@@ -721,7 +721,7 @@
 	            <div class="row">
 	            	<div class="col-3">
 	            		<label>Tổng giá nhập khách sạn</label>
-	            		<input type="text" name="" class="form-control marginHotel common-currency" disabled="true" value="{!! $countSurcharge !!}">
+	            		<input type="text" name="" class="form-control marginHotel common-currency" disabled="true" value="{!! ($margin != null) ? $margin->countHotel[0]['nhap'] : $countSurcharge !!}">
 	            	</div>
 	            	<div class="col-3">
 	            		<label>Tổng giá bán khách sạn</label>
@@ -729,7 +729,7 @@
 	            	</div>
 	            	<div class="col-3">
 	            		<label>Tổng lợi nhuận khách sạn</label>
-	            		<input type="text" name="" class="form-control profitHotel common-currency" disabled="true">
+	            		<input type="text" name="" class="form-control profitHotel common-currency" disabled="true" value=" {!! ($margin != null) ? $margin->countHotel[0]['profitHotel'] : '' !!}">
 	            	</div>
 	            </div>
 		        <div class="form-group">
@@ -754,7 +754,7 @@
 	            				<label class="amount{!! $key !!}"> {!! $res['valueOther'] !!}</label>
 		                	</td>
 		                	<td>
-		                		<input type="" name="" class="form-control inCostOther common-currency" style="font-size: 12px">
+		                		<input type="" name="" class="form-control inCostOther common-currency" style="font-size: 12px" value="{!! ($margin != null) ? $margin->other[$key]['cost'] : '' !!}">
 		                	</td>
 	            		</tr>
 	                	@endforeach
@@ -764,15 +764,15 @@
 	            <div class="row">
 	            	<div class="col-3">
 	            		<label>Tổng giá dịch vụ</label>
-	            		<input type="text" name="" class="form-control marginOther common-currency" disabled="true" value="{!! $countOther !!}">
+	            		<input type="text" name="" class="form-control marginOther common-currency" disabled="true" value="{!! ($margin != null) ? $margin->countOther[0]['nhap'] : $countOther !!}">
 	            	</div>
 	            	<div class="col-3">
 	            		<label>Tổng giá nhập dịch vụ</label>
-	            		<input type="text" name="" class="form-control costOther common-currency" disabled="true">
+	            		<input type="text" name="" class="form-control costOther common-currency" disabled="true" value="{!! ($margin != null) ? $margin->countOther[0]['ban'] : '' !!}">
 	            	</div>
 	            	<div class="col-3">
 	            		<label>Tổng lợi nhuận dịch vụ</label>
-	            		<input type="text" name="" class="form-control profitOther common-currency" disabled="true">
+	            		<input type="text" name="" class="form-control profitOther common-currency" disabled="true" value="{!! ($margin != null) ? $margin->countOther[0]['profitOther'] : '' !!}">
 	            	</div>
 	            </div>
 	            <div class="form-group">
@@ -781,15 +781,15 @@
 	            <div class="row">
 	            	<div class="col-3">
 	            		<label>Tổng giá nhập</label>
-	            		<input type="text" name="" class="form-control countNhap common-currency" disabled="true">
+	            		<input type="text" name="" class="form-control countNhap common-currency" disabled="true" value="{!! ($margin != null) ? $margin->count[0]['countNhap'] : '' !!}">
 	            	</div>
 	            	<div class="col-3">
 	            		<label>Tổng giá bán</label>
-	            		<input type="text" name="" class="form-control countBan common-currency" disabled="true">
+	            		<input type="text" name="" class="form-control countBan common-currency" disabled="true" value="{!! ($margin != null) ? $margin->count[0]['countBan'] : '' !!}">
 	            	</div>
 	            	<div class="col-3">
 	            		<label>Tổng lợi nhuận đơn hàng</label>
-	            		<input type="text" name="" class="form-control countProfit common-currency" disabled="true">
+	            		<input type="text" name="" class="form-control countProfit common-currency" disabled="true" value="{!! ($margin != null) ? $margin->count[0]['countProfit'] : '' !!}">
 	            	</div>
 	            </div>
             </div>
@@ -1231,6 +1231,51 @@
 				});
 	        });
 	        var listCustomer = $('.listCustomer').val().split('\n');
+	        var _marginHotel = [];
+	        var $_marginHotel = $('#tblhotelMargin .data');
+	        $_marginHotel.each(function(){
+	        	_marginHotel.push({
+					date: $(this).find("td:eq(0)").text(),
+					name: $(this).find("td:eq(1)").text(),
+					level: $(this).find("td:eq(2)").text(),
+					bad: $(this).find("td:eq(3)").text(),
+					combo: $(this).find("td:eq(4)").text(),
+					cost: $(this).find("td:eq(5) .countProfitHotel").val(),
+				});
+	        });
+	        var _marginOther = [];
+	        var $_marginOther = $('#tblOtherMargin .data');
+	        $_marginOther.each(function(){
+	        	_marginOther.push({
+					name: $(this).find("td:eq(0)").text(),
+					prince: $(this).find("td:eq(1)").text(),
+					cost: $(this).find("td:eq(2) .inCostOther").val(),
+				});
+	        });
+	        var countAirline =[];
+	        countAirline.push({
+	        	nhap: $('.airNhap ').val(),
+	        	ban: $('.airBan ').val(),
+	        	airPrifit: $('.airPrifit').val()
+	        });
+	        var countHotel =[];
+	        countHotel.push({
+	        	nhap: $('.marginHotel').val(),
+	        	ban: $('.cin').val(),
+	        	profitHotel: $('.profitHotel').val()
+	        });
+	        var countOther =[];
+	        countOther.push({
+	        	nhap: $('.marginOther').val(),
+	        	ban: $('.costOther').val(),
+	        	profitOther: $('.profitOther').val()
+	        });
+	        var count =[];
+	        count.push({
+	        	countNhap: $('.countNhap ').val(),
+	        	countBan: $('.countBan').val(),
+	        	countProfit: $('.countProfit').val()
+	        });
 		    $.ajax({
 	            url: url,
 	            method: 'POST',
@@ -1259,7 +1304,13 @@
 				    statusAir: $('.statusAir').val(),
 				    statusHotel: $('.statusHotel').val(),
 				    statusOther: $('.statusOther').val(),
-				    listCustomer: listCustomer
+				    listCustomer: listCustomer,
+				    _marginHotel: _marginHotel,
+				    _marginOther: _marginOther,
+				    countAirline: countAirline,
+				    countHotel: countHotel,
+				    countOther: countOther,
+				    count: count
 		        },
 	        }).done(function(res){
 	        	if(res.httpCode == 200){

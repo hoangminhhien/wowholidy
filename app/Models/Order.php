@@ -18,5 +18,8 @@ class Order extends Model
         'listCustomer' => 'array'
     ];
     public $timestamps = true;
+    public function margin(){
+        return $this->hasOne('App\Models\Margin', 'id_order', 'id');
+    }
 
 }
