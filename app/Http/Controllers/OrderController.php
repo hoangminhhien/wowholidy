@@ -117,7 +117,8 @@ class OrderController extends Controller
             'airlineStatus' => (int)$request['airlineStatus'],
             'hotelStatus' => (int)$request['hotelStatus'],
             'otherStatus' => (int)$request['otherStatus'],
-            'listCustomer' => $request['listCustomer']
+            'listCustomer' => $request['listCustomer'],
+            'ctkm' => $request['ctkm']
     	]);
     	return response()->json(['httpCode'=>200,'message'=>'Tạo thành công']);
     }
@@ -181,7 +182,8 @@ class OrderController extends Controller
                 'statusAir' => (int)$request['statusAir'],
                 'statusHotel' => (int)$request['statusHotel'],
                 'statusOther' => (int)$request['statusOther'],
-                'listCustomer' => $listCustomer
+                'listCustomer' => $listCustomer,
+                'ctkm' => $request['ctkm']
             ]);
             // all good
             DB::commit();

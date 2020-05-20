@@ -86,7 +86,7 @@
 				  	<option value="2">Nguyễn Văn C</option>
 				  	<option value="3">Nguyễn Văn D</option>
 				</select> -->
-				<input type="text" name="nameSaler" class="form-control nameSaler" value="{!! $response['nameSaler'] !!}">
+				<input type="text" name="nameSaler" class="form-control nameSaler" value="{!! $response['nameSaler'] !!}" disabled="true">
 			</div>
 			<div class="col-3">
 				<input type="text" name="nameTeam" class="form-control nameTeam" value="{!! $response['teamSaler'] !!}">
@@ -281,8 +281,9 @@
 					</div>
 				</div>
 				<div class="col-3">
-					<select class="browser-default custom-select">
-					  	<option selected>Son môi Hồ Ngọc Hà</option>
+					<select class="browser-default custom-select ctkm">
+					  	<option {!! $response['ctkm'] == 'Son môi Hồ Ngọc Hà'  ? 'selected' : '' !!} value="Son môi Hồ Ngọc Hà">Son môi Hồ Ngọc Hà</option>
+					  	<option {!! $response['ctkm'] == 'WowHoliday'  ? 'selected' : '' !!} value="WowHoliday">WowHoliday</option>
 					</select>
 				</div>
 				<table id="tblhotel" class="table table-xs data-table table-bordered">
@@ -1294,6 +1295,7 @@
 	    			country : $('.country').val(),
 	    			codeCombo: $('.codeCombo').val(),
 	    			levelOrder: $('.levelOrder').val(),
+	    			ctkm: $('.ctkm').val(),
 		            airLine: airLine,
 		            hotel: hotel,
 		            other: other,

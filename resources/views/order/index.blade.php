@@ -231,6 +231,8 @@
 	            				{!! $order->typeCombo !!}<br>
 	            			Level:
 	            				 {!! $order->levelOrder !!}<br>
+	            			CTKM: 
+	            				{!! $order->ctkm !!}<br>
 	            		</td>
 	            		<td>
 	            			Sale:

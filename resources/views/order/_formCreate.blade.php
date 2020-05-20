@@ -259,8 +259,9 @@
 					</div>
 				</div>
 				<div class="col-3">
-					<select class="browser-default custom-select">
-					  	<option selected>Son môi Hồ Ngọc Hà</option>
+					<select class="browser-default custom-select ctkm">
+					  	<option value="Son môi Hồ Ngọc Hà">Son môi Hồ Ngọc Hà</option>
+					  	<option value="WowHoliday">WowHoliday</option>
 					</select>
 				</div>
 				<table id="tblhotel" class="table table-xs data-table table-bordered">
@@ -903,7 +904,8 @@
 		            airlineStatus: airlineStatus,
 				    hotelStatus: hotelStatus,
 				    otherStatus: otherStatus,
-				    listCustomer: listCustomer
+				    listCustomer: listCustomer,
+				    ctkm: $('.ctkm').val()
 		        },
 	        }).done(function(res){
 	        	if(res.httpCode == 200){
