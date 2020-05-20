@@ -442,7 +442,7 @@
                 			<input type="text" name="valuePayment" class="form-control valuePayment common-currency">
                 		</td>
                 		<td>
-                			<input type="text" name="datePayment" class="form-control datePayment date">
+                			<input type="date" name="datePayment" class="form-control datePayment date">
                 		</td>
                 		<td>
                 			<input type="file" name="imagePayment" class="form-control imagePayment">
