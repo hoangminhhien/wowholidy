@@ -677,6 +677,7 @@
 	            		<input type="text" name="" class="form-control airPrifit common-currency" disabled="true" value="{!! $profit !!}">
 	            	</div>
 	            </div>
+	            @if($response['hotel'] != null)
 	            <div class="form-group">
 					<label style="font: Bold 14px Avenir Next Rounded Pro;">Vé Khách sạn</label>
 	            </div>
@@ -692,7 +693,6 @@
 	                </tr>
 	                </thead>
 	                <tbody>
-	            	@if($response['hotel'] != null)
 	                	@foreach($response['hotel'] as $key => $res)
 	                	<tr class="hotel{!! $key !!} updateHotel data">
 	                		<td>
@@ -715,7 +715,6 @@
 		                	</td>
 	                	</tr>
 	                	@endforeach
-	                	@endif
 	                </tbody>
 	            </table>
 	            <div class="row">
@@ -732,6 +731,8 @@
 	            		<input type="text" name="" class="form-control profitHotel common-currency" disabled="true" value=" {!! ($margin != null) ? $margin->countHotel[0]['profitHotel'] : '' !!}">
 	            	</div>
 	            </div>
+	            @endif
+	            @if($response['other'] != null)
 		        <div class="form-group">
 					<label style="font: Bold 14px Avenir Next Rounded Pro;">Dịch vụ khác</label>
 	            </div>
@@ -744,7 +745,7 @@
 	                </tr>
 	                </thead>
 	                <tbody>
-	            		@if($response['other'] != null)
+	            		
 	                	@foreach($response['other'] as $key => $res)
 	            		<tr class='other{!! $key !!} updateOther data'>
 		                	<td>
@@ -758,7 +759,6 @@
 		                	</td>
 	            		</tr>
 	                	@endforeach
-	                	@endif
 	                </tbody>
 	            </table>
 	            <div class="row">
@@ -775,6 +775,7 @@
 	            		<input type="text" name="" class="form-control profitOther common-currency" disabled="true" value="{!! ($margin != null) ? $margin->countOther[0]['profitOther'] : '' !!}">
 	            	</div>
 	            </div>
+	            @endif
 	            <div class="form-group">
 					<label style="font: Bold 14px Avenir Next Rounded Pro;">Tổng lợi nhuận đơn hàng</label>
 	            </div>
@@ -1328,16 +1329,39 @@
 	});
 	var aaa  = $('.marginHotel').val();
 	var _hotel = 0;
+	var checkHotel = $('.profitHotel').val();
+	$('.countProfitHotel').click(function(){
+		first = $(this).val();
+		firstCost = $('.marginHotel').val()
+	});
 	$('.countProfitHotel').focusout(function(){
-		_hotel += parseInt($(this).val());
-		$('.marginHotel').val(parseInt(_hotel) + parseInt(aaa));
+		if(checkHotel != 0){
+			console.log(1111)
+			_hotel = parseInt(firstCost) - parseInt(first) + parseInt($(this).val());
+			$('.marginHotel').val(parseInt(_hotel));
+		}else{
+			_hotel += parseInt($(this).val());
+			$('.marginHotel').val(parseInt(_hotel) + parseInt(aaa));
+		}
 		$('.profitHotel').val(parseInt($('.cin').val()) - parseInt($('.marginHotel ').val()))
 	});
 	var marginOther = $('.marginOther').val();
 	var _other = 0;
+	var checkOther = $('.costOther').val();
+	$('.inCostOther').click(function(){
+		first = $(this).val();
+		firstCost = $('.costOther ').val()
+	});
 	$('.inCostOther').focusout(function(){
-		_other += parseInt($(this).val());
-		$('.costOther').val(parseInt(_other));
+		if(checkOther != 0){
+			console.log(111)
+			_other = parseInt(firstCost) - parseInt(first) + parseInt($(this).val());
+			$('.costOther').val(parseInt(_other));
+		}else{
+			console.log(124)
+			_other += parseInt($(this).val());
+			$('.costOther').val(parseInt(_other));
+		}
 		$('.profitOther').val(parseInt(marginOther) - parseInt(_other));
 	});
 	$('.countProfitHotel, .inCostOther').focusout(function(){
