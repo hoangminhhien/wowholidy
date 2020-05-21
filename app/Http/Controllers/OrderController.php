@@ -88,6 +88,11 @@ class OrderController extends Controller
         return view('order._formEdit', compact('response', 'couthHotel', 'countOther', 'coutPayment', 'countSurcharge','profit' , 'role', 'margin'));
     }
     public function store(Request $request){
+        if(isset($request['checkin_out'])){
+            $check = explode('~', $request['checkin_out']);
+            $checkin = $check[0] != null  ? $check[0] : null;
+            $checkout = $check[0] != null  ? $check[1] : null;
+        }
     	// if($request['payment'] != null){
 	    // 	foreach($request['payment'] as $image){
 		   //  	$image_url = '';
@@ -122,6 +127,8 @@ class OrderController extends Controller
             'adult'=> $request['adult'],
             'children'=> $request['children'],
             'baby'=> $request['baby'],
+            'checkin'=> $checkin,
+            'checkout' => $checkout
     	]);
     	return response()->json(['httpCode'=>200,'message'=>'Tạo thành công']);
     }
@@ -135,6 +142,11 @@ class OrderController extends Controller
                     array_push($listCustomer, $list);
                 }
             }
+        }
+        if(isset($request['checkin_out'])){
+            $check = explode('~', $request['checkin_out']);
+            $checkin = $check[0] != null  ? $check[0] : null;
+            $checkout = $check[0] != null  ? $check[1] : null;
         }
         DB::beginTransaction();
         try {
@@ -190,6 +202,8 @@ class OrderController extends Controller
                 'adult'=> $request['adult'],
                 'children'=> $request['children'],
                 'baby'=> $request['baby'],
+                'checkin'=> $checkin,
+                'checkout' => $checkout
             ]);
             // all good
             DB::commit();

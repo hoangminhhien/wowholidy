@@ -4,6 +4,7 @@
 	<title>wowholiday</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<style type="text/css">
 		body{
 			font-size: 12px;
@@ -191,18 +192,24 @@
 			<div class="col-4">
 			</div>
 			<div class="col-4">
-				@if($role == 2 || $role == 3)
-				<button type="button" style="margin: 2px; font-size: 12px" onclick="window.location = '{{route('order.export')}}'" class="btn bg-success btn-sm mr-2"><i class="icon-add-to-list"></i>
-                Xuất excel
-            	</button>
-            	@endif
-            	@if($role == 1 || $role == 2)
-            	<a href="{!! route('order.create') !!}">
-                	<button type="button" style="margin-left: 85px; font-size: 12px" class="btn btn-search btn-sm mr-2">
-                    <i class="fa fa-plus" aria-hidden="true"></i>  Đơn hàng mới
-                	</button>
-            	</a>
-            	@endif
+				<div class="row">
+					<div class="col-6">
+						@if($role == 2 || $role == 3)
+						<button type="button" style="margin: 2px; font-size: 12px; margin-left: 70px;" onclick="window.location = '{{route('order.export')}}'" class="btn bg-success btn-sm mr-2"><i class="icon-add-to-list"></i>
+		                Xuất excel
+		            	</button>
+		            	@endif
+					</div>
+					<div class="col-6">
+		            	@if($role == 1 || $role == 2)
+		            	<a href="{!! route('order.create') !!}">
+		                	<button type="button" style="font-size: 12px" class="btn btn-search btn-sm mr-2">
+		                    <i class="fa fa-plus" aria-hidden="true"></i>  Đơn hàng mới
+		                	</button>
+		            	</a>
+		            	@endif
+					</div>
+				</div>
 			</div>
 		</div>
 		<div class="body">
@@ -294,7 +301,8 @@
 	            			@if($order->hotel != null)
 	            				@foreach($order->hotel as $hotel)
 	            				Tên khách sạn : {!!  $hotel['name'] !!}<br>
-	            				Check in: {!!  $hotel['date'] !!}<br>
+	            				Check in: {!!  $order['checkin'] !!}<br>
+	            				Check out: {!!  $order['checkout'] !!}<br>
 	            				Tổng tiền : 
 	            				<lable class="common-currency">
 	            				{!!  $hotel['value'] !!}<br>
@@ -376,7 +384,7 @@
 	            		<td></td>
 	            		<td>
 	            			<a href="{!! route('order.edit', $order->id) !!}">
-	            				<i class="fa fa-eye" aria-hidden="true"></i>
+	            				<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 	            			</a>
 	            		</td>
 	            	</tr>
@@ -392,7 +400,7 @@
 </html>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/js/all.min.js"></script>
 <script src="{{ asset('js/inputmask/jquery.inputmask.bundle.min.js') }}"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <script type="text/javascript">

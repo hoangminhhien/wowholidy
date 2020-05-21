@@ -269,7 +269,7 @@
 				</div>
 				<div class="col-3">
 					<div class="input-group mb-3">
-		  				<input type="text" class="form-control dateCheck">
+		  				<input type="text" class="form-control dateCheck" value="{!! $response['checkin'] != null ? $response['checkin'].'~'.$response['checkout'] : '' !!}">
 						<div class="input-group-append">
 						    <span class="input-group-text" id="basic-addon2"><i class="fa fa-calendar" aria-hidden="true"></i>
 							</span>
@@ -854,7 +854,7 @@
 	  	});
 
 	  	$('.dateCheck').on('apply.daterangepicker', function(ev, picker) {
-	      	$(this).val(picker.startDate.format('YYYY-MM-DD') + ' - ' + picker.endDate.format('YYYY-MM-DD'));
+	      	$(this).val(picker.startDate.format('YYYY-MM-DD') + '~' + picker.endDate.format('YYYY-MM-DD'));
 	  	});
 	  	$('.dateCheck').on('cancel.daterangepicker', function(ev, picker) {
 	      	$(this).val('');
@@ -869,7 +869,7 @@
 	    	var checkout = $('.toDate ').val();
 	    	// console.log(checkin, checkout, 111);
 	    	if($(this).prop("checked") == true){
-                $('.dateCheck').val(checkin+'  -  ' +checkout);
+                $('.dateCheck').val(checkin+'~' +checkout);
             }
             else if($(this).prop("checked") == false){
                 $('.dateCheck').val('');
@@ -1313,6 +1313,7 @@
 				    adult: $('.adult').val(),
 				    children: $('.children').val(),
 				    baby: $('.baby').val(),
+				    checkin_out: $('.dateCheck').val()
 		        },
 	        }).done(function(res){
 	        	if(res.httpCode == 200){

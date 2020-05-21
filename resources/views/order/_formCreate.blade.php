@@ -526,7 +526,7 @@
 	  	});
 
 	  	$('.dateCheck').on('apply.daterangepicker', function(ev, picker) {
-	      	$(this).val(picker.startDate.format('YYYY-MM-DD') + ' - ' + picker.endDate.format('YYYY-MM-DD'));
+	      	$(this).val(picker.startDate.format('YYYY-MM-DD') + '~' + picker.endDate.format('YYYY-MM-DD'));
 	  	});
 	  	$('.dateCheck').on('cancel.daterangepicker', function(ev, picker) {
 	      	$(this).val('');
@@ -538,10 +538,10 @@
 	    });
 	    $('#checkin_out').click(function(){
 	    	var checkin = $('.fromDate ').val();
-	    	var checkout = $('.toDate ').val();
+	    	var checkout = $('.toDate').val();
 	    	// console.log(checkin, checkout, 111);
 	    	if($(this).prop("checked") == true){
-                $('.dateCheck').val(checkin+'  -  ' +checkout);
+                $('.dateCheck').val(checkin+'~' +checkout);
             }
             else if($(this).prop("checked") == false){
                 $('.dateCheck').val('');
@@ -904,6 +904,7 @@
 				    adult: $('.adult').val(),
 				    children: $('.children').val(),
 				    baby: $('.baby').val(),
+				    checkin_out: $('.dateCheck').val()
 		        },
 	        }).done(function(res){
 	        	if(res.httpCode == 200){
