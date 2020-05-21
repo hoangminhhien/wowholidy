@@ -32,6 +32,7 @@
 			width: 451px;
 			height: 39px;
 			font-size: 25px;
+			font-weight: bold;
 		}
 		strong{
 			color: red
@@ -73,7 +74,7 @@
 			<div class="col-3">Loại khách hàng</div>
 		</div>
 		<div class="row form-group">
-			<div class="col-3">Thông tin khách hàng</div>
+			<div class="col-3"><label style="font-size:14px; font-weight: bolder ">Thông tin chung</label></div>
 			<div class="col-3">
 				<!-- <select class="browser-default custom-select">
 				  	<option selected>Nguyễn Văn A</option>
@@ -81,7 +82,7 @@
 				  	<option value="2">Nguyễn Văn C</option>
 				  	<option value="3">Nguyễn Văn D</option>
 				</select> -->
-				<input type="text" name="nameSaler" class="form-control nameSaler" value="{!! $user_name !!}" disabled="true">
+				<input type="text" name="nameSaler" class="form-control nameSaler" value="{!! $email !!}" disabled="true">
 			</div>
 			<div class="col-3">
 				<input type="text" name="nameTeam" class="form-control nameTeam" >
@@ -97,7 +98,7 @@
 			</div>
 		</div>
 		<hr>
-		<label style="font: Bold 16px/20px Avenir Next Rounded Pro;">Thông tin đơn hàng</label>
+		<label style="font-size:14px; font-weight: bolder " >Thông tin đơn hàng</label>
 		<div class="row form-group">
 			<div class="col-3">
 				<label>Loại combo <strong>*</strong></label>
@@ -141,7 +142,7 @@
 		<hr>
 		<div class="row">
 			<div class="col-3">
-				<label style="font: Bold 16px/20px Avenir Next Rounded Pro;">Thông tin vé máy bay</label>
+				<label style="font-size:14px; font-weight: bolder " >Thông tin vé máy bay</label>
 			</div>
 			<div class="col-3"></div>
 			<div class="col-3"></div>
@@ -201,7 +202,7 @@
 		
 			<div class="row">
 				<div class="col-3">
-					<label style="font: Bold 16px/20px Avenir Next Rounded Pro;">Thông tin khách sạn</label>
+					<label style="font-size:14px; font-weight: bolder " >Thông tin khách sạn</label>
 				</div>
 				<div class="col-3"></div>
 				<div class="col-3"></div>
@@ -213,21 +214,15 @@
 			<div class="row">
 				<div class="col-3">
 					<label>Người lớn(>12 tuổi)</label>
-					<select class="browser-default custom-select">
-					  	<option selected>01</option>
-					</select>
+					<input type="text" name="adult" class="form-control adult common-numeric">
 				</div>
 				<div class="col-3">
 					<label>Trẻ em(4-12 tuổi)</label>
-					<select class="browser-default custom-select">
-					  	<option selected>03</option>
-					</select>
+					<input type="text" name="children" class="form-control children common-numeric">
 				</div>
 				<div class="col-3">
 					<label>Em bé(<4 tuổi)</label>
-					<select class="browser-default custom-select">
-					  	<option selected>03</option>
-					</select>
+					<input type="text" name="baby" class="form-control baby common-numeric">
 				</div>
 				<div class="col-3">
 					<label>Danh sách khách hàng</label>
@@ -346,7 +341,7 @@
 			<hr>
 			<div class="row">
 				<div class="col-3">
-					<label style="font: Bold 16px/20px Avenir Next Rounded Pro;">Dịch vụ khác</label>
+					<label style="font-size:14px; font-weight: bolder " >Dịch vụ khác</label>
 				</div>
 				<div class="col-3"></div>
 				<div class="col-3"></div>
@@ -410,7 +405,7 @@
 			<hr>
 			<div class="row">
 				<div class="col-3">
-					<label style="font: Bold 16px/20px Avenir Next Rounded Pro;">Thông tin thanh toán</label>
+					<label style="font-size:14px; font-weight: bolder " >Thông tin thanh toán</label>
 				</div>
 			</div>
 			<div class="row">
@@ -640,7 +635,7 @@
 	    	var typeSurcharge = $('.typeSurcharge').val();
 	    	var amountHotel = $('.amountHotel').val();
 	    	var surcharge = $('.surcharge').val();
-	    	$('.totalValueHotel').text(parseInt($('.totalValueHotel').text()) + parseInt(valueHotel) * parseInt(numberHotel));
+	    	$('.totalValueHotel').text(parseInt($('.totalValueHotel').text()) + parseInt(valueHotel) * parseInt(numberHotel) + parseInt(amountHotel) * parseInt(surcharge));
 	    	$('#tblhotel tbody').append(`<tr class='data'>
 	    		<td>`+dateHotel+`</td><td>`+nameHotel+`</td><td>`+levelHotel+`</td><td>`+bedHotel+`</td><td>`+comboHotel+`</td><td>`+numberHotel+`</td><td>`+valueHotel+`</td><td>`+typeSurcharge+`</td><td>`+amountHotel+`</td><td>`+surcharge+`</td><td><button type="button" class="btn btn-link removeRow`+index+`"><i class="remove fa fa-times" aria-hidden="true" style="cursor: pointer;"></i></button></td>
 	    		</tr>`);
@@ -782,7 +777,7 @@
 	    	var countValue = $('.totalValueHotel').text();
 	    	console.log(countValue);
 	    	// xóa tổng giá trị đơn hàng
-	    	$('.totalValueHotel').text(parseInt(countValue) - parseInt($(this).closest("tr").find("td:eq(5)").text()) * parseInt($(this).closest("tr").find("td:eq(6)").text()));
+	    	$('.totalValueHotel').text(parseInt(countValue) - parseInt($(this).closest("tr").find("td:eq(5)").text()) * parseInt($(this).closest("tr").find("td:eq(6)").text())- parseInt($(this).closest("tr").find("td:eq(8)").text()) * parseInt($(this).closest("tr").find("td:eq(9)").text()));
 	    	$(this).closest("tr").remove();
 	    	if(parseInt($('.totalValueHotel').text()) == 0){
 	    		$('.paymentHotel').prop('disabled', true);
@@ -905,7 +900,10 @@
 				    hotelStatus: hotelStatus,
 				    otherStatus: otherStatus,
 				    listCustomer: listCustomer,
-				    ctkm: $('.ctkm').val()
+				    ctkm: $('.ctkm').val(),
+				    adult: $('.adult').val(),
+				    children: $('.children').val(),
+				    baby: $('.baby').val(),
 		        },
 	        }).done(function(res){
 	        	if(res.httpCode == 200){

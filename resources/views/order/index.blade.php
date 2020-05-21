@@ -8,6 +8,9 @@
 		body{
 			font-size: 12px;
 		}
+		button{
+			font-size: 12px;
+		}
 		.custom-select{
 			font-size: 12px;
 		}
@@ -53,7 +56,7 @@
 		}
 		.btn-search{
 			background: #FFC82E 0% 0% no-repeat padding-box;
-			width: 120px;
+			width: 150px;
 			height: 34px;
 			border-radius: 4px;
 			opacity: 1;
@@ -63,7 +66,8 @@
 		}
 		table thead{
 			background-color: #f8e7b4;
-			font-size: 11px
+			font-size: 11px;
+			text-align: center;
 		}
 	</style>
 </head>
@@ -85,7 +89,7 @@
 						</div>
 					</div>
 					<div class="col-3">
-						<label>Ngày tạo form</label>
+						<label>Khoảng ngày</label>
 						<div class="input-group mb-3">
 			  				<input type="text" name="created_at" class="form-control" >
 							<div class="input-group-append">
@@ -121,9 +125,9 @@
 						<div class="input-group mb-3">
 			  				<select class="browser-default custom-select">
 							  	<option value="" selected>--Tất cả--</option>
-							  	<option value="L6">L6->L3</option>
-							  	<option value="L7">L7->L4</option>
-							  	<option value="L8">L8->L5</option>
+							  	<option value="L3">L3</option>
+							  	<option value="L4">L4</option>
+							  	<option value="L5">L5</option>
 							</select>
 						</div>
 					</div>
@@ -167,37 +171,41 @@
 						</div>
 					</div>
 					<div class="col-3">
+					</div>
+					<div class="col-3">
+					</div>
+					<div class="col-3">
 						<div class="input-group mb-3">
-							<button class="btn-search" style="margin-top: 25px;">Tìm kiếm</button>
+							<button class="btn-search" style="margin-top: 25px;margin-left: 125px; width: 100px">Tìm kiếm</button>
 						</div>
 					</div>
 				</div>
 			</form>
 		<!-- </div> -->
-		<div class="body">
-			<div class="row">
-				<div class="col-4">
-					<label>Danh sách</label><br>
-					<small>Kết quả tìm kiếm được: {!! $count !!}</small>
-					<br>
-				</div>
-				<div class="col-4">
-				</div>
-				<div class="col-4">
-					@if($role == 2 || $role == 3)
-					<button type="button" style="margin: 2px" onclick="window.location = '{{route('order.export')}}'" class="btn bg-success btn-sm mr-2"><i class="icon-add-to-list"></i>
-                    Xuất excel
-                	</button>
-                	@endif
-                	@if($role == 1 || $role == 2)
-                	<a href="{!! route('order.create') !!}">
-	                	<button type="button" style="margin: 2px" class="btn btn-search btn-sm mr-2">
-	                    <i class="fa fa-plus" aria-hidden="true"></i>Đơn hàng mới
-	                	</button>
-                	</a>
-                	@endif
-				</div>
+		<div class="row">
+			<div class="col-4">
+				<h5>Danh sách</h5>
+				<small>Kết quả tìm kiếm được: {!! $count !!}</small>
+				<br>
 			</div>
+			<div class="col-4">
+			</div>
+			<div class="col-4">
+				@if($role == 2 || $role == 3)
+				<button type="button" style="margin: 2px; font-size: 12px" onclick="window.location = '{{route('order.export')}}'" class="btn bg-success btn-sm mr-2"><i class="icon-add-to-list"></i>
+                Xuất excel
+            	</button>
+            	@endif
+            	@if($role == 1 || $role == 2)
+            	<a href="{!! route('order.create') !!}">
+                	<button type="button" style="margin-left: 85px; font-size: 12px" class="btn btn-search btn-sm mr-2">
+                    <i class="fa fa-plus" aria-hidden="true"></i>  Đơn hàng mới
+                	</button>
+            	</a>
+            	@endif
+			</div>
+		</div>
+		<div class="body">
 			<table id="tblTable" class="table table-xs data-table table-bordered">
                 <thead>
                 <tr>

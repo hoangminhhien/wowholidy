@@ -32,6 +32,7 @@
 			width: 451px;
 			height: 39px;
 			font-size: 25px;
+			font-weight: bold;
 		}
 		strong{
 			color: red
@@ -78,7 +79,8 @@
 			<div class="col-3">Loại khách hàng</div>
 		</div>
 		<div class="row form-group">
-			<div class="col-3">Thông tin khách hàng</div>
+			<div class="col-3">
+				<label style="font-size:14px; font-weight: bolder ">Thông tin chung</label></div>
 			<div class="col-3">
 				<!-- <select class="browser-default custom-select">
 				  	<option selected>Nguyễn Văn A</option>
@@ -101,7 +103,7 @@
 			</div>
 		</div>
 		<hr>
-		<label style="font: Bold 16px/20px Avenir Next Rounded Pro;">Thông tin đơn hàng</label>
+		<label style="font-size:14px; font-weight: bolder ">Thông tin đơn hàng</label>
 		<div class="row form-group">
 			<div class="col-3">
 				<label>Loại combo <strong>*</strong></label>
@@ -144,7 +146,7 @@
 		<hr>
 		<div class="row">
 			<div class="col-3">
-				<label style="font: Bold 16px/20px Avenir Next Rounded Pro;">Thông tin vé máy bay</label>
+				<label style="font-size:14px; font-weight: bolder ">Thông tin vé máy bay</label>
 			</div>
 			<div class="col-3"></div>
 			<div class="col-3"></div>
@@ -221,7 +223,7 @@
 		
 			<div class="row">
 				<div class="col-3">
-					<label style="font: Bold 16px/20px Avenir Next Rounded Pro;">Thông tin khách sạn</label>
+					<label style="font-size:14px; font-weight: bolder ">Thông tin khách sạn</label>
 				</div>
 				<div class="col-3"></div>
 				<div class="col-3"></div>
@@ -233,21 +235,15 @@
 			<div class="row">
 				<div class="col-3">
 					<label>Người lớn(>12 tuổi)</label>
-					<select class="browser-default custom-select">
-					  	<option selected>01</option>
-					</select>
+					<input type="text" name="adult" class="form-control adult common-numeric" value="{!! $response['adult'] != null ? $response['adult'] : '' !!}">
 				</div>
 				<div class="col-3">
 					<label>Trẻ em(4-12 tuổi)</label>
-					<select class="browser-default custom-select">
-					  	<option selected>03</option>
-					</select>
+					<input type="text" name="children" class="form-control children common-numeric" value="{!! $response['children'] != null ? $response['children'] : '' !!}">
 				</div>
 				<div class="col-3">
 					<label>Em bé(<4 tuổi)</label>
-					<select class="browser-default custom-select">
-					  	<option selected>03</option>
-					</select>
+					<input type="text" name="baby" class="form-control baby common-numeric" value="{!! $response['baby'] != null ? $response['baby'] : '' !!}">
 				</div>
 				<div class="col-3">
 					<label>Danh sách khách hàng</label>
@@ -441,7 +437,7 @@
 			<hr>
 			<div class="row">
 				<div class="col-3">
-					<label style="font: Bold 16px/20px Avenir Next Rounded Pro;">Dịch vụ khác</label>
+					<label style="font-size:14px; font-weight: bolder ">Dịch vụ khác</label>
 				</div>
 				<div class="col-3"></div>
 				<div class="col-3"></div>
@@ -557,7 +553,7 @@
 			<hr>
 			<div class="row">
 				<div class="col-3">
-					<label style="font: Bold 16px/20px Avenir Next Rounded Pro;">Thông tin thanh toán</label>
+					<label style="font-size:14px; font-weight: bolder ">Thông tin thanh toán</label>
 				</div>
 			</div>
 			<div class="row">
@@ -783,15 +779,15 @@
 	            <div class="row">
 	            	<div class="col-3">
 	            		<label>Tổng giá nhập</label>
-	            		<input type="text" name="" class="form-control countNhap common-currency" disabled="true" value="{!! ($margin != null) ? $margin->count[0]['countNhap'] : '' !!}">
+	            		<input type="text" name="" class="form-control countNhap common-currency" disabled="true" value="{!! ($margin != null) ? $margin->count[0]['countNhap'] : $response->airLine['airValue'] - $profit !!}">
 	            	</div>
 	            	<div class="col-3">
 	            		<label>Tổng giá bán</label>
-	            		<input type="text" name="" class="form-control countBan common-currency" disabled="true" value="{!! ($margin != null) ? $margin->count[0]['countBan'] : '' !!}">
+	            		<input type="text" name="" class="form-control countBan common-currency" disabled="true" value="{!! ($margin != null) ? $margin->count[0]['countBan'] : $response->airLine['airValue'] !!}">
 	            	</div>
 	            	<div class="col-3">
 	            		<label>Tổng lợi nhuận đơn hàng</label>
-	            		<input type="text" name="" class="form-control countProfit common-currency" disabled="true" value="{!! ($margin != null) ? $margin->count[0]['countProfit'] : '' !!}">
+	            		<input type="text" name="" class="form-control countProfit common-currency" disabled="true" value="{!! ($margin != null) ? $margin->count[0]['countProfit'] : $profit !!}">
 	            	</div>
 	            </div>
             </div>
@@ -1110,7 +1106,7 @@
 	    	var id = $(this).data('id');
 	    	$(this).toggle();
 	    	console.log(id);
-	    	$('.totalValueHotel').text(parseInt($('.totalValueHotel').text()) - parseInt($('.number'+id).text()) * parseInt($('.value'+id).text())  + parseInt($('.numberHotel'+id).val()) * parseInt($('.valueHotel'+id).val()));
+	    	$('.totalValueHotel').text(parseInt($('.totalValueHotel').text()) - parseInt($('.number'+id).text()) * parseInt($('.value'+id).text())  + parseInt($('.numberHotel'+id).val()) * parseInt($('.valueHotel'+id).val()) - parseInt($('.amountlable'+id).text()) * parseInt($('.surcharge'+id).text())  + parseInt($('.amountHotel'+id).val()) * parseInt($('.surchargeHotel'+id).val()));
 	    	$('.dateLable'+id).text($('.dateHotel'+id).val());
 	    	$('.name'+id).text($('.nameHotel'+id).val());
 	    	$('.level'+id).text($('.levelHotel'+id).val());
@@ -1313,7 +1309,10 @@
 				    countAirline: countAirline,
 				    countHotel: countHotel,
 				    countOther: countOther,
-				    count: count
+				    count: count,
+				    adult: $('.adult').val(),
+				    children: $('.children').val(),
+				    baby: $('.baby').val(),
 		        },
 	        }).done(function(res){
 	        	if(res.httpCode == 200){

@@ -49,8 +49,8 @@ class OrderController extends Controller
             return redirect()->route('login');
         }
         $role = Auth::user()->role;
-        $user_name = Auth::user()->name;
-    	return view('order._formCreate', compact('role', 'user_name'));
+        $email = Auth::user()->email;
+    	return view('order._formCreate', compact('role', 'email'));
     }
     public function edit($id){
         $check = Order::find($id);
@@ -69,7 +69,7 @@ class OrderController extends Controller
         $countSurcharge = 0;
         if($response->hotel != null){
             foreach($response->hotel as $hotel){
-                $couthHotel += (int)$hotel['number'] * (int)$hotel['value'];
+                $couthHotel += (int)$hotel['number'] * (int)$hotel['value'] + (int)$hotel['amountHotel'] * (int)$hotel['surcharge'];
                 $countSurcharge += (int)$hotel['amountHotel'] * (int)$hotel['surcharge'];
             }
         }
@@ -118,7 +118,10 @@ class OrderController extends Controller
             'hotelStatus' => (int)$request['hotelStatus'],
             'otherStatus' => (int)$request['otherStatus'],
             'listCustomer' => $request['listCustomer'],
-            'ctkm' => $request['ctkm']
+            'ctkm' => $request['ctkm'],
+            'adult'=> $request['adult'],
+            'children'=> $request['children'],
+            'baby'=> $request['baby'],
     	]);
     	return response()->json(['httpCode'=>200,'message'=>'Tạo thành công']);
     }
@@ -183,7 +186,10 @@ class OrderController extends Controller
                 'statusHotel' => (int)$request['statusHotel'],
                 'statusOther' => (int)$request['statusOther'],
                 'listCustomer' => $listCustomer,
-                'ctkm' => $request['ctkm']
+                'ctkm' => $request['ctkm'],
+                'adult'=> $request['adult'],
+                'children'=> $request['children'],
+                'baby'=> $request['baby'],
             ]);
             // all good
             DB::commit();
