@@ -88,15 +88,15 @@
 				  	<option value="2">Nguyễn Văn C</option>
 				  	<option value="3">Nguyễn Văn D</option>
 				</select> -->
-				<input type="text" name="nameSaler" class="form-control nameSaler" value="{!! $response['nameSaler'] !!}" disabled="true">
+				<input type="text" name="nameSaler" class="form-control nameSaler" value="{!! $response['nameSaler'] !!}" disabled="true" >
 			</div>
 			<div class="col-3">
-				<input type="text" name="nameTeam" class="form-control nameTeam" value="{!! $response['teamSaler'] !!}">
+				<input type="text" name="nameTeam" class="form-control nameTeam" value="{!! $response['teamSaler'] !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 				<!-- <input type="" name="" value="Nguyễn Văn A" disabled="" class="form-control" > -->
 			</div>
 			<div class="col-3">
 				<!-- <input type="text" name="typeCustomer" class="form-control typeCustomer" > -->
-				<select class="browser-default custom-select typeCustomer" name="typeCustomer">
+				<select class="browser-default custom-select typeCustomer" name="typeCustomer" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 				  	<option {!! isset($response['typeCustomer']) === 'B2B'  ? 'selected' : '' !!} value="B2B">B2B</option>
 				  	<option {!! isset($response['typeCustomer']) === 'B2C'  ? 'selected' : '' !!} value="B2C">B2C</option>
 				</select>
@@ -107,7 +107,7 @@
 		<div class="row form-group">
 			<div class="col-3">
 				<label>Loại combo <strong>*</strong></label>
-				<select class="browser-default custom-select typeCombo" name="typeCombo">
+				<select class="browser-default custom-select typeCombo" name="typeCombo" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 				  	<option {!! isset($response['typeCustomer']) === 'Vi vu Phú Quốc'  ? 'selected' : '' !!} value="Vi vu Phú Quốc">Vi vu Phú Quốc</option>
 				  	<option {!! isset($response['typeCustomer']) === 'Vi vu Quy Nhơn'  ? 'selected' : '' !!} value="Vi vu Quy Nhơn">Vi vu Quy Nhơn</option>
 				  	<option {!! isset($response['typeCustomer']) === 'Vi vu Hội An'  ? 'selected' : '' !!} value="Vi vu Hội An">Vi vu Hội An</option>
@@ -116,31 +116,31 @@
 			</div>
 			<div class="col-3">
 				<label>Mã contact <strong>*</strong></label>
-				<input type="text" name="contactCode" class="form-control contactCode" value="{!! $response['contactCode'] !!}">
+				<input type="text" name="contactCode" class="form-control contactCode" value="{!! $response['contactCode'] !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 			</div>
 			<div class="col-3">
 				<label>Họ và tên khách đại diện <strong>*</strong></label>
-				<input type="text" name="nameCustomer" class="form-control nameCustomer" value="{!! $response['nameCustomer'] !!}">
+				<input type="text" name="nameCustomer" class="form-control nameCustomer" value="{!! $response['nameCustomer'] !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 			</div>
 			<div class="col-3">
 				<label>Số điện thoại khách đại diện <strong>*</strong></label>
-				<input type="text" name="phoneCustomer" class="form-control phoneCustomer common-number" value="{!! $response['phoneCustomer'] !!}">
+				<input type="text" name="phoneCustomer" class="form-control phoneCustomer common-number" value="{!! $response['phoneCustomer'] !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 			</div>
 			<div class="col-3">
 				<label>Email khác đại diện <strong>*</strong></label>
-				<input type="text" name="mailCustomer" class="form-control mailCustomer email" value="{!! $response['mailCustomer'] !!}">
+				<input type="text" name="mailCustomer" class="form-control mailCustomer email" value="{!! $response['mailCustomer'] !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 			</div>
 			<div class="col-3">
 				<label>Quốc tịch <strong>*</strong></label>
-				<input type="text" name="country" class="form-control country" value="{!! $response['country'] !!}">
+				<input type="text" name="country" class="form-control country" value="{!! $response['country'] !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 			</div>
 			<div class="col-3">
 				<label>Mã combo</label>
-				<input type="text" name="codeCombo" class="form-control codeCombo" value="{!! isset($response['codeCombo']) ? $response['codeCombo'] : '' !!}">
+				<input type="text" name="codeCombo" class="form-control codeCombo" value="{!! isset($response['codeCombo']) ? $response['codeCombo'] : '' !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 			</div>
 			<div class="col-3">
-				<label>level đơn hàng</label>
-				<input type="text" name="levelOrder" class="form-control levelOrder" value="{!! isset($response['levelOrder']) ? $response['levelOrder'] : '' !!}">
+				<label>Level đơn hàng</label>
+				<input type="text" name="levelOrder" class="form-control levelOrder" value="{!! isset($response['levelOrder']) ? $response['levelOrder'] : '' !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 			</div>
 		</div>
 		<hr>
@@ -151,21 +151,21 @@
 			<div class="col-3"></div>
 			<div class="col-3"></div>
 			<div class="col-3">
-				<input type="checkbox" id="paymentAirline" name="paymentAirline" class="form-check-input paymentAirline" {!! $response['airlineStatus'] == 1  ? 'checked' : '' !!} @if($role !=	 1 && $role != 2) disabled="true"   @endif>
+				<input type="checkbox" id="paymentAirline" name="paymentAirline" class="form-check-input paymentAirline" {!! $response['airlineStatus'] == 1  ? 'checked' : '' !!} @if($role !=	 1 && $role != 2) disabled="true"   @endif @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 				<label>Thanh toán cho phần này</label>
 			</div>
 		</div>
 		<div class="row form-group">
 			<div class="col-3">
 				<label>Mã đơn máy bay</label>
-				<input type="text" type="input" name="airCode" class="form-control airCode" value="{!! $response->airLine != null ? $response->airLine['airCode'] : '' !!}">
+				<input type="text" type="input" name="airCode" class="form-control airCode" value="{!! $response->airLine != null ? $response->airLine['airCode'] : '' !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
                 <div class="form-control-feedback">
                     <i class="icon-search4 font-size-base text-muted"></i>
                 </div>
 			</div>
 			<div class="col-3">
 				<label>Số lượng vé máy bay</label>
-				<input type="text" name="airQuantity" class="form-control common-numeric airQuantity" value="{!! $response->airLine != null ? $response->airLine['airQuantity'] : '' !!}">
+				<input type="text" name="airQuantity" class="form-control common-numeric airQuantity" value="{!! $response->airLine != null ? $response->airLine['airQuantity'] : '' !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
                 <div class="form-control-feedback">
                     <i class="icon-search4 font-size-base text-muted"></i>
                 </div>
@@ -173,7 +173,7 @@
 			<div class="col-3">
 				<label>Tiền vé máy bay</label>
 				<div class="input-group mb-3">
-	  				<input type="text" name="airValue" class="form-control common-currency airValue" value="{!! $response->airLine != null ? $response->airLine['airValue'] : '' !!}">
+	  				<input type="text" name="airValue" class="form-control common-currency airValue" value="{!! $response->airLine != null ? $response->airLine['airValue'] : '' !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 					<div class="input-group-append">
 					    <span class="input-group-text" id="basic-addon2" style="font-size: 12px">VNĐ</span>
 					</div>
@@ -184,7 +184,7 @@
 			<div class="col-3">
 				<label>Ngày bay đi</label>
 				<div class="input-group mb-3">
-	  				<input type="date" name="fromDate" class="form-control fromDate" value="{!! $response->airLine != null ? $response->airLine['fromDate'] : '' !!}">
+	  				<input type="date" name="fromDate" class="form-control fromDate" value="{!! $response->airLine != null ? $response->airLine['fromDate'] : '' !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 					<div class="input-group-append">
 					    <span class="input-group-text" id="basic-addon2"><i class="fa fa-calendar" aria-hidden="true"></i>
 						</span>
@@ -194,16 +194,14 @@
 			<div class="col-3">
 				<label>Ngày bay về</label>
 				<div class="input-group mb-3">
-	  				<input type="date" name="toDate" class="form-control toDate" value="{!! $response->airLine != null ? $response->airLine['toDate'] : '' !!}">
+	  				<input type="date" name="toDate" class="form-control toDate" value="{!! $response->airLine != null ? $response->airLine['toDate'] : '' !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 					<div class="input-group-append">
 					    <span class="input-group-text" id="basic-addon2"><i class="fa fa-calendar" aria-hidden="true"></i>
 						</span>
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="row" @if($role != 4) style="display: none" @endif>
-				<div class="col-3">
+			<div class="col-3" @if($role != 4) style="display: none" @endif>
 				<label>Trạng thái</label>
 				<div class="input-group mb-3">
 	  				<select class="browser-default custom-select statusAir" name="statusAir" @if($response->airlineStatus == 0) disabled="true"   @endif>
@@ -211,16 +209,15 @@
 					  	<option {!! $response['statusAir'] == 1  ? 'selected' : '' !!} value="1">Đã xử lý</option>
 					</select>
 				</div>
-				</div>
-				<div class="col-3">
-					<label>Ghi chú vận hành</label>
-					<div class="input-group mb-3">
-		  				<input type="text" name="noteAdminAir" class="form-control noteAdminHotel">
-					</div>
+			</div>
+			<div class="col-3" @if($role != 4) style="display: none" @endif>
+				<label>Ghi chú vận hành</label>
+				<div class="input-group mb-3">
+	  				<input type="text" name="noteAdminAir" class="form-control noteAdminHotel">
 				</div>
 			</div>
+		</div>
 		<hr>
-		
 			<div class="row">
 				<div class="col-3">
 					<label style="font-size:14px; font-weight: bolder ">Thông tin khách sạn</label>
@@ -228,26 +225,26 @@
 				<div class="col-3"></div>
 				<div class="col-3"></div>
 				<div class="col-3">
-					<input type="checkbox" id="paymentHotel" name="paymentHotel" class="form-check-input paymentHotel" {!! $response['hotelStatus'] == 1  ? 'checked' : '' !!} @if($role != 1 && $role != 2) disabled="true"   @endif>
+					<input type="checkbox" id="paymentHotel" name="paymentHotel" class="form-check-input paymentHotel" {!! $response['hotelStatus'] == 1  ? 'checked' : '' !!} @if($role != 1 && $role != 2) disabled="true"   @endif @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 					<label style="">Thanh toán cho phần này</label>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-3">
 					<label>Người lớn(>12 tuổi)</label>
-					<input type="text" name="adult" class="form-control adult common-numeric" value="{!! $response['adult'] != null ? $response['adult'] : '' !!}">
+					<input type="text" name="adult" class="form-control adult common-numeric" value="{!! $response['adult'] != null ? $response['adult'] : '' !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 				</div>
 				<div class="col-3">
 					<label>Trẻ em(4-12 tuổi)</label>
-					<input type="text" name="children" class="form-control children common-numeric" value="{!! $response['children'] != null ? $response['children'] : '' !!}">
+					<input type="text" name="children" class="form-control children common-numeric" value="{!! $response['children'] != null ? $response['children'] : '' !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 				</div>
 				<div class="col-3">
 					<label>Em bé(<4 tuổi)</label>
-					<input type="text" name="baby" class="form-control baby common-numeric" value="{!! $response['baby'] != null ? $response['baby'] : '' !!}">
+					<input type="text" name="baby" class="form-control baby common-numeric" value="{!! $response['baby'] != null ? $response['baby'] : '' !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 				</div>
 				<div class="col-3">
 					<label>Danh sách khách hàng</label>
-					<textarea cols="30" rows="3" name="listCustomer" class="form-control listCustomer" style="font-size: 12px">@if($response['listCustomer'] != null)@foreach($response['listCustomer'] as $customer){!! $customer !!}&#13;&#10;@endforeach @endif
+					<textarea cols="30" rows="3" name="listCustomer" class="form-control listCustomer" style="font-size: 12px" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>@if($response['listCustomer'] != null)@foreach($response['listCustomer'] as $customer){!! $customer !!}&#13;&#10;@endforeach @endif 
 					</textarea>
 
 				</div>
@@ -262,14 +259,14 @@
 			</div>
 			<div class="row">
 				<div class="col-3" style="padding-left: 45px; padding-top: 16px">
-					<input type="checkbox" id="checkin_out" name="checkin_out" class="form-check-input">
+					<input type="checkbox" id="checkin_out" name="checkin_out" class="form-check-input" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 				    <label class="form-check-label" for="gridCheck">
 				    	Chọn trùng theo vé máy bay
 				    </label>
 				</div>
 				<div class="col-3">
 					<div class="input-group mb-3">
-		  				<input type="text" class="form-control dateCheck" value="{!! $response['checkin'] != null ? $response['checkin'].'~'.$response['checkout'] : '' !!}">
+		  				<input type="text" class="form-control dateCheck" value="{!! $response['checkin'] != null ? $response['checkin'].'~'.$response['checkout'] : '' !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 						<div class="input-group-append">
 						    <span class="input-group-text" id="basic-addon2"><i class="fa fa-calendar" aria-hidden="true"></i>
 							</span>
@@ -277,7 +274,7 @@
 					</div>
 				</div>
 				<div class="col-3">
-					<select class="browser-default custom-select ctkm">
+					<select class="browser-default custom-select ctkm" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 					  	<option {!! $response['ctkm'] == 'Son môi Hồ Ngọc Hà'  ? 'selected' : '' !!} value="Son môi Hồ Ngọc Hà">Son môi Hồ Ngọc Hà</option>
 					  	<option {!! $response['ctkm'] == 'WowHoliday'  ? 'selected' : '' !!} value="WowHoliday">WowHoliday</option>
 					</select>
@@ -390,8 +387,10 @@
 	                			<label class="surcharge{!! $key !!}"> {!! $res['surcharge'] !!}</label>
 		                	</td>
 	                		<td>
-	                			<i class="fa fa-check-circle saveHotel saveHotel{!! $key !!}" aria-hidden="true" data-id="{!! $key !!}" title="Lưu" style="display: none; cursor: pointer; color: orange"></i>
-		                		<i class="fa fa-minus-circle editHotel" aria-hidden="true" data-id="{!! $key !!}" title="Sửa" style="cursor: pointer; color: orange"></i>
+	                			<div @if($role == 3 || $role == 4 || $role == 5 || $role == 6) style="display: none;"@endif>
+		                			<i class="fa fa-check-circle saveHotel saveHotel{!! $key !!}" aria-hidden="true" data-id="{!! $key !!}" title="Lưu" style="display: none; cursor: pointer; color: orange"></i>
+			                		<i class="fa fa-minus-circle editHotel" aria-hidden="true" data-id="{!! $key !!}" title="Sửa" style="cursor: pointer; color: orange"></i>
+	                			</div>
 	                		</td>
 	                	</tr>
 	                	@endforeach
@@ -502,8 +501,10 @@
 	                			<label class="note{!! $key !!}"> {!! $res['noteOther'] !!}</label>
 			                </td>
 		                	<td>
-	                			<i class="fa fa-check-circle saveOther saveOther{!! $key !!}" aria-hidden="true" data-id="{!! $key !!}" title="Lưu" style="display: none; cursor: pointer; color: orange"></i>
-		                		<i class="fa fa-minus-circle editOther" aria-hidden="true" data-id="{!! $key !!}" title="Sửa" style="cursor: pointer; color: orange"></i>
+		                		<div @if($role == 3 || $role == 4 || $role == 5 || $role == 6) style="display: none;"@endif>
+		                			<i class="fa fa-check-circle saveOther saveOther{!! $key !!}" aria-hidden="true" data-id="{!! $key !!}" title="Lưu" style="display: none; cursor: pointer; color: orange"></i>
+			                		<i class="fa fa-minus-circle editOther" aria-hidden="true" data-id="{!! $key !!}" title="Sửa" style="cursor: pointer; color: orange"></i>
+		                		</div>
 		                	</td>
                 		</tr>
 	                	@endforeach
@@ -594,15 +595,15 @@
                 	@foreach($response['payment'] as $key=>$res)
                 	<tr class="payment{!! $key !!} updatePayment data">
                 		<td>
-                			<input type="text" name="" class="form-control valuePayment{!! $key !!} common-currency" value="{!! $res['valuePayment'] !!}">
+                			<input type="text" name="" class="form-control valuePayment{!! $key !!} common-currency" value="{!! $res['valuePayment'] !!}" @if($res['codeFT'] != null) disabled @endif>
 	                		<label class="valuePayments{!! $key !!}"> {!! $res['valuePayment'] !!}</label>
                 		</td>
 	                	<td>
-	                		<input type="text" name="" class="form-control datePayment{!! $key !!} date" value="{!! $res['datePayment'] !!}">
+	                		<input type="text" name="" class="form-control datePayment{!! $key !!} date" value="{!! $res['datePayment'] !!}" @if($res['codeFT'] != null) disabled @endif>
 	                		<label class="datePayments{!! $key !!}"> {!! $res['datePayment'] !!}</label>
 	                	</td>
 	                	<td>
-	                		<input type="file" name="" class="form-control imagePayment{!! $key !!}" value="{!! $res['imagePayment'] !!}">
+	                		<input type="file" name="" class="form-control imagePayment{!! $key !!}" value="{!! $res['imagePayment'] !!}" @if($res['codeFT'] != null) disabled @endif>
 	                		<label class="imagePayments{!! $key !!}"> {!! $res['imagePayment'] !!}</label>
 	                	</td>
 	                	<td>
@@ -613,14 +614,12 @@
 	                		<label class="confirms{!! $key !!}"> {!! $res['confirm'] !!}</label>
 	                	</td>
 	                	<td>
-	                		<input type="text" name="" class="form-control notePayment{!! $key !!}" value="{!! $res['notePayment'] !!}">
+	                		<input type="text" name="" class="form-control notePayment{!! $key !!}" value="{!! $res['notePayment'] !!}" @if($res['codeFT'] != null) disabled @endif>
 	                		<label class="notePayments{!! $key !!}"> {!! $res['notePayment'] !!}</label>
 	                	</td>
 	                	<td>
-	                		@if($res['codeFT'] == null)
                 			<i class="fa fa-check-circle savePayment savePayment{!! $key !!}" aria-hidden="true" data-id="{!! $key !!}" title="Lưu" style="display: none; cursor: pointer; color: orange"></i>
 	                		<i class="fa fa-minus-circle editPayment" aria-hidden="true" data-id="{!! $key !!}" title="Sửa" style="cursor: pointer; color: orange"></i>
-	                		@endif
 	                	</td>
                 	</tr>
                 	@endforeach
