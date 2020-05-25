@@ -285,7 +285,7 @@
 				<table id="tblhotel" class="table table-xs data-table table-bordered">
                     <thead>
                     <tr>
-                        <th width="13%">Ngày</th>
+                        <th width="13%">Ngày<button type="button" class="btn btn-link addHotel" disabled="true"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></th>
                         <th width="10%">Tên khách sạn</th>
                         <th width="10%">Hạng phòng</th>
                         <th width="10%">Giường</th>
@@ -390,12 +390,8 @@
 	                			<label class="surcharge{!! $key !!}"> {!! $res['surcharge'] !!}</label>
 		                	</td>
 	                		<td>
-	                			<button type="button" class="btn btn-link saveHotel saveHotel{!! $key !!}" data-id="{!! $key !!}" title="Lưu" style="display: none;">
-	                			<i class="fa fa-check-circle" aria-hidden="true"></i>
-		                		</button>
-		                		<button type="button" class="btn btn-link editHotel" data-id="{!! $key !!}" title="Sửa">
-		                			<i class="fa fa-minus-circle" aria-hidden="true"></i>
-		                		</button>
+	                			<i class="fa fa-check-circle saveHotel saveHotel{!! $key !!}" aria-hidden="true" data-id="{!! $key !!}" title="Lưu" style="display: none; cursor: pointer; color: orange"></i>
+		                		<i class="fa fa-minus-circle editHotel" aria-hidden="true" data-id="{!! $key !!}" title="Sửa" style="cursor: pointer; color: orange"></i>
 	                		</td>
 	                	</tr>
 	                	@endforeach
@@ -404,15 +400,8 @@
                 </table>
 			</div>
 			<div class="row">
-				<div class="">Tiền khách sạn: <label class="totalValueHotel">{!! $couthHotel !!}</label> VNĐ</div>
+				<div class="">Tiền khách sạn: <label class="totalValueHotel" style="font-weight: bold;">{!! $couthHotel !!}</label> VNĐ</div>
 			</div>
-			<div class="row">
-				<div class="col-4"></div>
-				<div class="col-4"></div>
-				<div class="col-4">
-                	<button type="button" class="btn-add addHotel" disabled="true" style="height: 36px"><i class="fa fa-plus" aria-hidden="true"></i>Thêm</button>
-				</div>
-            </div>
 			<div class="row">
                 <label>Ghi chú</label>
                 <input type="text" name="noteHotel" class="form-control">
@@ -513,12 +502,8 @@
 	                			<label class="note{!! $key !!}"> {!! $res['noteOther'] !!}</label>
 			                </td>
 		                	<td>
-		                		<button type="button" class="btn btn-link saveOther saveOther{!! $key !!}" data-id="{!! $key !!}" title="Lưu" style="display: none;">
-	                			<i class="fa fa-check-circle" aria-hidden="true"></i>
-		                		</button>
-		                		<button type="button" class="btn btn-link editOther" data-id="{!! $key !!}" title="Sửa">
-		                			<i class="fa fa-minus-circle" aria-hidden="true"></i>
-		                		</button>
+	                			<i class="fa fa-check-circle saveOther saveOther{!! $key !!}" aria-hidden="true" data-id="{!! $key !!}" title="Lưu" style="display: none; cursor: pointer; color: orange"></i>
+		                		<i class="fa fa-minus-circle editOther" aria-hidden="true" data-id="{!! $key !!}" title="Sửa" style="cursor: pointer; color: orange"></i>
 		                	</td>
                 		</tr>
 	                	@endforeach
@@ -527,7 +512,7 @@
                 </table>
 			</div>
 			<div class="row">
-				<div class="">Tổng giá trị: <label class="totalValueOther">{!! $countOther !!}</label> VNĐ</div>
+				<div class="">Tổng giá trị: <label class="totalValueOther" style="font-weight: bold;">{!! $countOther !!}</label> VNĐ</div>
 			</div>
 			<div class="row" @if($role != 6) style="display: none" @endif>
 				<div class="col-3">
@@ -633,12 +618,8 @@
 	                	</td>
 	                	<td>
 	                		@if($res['codeFT'] == null)
-	                		<button type="button" class="btn btn-link savePayment savePayment{!! $key !!}" data-id="{!! $key !!}" title="Lưu" style="display: none;">
-                			<i class="fa fa-check-circle" aria-hidden="true"></i>
-	                		</button>
-	                		<button type="button" class="btn btn-link editPayment" data-id="{!! $key !!}" title="Sửa">
-	                			<i class="fa fa-minus-circle" aria-hidden="true"></i>
-	                		</button>
+                			<i class="fa fa-check-circle savePayment savePayment{!! $key !!}" aria-hidden="true" data-id="{!! $key !!}" title="Lưu" style="display: none; cursor: pointer; color: orange"></i>
+	                		<i class="fa fa-minus-circle editPayment" aria-hidden="true" data-id="{!! $key !!}" title="Sửa" style="cursor: pointer; color: orange"></i>
 	                		@endif
 	                	</td>
                 	</tr>
@@ -921,7 +902,7 @@
 	    	var surcharge = $('.surcharge').val();
 	    	$('.totalValueHotel').text(parseInt($('.totalValueHotel').text()) + parseInt(valueHotel) * parseInt(numberHotel));
 	    	$('#tblhotel tbody').append(`<tr class='data'>
-	    		<td>`+dateHotel+`</td><td>`+nameHotel+`</td><td>`+levelHotel+`</td><td>`+bedHotel+`</td><td>`+comboHotel+`</td><td>`+numberHotel+`</td><td>`+valueHotel+`</td><td>`+typeSurcharge+`</td><td>`+amountHotel+`</td><td>`+surcharge+`</td><td><button type="button" class="btn btn-link removeRow`+index+`"><i class="remove fa fa-times" aria-hidden="true" style="cursor: pointer;"></i></button></td>
+	    		<td>`+dateHotel+`</td><td>`+nameHotel+`</td><td>`+levelHotel+`</td><td>`+bedHotel+`</td><td>`+comboHotel+`</td><td>`+numberHotel+`</td><td>`+valueHotel+`</td><td>`+typeSurcharge+`</td><td>`+amountHotel+`</td><td>`+surcharge+`</td><td><i class="remove fa fa-times removeRow`+index+`" aria-hidden="true" style="cursor: pointer; color: orange"></i></td>
 	    		</tr>`);
 	    	$('.dateHotel, .nameHotel, .levelHotel, .bedHotel, .comboHotel, .numberHotel, .valueHotel, .amountHotel, .typeSurcharge, .surcharge').val('');
 	    });
@@ -936,7 +917,7 @@
 	    	var noteOther = $('.noteOther').val();
 	    	$('.totalValueOther').text(parseInt($('.totalValueOther').text()) + parseInt(valueOther));
 	    	$('#tblOther tbody').append(`<tr class='data'>
-	    		<td>`+nameOther+`</td><td>`+detailOther+`</td><td>`+amountOther+`</td><td>`+princeOther+`</td><td>`+valueOther+`</td><td>`+noteOther+`</td><td><button type="button" class="btn btn-link removeRow`+index+`"><i class="remove fa fa-times" aria-hidden="true" style="cursor: pointer;"></i></button></td>
+	    		<td>`+nameOther+`</td><td>`+detailOther+`</td><td>`+amountOther+`</td><td>`+princeOther+`</td><td>`+valueOther+`</td><td>`+noteOther+`</td><td><i class="remove fa fa-times removeRow`+index+`" aria-hidden="true" style="cursor: pointer; color: orange"></i></td>
 	    		</tr>`);
 	    	$('.nameOther, .detailOther, .amountOther, .princeOther, .valueOther, .noteOther').val('');
 	    });
@@ -952,7 +933,7 @@
 	    	var confirm = $('.confirm').val();
 	    	var notePayment = $('.notePayment').val();
 	    	$('#tblPayment tbody').append(`<tr class='data'>
-	    		<td>`+valuePayment+`</td><td>`+datePayment+`</td><td>`+imagePayment.substr(12, imagePayment.length-1)+`<td>`+codeFT+`</td><td>`+confirm+`</td><td>`+notePayment+`</td></td><td><button type="button" class="btn btn-link removeRow`+index+`"><i class="remove fa fa-times" aria-hidden="true" style="cursor: pointer;"></i></button></td>
+	    		<td>`+valuePayment+`</td><td>`+datePayment+`</td><td>`+imagePayment.substr(12, imagePayment.length-1)+`<td>`+codeFT+`</td><td>`+confirm+`</td><td>`+notePayment+`</td></td><td><i class="remove fa fa-times removeRow`+index+`" aria-hidden="true" style="cursor: pointer; color: orange"></i></td>
 	    		</tr>`);
 	    	$('.valuePayment, .datePayment, .imagePayment').val('');
 	    	// check input checkbox

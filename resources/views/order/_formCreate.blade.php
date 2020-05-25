@@ -262,7 +262,7 @@
 				<table id="tblhotel" class="table table-xs data-table table-bordered">
                     <thead>
                     <tr>
-                        <th width="13%">Ngày</th>
+                        <th width="13%">Ngày<button type="button" class="btn btn-link addHotel" disabled="true"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></th>
                         <th width="10%">Tên khách sạn</th>
                         <th width="10%">Hạng phòng</th>
                         <th width="10%">Giường</th>
@@ -325,15 +325,9 @@
                 </table>
 			</div>
 			<div class="row">
-				<div class="">Tiền khách sạn: <label class="totalValueHotel">0</label> VNĐ</div>
+				<div class="">Tiền khách sạn: <label class="totalValueHotel" style="font-weight: bold;">0</label> VNĐ</div>
 			</div>
-			<div class="row">
-				<div class="col-4"></div>
-				<div class="col-4"></div>
-				<div class="col-4">
-                	<button type="button" class="btn-add addHotel" disabled="true"><i class="fa fa-plus" aria-hidden="true"></i>Thêm</button>
-				</div>
-            </div>
+			
 				<div class="row">
 	                <label>Ghi chú</label>
 	                <input type="text" name="noteHotel" class="form-control">
@@ -396,7 +390,7 @@
                 </table>
 			</div>
 			<div class="row">
-				<div class="">Tổng giá trị: <label class="totalValueOther">0</label> VNĐ</div>
+				<div class="">Tổng giá trị: <label class="totalValueOther" style="font-weight: bold;">0</label> VNĐ</div>
 			</div>
 			<div class="row">
 				<div class="col-4"></div>
@@ -637,7 +631,7 @@
 	    	var surcharge = $('.surcharge').val();
 	    	$('.totalValueHotel').text(parseInt($('.totalValueHotel').text()) + parseInt(valueHotel) * parseInt(numberHotel) + parseInt(amountHotel) * parseInt(surcharge));
 	    	$('#tblhotel tbody').append(`<tr class='data'>
-	    		<td>`+dateHotel+`</td><td>`+nameHotel+`</td><td>`+levelHotel+`</td><td>`+bedHotel+`</td><td>`+comboHotel+`</td><td>`+numberHotel+`</td><td>`+valueHotel+`</td><td>`+typeSurcharge+`</td><td>`+amountHotel+`</td><td>`+surcharge+`</td><td><button type="button" class="btn btn-link removeRow`+index+`"><i class="remove fa fa-times" aria-hidden="true" style="cursor: pointer;"></i></button></td>
+	    		<td>`+dateHotel+`</td><td>`+nameHotel+`</td><td>`+levelHotel+`</td><td>`+bedHotel+`</td><td>`+comboHotel+`</td><td>`+numberHotel+`</td><td>`+valueHotel+`</td><td>`+typeSurcharge+`</td><td>`+amountHotel+`</td><td>`+surcharge+`</td><td><i class="remove fa fa-times removeRow`+index+`" aria-hidden="true" style="cursor: pointer; color: orange"></i></td>
 	    		</tr>`);
 	    	$('.dateHotel, .nameHotel, .levelHotel, .bedHotel, .comboHotel, .numberHotel, .valueHotel, .amountHotel, .typeSurcharge, .surcharge').val('');
 	    });
@@ -652,7 +646,7 @@
 	    	var noteOther = $('.noteOther').val();
 	    	$('.totalValueOther').text(parseInt($('.totalValueOther').text()) + parseInt(valueOther));
 	    	$('#tblOther tbody').append(`<tr class='data'>
-	    		<td>`+nameOther+`</td><td>`+detailOther+`</td><td>`+amountOther+`</td><td>`+princeOther+`</td><td>`+valueOther+`</td><td>`+noteOther+`</td><td><button type="button" class="btn btn-link removeRow`+index+`"><i class="remove fa fa-times" aria-hidden="true" style="cursor: pointer;"></i></button></td>
+	    		<td>`+nameOther+`</td><td>`+detailOther+`</td><td>`+amountOther+`</td><td>`+princeOther+`</td><td>`+valueOther+`</td><td>`+noteOther+`</td><td><i class="remove fa fa-times removeRow`+index+`" aria-hidden="true" style="cursor: pointer; color: orange"></i></td>
 	    		</tr>`);
 	    	$('.nameOther, .detailOther, .amountOther, .princeOther, .valueOther, .noteOther').val('');
 	    });
@@ -668,7 +662,7 @@
 	    	var confirm = $('.confirm').val();
 	    	var notePayment = $('.notePayment').val();
 	    	$('#tblPayment tbody').append(`<tr class='data'>
-	    		<td>`+valuePayment+`</td><td>`+datePayment+`</td><td>`+imagePayment.substr(12, imagePayment.length-1)+`<td>`+codeFT+`</td><td>`+confirm+`</td><td>`+notePayment+`</td></td><td><button type="button" class="btn btn-link removeRow`+index+`"><i class="remove fa fa-times" aria-hidden="true" style="cursor: pointer;"></i></button></td>
+	    		<td>`+valuePayment+`</td><td>`+datePayment+`</td><td>`+imagePayment.substr(12, imagePayment.length-1)+`<td>`+codeFT+`</td><td>`+confirm+`</td><td>`+notePayment+`</td></td><td><i class="remove fa fa-times removeRow`+index+`" aria-hidden="true" style="cursor: pointer; color: orange"></i></td>
 	    		</tr>`);
 	    	$('.valuePayment, .datePayment, .imagePayment').val('');
 	    	// check input checkbox

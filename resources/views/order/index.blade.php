@@ -92,7 +92,7 @@
 					<div class="col-3">
 						<label>Khoảng ngày</label>
 						<div class="input-group mb-3">
-			  				<input type="text" name="created_at" class="form-control" >
+			  				<input type="text" name="created_at" class="form-control" value="{!! isset($request['created_at']) ? $request['created_at'] : '' !!}">
 							<div class="input-group-append">
 							    <span class="input-group-text" id="basic-addon2"><i class="fa fa-calendar" aria-hidden="true"></i>
 								</span>
@@ -414,7 +414,7 @@
   	});
 
   	$('input[name="created_at"]').on('apply.daterangepicker', function(ev, picker) {
-      	$(this).val(picker.startDate.format('YYYY-MM-DD') + ' - ' + picker.endDate.format('YYYY-MM-DD'));
+      	$(this).val(picker.startDate.format('YYYY-MM-DD') + '~' + picker.endDate.format('YYYY-MM-DD'));
   	});
   	$('input[name="created_at"]').on('cancel.daterangepicker', function(ev, picker) {
       	$(this).val('');

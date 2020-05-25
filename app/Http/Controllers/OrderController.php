@@ -20,7 +20,7 @@ class OrderController extends Controller
         $data = [];
         $order = isset($request['order']) ? $request['order'] : '';
         if(isset($request['created_at']) && $request['created_at'] != null){
-            $created_at = explode(' - ', $request['created_at']);
+            $created_at = explode('~', $request['created_at']);
             $data[] = ['created_at', '>=', $created_at[0]];
             $data[] = ['created_at', '<=', $created_at[1]];
         }
