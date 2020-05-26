@@ -599,7 +599,7 @@
 	                		<label class="valuePayments{!! $key !!}"> {!! $res['valuePayment'] !!}</label>
                 		</td>
 	                	<td>
-	                		<input type="text" name="" class="form-control datePayment{!! $key !!} date" value="{!! $res['datePayment'] !!}" @if($res['codeFT'] != null) disabled @endif>
+	                		<input type="text" name="" class="form-control datePayment{!! $key !!} date" value="{!! $res['datePayment'] !!}" @if($res['codeFT'] != null) disabled @endif @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 	                		<label class="datePayments{!! $key !!}"> {!! $res['datePayment'] !!}</label>
 	                	</td>
 	                	<td>
