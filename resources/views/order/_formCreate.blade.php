@@ -259,79 +259,86 @@
 					  	<option value="WowHoliday">WowHoliday</option>
 					</select>
 				</div>
-				<table id="tblhotel" class="table table-xs data-table table-bordered">
-                    <thead>
-                    <tr>
-                        <th width="13%">Ngày<button type="button" class="btn btn-link addHotel" disabled="true"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></th>
-                        <th width="10%">Tên khách sạn</th>
-                        <th width="10%">Hạng phòng</th>
-                        <th width="10%">Giường</th>
-                        <th width="10%">Gói mua</th>
-                        <th width="5%">Số lượng</th>
-                        <th width="10%">Tiền phòng</th>
-                        <th>Phụ thu loại</th>
-                        <th>Số lượng</th>
-                        <th>CP phụ thu</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                	<tr>
-                		<td>
-                			<input type="text" name="dateHotel" class="form-control dateHotel date">
-                		</td>
-                		<td>
-                			<!-- <select name="nameHotel" class="browser-default custom-select form-control">
-							  	<option selected value="Vinmart">Vinmart</option>
-							</select> -->
-							<input type="text" name="nameHotel" class="form-control nameHotel">
-                		</td>
-                		<td>
-                			<!-- <select name="levelHotel" class="browser-default custom-select form-control">
-							  	<option selected value="5 sao">5 sao</option>
-							</select> -->
-							<input type="text" name="levelHotel" class="form-control levelHotel">
-                		</td>
-                		<td>
-                			<!-- <select name="bedHotel" class="browser-default custom-select form-control">
-							  	<option selected value="Double">Double</option>
-							</select> -->
-							<input type="text" name="bedHotel" class="form-control bedHotel">
-                		</td>
-                		<td>
-                			<!-- <select name="comboHotel" class="browser-default custom-select">
-							  	<option selected value="BB: ăn sáng">BB: ăn sáng</option>
-							</select> -->
-							<input type="text" name="comboHotel" class="form-control comboHotel">
-                		</td>
-                		<td>
-                			<input type="text" name="numberHotel" class="form-control numberHotel common-numeric">
-                		</td>
-                		<td>
-                			<input type="text" name="valueHotel" class="form-control valueHotel common-currency">
-                		</td>
-                		<td>
-                			<input type="text" name="typeSurcharge" class="form-control typeSurcharge">
-                		</td>
-                		<td>
-                			<input type="text" name="amountHotel" class="form-control amountHotel common-numeric">
-                		</td>
-                		<td><input type="text" name="surcharge" placeholder="nhập tiền" class="form-control common-currency surcharge"></td>
-                		<td>
-                			
-                		</td>
-                	</tr>
-                    </tbody>
-                </table>
 			</div>
 			<div class="row">
-				<div class="">Tiền khách sạn: <label class="totalValueHotel" style="font-weight: bold;">0</label> VNĐ</div>
+				<div class="col-12">
+					<table id="tblhotel" class="table table-xs data-table table-bordered">
+	                    <thead>
+	                    <tr>
+	                        <th width="13%">Ngày<button type="button" class="btn btn-link addHotel" disabled="true"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></th>
+	                        <th width="10%">Tên khách sạn</th>
+	                        <th width="10%">Hạng phòng</th>
+	                        <th width="10%">Giường</th>
+	                        <th width="10%">Gói mua</th>
+	                        <th width="5%">Số lượng</th>
+	                        <th width="10%">Tiền phòng</th>
+	                        <th>Phụ thu loại</th>
+	                        <th>Số lượng</th>
+	                        <th>CP phụ thu</th>
+	                        <th></th>
+	                    </tr>
+	                    </thead>
+	                    <tbody>
+	                	<tr>
+	                		<td>
+	                			<input type="text" name="dateHotel" class="form-control dateHotel date">
+	                		</td>
+	                		<td>
+	                			<!-- <select name="nameHotel" class="browser-default custom-select form-control">
+								  	<option selected value="Vinmart">Vinmart</option>
+								</select> -->
+								<input type="text" name="nameHotel" class="form-control nameHotel">
+	                		</td>
+	                		<td>
+	                			<!-- <select name="levelHotel" class="browser-default custom-select form-control">
+								  	<option selected value="5 sao">5 sao</option>
+								</select> -->
+								<input type="text" name="levelHotel" class="form-control levelHotel">
+	                		</td>
+	                		<td>
+	                			<!-- <select name="bedHotel" class="browser-default custom-select form-control">
+								  	<option selected value="Double">Double</option>
+								</select> -->
+								<input type="text" name="bedHotel" class="form-control bedHotel">
+	                		</td>
+	                		<td>
+	                			<!-- <select name="comboHotel" class="browser-default custom-select">
+								  	<option selected value="BB: ăn sáng">BB: ăn sáng</option>
+								</select> -->
+								<input type="text" name="comboHotel" class="form-control comboHotel">
+	                		</td>
+	                		<td>
+	                			<input type="text" name="numberHotel" class="form-control numberHotel common-numeric">
+	                		</td>
+	                		<td>
+	                			<input type="text" name="valueHotel" class="form-control valueHotel common-currency">
+	                		</td>
+	                		<td>
+	                			<input type="text" name="typeSurcharge" class="form-control typeSurcharge">
+	                		</td>
+	                		<td>
+	                			<input type="text" name="amountHotel" class="form-control amountHotel common-numeric">
+	                		</td>
+	                		<td><input type="text" name="surcharge" placeholder="nhập tiền" class="form-control common-currency surcharge"></td>
+	                		<td>
+	                			
+	                		</td>
+	                	</tr>
+	                    </tbody>
+	                </table>
+				</div>
 			</div>
-			
-				<div class="row">
+			<div class="row">
+				<div class="col-12">
+					<div class="">Tiền khách sạn: <label class="totalValueHotel" style="font-weight: bold;">0</label> VNĐ</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
 	                <label>Ghi chú</label>
 	                <input type="text" name="noteHotel" class="form-control">
 				</div>
+			</div>
 			<hr>
 			<div class="row">
 				<div class="col-3">
@@ -343,54 +350,60 @@
 					<input type="checkbox" id="paymentOther" name="paymentOther" class="form-check-input paymentOther" disabled="true">
 					<label>Thanh toán cho phần này</label>
 				</div>
-				<table id="tblOther" class="table table-xs data-table table-bordered">
-                    <thead>
-                    <tr>
-                        <th>Tên dịch vụ <button type="button" class="btn btn-link addOther" disabled="true"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></th>
-                        <th>Chi tiết dịch vụ</th>
-                        <th>Số lượng</th>
-                        <th>Đơn giá</th>
-                        <th>Tổng tiền</th>
-                        <th>Ghi chú</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                	<tr>
-                		<td>
-                			<!-- <select class="browser-default custom-select form-control">
-							  	<option selected >Dịch vụ bãi biển</option>
-							</select> -->
-							<input type="text" name="nameOther" class="form-control nameOther">
-                		</td>
-                		<td>
-                			<!-- <select class="browser-default custom-select form-control">
-							  	<option selected>Ngắm san hô dưới nước</option>
-							</select> -->
-							<input type="text" name="detailOther" class="form-control detailOther">
-                		</td>
-                		<td>
-                			<input type="text" name="amountOther" class="form-control amountOther common-numeric">
-                		</td>
-                		<td>
-                			<input type="text" name="princeOther" class="form-control princeOther common-currency">
-                		</td>
-                		<td>
-                			<input type="text" name="valueOther" class="form-control valueOther common-currency" disabled="">
-                		</td>
-                		<td>
-                			<input type="text" name="noteOther" class="form-control noteOther">
-                		</td>
-                		<td></td>
-                	</tr>
-                	<tr>
-                		
-                	</tr>
-                    </tbody>
-                </table>
 			</div>
 			<div class="row">
-				<div class="">Tổng giá trị: <label class="totalValueOther" style="font-weight: bold;">0</label> VNĐ</div>
+				<div class="col-12">
+					<table id="tblOther" class="table table-xs data-table table-bordered">
+	                    <thead>
+	                    <tr>
+	                        <th>Tên dịch vụ <button type="button" class="btn btn-link addOther" disabled="true"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></th>
+	                        <th>Chi tiết dịch vụ</th>
+	                        <th>Số lượng</th>
+	                        <th>Đơn giá</th>
+	                        <th>Tổng tiền</th>
+	                        <th>Ghi chú</th>
+	                        <th></th>
+	                    </tr>
+	                    </thead>
+	                    <tbody>
+	                	<tr>
+	                		<td>
+	                			<!-- <select class="browser-default custom-select form-control">
+								  	<option selected >Dịch vụ bãi biển</option>
+								</select> -->
+								<input type="text" name="nameOther" class="form-control nameOther">
+	                		</td>
+	                		<td>
+	                			<!-- <select class="browser-default custom-select form-control">
+								  	<option selected>Ngắm san hô dưới nước</option>
+								</select> -->
+								<input type="text" name="detailOther" class="form-control detailOther">
+	                		</td>
+	                		<td>
+	                			<input type="text" name="amountOther" class="form-control amountOther common-numeric">
+	                		</td>
+	                		<td>
+	                			<input type="text" name="princeOther" class="form-control princeOther common-currency">
+	                		</td>
+	                		<td>
+	                			<input type="text" name="valueOther" class="form-control valueOther common-currency" disabled="">
+	                		</td>
+	                		<td>
+	                			<input type="text" name="noteOther" class="form-control noteOther">
+	                		</td>
+	                		<td></td>
+	                	</tr>
+	                	<tr>
+	                		
+	                	</tr>
+	                    </tbody>
+	                </table>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<div class="">Tổng giá trị: <label class="totalValueOther" style="font-weight: bold;">0</label> VNĐ</div>
+				</div>
 			</div>
 			<div class="row">
 				<div class="col-4"></div>
@@ -414,44 +427,48 @@
 						</div>
 					</div>
 				</div>
-				<table id="tblPayment" class="table table-xs data-table table-bordered">
-                    <thead>
-                    <tr>
-                        <th>Tiền <button type="button" class="btn btn-link addPayment" disabled="true"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></th>
-                        <th>Ngày</th>
-                        <th>Đính kèm file</th>
-                        <th>Nhập mã FT</th>
-                        <th>Xác nhận cho nợ</th>
-                        <th>Ghi chú</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                	<tr>
-                		<td>
-                			<input type="text" name="valuePayment" class="form-control valuePayment common-currency">
-                		</td>
-                		<td>
-                			<input type="date" name="datePayment" class="form-control datePayment date">
-                		</td>
-                		<td>
-                			<input type="file" name="imagePayment" class="form-control imagePayment">
-                		</td>
-                		<td>
-                			<input type="text" name="codeFT" class="form-control codeFT" @if($role != 3) disabled @endif>
-                		</td>
-                		<td>
-                			<select class="browser-default custom-select confirm" name="confirm" @if($role != 2) disabled @endif>
-							  	<option value="0">Không cho nợ</option>
-							  	<option value="1">Cho nợ</option>
-							</select>
-                		</td>
-                		<td>
-                			<input type="text" name="notePayment" class="form-control notePayment">
-                		</td>
-                	</tr>
-                    </tbody>
-                </table>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<table id="tblPayment" class="table table-xs data-table table-bordered">
+	                    <thead>
+	                    <tr>
+	                        <th>Tiền <button type="button" class="btn btn-link addPayment" disabled="true"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></th>
+	                        <th>Ngày</th>
+	                        <th>Đính kèm file</th>
+	                        <th>Nhập mã FT</th>
+	                        <th>Xác nhận cho nợ</th>
+	                        <th>Ghi chú</th>
+	                        <th></th>
+	                    </tr>
+	                    </thead>
+	                    <tbody>
+	                	<tr>
+	                		<td>
+	                			<input type="text" name="valuePayment" class="form-control valuePayment common-currency">
+	                		</td>
+	                		<td>
+	                			<input type="date" name="datePayment" class="form-control datePayment date">
+	                		</td>
+	                		<td>
+	                			<input type="file" name="imagePayment" class="form-control imagePayment">
+	                		</td>
+	                		<td>
+	                			<input type="text" name="codeFT" class="form-control codeFT" @if($role != 3) disabled @endif>
+	                		</td>
+	                		<td>
+	                			<select class="browser-default custom-select confirm" name="confirm" @if($role != 2) disabled @endif>
+								  	<option value="0">Không cho nợ</option>
+								  	<option value="1">Cho nợ</option>
+								</select>
+	                		</td>
+	                		<td>
+	                			<input type="text" name="notePayment" class="form-control notePayment">
+	                		</td>
+	                	</tr>
+	                    </tbody>
+	                </table>
+				</div>
 			</div>
 			<div class="row">
 				<div class="col-4"></div>
