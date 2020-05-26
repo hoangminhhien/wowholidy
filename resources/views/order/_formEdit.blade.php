@@ -697,7 +697,7 @@
 	            <div class="row">
 	            	<div class="col-3">
 	            		<label>Tổng giá nhập khách sạn</label>
-	            		<input type="text" name="" class="form-control marginHotel common-currency" disabled="true" value="{!! ($margin != null) ? $margin->countHotel[0]['nhap'] : $countSurcharge !!}">
+	            		<input type="text" name="" class="form-control marginHotel common-currency" disabled="true" value="{!! ($margin != null && $margin->countHotel != null) ? $margin->countHotel[0]['nhap'] : $countSurcharge !!}">
 	            	</div>
 	            	<div class="col-3">
 	            		<label>Tổng giá bán khách sạn</label>
@@ -741,7 +741,7 @@
 	            <div class="row">
 	            	<div class="col-3">
 	            		<label>Tổng giá dịch vụ</label>
-	            		<input type="text" name="" class="form-control marginOther common-currency" disabled="true" value="{!! ($margin != null) ? $margin->countOther[0]['nhap'] : $countOther !!}">
+	            		<input type="text" name="" class="form-control marginOther common-currency" disabled="true" value="{!! ($margin != null && $margin->countOther != null) ? $margin->countOther[0]['nhap'] : $countOther !!}">
 	            	</div>
 	            	<div class="col-3">
 	            		<label>Tổng giá nhập dịch vụ</label>
@@ -920,6 +920,15 @@
 	    		</tr>`);
 	    	$('.nameOther, .detailOther, .amountOther, .princeOther, .valueOther, .noteOther').val('');
 	    });
+	    if(parseInt($('.countPayment').val()) < parseInt($('.airValue').val())){
+    		$(".paymentAirline").prop( "disabled", true );
+    	}
+    	if(parseInt($('.countPayment').val()) < parseInt($('.totalValueHotel').text())){
+    		$(".paymentHotel").prop( "disabled", true );
+    	}
+    	if(parseInt($('.countPayment').val()) < parseInt($('.totalValueOther').text())){
+    		$(".paymentOther").prop( "disabled", true );
+    	}
 	    $('.addPayment').click(function(){
 	    	$(this).prop('disabled', true);
 	    	++index;

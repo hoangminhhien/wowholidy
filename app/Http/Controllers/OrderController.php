@@ -85,6 +85,7 @@ class OrderController extends Controller
         }
         $response->airLine != null ? $quantity = $response->airLine['airQuantity'] : $quantity = 0;
         $profit = (int)$quantity * 15000;
+        // dd($margin, $countOther);
         return view('order._formEdit', compact('response', 'couthHotel', 'countOther', 'coutPayment', 'countSurcharge','profit' , 'role', 'margin'));
     }
     public function store(Request $request){
@@ -224,7 +225,7 @@ class OrderController extends Controller
     }
     public function export(Request $request){
         $results = $this->read($request);
-        // dd($results);
+        dd($results);
         $count = $results['count'];
         if ($count > 5000) {
             return redirect()->back()->with('info', 'Không được export quá 5000 bản ghi!');
@@ -245,6 +246,11 @@ class OrderController extends Controller
                 'Tên khách hàng',
                 'Số điện thoại',
                 'Email',
+                'Mã contact',
+                'Level',
+                'Loại combo',
+                'Chương trình khuyễn mãi',
+                'Nguồn khách hàng',
                 'Mã máy bay',
                 'Ngày bay đi',
                 'Ngày bay về',
@@ -270,6 +276,11 @@ class OrderController extends Controller
                             $row['nameCustomer'],
                             $row['phoneCustomer'],
                             $row['mailCustomer'],
+                            $row['contactCode'],
+                            $row['levelOrder'],
+                            $row['codeCombo'],
+                            $row['ctkm'],
+                            $row['typeCustomer'],
                             $row['airLine'] != null ? $row['airLine']['airCode']: '',
                             $row['airLine'] != null ? $row['airLine']['fromDate']: '',
                             $row['airLine'] != null ? $row['airLine']['toDate']: '',
