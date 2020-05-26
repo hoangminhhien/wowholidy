@@ -325,10 +325,10 @@
 	            			<!-- Sales  -->
 	            			@if($order->statusAir == 1 && $order->statusHotel == 1 && $order->statusOther == 1)
 	            			<span class="badge badge-success">Sales</span>
-	            			@elseif($order->statusAir == 1 || $order->statusHotel == 1 || $order->statusOther == 1)
-	            			<span class="badge badge-danger">Sales</span>
-	            			@else
+	            			@elseif($order->airlineStatus == 0 && $order->hotelStatus == 0 && $order->otherStatus == 0)
 	            			<span class="badge badge-secondary">Sales</span>
+	            			@else
+	            			<span class="badge badge-danger">Sales</span>
 	            			@endif
 	            			<br>
 	            			@if($order->payment == null)
@@ -357,27 +357,27 @@
 		            			@endif
 	            			@endif
 	            			<br>
-	            			@if($order->statusAir == 1)
+	            			@if($order->statusAir == 1 && $order->airlineStatus == 1)
 	            				<span class="badge badge-success">VH vé</span>
-	            			@elseif($order->airlineStatus == 1 && $order->statusAir == 0)
+	            			@elseif($order->statusAir == 0 && $order->airlineStatus == 1)
 	            				<span class="badge badge-danger">VH vé</span>
 	            			@elseif($order->airlineStatus == 0 && $order->statusAir == 0)
 	            				<span class="badge badge-secondary">VH vé</span>
 	            			@endif
 	            			<br>
-	            			@if($order->statusHotel == 1)
+	            			@if($order->statusHotel == 1 && $order->hotelStatus == 1)
 	            				<span class="badge badge-success">VH phòng</span>
-	            			@elseif($order->hotelStatus == 1 && $order->statusHotel == 0)
+	            			@elseif($order->statusHotel == 0 && $order->hotelStatus == 1)
 	            				<span class="badge badge-danger">VH phòng</span>
-	            			@elseif($order->hotelStatus == 0 && $order->statusHotel == 0)
+	            			@elseif($order->statusHotel == 0 && $order->hotelStatus == 0)
 	            				<span class="badge badge-secondary">VH phòng</span>
 	            			@endif
 	            			<br>
-	            			@if($order->statusOther == 1)
+	            			@if($order->statusOther == 1 && $order->otherStatus == 1)
 	            				<span class="badge badge-success">VH DV khác</span>
-	            			@elseif($order->statusOther == 1 && $order->statusOther == 0)
+	            			@elseif($order->statusOther == 0 && $order->otherStatus == 1)
 	            				<span class="badge badge-danger">VH DV khác</span>
-	            			@elseif($order->statusOther == 0 && $order->statusOther == 0)
+	            			@elseif($order->statusOther == 0 && $order->otherStatus == 0)
 	            				<span class="badge badge-secondary">VH DV khác</span>
 	            			@endif
 	            		</td>

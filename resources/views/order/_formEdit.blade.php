@@ -595,7 +595,7 @@
                 	@foreach($response['payment'] as $key=>$res)
                 	<tr class="payment{!! $key !!} updatePayment data">
                 		<td>
-                			<input type="text" name="" class="form-control valuePayment{!! $key !!} common-currency" value="{!! $res['valuePayment'] !!}" @if($res['codeFT'] != null) disabled @endif>
+                			<input type="text" name="" class="form-control valuePayment{!! $key !!} common-currency" value="{!! $res['valuePayment'] !!}" @if($res['codeFT'] != null) disabled @endif @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 	                		<label class="valuePayments{!! $key !!}"> {!! $res['valuePayment'] !!}</label>
                 		</td>
 	                	<td>
@@ -604,7 +604,7 @@
 	                	</td>
 	                	<td>
 	                		<input type="file" name="" class="form-control imagePayment{!! $key !!}" value="{!! $res['imagePayment'] !!}" @if($res['codeFT'] != null) disabled @endif>
-	                		<label class="imagePayments{!! $key !!}"> {!! $res['imagePayment'] !!}</label>
+	                		<label class="imagePayments{!! $key !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif> {!! $res['imagePayment'] !!}</label>
 	                	</td>
 	                	<td>
 	                		<input type="text" name="" class="form-control codeFT{!! $key !!}" value="{!! $res['codeFT'] !!}" @if($role != 3) disabled @endif>
@@ -614,7 +614,7 @@
 	                		<label class="confirms{!! $key !!}"> {!! $res['confirm'] !!}</label>
 	                	</td>
 	                	<td>
-	                		<input type="text" name="" class="form-control notePayment{!! $key !!}" value="{!! $res['notePayment'] !!}" @if($res['codeFT'] != null) disabled @endif>
+	                		<input type="text" name="" class="form-control notePayment{!! $key !!}" value="{!! $res['notePayment'] !!}" @if($res['codeFT'] != null) disabled @endif @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 	                		<label class="notePayments{!! $key !!}"> {!! $res['notePayment'] !!}</label>
 	                	</td>
 	                	<td>
