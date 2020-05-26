@@ -134,6 +134,7 @@ class OrderController extends Controller
     	return response()->json(['httpCode'=>200,'message'=>'Tạo thành công']);
     }
     public function update(Request $request){
+        dd($request->all());
         $role = Auth::user()->role;
         $listCustomer = [];
         $id = $request['id'];

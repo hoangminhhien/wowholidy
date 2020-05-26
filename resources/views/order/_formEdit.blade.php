@@ -626,6 +626,10 @@
 		                		<label class="codeFTs{!! $key !!}"> {!! $res['codeFT'] !!}</label>
 		                	</td>
 		                	<td>
+		                		<select class="browser-default custom-select confirm{!! $key !!}" name="confirm" @if($role != 2) disabled @endif>
+								  	<option @if($res['confirm'] == 0) selected @endif value="0">Không cho nợ</option>
+								  	<option @if($res['confirm'] == 1) selected @endif value="1">Cho nợ</option>
+								</select>
 		                		<label class="confirms{!! $key !!}"> {!! $res['confirm'] !!}</label>
 		                	</td>
 		                	<td>
@@ -1156,11 +1160,12 @@
 	    });
 
 	    $('.updatePayment label').show();
-	    $('.updatePayment input:text, .updatePayment input:file').hide();
+	    $('.updatePayment input:text, .updatePayment input:file, .updatePayment select').hide();
 	    $('.editPayment').click(function(){
 	    	var id = $(this).data('id');
             $('.payment'+id+' label').toggle();
             $('.payment'+id+' input:text').toggle();
+            $('.payment'+id+' select').toggle();
             $('.savePayment'+id).toggle();
 	    });
 	    $('.savePayment').click(function(){
@@ -1172,10 +1177,11 @@
 	    	$('.datePayments'+id).text($('.datePayment'+id).val());
 	    	$('.imagePayments'+id).text($('.imagePayment'+id).val());
 	    	$('.codeFTs'+id).text($('.codeFT'+id).val());
+	    	$('.confirms'+id).text($('.confirm'+id).val());
 	    	$('.valueLable'+id).text($('.valueOther'+id).val());
 	    	$('.notePayments'+id).text($('.notePayment'+id).val());
 	    	$('.payment'+id+' label').toggle();
-            $('.payment'+id+' input:text, .payment'+id+' input:file').toggle();
+            $('.payment'+id+' input:text, .payment'+id+' input:file, .payment'+id+' select').toggle();
 	    });
 
 	    $('body').delegate('.update_order', 'click', function (){
@@ -1229,7 +1235,7 @@
 					datePayment: $(this).find("td:eq(1)").text(),
 					imagePayment: $(this).find("td:eq(2)").text(),
 					codeFT: $(this).find("td:eq(3)").text(),
-					confirm: $(this).find("td:eq(4)").text(),
+					confirm: $(this).find("td:eq(4) label").text(),
 					notePayment: $(this).find("td:eq(5)").text(),
 				});
 	        });
