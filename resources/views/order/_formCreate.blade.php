@@ -137,7 +137,7 @@
 			<div class="col-3">
 				<label>Level đơn hàng</label>
 				<div class="input-group mb-3">
-	  				<select class="browser-default custom-select">
+	  				<select class="browser-default custom-select levelOrder" name="levelOrder">
 					  	<option value="" selected>--Tất cả--</option>
 					  	<option value="L3">L3</option>
 					  	<option value="L4">L4</option>
@@ -418,7 +418,7 @@
 			</div>
 			<div class="row">
 				<div class="col-3">
-					<label>Tổng giá trị đơn hàng</label>
+					<label>Tổng giá trị thanh toán</label>
 					<div>
 						<div class="input-group mb-3">
 						  	<input type="text" class="form-control countPayment" disabled="" value="0">

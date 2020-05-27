@@ -70,6 +70,9 @@
 			font-size: 11px;
 			text-align: center;
 		}
+		.tblTitle{
+			font-weight: bold;
+		}
 	</style>
 </head>
 <body>
@@ -180,7 +183,7 @@
 					</div>
 					<div class="col-3">
 						<div class="input-group mb-3">
-							<button class="btn-search" style="margin-top: 25px;margin-left: 125px; width: 100px">Tìm kiếm</button>
+							<button class="btn btn-warning" style="margin-top: 25px;margin-left: 140px; width: 100px; font-size: 12px">Tìm kiếm</button>
 						</div>
 					</div>
 				</div>
@@ -195,24 +198,26 @@
 			<div class="col-4">
 			</div>
 			<div class="col-4">
-				<div class="row">
-					<div class="col-6">
-						@if($role == 2 || $role == 3)
-						<button type="button" style="margin: 2px; font-size: 12px; margin-left: 70px;" onclick="window.location = '{{route('order.export')}}'" class="btn bg-success btn-sm mr-2"><i class="icon-add-to-list"></i>
-		                Xuất excel
-		            	</button>
-		            	@endif
-					</div>
-					<div class="col-6">
-		            	@if($role == 1 || $role == 2)
-		            	<a href="{!! route('order.create') !!}">
-		                	<button type="button" style="font-size: 12px" class="btn btn-search btn-sm mr-2">
-		                    <i class="fa fa-plus" aria-hidden="true"></i>  Đơn hàng mới
-		                	</button>
-		            	</a>
-		            	@endif
-					</div>
-				</div>
+				<!-- <div class="row"> -->
+					<!-- <div class="col-6"> -->
+						<div style="float: right;">
+							@if($role == 2 || $role == 3)
+							<button type="button" style="font-size: 12px;" onclick="window.location = '{{route('order.export')}}'" class="btn bg-success btn-sm mr-2"><i class="icon-add-to-list"></i>
+			                Xuất excel
+			            	</button>
+			            	@endif
+						<!-- </div> -->
+						<!-- <div class="col-6"> -->
+			            	@if($role == 1 || $role == 2)
+			            	<a href="{!! route('order.create') !!}">
+			                	<button type="button" style="font-size: 12px" class="btn btn-warning btn-sm mr-2">
+			                    <i class="fa fa-plus" aria-hidden="true"></i>  Đơn hàng mới
+			                	</button>
+			            	</a>
+			            	@endif
+						</div>
+					<!-- </div> -->
+				<!-- </div> -->
 			</div>
 		</div>
 		<div class="body">
@@ -223,7 +228,7 @@
                     <th style="width: 15%;">Mã/Loại</th>
                     <th style="width: 10%">Thông tin sale</th>
                     <th>Thông tin người đại diện</th>
-                    <th>Tổng giá trị đơn hàng</th>
+                    <th>Giá trị đơn hàng</th>
                     <th>Đã thanh toán</th>
                     <th style="width: 15%">Vé máy bay</th>
                     <th style="width: 15%">Phòng khách sạn</th>
@@ -237,33 +242,33 @@
                 @foreach($listOrder as $key => $order)
 	            	<tr>
 	            		<td>
-	            			Ngày tạo: {{ date('d/m/Y', strtotime($order->created_at))}}<br>
-	            			Sửa gần nhất: {{date('d/m/Y', strtotime($order->updated_at))}}
+	            			<lable class="tblTitle">Ngày tạo:</lable> {{ date('d/m/Y', strtotime($order->created_at))}}<br>
+	            			<lable class="tblTitle">Sửa gần nhất:</lable> {{date('d/m/Y', strtotime($order->updated_at))}}
 	            		</td>
 	            		<td>
-	            			Mã contact:
+	            			<lable class="tblTitle">Mã contact:</lable>
 	            				{!! $order->contactCode !!}<br>
-	            			Mã combo: 
+	            			<lable class="tblTitle">Mã combo: </lable>
 	            			{!! $order->codeCombo !!}<br>
-	            			Loại combo:
+	            			<lable class="tblTitle">Loại combo:</lable>
 	            				{!! $order->typeCombo !!}<br>
-	            			Level:
+	            			<lable class="tblTitle">Level:</lable>
 	            				 {!! $order->levelOrder !!}<br>
-	            			CTKM: 
+	            			<lable class="tblTitle">CTKM: </lable>
 	            				{!! $order->ctkm !!}<br>
 	            		</td>
 	            		<td>
-	            			Sale:
+	            			<lable class="tblTitle">Sale:</lable>
 	            				{!! $order->nameSaler !!}<br>
-	            			Team:
+	            			<lable class="tblTitle">Team:</lable>
 	            				{!! $order->teamSaler !!}<br>
-	            			Loại khách hàng:
+	            			<lable class="tblTitle">Loại khách hàng:</lable>
 	            				{!! $order->typeCustomer !!}
 	            		</td>
 	            		<td>
 	            			{!! $order->nameCustomer !!}<br>
-	            			SĐT: {!! $order->phoneCustomer !!}<br>
-	            			Email: {!! $order->mailCustomer !!}<br>
+	            			<lable class="tblTitle">SĐT: </lable>{!! $order->phoneCustomer !!}<br>
+	            			<lable class="tblTitle">Email: </lable>{!! $order->mailCustomer !!}<br>
 	            		</td>
 	            		<td>
 	            			<div class="common-currency">
@@ -285,16 +290,16 @@
 	            			</div>
 	            		</td>
 	            		<td>
-	            			Mã:  @if($order->airLine != null)
+	            			<lable class="tblTitle">Mã: </lable>@if($order->airLine != null)
 	            				{!! $order->airLine['airCode'] !!}
 	            			@endif<br>
-	            			Ngày đi: @if($order->airLine != null)
+	            			<lable class="tblTitle">Ngày đi: </lable>@if($order->airLine != null)
 	            			{{ date('d/m/Y' , strtotime($order->airLine['fromDate']))}}
 	            			@endif<br>
-	            			Ngày về: @if($order->airLine != null)
+	            			<lable class="tblTitle">Ngày về:</lable> @if($order->airLine != null)
 	            			{{ date('d/m/Y' , strtotime($order->airLine['toDate']))}}
 	            			@endif<br>
-	            			Tổng tiền: @if($order->airLine != null)
+	            			<lable class="tblTitle"> Tổng tiền:</lable> @if($order->airLine != null)
 	            			<label class="common-currency">
 	            				{!! $order->airLine['airValue'] !!}
 	            			</label>
@@ -303,10 +308,10 @@
 	            		<td>
 	            			@if($order->hotel != null)
 	            				@foreach($order->hotel as $hotel)
-	            				Tên khách sạn : {!!  $hotel['name'] !!}<br>
-	            				Check in: {!!  $order['checkin'] !!}<br>
-	            				Check out: {!!  $order['checkout'] !!}<br>
-	            				Tổng tiền : 
+	            				<lable class="tblTitle">Tên khách sạn :</lable> {!!  $hotel['name'] !!}<br>
+	            				<lable class="tblTitle">Check in: </lable>{!!  $order['checkin'] !!}<br>
+	            				<lable class="tblTitle">Check out: </lable>{!!  $order['checkout'] !!}<br>
+	            				<lable class="tblTitle">Tổng tiền : </lable>
 	            				<lable class="common-currency">
 	            				{!!  $hotel['value'] !!}<br>
 	            				</lable>
@@ -316,8 +321,8 @@
 	            		<td>
 	            			@if($order->other != null)
 	            				@foreach($order->other as $other)
-	            				Dịch vụ: {!!  $other['nameOther'] !!}<br>
-	            				Tổng tiền: 
+	            				<lable class="tblTitle">Dịch vụ: </lable>{!!  $other['nameOther'] !!}<br>
+	            				<lable class="tblTitle">Tổng tiền: </lable>
 	            				<lable class="common-currency">
 	            				{!!  $other['valueOther'] !!}<br>
 	            				</lable>
