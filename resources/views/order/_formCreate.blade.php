@@ -509,6 +509,7 @@
 	        'alias': 'decimal',
 	        'autoGroup': true,
 	        'removeMaskOnSubmit': true,
+	        'placeholder': "0",
 	        'autoUnmask': true,
 	        'allowMinus': false
 	    });
