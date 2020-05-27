@@ -129,6 +129,9 @@
 							  	<option value="L3">L3</option>
 							  	<option value="L4">L4</option>
 							  	<option value="L5">L5</option>
+							  	<option value="L3B">L3B</option>
+							  	<option value="L4B">L4B</option>
+							  	<option value="L5B">L5B</option>
 							</select>
 						</div>
 					</div>
@@ -186,7 +189,7 @@
 		<div class="row">
 			<div class="col-4">
 				<h5>Danh sách</h5>
-				<small>Kết quả tìm kiếm được: {!! $count !!}</small>
+				<div>Kết quả tìm kiếm được: {!! $count !!}</div>
 				<br>
 			</div>
 			<div class="col-4">
@@ -323,14 +326,28 @@
 	            		</td>
 	            		<td>
 	            			<!-- Sales  -->
-	            			@if($order->statusAir == 1 && $order->statusHotel == 1 && $order->statusOther == 1)
-	            			<span class="badge badge-success">Sales</span>
-	            			@elseif($order->airlineStatus == 0 && $order->hotelStatus == 0 && $order->otherStatus == 0)
-	            			<span class="badge badge-secondary">Sales</span>
-	            			@else
-	            			<span class="badge badge-danger">Sales</span>
+	            			@if($order->payment != null)
+	            				@php
+	            					$check = 0;
+	            				@endphp
+	            				@foreach($order->payment as $key => $payments)
+		            				@if($payments['confirm'] != 0)
+			            				@php
+			            					$check ++;
+			            				@endphp
+		            				@endif
+		            			@endforeach
+		            			@if($order->statusAir == 0 || $order->statusHotel == 0 || $order->statusOther == 0 || $check > 0)
+		            			<span class="badge badge-danger">Sales</span>
+		            			@elseif($order->statusAir == 2 || $order->statusHotel == 2 || $order->statusOther == 2)
+		            			<span class="badge badge-success">Sales</span>
+		            			@else
+		            			<span class="badge badge-secondary">Sales</span>
+		            			@endif
+		            			<br>
+		            		@else
+		            			<span class="badge badge-secondary">Sales</span>
 	            			@endif
-	            			<br>
 	            			@if($order->payment == null)
 	            			<span class="badge badge-secondary">Kế toán</span>
 	            			@else
@@ -357,52 +374,128 @@
 		            			@endif
 	            			@endif
 	            			<br>
-	            			@if($order->statusAir == 1 && $order->airlineStatus == 1)
-	            				<span class="badge badge-success">VH vé</span>
-	            			@elseif($order->statusAir == 0 && $order->airlineStatus == 1)
-	            				<span class="badge badge-danger">VH vé</span>
-	            			@elseif($order->airlineStatus == 0 && $order->statusAir == 0)
-	            				<span class="badge badge-secondary">VH vé</span>
-	            			@endif
-	            			<br>
-	            			@if($order->statusHotel == 1 && $order->hotelStatus == 1)
-	            				<span class="badge badge-success">VH phòng</span>
-	            			@elseif($order->statusHotel == 0 && $order->hotelStatus == 1)
-	            				<span class="badge badge-danger">VH phòng</span>
-	            			@elseif($order->statusHotel == 0 && $order->hotelStatus == 0)
-	            				<span class="badge badge-secondary">VH phòng</span>
-	            			@endif
-	            			<br>
-	            			@if($order->statusOther == 1 && $order->otherStatus == 1)
-	            				<span class="badge badge-success">VH DV khác</span>
-	            			@elseif($order->statusOther == 0 && $order->otherStatus == 1)
-	            				<span class="badge badge-danger">VH DV khác</span>
-	            			@elseif($order->statusOther == 0 && $order->otherStatus == 0)
-	            				<span class="badge badge-secondary">VH DV khác</span>
-	            			@endif
+	            			@if($order->payment != null)
+	            				@php
+	            					$check = 0;
+	            					$count = 0;
+	            				@endphp
+		            			@foreach($order->payment as $key => $payments)
+		            				@php
+		            					$count += $payments['valuePayment'];
+		            				@endphp
+		            				@if($payments['codeFT'] != null)
+			            				@php
+			            					$check += $payments['valuePayment'];
+			            				@endphp
+		            				@endif
+		            			@endforeach
+		            			@if($check == $count && $order->airlineStatus == 1 && $order->statusAir != 2)
+		            				<span class="badge badge-danger">VH vé</span>
+		            			@elseif($order->statusAir == 2 )
+		            				<span class="badge badge-success">VH vé</span>
+		            			@elseif($check < $count && $order->airlineStatus == 0)
+		            				<span class="badge badge-secondary">VH vé</span>
+		            			@else
+		            				<span class="badge badge-secondary">VH vé</span>
+		            			@endif
+		            		@elseif($order->airLine == null)
+		            			<span class="badge badge-secondary">VH vé</span>
+		            		@elseif($order->payment == null)
+		            			<span class="badge badge-secondary">VH vé</span>
+		            		@endif
+		            		<br>
+	            			@if($order->payment != null)
+	            				@php
+	            					$check = 0;
+	            					$count = 0;
+	            				@endphp
+		            			@foreach($order->payment as $key => $payments)
+		            				@php
+		            					$count += $payments['valuePayment'];
+		            				@endphp
+		            				@if($payments['codeFT'] != null)
+			            				@php
+			            					$check += $payments['valuePayment'];
+			            				@endphp
+		            				@endif
+		            			@endforeach
+		            			@if($check == $count && $order->hotelStatus == 1 && $order->statusHotel != 2)
+		            				<span class="badge badge-danger">VH phòng</span>
+		            			@elseif($order->statusHotel == 2 )
+		            				<span class="badge badge-success">VH phòng</span>
+		            			@elseif($check < $count && $order->hotelStatus == 0)
+		            				<span class="badge badge-secondary">VH phòng</span>
+		            			@else
+		            				<span class="badge badge-secondary">VH phòng</span>
+		            			@endif
+		            		@elseif($order->hotel == null)
+		            			<span class="badge badge-secondary">VH phòng</span>
+		            		@elseif($order->payment == null)
+		            			<span class="badge badge-secondary">VH phòng</span>
+		            		@endif
+		            		<br>
+	            			@if($order->payment != null)
+	            				@php
+	            					$check = 0;
+	            					$count = 0;
+	            				@endphp
+		            			@foreach($order->payment as $key => $payments)
+		            				@php
+		            					$count += $payments['valuePayment'];
+		            				@endphp
+		            				@if($payments['codeFT'] != null)
+			            				@php
+			            					$check += $payments['valuePayment'];
+			            				@endphp
+		            				@endif
+		            			@endforeach
+		            			@if($check == $count && $order->otherStatus == 1 && $order->statusOther != 2)
+		            				<span class="badge badge-danger">VH DV khác</span>
+		            			@elseif($order->statusOther == 2 )
+		            				<span class="badge badge-success">VH DV khác</span>
+		            			@elseif($check < $count && $order->otherStatus == 0)
+		            				<span class="badge badge-secondary">VH DV khác</span>
+		            			@else
+		            				<span class="badge badge-secondary">VH DV khác</span>
+		            			@endif
+		            		@elseif($order->other == null)
+		            			<span class="badge badge-secondary">VH DV khác</span>
+		            		@elseif($order->payment == null)
+		            			<span class="badge badge-secondary">VH DV khác</span>
+		            		@endif
+		            		<br>
 	            		</td>
 	            		<td>
-	            			@php
-            					$check = 0;
-            					$count = 0;
-            				@endphp
-	            			@foreach($order->payment as $key => $payments)
-	            				@php
-	            					$count += $payments['valuePayment'];
+	            			@if($order->payment != null)
+		            			@php
+	            					$check = 0;
+	            					$count = 0;
 	            				@endphp
-	            				@if($payments['codeFT'] != null)
+		            			@foreach($order->payment as $key => $payments)
 		            				@php
-		            					$check += $payments['valuePayment'];
+		            					$count += $payments['valuePayment'];
 		            				@endphp
-	            				@endif
-	            			@endforeach
-	            			@if($order->airLine == null && $order->hotel == null && $order->other == null && $order->payment)
-	            				Không xử lý
-	            			@elseif($check < $count || ($order->airlineStatus == 1 && $order->statusAir == 0) || ($order->hotelStatus == 1 && $order->statusHotel == 0) || ($order->otherStatus == 1 && $order->statusOther == 0))
-	            				Đang xử lý
-	            			@else
-	            				Đã xử lý
+		            				@if($payments['codeFT'] != null)
+			            				@php
+			            					$check += $payments['valuePayment'];
+			            				@endphp
+		            				@endif
+		            			@endforeach
+		            			@if($check < $count || $order->statusAir != 2 || $order->statusHotel != 2 || $order->statusOther != 2)
+		            				Đang xử lý
+		            			@elseif($order->statusAir == 2 && $order->statusHotel == 2 && $order->statusOther == 2)
+		            				Đã xử lý
+		            			@endif
+		            		@else
+		            			@if($order->statusAir == 0 && $order->statusHotel == 0 && $order->statusOther == 0)
+		            				Không xử lý
+		            			@elseif($order->statusAir == 1 || $order->statusHotel == 1 || $order->statusOther == 1)
+		            				Đang xử lý
+		            			@elseif($order->statusAir == 2 && $order->statusHotel == 2 && $order->statusOther == 2)
+		            				Đã xử lý
+		            			@endif
 	            			@endif
+
 	            		</td>
 	            		<td>
 	            			<a href="{!! route('order.edit', $order->id) !!}">

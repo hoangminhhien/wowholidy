@@ -83,8 +83,7 @@ class OrderController extends Controller
                 $coutPayment += (int)$payment['valuePayment'];
             }
         }
-        $response->airLine != null ? $quantity = $response->airLine['airQuantity'] : $quantity = 0;
-        $profit = (int)$quantity * 15000;
+        $profit = 1 * 15000;
         // dd($margin, $countOther);
         return view('order._formEdit', compact('response', 'couthHotel', 'countOther', 'coutPayment', 'countSurcharge','profit' , 'role', 'margin'));
     }
@@ -134,7 +133,6 @@ class OrderController extends Controller
     	return response()->json(['httpCode'=>200,'message'=>'Tạo thành công']);
     }
     public function update(Request $request){
-        dd($request->all());
         $role = Auth::user()->role;
         $listCustomer = [];
         $id = $request['id'];

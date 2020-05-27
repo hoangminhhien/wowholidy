@@ -128,7 +128,7 @@
 			</div>
 			<div class="col-3">
 				<label>Quốc tịch <strong>*</strong></label>
-				<input type="text" name="country" class="form-control country">
+				<input type="text" name="country" class="form-control country" value="Việt Nam">
 			</div>
 			<div class="col-3">
 				<label>Mã combo</label>
@@ -136,7 +136,17 @@
 			</div>
 			<div class="col-3">
 				<label>Level đơn hàng</label>
-				<input type="text" name="levelOrder" class="form-control levelOrder">
+				<div class="input-group mb-3">
+	  				<select class="browser-default custom-select">
+					  	<option value="" selected>--Tất cả--</option>
+					  	<option value="L3">L3</option>
+					  	<option value="L4">L4</option>
+					  	<option value="L5">L5</option>
+					  	<option value="L3B">L3B</option>
+					  	<option value="L4B">L4B</option>
+					  	<option value="L5B">L5B</option>
+					</select>
+				</div>
 			</div>
 		</div>
 		<hr>
@@ -160,13 +170,6 @@
                 </div>
 			</div>
 			<div class="col-3">
-				<label>Số lượng vé máy bay</label>
-				<input type="text" type="input" name="airQuantity" class="form-control common-numeric airQuantity">
-                <div class="form-control-feedback">
-                    <i class="icon-search4 font-size-base text-muted"></i>
-                </div>
-			</div>
-			<div class="col-3">
 				<label>Tiền vé máy bay</label>
 				<div class="input-group mb-3">
 	  				<input type="text" name="airValue" class="form-control common-currency airValue">
@@ -175,8 +178,6 @@
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="row form-group">
 			<div class="col-3">
 				<label>Ngày bay đi</label>
 				<div class="input-group mb-3">
@@ -644,8 +645,9 @@
 	    	var numberHotel = $('.numberHotel').val();
 	    	var valueHotel = $('.valueHotel').val();
 	    	var typeSurcharge = $('.typeSurcharge').val();
-	    	var amountHotel = $('.amountHotel').val();
-	    	var surcharge = $('.surcharge').val();
+	    	var amountHotel = ($('.amountHotel').val() != 0) ? $('.amountHotel').val() : 0;
+	    	var surcharge = ($('.surcharge').val() != 0) ? $('.surcharge').val() : 0;
+	    	console.log(parseInt(valueHotel), parseInt(numberHotel), parseInt(amountHotel), parseInt(surcharge));
 	    	$('.totalValueHotel').text(parseInt($('.totalValueHotel').text()) + parseInt(valueHotel) * parseInt(numberHotel) + parseInt(amountHotel) * parseInt(surcharge));
 	    	$('#tblhotel tbody').append(`<tr class='data'>
 	    		<td>`+dateHotel+`</td><td>`+nameHotel+`</td><td>`+levelHotel+`</td><td>`+bedHotel+`</td><td>`+comboHotel+`</td><td>`+numberHotel+`</td><td>`+valueHotel+`</td><td>`+typeSurcharge+`</td><td>`+amountHotel+`</td><td>`+surcharge+`</td><td><i class="remove fa fa-times removeRow`+index+`" aria-hidden="true" style="cursor: pointer; color: orange"></i></td>
@@ -840,7 +842,6 @@
 	    	var url = '{!! route('order.store') !!}';
 	    	var airLine = {
 	    		'airCode' : $('.airCode').val(),
-	    		'airQuantity' : $('.airQuantity').val(),
     			'airValue' : $('.airValue').val(),
     			'fromDate' : $('.fromDate').val(),
     			'toDate' : $('.toDate').val()

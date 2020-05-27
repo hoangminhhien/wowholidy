@@ -165,7 +165,7 @@
 			</div>
 			<div class="col-3">
 				<label>Số lượng vé máy bay</label>
-				<input type="text" name="airQuantity" class="form-control common-numeric airQuantity" value="{!! $response->airLine != null ? $response->airLine['airQuantity'] : '' !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
+				<input type="text" name="airQuantity" class="form-control common-numeric airQuantity" value="1" disabled >
                 <div class="form-control-feedback">
                     <i class="icon-search4 font-size-base text-muted"></i>
                 </div>
@@ -204,9 +204,10 @@
 			<div class="col-3" @if($role != 4) style="display: none" @endif>
 				<label>Trạng thái</label>
 				<div class="input-group mb-3">
-	  				<select class="browser-default custom-select statusAir" name="statusAir" @if($response->airlineStatus == 0) disabled="true"   @endif>
-					  	<option {!! $response['statusAir'] == 0  ? 'selected' : '' !!} value="0">Chưa xử lý</option>
-					  	<option {!! $response['statusAir'] == 1  ? 'selected' : '' !!} value="1">Đã xử lý</option>
+	  				<select class="browser-default custom-select statusAir" name="statusAir">
+	  					<option {!! ($response['statusAir'] == 0 && $response['airlineStatus'] == 0) ? 'selected' : '' !!} value="0">Không xử lý</option>
+					  	<option {!! ($response['statusAir'] == 1 && $response['airlineStatus'] == 1)  ? 'selected' : '' !!} value="1">Đang xử lý</option>
+					  	<option {!! $response['statusAir'] == 2  ? 'selected' : '' !!} value="2">Đã xử lý</option>
 					</select>
 				</div>
 			</div>
@@ -301,45 +302,45 @@
                     <tbody>
                 	<tr>
                 		<td>
-                			<input type="text" name="dateHotel" class="form-control dateHotel date">
+                			<input type="text" name="dateHotel" class="form-control dateHotel date" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
                 		</td>
                 		<td>
                 			<!-- <select name="nameHotel" class="browser-default custom-select form-control">
 							  	<option selected value="Vinmart">Vinmart</option>
 							</select> -->
-							<input type="text" name="nameHotel" class="form-control nameHotel">
+							<input type="text" name="nameHotel" class="form-control nameHotel" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
                 		</td>
                 		<td>
                 			<!-- <select name="levelHotel" class="browser-default custom-select form-control">
 							  	<option selected value="5 sao">5 sao</option>
 							</select> -->
-							<input type="text" name="levelHotel" class="form-control levelHotel">
+							<input type="text" name="levelHotel" class="form-control levelHotel" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
                 		</td>
                 		<td>
                 			<!-- <select name="bedHotel" class="browser-default custom-select form-control">
 							  	<option selected value="Double">Double</option>
 							</select> -->
-							<input type="text" name="bedHotel" class="form-control bedHotel">
+							<input type="text" name="bedHotel" class="form-control bedHotel" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
                 		</td>
                 		<td>
                 			<!-- <select name="comboHotel" class="browser-default custom-select">
 							  	<option selected value="BB: ăn sáng">BB: ăn sáng</option>
 							</select> -->
-							<input type="text" name="comboHotel" class="form-control comboHotel">
+							<input type="text" name="comboHotel" class="form-control comboHotel" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
                 		</td>
                 		<td>
-                			<input type="text" name="numberHotel" class="form-control numberHotel common-numeric">
+                			<input type="text" name="numberHotel" class="form-control numberHotel common-numeric" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
                 		</td>
                 		<td>
-                			<input type="text" name="valueHotel" class="form-control valueHotel common-currency">
+                			<input type="text" name="valueHotel" class="form-control valueHotel common-currency" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
                 		</td>
                 		<td>
-                			<input type="text" name="typeSurcharge" class="form-control typeSurcharge">
+                			<input type="text" name="typeSurcharge" class="form-control typeSurcharge" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
                 		</td>
                 		<td>
-                			<input type="text" name="amountHotel" class="form-control amountHotel common-numeric">
+                			<input type="text" name="amountHotel" class="form-control amountHotel common-numeric" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
                 		</td>
-                		<td><input type="text" name="surcharge" placeholder="nhập tiền" class="form-control common-currency surcharge"></td>
+                		<td><input type="text" name="surcharge" placeholder="nhập tiền" class="form-control common-currency surcharge" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif></td>
                 		<td></td>
                 	</tr>
                 	@if($response['hotel'] != null)
@@ -415,9 +416,10 @@
 				<div class="col-3">
 					<label>Trạng thái</label>
 					<div class="input-group mb-3">
-		  				<select class="browser-default custom-select statusHotel" name="statusHotel" @if($response->hotelStatus == 0) disabled="true" @endif>
-						  	<option {!! $response['statusHotel'] == 0  ? 'selected' : '' !!} value="0">Chưa xử lý</option>
-						  	<option {!! $response['statusHotel'] == 1  ? 'selected' : '' !!} value="1">Đã xử lý</option>
+		  				<select class="browser-default custom-select statusHotel" name="statusHotel">
+						  	<option {!! ($response['statusHotel'] == 0 && $response['hotelStatus'] == 0) ? 'selected' : '' !!} value="0">Không xử lý</option>
+						  	<option {!! ($response['statusHotel'] == 1 && $response['hotelStatus'] == 1)  ? 'selected' : '' !!} value="1">Đang xử lý</option>
+						  	<option {!! $response['statusHotel'] == 2  ? 'selected' : '' !!} value="2">Đã xử lý</option>
 						</select>
 					</div>
 				</div>
@@ -460,25 +462,25 @@
 	                			<!-- <select class="browser-default custom-select form-control">
 								  	<option selected >Dịch vụ bãi biển</option>
 								</select> -->
-								<input type="text" name="nameOther" class="form-control nameOther">
+								<input type="text" name="nameOther" class="form-control nameOther" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 	                		</td>
 	                		<td>
 	                			<!-- <select class="browser-default custom-select form-control">
 								  	<option selected>Ngắm san hô dưới nước</option>
 								</select> -->
-								<input type="text" name="detailOther" class="form-control detailOther">
+								<input type="text" name="detailOther" class="form-control detailOther" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 	                		</td>
 	                		<td>
-	                			<input type="text" name="amountOther" class="form-control amountOther common-numeric">
+	                			<input type="text" name="amountOther" class="form-control amountOther common-numeric" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 	                		</td>
 	                		<td>
-	                			<input type="text" name="princeOther" class="form-control princeOther common-currency">
+	                			<input type="text" name="princeOther" class="form-control princeOther common-currency" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 	                		</td>
 	                		<td>
 	                			<input type="text" name="valueOther" class="form-control valueOther common-currency" disabled="">
 	                		</td>
 	                		<td>
-	                			<input type="text" name="noteOther" class="form-control noteOther">
+	                			<input type="text" name="noteOther" class="form-control noteOther" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 	                		</td>
 	                		<td></td>
 	                	</tr>
@@ -531,9 +533,10 @@
 				<div class="col-3">
 					<label>Trạng thái</label>
 					<div class="input-group mb-3">
-		  				<select class="browser-default custom-select statusOther" name="statusOther" @if($response->otherStatus == 0) disabled="true" @endif>
-						  	<option {!! $response['statusOther'] == 0  ? 'selected' : '' !!} value="0">Chưa xử lý</option>
-						  	<option {!! $response['statusOther'] == 1  ? 'selected' : '' !!} value="1">Đã xử lý</option>
+		  				<select class="browser-default custom-select statusOther" name="statusOther">
+						  	<option {!! ($response['statusOther'] == 0 && $response['otherStatus'] == 0) ? 'selected' : '' !!} value="0">Không xử lý</option>
+						  	<option {!! ($response['statusOther'] == 1 && $response['otherStatus'] == 1)  ? 'selected' : '' !!} value="1">Đang xử lý</option>
+						  	<option {!! $response['statusOther'] == 2  ? 'selected' : '' !!} value="2">Đã xử lý</option>
 						</select>
 					</div>
 				</div>
@@ -584,26 +587,26 @@
 	                    <tbody>
 	                	<tr>
 	                		<td>
-	                			<input type="text" name="valuePayment" class="form-control valuePayment common-currency">
+	                			<input type="text" name="valuePayment" class="form-control valuePayment common-currency" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 	                		</td>
 	                		<td>
-	                			<input type="text" name="datePayment" class="form-control datePayment date">
+	                			<input type="text" name="datePayment" class="form-control datePayment date" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 	                		</td>
 	                		<td>
-	                			<input type="file" name="imagePayment" class="form-control imagePayment">
+	                			<input type="file" name="imagePayment" class="form-control imagePayment" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 	                		</td>
 	                		<td>
-	                			<input type="text" name="codeFT" class="form-control codeFT" @if($role != 3) disabled @endif>
+	                			<input type="text" name="codeFT" class="form-control codeFT" @if($role != 3) disabled @endif @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 	                		</td>
 	                		<td>
-	                			<select class="browser-default custom-select confirm" name="confirm" @if($role != 2) disabled @endif>
+	                			<select class="browser-default custom-select confirm" name="confirm" @if($role != 2) disabled @endif @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 								  	<option value="" selected>--Lựa chọn--</option>
 								  	<option value="0">Chưa xác nhận</option>
 								  	<option value="1">Đã xác nhận</option>
 								</select>
 	                		</td>
 	                		<td>
-	                			<input type="text" name="notePayment" class="form-control notePayment">
+	                			<input type="text" name="notePayment" class="form-control notePayment" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 	                		</td>
 	                	</tr>
 	                	@if($response['payment'] != null)
@@ -1193,7 +1196,6 @@
 	    	var url = '{!! route('order.update') !!}';
 	    	var airLine = {
 	    		'airCode' : $('.airCode').val(),
-	    		'airQuantity' : $('.airQuantity').val(),
     			'airValue' : $('.airValue').val(),
     			'fromDate' : $('.fromDate').val(),
     			'toDate' : $('.toDate').val()
