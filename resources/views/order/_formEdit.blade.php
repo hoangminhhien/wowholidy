@@ -221,7 +221,23 @@
 			<div class="col-3" @if($role != 4) style="display: none" @endif>
 				<label>Ghi chú vận hành</label>
 				<div class="input-group mb-3">
-	  				<input type="text" name="noteAdminAir" class="form-control noteAdminHotel">
+					<textarea class="form-control rounded-0 noteAdminAir" name="noteAdminAir" rows="2"></textarea>
+				</div>
+			</div>
+		</div>
+		<div class="groupService">
+			<div class="row">
+				<div class="col-3" @if($role != 4) style="display: none" @endif>
+					<label>Loại dịch vụ  <i class="fa fa-plus-circle addService" aria-hidden="true" style="color: blue; cursor: pointer;"></i></label>
+					<div class="input-group mb-3">
+		  				<input type="text" name="noteAdminAir" class="form-control">
+					</div>
+				</div>
+				<div class="col-3" @if($role != 4) style="display: none" @endif>
+					<label>Chi phí dịch vụ</label>
+					<div class="input-group mb-3">
+		  				<input type="text" name="noteAdminAir" class="form-control">
+					</div>
 				</div>
 			</div>
 		</div>
@@ -415,11 +431,17 @@
 			</div>
 			<div class="row">
 				<div class="col-12">
-	                <label>Ghi chú</label>
-	                <input type="text" name="noteHotel" class="form-control">
+	                <label>Ghi chú của saler</label>
+	                <input type="text" name="noteHotelSale" class="form-control noteHotelSale">
 				</div>
 			</div>
 			<div class="row" @if($role != 5) style="display: none" @endif>
+				<div class="col-3">
+					<label>Code phòng</label>
+					<div class="input-group mb-3">
+		  				<input type="text" name="codeHotel" class="form-control codeHotel">
+					</div>
+				</div>
 				<div class="col-3">
 					<label>Trạng thái</label>
 					<div class="input-group mb-3">
@@ -536,6 +558,12 @@
 					<div class="">Tổng giá trị: <label class="totalValueOther" style="font-weight: bold;">{!! $countOther !!}</label> VNĐ</div>
 				</div>
 			</div>
+			<div class="row">
+				<div class="col-12">
+	                <label>Ghi chú của saler</label>
+	                <input type="text" name="noteOtherSale" class="form-control noteOtherSale">
+				</div>
+			</div>
 			<div class="row" @if($role != 6) style="display: none" @endif>
 				<div class="col-3">
 					<label>Trạng thái</label>
@@ -550,7 +578,7 @@
 				<div class="col-3">
 					<label>Ghi chú vận hành</label>
 					<div class="input-group mb-3">
-		  				<input type="text" name="noteAdminOther" class="form-control noteAdminHotel">
+		  				<input type="text" name="noteAdminOther" class="form-control noteAdminOther">
 					</div>
 				</div>
 			</div>
@@ -1208,6 +1236,16 @@
     			'fromDate' : $('.fromDate').val(),
     			'toDate' : $('.toDate').val()
 	    	};
+	    	var serviceAlir = [];
+			var $service = $('.groupService .row');
+			console.log($service);
+			$service.each(function(){
+				serviceAlir.push({
+					name: $(this).find("input:eq(0)").val(),
+					value: $(this).find("input:eq(1)").val(),
+				});
+			});
+			console.log(serviceAlir);
 	    	var hotel = [];
 	    	var $hotel = $('#tblhotel .data');
 	    	$hotel.each(function(){
@@ -1334,7 +1372,14 @@
 				    adult: $('.adult').val(),
 				    children: $('.children').val(),
 				    baby: $('.baby').val(),
-				    checkin_out: $('.dateCheck').val()
+				    checkin_out: $('.dateCheck').val(),
+				    service: serviceAlir,
+				    noteAdminAir: $('.noteAdminAir').val(),
+				    noteHotelSale: $('.noteHotelSale').val(),
+				    codeHotel: $('.codeHotel').val(),
+				    noteAdminHotel: $('.noteAdminHotel').val(),
+				    noteOtherSale: $('.noteOtherSale').val(),
+				    noteAdminOther: $('.noteAdminOther').val()
 		        },
 	        }).done(function(res){
 	        	if(res.httpCode == 200){
@@ -1397,5 +1442,21 @@
 		$('.countNhap').val(parseInt($('.airNhap').val()) + parseInt($('.marginHotel').val()) + parseInt($('.marginOther').val()));
 		$('.countBan').val(parseInt($('.airBan').val()) + parseInt($('.cin').val()) + parseInt(cost));
 		$('.countProfit').val(parseInt($('.countBan').val()) - parseInt($('.countNhap').val()))
+	});
+	$('body').delegate('.addService', 'click', function (){
+		$('.groupService').append(`
+			<div class="row">
+				<div class="col-3" @if($role != 4) style="display: none" @endif>
+					<div class="input-group mb-3">
+		  				<input type="text" name="" class="form-control">
+					</div>
+				</div>
+				<div class="col-3" @if($role != 4) style="display: none" @endif>
+					<div class="input-group mb-3">
+		  				<input type="text" name="" class="form-control">
+					</div>
+				</div>
+			</div>
+		`);
 	});
 </script>
