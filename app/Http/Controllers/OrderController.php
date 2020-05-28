@@ -133,7 +133,7 @@ class OrderController extends Controller
     	return response()->json(['httpCode'=>200,'message'=>'Tạo thành công']);
     }
     public function update(Request $request){
-        dd($request->all());
+        // dd($request->all());
         $role = Auth::user()->role;
         $listCustomer = [];
         $id = $request['id'];
@@ -204,7 +204,14 @@ class OrderController extends Controller
                 'children'=> $request['children'],
                 'baby'=> $request['baby'],
                 'checkin'=> $checkin,
-                'checkout' => $checkout
+                'checkout' => $checkout,
+                'service'=> $request['service'],
+                'noteAdminAir'=> $request['noteAdminAir'],
+                'codeHotel'=> $request['codeHotel'],
+                'noteHotelSale' => $request['noteHotelSale'],
+                'noteAdminHotel' => $request['noteAdminHotel'],
+                'noteOtherSale' => $request['noteOtherSale'],
+                'noteAdminOther' => $request['noteAdminOther'],
             ]);
             // all good
             DB::commit();

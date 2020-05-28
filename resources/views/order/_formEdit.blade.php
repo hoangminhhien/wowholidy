@@ -208,38 +208,46 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-3" @if($role != 4) style="display: none" @endif>
+			<div class="col-3">
 				<label>Trạng thái</label>
 				<div class="input-group mb-3">
-	  				<select class="browser-default custom-select statusAir" name="statusAir">
+	  				<select class="browser-default custom-select statusAir" name="statusAir" @if($role != 4) disabled="" @endif>
 	  					<option {!! ($response['statusAir'] == 0 && $response['airlineStatus'] == 0) ? 'selected' : '' !!} value="0">Không xử lý</option>
 					  	<option {!! ($response['statusAir'] == 1 && $response['airlineStatus'] == 1)  ? 'selected' : '' !!} value="1">Đang xử lý</option>
 					  	<option {!! $response['statusAir'] == 2  ? 'selected' : '' !!} value="2">Đã xử lý</option>
 					</select>
 				</div>
 			</div>
-			<div class="col-3" @if($role != 4) style="display: none" @endif>
+			<div class="col-3">
 				<label>Ghi chú vận hành</label>
 				<div class="input-group mb-3">
-					<textarea class="form-control rounded-0 noteAdminAir" name="noteAdminAir" rows="2"></textarea>
+					<textarea class="form-control rounded-0 noteAdminAir" style="font-size: 12px" name="noteAdminAir" rows="2" @if($role != 4) disabled="" @endif>{!! ($response['noteAdminAir'] != null) ? $response['noteAdminAir'] : '' !!}</textarea>
 				</div>
 			</div>
 		</div>
 		<div class="groupService">
 			<div class="row">
-				<div class="col-3" @if($role != 4) style="display: none" @endif>
-					<label>Loại dịch vụ  <i class="fa fa-plus-circle addService" aria-hidden="true" style="color: blue; cursor: pointer;"></i></label>
-					<div class="input-group mb-3">
-		  				<input type="text" name="noteAdminAir" class="form-control">
-					</div>
+				<div class="col-3">
+					<label>Loại dịch vụ  <i class="fa fa-plus-circle addService" aria-hidden="true" style="color: blue; cursor: pointer;" @if($role != 4) disabled="" @endif></i></label>
 				</div>
-				<div class="col-3" @if($role != 4) style="display: none" @endif>
+				<div class="col-3">
 					<label>Chi phí dịch vụ</label>
+				</div>
+			</div>
+			@if($response['service'] != null)
+			@foreach($response['service'] as $service)
+			<div class="row">
+				<div class="col-3 input-group mb-3">
+	  				<input type="text" name="noteAdminAir" class="form-control" value="{!! $service['name'] !!}" @if($role != 4) disabled="" @endif>
+				</div>
+				<div class="col-3">
 					<div class="input-group mb-3">
-		  				<input type="text" name="noteAdminAir" class="form-control">
+		  				<input type="text" name="noteAdminAir" class="form-control" value="{!! $service['value'] !!}" @if($role != 4) disabled="" @endif>
 					</div>
 				</div>
 			</div>
+			@endforeach
+			@endif
 		</div>
 		<hr>
 			<div class="row">
@@ -432,20 +440,20 @@
 			<div class="row">
 				<div class="col-12">
 	                <label>Ghi chú của saler</label>
-	                <input type="text" name="noteHotelSale" class="form-control noteHotelSale">
+	                <input type="text" name="noteHotelSale" class="form-control noteHotelSale" value="{!! ($response['noteHotelSale'] != null) ? $response['noteHotelSale'] : '' !!}" @if($role != 1) disabled="" @endif>
 				</div>
 			</div>
-			<div class="row" @if($role != 5) style="display: none" @endif>
+			<div class="row">
 				<div class="col-3">
 					<label>Code phòng</label>
 					<div class="input-group mb-3">
-		  				<input type="text" name="codeHotel" class="form-control codeHotel">
+		  				<input type="text" name="codeHotel" class="form-control codeHotel" value="{!! ($response['codeHotel'] != null) ? $response['codeHotel'] : '' !!}" @if($role != 5) disabled="" @endif>
 					</div>
 				</div>
 				<div class="col-3">
 					<label>Trạng thái</label>
 					<div class="input-group mb-3">
-		  				<select class="browser-default custom-select statusHotel" name="statusHotel">
+		  				<select class="browser-default custom-select statusHotel" name="statusHotel" @if($role != 5) disabled="" @endif>
 						  	<option {!! ($response['statusHotel'] == 0 && $response['hotelStatus'] == 0) ? 'selected' : '' !!} value="0">Không xử lý</option>
 						  	<option {!! ($response['statusHotel'] == 1 && $response['hotelStatus'] == 1)  ? 'selected' : '' !!} value="1">Đang xử lý</option>
 						  	<option {!! $response['statusHotel'] == 2  ? 'selected' : '' !!} value="2">Đã xử lý</option>
@@ -455,7 +463,7 @@
 				<div class="col-3">
 					<label>Ghi chú vận hành</label>
 					<div class="input-group mb-3">
-		  				<input type="text" name="noteAdminHotel" class="form-control noteAdminHotel">
+		  				<input type="text" name="noteAdminHotel" class="form-control noteAdminHotel" value="{!! ($response['noteAdminHotel'] != null) ? $response['noteAdminHotel'] : '' !!}" @if($role != 5) disabled="" @endif>
 					</div>
 				</div>
 			</div>
@@ -561,14 +569,14 @@
 			<div class="row">
 				<div class="col-12">
 	                <label>Ghi chú của saler</label>
-	                <input type="text" name="noteOtherSale" class="form-control noteOtherSale">
+	                <input type="text" name="noteOtherSale" class="form-control noteOtherSale" value="{!! ($response['noteOtherSale'] != null) ? $response['noteOtherSale'] : '' !!}" @if($role != 1) disabled="" @endif>
 				</div>
 			</div>
-			<div class="row" @if($role != 6) style="display: none" @endif>
+			<div class="row">
 				<div class="col-3">
 					<label>Trạng thái</label>
 					<div class="input-group mb-3">
-		  				<select class="browser-default custom-select statusOther" name="statusOther">
+		  				<select class="browser-default custom-select statusOther" name="statusOther" @if($role != 6) disabled="" @endif>
 						  	<option {!! ($response['statusOther'] == 0 && $response['otherStatus'] == 0) ? 'selected' : '' !!} value="0">Không xử lý</option>
 						  	<option {!! ($response['statusOther'] == 1 && $response['otherStatus'] == 1)  ? 'selected' : '' !!} value="1">Đang xử lý</option>
 						  	<option {!! $response['statusOther'] == 2  ? 'selected' : '' !!} value="2">Đã xử lý</option>
@@ -578,7 +586,7 @@
 				<div class="col-3">
 					<label>Ghi chú vận hành</label>
 					<div class="input-group mb-3">
-		  				<input type="text" name="noteAdminOther" class="form-control noteAdminOther">
+		  				<input type="text" name="noteAdminOther" class="form-control noteAdminOther" value="{!! ($response['noteAdminOther'] != null) ? $response['noteAdminOther'] : '' !!}" @if($role != 6) disabled="" @endif>
 					</div>
 				</div>
 			</div>
