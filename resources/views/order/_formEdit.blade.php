@@ -242,7 +242,7 @@
 				</div>
 				<div class="col-3">
 					<div class="input-group mb-3">
-		  				<input type="text" name="noteAdminAir" class="form-control" value="{!! $service['value'] !!}" @if($role != 4) disabled="" @endif>
+		  				<input type="text" name="noteAdminAir" class="form-control common-currency" value="{!! $service['value'] !!}" @if($role != 4) disabled="" @endif>
 					</div>
 				</div>
 			</div>
@@ -317,7 +317,7 @@
 					<table id="tblhotel" class="table table-xs data-table table-bordered">
                     <thead>
                     <tr>
-                        <th width="13%">Ngày<button type="button" class="btn btn-link addHotel"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></th>
+                        <th width="13%">Ngày<button type="button" class="btn btn-link addHotel" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) style="display: none;" @endif><i class="fa fa-plus-circle" aria-hidden="true"></i></button></th>
                         <th width="10%">Tên khách sạn</th>
                         <th width="10%">Hạng phòng</th>
                         <th width="10%">Giường</th>
@@ -335,37 +335,39 @@
 	                	@foreach($response['hotel'] as $key => $res)
 	                	<tr class="hotel updateHotel data">
 	                		<td>
-		                		<input type="text" name="" class="form-control dateHotel date" value="{!! $res['date'] !!}">
+		                		<input type="text" name="" class="form-control dateHotel date" value="{!! $res['date'] !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 		                	</td>
 	                		<td>
-		                		<input type="text" name="" class="form-control nameHotel" value="{!! $res['name'] !!}">
+		                		<input type="text" name="" class="form-control nameHotel" value="{!! $res['name'] !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 		                	</td>
 	                		<td>
-		                		<input type="text" name="" class="form-control levelHotel" value="{!! $res['level'] !!}">
+		                		<input type="text" name="" class="form-control levelHotel" value="{!! $res['level'] !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 		                	</td>
 	                		<td>
-		                		<input type="text" name="" class="form-control bedHotel" value="{!! $res['bed'] !!}">
+		                		<input type="text" name="" class="form-control bedHotel" value="{!! $res['bed'] !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 		                	</td>
 	                		<td>
-		                		<input type="text" name="" class="form-control comboHotel" value="{!! $res['combo'] !!}">
+		                		<input type="text" name="" class="form-control comboHotel" value="{!! $res['combo'] !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 		                	</td>
 	                		<td>
-		                		<input type="text" name="" class="form-control numberHotel common-numeric" value="{!! $res['number'] !!}">
+		                		<input type="text" name="" class="form-control numberHotel common-numeric" value="{!! $res['number'] !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 		                	</td>
 	                		<td>
-		                		<input type="text" name="" class="form-control valueHotel common-currency" value="{!! $res['value'] !!}">
+		                		<input type="text" name="" class="form-control valueHotel common-currency" value="{!! $res['value'] !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 		                	</td>
 	                		<td>
-		                		<input type="text" name="" class="form-control typeSurchargeHotel" value="{!! $res['typeSurcharge'] !!}">
+		                		<input type="text" name="" class="form-control typeSurchargeHotel" value="{!! $res['typeSurcharge'] !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 		                	</td>
 	                		<td>
-		                		<input type="text" name="" class="form-control amountHotel common-numeric" value="{!! $res['amountHotel'] !!}">
+		                		<input type="text" name="" class="form-control amountHotel common-numeric" value="{!! $res['amountHotel'] !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 		                	</td>
 	                		<td>
-		                		<input type="text" name="" class="form-control common-currency surcharge" value="{!! $res['surcharge'] !!}">
+		                		<input type="text" name="" class="form-control common-currency surcharge" value="{!! $res['surcharge'] !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 		                	</td>
 	                		<td>
-	                			<i class="remove fa fa-times removeRow" aria-hidden="true" style="cursor: pointer; color: orange"></i>
+	                			<div @if($role == 3 || $role == 4 || $role == 5 || $role == 6) style="display: none;" @endif>
+	                				<i class="remove fa fa-times removeRow" aria-hidden="true" style="cursor: pointer; color: orange" ></i>
+	                			</div>
 	                		</td>
 	                	</tr>
 	                	@endforeach
@@ -424,7 +426,7 @@
 					<table id="tblOther" class="table table-xs data-table table-bordered">
 	                    <thead>
 	                    <tr>
-	                        <th>Tên dịch vụ <button type="button" class="btn btn-link addOther"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></th>
+	                        <th>Tên dịch vụ <button type="button" class="btn btn-link addOther" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) style="display: none;" @endif><i class="fa fa-plus-circle" aria-hidden="true"></i></button></th>
 	                        <th>Chi tiết dịch vụ</th>
 	                        <th>Số lượng</th>
 	                        <th>Đơn giá</th>
@@ -438,22 +440,22 @@
 	                	@foreach($response['other'] as $key => $res)
                 		<tr class='other{!! $key !!} updateOther data'>
 		                	<td>
-		                		<input type="text" name="" class="form-control nameOther" value="{!! $res['nameOther'] !!}">
+		                		<input type="text" name="" class="form-control nameOther" value="{!! $res['nameOther'] !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 		                	</td>
 		                	<td>
-		                		<input type="text" name="" class="form-control detailOther" value="{!! $res['detailOther'] !!}">
+		                		<input type="text" name="" class="form-control detailOther" value="{!! $res['detailOther'] !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 		                	</td>
 		                	<td>
-		                		<input type="text" name="" class="form-control amountOther common-numeric" value="{!! $res['amountOther'] !!}">
+		                		<input type="text" name="" class="form-control amountOther common-numeric" value="{!! $res['amountOther'] !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 		                	</td>
 		                	<td>
-		                		<input type="text" name="" class="form-control princeOther common-currency" value="{!! $res['princeOther'] !!}">
+		                		<input type="text" name="" class="form-control princeOther common-currency" value="{!! $res['princeOther'] !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 		                		</td>
 		                	<td>
 		                		<input type="text" name="" class="form-control valueOther common-currency" value="{!! $res['valueOther'] !!}" disabled="">
 			                </td>
 		                	<td>
-		                		<input type="text" name="" class="form-control noteOther" value="{!! $res['noteOther'] !!}">
+		                		<input type="text" name="" class="form-control noteOther" value="{!! $res['noteOther'] !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 			                </td>
 		                	<td>
 		                		<div @if($role == 3 || $role == 4 || $role == 5 || $role == 6) style="display: none;"@endif>
@@ -524,7 +526,7 @@
 					<table id="tblPayment" class="table table-xs data-table table-bordered">
 	                    <thead>
 	                    <tr>
-	                        <th>Tiền <button type="button" class="btn btn-link addPayment"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></th>
+	                        <th>Tiền <button type="button" class="btn btn-link addPayment" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) style="display: none;" @endif><i class="fa fa-plus-circle" aria-hidden="true"></i></button></th>
 	                        <th>Ngày</th>
 	                        <th>Đính kèm file</th>
 	                        <th>Nhập mã FT</th>
@@ -559,7 +561,9 @@
 		                		<input type="text" name="" class="form-control notePayment" value="{!! $res['notePayment'] !!}" @if($res['codeFT'] != null) disabled @endif @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 		                	</td>
 		                	<td>
-	                			<i class="remove fa fa-times removeRow`+indexPay+`" aria-hidden="true" style="cursor: pointer; color: orange"></i>
+		                		<div @if($role == 3 || $role == 4 || $role == 5 || $role == 6 || $res['codeFT'] != null) style="display: none;" @endif>
+	                				<i class="remove fa fa-times removeRow`+indexPay+`" aria-hidden="true" style="cursor: pointer; color: orange"></i>
+		                		</div>
 		                	</td>
 	                	</tr>
 	                	@endforeach
@@ -576,10 +580,10 @@
             <div @if($role == 1 || $role == 2 ) style="display: none;"@endif>
 	            <hr>
 	            <div class="form-group">
-					<label style="font: Bold 16px Avenir Next Rounded Pro;">Thông tin margin</label>
+					<label style="font-size:14px; font-weight: bolder ">Thông tin margin</label>
 	            </div>
 	            <div class="form-group">
-					<label style="font: Bold 14px Avenir Next Rounded Pro;">Vé máy bay</label>
+					<label style="font-size:12px; font-weight: bolder ">Vé máy bay</label>
 	            </div>
 	            <div class="row">
 	            	<div class="col-3">
@@ -597,7 +601,7 @@
 	            </div>
 	            @if($response['hotel'] != null)
 	            <div class="form-group">
-					<label style="font: Bold 14px Avenir Next Rounded Pro;">Vé Khách sạn</label>
+					<label style="font-size:12px; font-weight: bolder">Vé khách sạn</label>
 	            </div>
 	            <table id="tblhotelMargin" class="table table-xs data-table table-bordered">
 	                <thead>
@@ -652,7 +656,7 @@
 	            @endif
 	            @if($response['other'] != null)
 		        <div class="form-group">
-					<label style="font: Bold 14px Avenir Next Rounded Pro;">Dịch vụ khác</label>
+					<label style="font-size:12px; font-weight: bolder">Dịch vụ khác</label>
 	            </div>
 	            <table id="tblOtherMargin" class="table table-xs data-table table-bordered">
 	                <thead>
@@ -746,7 +750,6 @@
 	        'alias': 'decimal',
 	        'autoGroup': true,
 	        'removeMaskOnSubmit': true,
-	        'placeholder': "0",
 	        'autoUnmask': true,
 	        'allowMinus': false
 	    });
@@ -908,7 +911,6 @@
 		        'alias': 'decimal',
 		        'autoGroup': true,
 		        'removeMaskOnSubmit': true,
-		        'placeholder': "0",
 		        'autoUnmask': true,
 		        'allowMinus': false
 		    });
@@ -987,7 +989,6 @@
 		        'alias': 'decimal',
 		        'autoGroup': true,
 		        'removeMaskOnSubmit': true,
-		        'placeholder': "0",
 		        'autoUnmask': true,
 		        'allowMinus': false
 		    });
@@ -1076,7 +1077,6 @@
 		        'alias': 'decimal',
 		        'autoGroup': true,
 		        'removeMaskOnSubmit': true,
-		        'placeholder': "0",
 		        'autoUnmask': true,
 		        'allowMinus': false
 		    });
@@ -1471,10 +1471,20 @@
 				</div>
 				<div class="col-3" @if($role != 4) style="display: none" @endif>
 					<div class="input-group mb-3">
-		  				<input type="text" name="" class="form-control">
+		  				<input type="text" name="" class="form-control common-currency">
 					</div>
 				</div>
 			</div>
 		`);
+		$(document).find('.common-currency').inputmask({
+	        'alias': 'decimal',
+	        'groupSeparator': ',',
+	        'placeholder': "0",
+	        'autoGroup': true,
+	        'removeMaskOnSubmit': true,
+	        'autoUnmask': true,
+	        'suffix': ' VNĐ',
+	        'allowMinus': false
+	    });
 	});
 </script>
