@@ -871,7 +871,7 @@
 	        $('.surcharge'+indexHotel).focusout(function(){
 	        	$('.totalValueHotel').text(parseInt($('.totalValueHotel').text()) + parseInt($('.amountHotel'+indexHotel).val() != '' ? $('.amountHotel'+indexHotel).val() : 0) * parseInt($('.surcharge'+indexHotel).val() != '' ? $('.surcharge'+indexHotel).val() : 0));
 	        });
-	        $('.numberHotel'+indexHotel+', valueHotel'+indexHotel+', .amountHotel'+indexHotel+', .surcharge'+indexHotel).click(function(){
+	        $('.numberHotel'+indexHotel+', .valueHotel'+indexHotel+', .amountHotel'+indexHotel+', .surcharge'+indexHotel).click(function(){
 	    		var count = $('.totalValueHotel').text() != '' ? $('.totalValueHotel').text() : 0;
 	    		var countChild = parseInt($(this).closest("tr").find("input:eq(5)").val() != '' ? $(this).closest("tr").find("input:eq(5)").val() : 0) * parseInt($(this).closest("tr").find("input:eq(6)").val() != '' ? $(this).closest("tr").find("input:eq(6)").val() : 0) + parseInt($(this).closest("tr").find("input:eq(8)").val() != '' ? $(this).closest("tr").find("input:eq(8)").val() : 0) * parseInt($(this).closest("tr").find("input:eq(9)").val() != '' ? $(this).closest("tr").find("input:eq(9)").val() : 0);
 	    			console.log(count, countChild);
@@ -1229,37 +1229,6 @@
 		    	$('.countPayment').val(parseInt(count) - parseInt(countChild) + parseInt($(this).val()));
 		    });
     	});
-	    $('.saveOther').click(function(){
-	    	var id = $(this).data('id');
-	    	$(this).toggle();
-	    	console.log(id);
-	    	$('.totalValueOther').text(parseInt($('.totalValueOther').text()) - parseInt($('.valueLable'+id).text()) + parseInt($('.valueOther'+id).val()));
-	    	$('.name'+id).text($('.nameOther'+id).val());
-	    	$('.detail'+id).text($('.detailOther'+id).val());
-	    	$('.amount'+id).text($('.amountOther'+id).val());
-	    	$('.prince'+id).text($('.princeOther'+id).val());
-	    	$('.valueLable'+id).text($('.valueOther'+id).val());
-	    	$('.note'+id).text($('.noteOther'+id).val());
-	    	$('.other'+id+' label').toggle();
-            $('.other'+id+' input:text').toggle();
-	    });
-
-	    $('.savePayment').click(function(){
-	    	var id = $(this).data('id');
-	    	$(this).toggle();
-	    	console.log(id);
-	    	$('.countPayment').val(parseInt($('.countPayment').val()) - parseInt($('.valuePayments'+id).text()) + parseInt($('.valuePayment'+id).val()));
-	    	$('.valuePayments'+id).text($('.valuePayment'+id).val());
-	    	$('.datePayments'+id).text($('.datePayment'+id).val());
-	    	$('.imagePayments'+id).text($('.imagePayment'+id).val());
-	    	$('.codeFTs'+id).text($('.codeFT'+id).val());
-	    	$('.confirms'+id).text($('.confirm'+id).val());
-	    	$('.valueLable'+id).text($('.valueOther'+id).val());
-	    	$('.notePayments'+id).text($('.notePayment'+id).val());
-	    	$('.payment'+id+' label').toggle();
-            $('.payment'+id+' input:text, .payment'+id+' input:file, .payment'+id+' select').toggle();
-	    });
-
 	    $('body').delegate('.update_order', 'click', function (){
 	    	$('.paymentAirline').is(":checked") ? airlineStatus = 1 : airlineStatus = 0;
 		    $('.paymentHotel').is(":checked") ? hotelStatus = 1 : hotelStatus = 0;

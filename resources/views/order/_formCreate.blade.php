@@ -615,12 +615,20 @@
         		$('.addPayment').prop('disabled', true);
         	}
         });
-        $('.valueHotel').focusout(function(){
-        	$('.totalValueHotel').text(parseInt($('.totalValueHotel').text()) + parseInt($('.numberHotel').val() != '' ? $('.numberHotel').val() : 0) * parseInt($('.valueHotel').val() != '' ? $('.valueHotel').val() : 0));
-        });
-        $('.surcharge').focusout(function(){
-        	$('.totalValueHotel').text(parseInt($('.totalValueHotel').text()) + parseInt($('.amountHotel').val() != '' ? $('.amountHotel').val() : 0) * parseInt($('.surcharge').val() != '' ? $('.surcharge').val() : 0));
-        });
+
+        $('.numberHotel, .valueHotel, .amountHotel, .surcharge').click(function(){
+    		var count = $('.totalValueHotel').text() != '' ? $('.totalValueHotel').text() : 0;
+    		var countChild = parseInt($(this).closest("tr").find("input:eq(5)").val() != '' ? $(this).closest("tr").find("input:eq(5)").val() : 0) * parseInt($(this).closest("tr").find("input:eq(6)").val() != '' ? $(this).closest("tr").find("input:eq(6)").val() : 0) + parseInt($(this).closest("tr").find("input:eq(8)").val() != '' ? $(this).closest("tr").find("input:eq(8)").val() : 0) * parseInt($(this).closest("tr").find("input:eq(9)").val() != '' ? $(this).closest("tr").find("input:eq(9)").val() : 0);
+    			console.log(count, countChild);
+	    	$(this).focusout(function(){
+		    	var numberHotel = $(this).closest("tr").find("input:eq(5)").val() != '' ? $(this).closest("tr").find("input:eq(5)").val() : 0;
+		    	var valueHotel = $(this).closest("tr").find("input:eq(6)").val() != '' ?$(this).closest("tr").find("input:eq(6)").val() : 0;
+		    	var amountHotel = $(this).closest("tr").find("input:eq(8)").val() != '' ?$(this).closest("tr").find("input:eq(8)").val() : 0;
+		    	var surcharge = $(this).closest("tr").find("input:eq(9)").val() != '' ?$(this).closest("tr").find("input:eq(9)").val() : 0;
+		    	console.log(numberHotel, valueHotel, amountHotel, surcharge);
+		    	$('.totalValueHotel').text(parseInt(count) - parseInt(countChild) + parseInt(numberHotel) * parseInt(valueHotel) + parseInt(amountHotel) *parseInt(surcharge));
+		    });
+    	});
 	    var indexHotel = 0;
 	    $('body').delegate('.addHotel', 'click', function (){
 	    	++indexHotel;
@@ -665,7 +673,7 @@
 	        $('.surcharge'+indexHotel).focusout(function(){
 	        	$('.totalValueHotel').text(parseInt($('.totalValueHotel').text()) + parseInt($('.amountHotel'+indexHotel).val() != '' ? $('.amountHotel'+indexHotel).val() : 0) * parseInt($('.surcharge'+indexHotel).val() != '' ? $('.surcharge'+indexHotel).val() : 0));
 	        });
-	        $('.numberHotel'+indexHotel+', valueHotel'+indexHotel+', .amountHotel'+indexHotel+', .surcharge'+indexHotel).click(function(){
+	        $('.numberHotel'+indexHotel+', .valueHotel'+indexHotel+', .amountHotel'+indexHotel+', .surcharge'+indexHotel).click(function(){
 	    		var count = $('.totalValueHotel').text() != '' ? $('.totalValueHotel').text() : 0;
 	    		var countChild = parseInt($(this).closest("tr").find("input:eq(5)").val() != '' ? $(this).closest("tr").find("input:eq(5)").val() : 0) * parseInt($(this).closest("tr").find("input:eq(6)").val() != '' ? $(this).closest("tr").find("input:eq(6)").val() : 0) + parseInt($(this).closest("tr").find("input:eq(8)").val() != '' ? $(this).closest("tr").find("input:eq(8)").val() : 0) * parseInt($(this).closest("tr").find("input:eq(9)").val() != '' ? $(this).closest("tr").find("input:eq(9)").val() : 0);
 	    			console.log(count, countChild);
