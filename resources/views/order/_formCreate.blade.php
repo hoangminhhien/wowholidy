@@ -266,13 +266,13 @@
 					<table id="tblhotel" class="table table-xs data-table table-bordered">
 	                    <thead>
 	                    <tr>
-	                        <th width="13%">Ngày<button type="button" class="btn btn-link addHotel" disabled="true"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></th>
+	                        <th width="13%">Ngày<button type="button" class="btn btn-link addHotel"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></th>
 	                        <th width="10%">Tên khách sạn</th>
 	                        <th width="10%">Hạng phòng</th>
 	                        <th width="10%">Giường</th>
 	                        <th width="10%">Gói mua</th>
 	                        <th width="5%">Số lượng</th>
-	                        <th width="10%">Tiền phòng</th>
+	                        <th width="10%">Đơn giá phòng</th>
 	                        <th>Phụ thu loại</th>
 	                        <th>Số lượng</th>
 	                        <th>CP phụ thu</th>
@@ -336,7 +336,7 @@
 			</div>
 			<div class="row">
 				<div class="col-12">
-	                <label>Ghi chú</label>
+	                <label>Ghi chú cho sale</label>
 	                <input type="text" name="noteHotel" class="form-control">
 				</div>
 			</div>
@@ -357,7 +357,7 @@
 					<table id="tblOther" class="table table-xs data-table table-bordered">
 	                    <thead>
 	                    <tr>
-	                        <th>Tên dịch vụ <button type="button" class="btn btn-link addOther" disabled="true"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></th>
+	                        <th>Tên dịch vụ <button type="button" class="btn btn-link addOther"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></th>
 	                        <th>Chi tiết dịch vụ</th>
 	                        <th>Số lượng</th>
 	                        <th>Đơn giá</th>
@@ -393,9 +393,6 @@
 	                			<input type="text" name="noteOther" class="form-control noteOther">
 	                		</td>
 	                		<td></td>
-	                	</tr>
-	                	<tr>
-	                		
 	                	</tr>
 	                    </tbody>
 	                </table>
@@ -434,7 +431,7 @@
 					<table id="tblPayment" class="table table-xs data-table table-bordered">
 	                    <thead>
 	                    <tr>
-	                        <th>Tiền <button type="button" class="btn btn-link addPayment" disabled="true"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></th>
+	                        <th>Tiền <button type="button" class="btn btn-link addPayment"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></th>
 	                        <th>Ngày</th>
 	                        <th>Đính kèm file</th>
 	                        <th>Nhập mã FT</th>
@@ -545,9 +542,11 @@
 	      	$(this).val('');
 	  	});
 	    $('.princeOther, .amountOther').keyup(function(){
-	    	var value = $('.princeOther').val();
-	    	var amount = $('.amountOther').val();
+	    	var value = $('.princeOther').val() != '' ? $('.princeOther').val() : 0;
+	    	var amount = $('.amountOther').val() != '' ? $('.amountOther').val() : 0;
+	    	console.log(value , amount);
 	    	$('.valueOther').val(parseInt(value) * parseInt(amount));
+	    	$('.totalValueOther').text(parseInt(value) * parseInt(amount));
 	    });
 	    $('#checkin_out').click(function(){
 	    	var checkin = $('.fromDate ').val();
@@ -609,23 +608,6 @@
                 $('.create_order').prop('disabled', true);
             }
         });
-
-        $('.numberHotel, .valueHotel').keyup(function(){
-        	if($('.numberHotel').val() != 0 && $('.valueHotel').val() != 0){
-        		$('.addHotel').prop('disabled', false);
-        	}else{
-        		$('.addHotel').prop('disabled', true);
-        	}
-        });
-
-        $('.amountOther, .princeOther').keyup(function(){
-        	if($('.amountOther').val() != 0 && $('.princeOther').val() != 0){
-        		$('.addOther').prop('disabled', false);
-        	}else{
-        		$('.addOther').prop('disabled', true);
-        	}
-        });
-
         $('.valuePayment ').keyup(function(){
         	if($(this).val() != 0){
         		$('.addPayment').prop('disabled', false);
@@ -633,58 +615,200 @@
         		$('.addPayment').prop('disabled', true);
         	}
         });
-
-	    var index = 0;
-	    $('.addHotel').click(function(){
-	    	$(this).prop('disabled', true);
-	    	++index;
-	    	var dateHotel = $('.dateHotel').val();
-	    	var nameHotel = $('.nameHotel').val();
-	    	var levelHotel = $('.levelHotel').val();
-	    	var bedHotel = $('.bedHotel').val();
-	    	var comboHotel = $('.comboHotel').val();
-	    	var numberHotel = $('.numberHotel').val();
-	    	var valueHotel = $('.valueHotel').val();
-	    	var typeSurcharge = $('.typeSurcharge').val();
-	    	var amountHotel = ($('.amountHotel').val() != 0) ? $('.amountHotel').val() : 0;
-	    	var surcharge = ($('.surcharge').val() != 0) ? $('.surcharge').val() : 0;
-	    	console.log(parseInt(valueHotel), parseInt(numberHotel), parseInt(amountHotel), parseInt(surcharge));
-	    	$('.totalValueHotel').text(parseInt($('.totalValueHotel').text()) + parseInt(valueHotel) * parseInt(numberHotel) + parseInt(amountHotel) * parseInt(surcharge));
-	    	$('#tblhotel tbody').append(`<tr class='data'>
-	    		<td>`+dateHotel+`</td><td>`+nameHotel+`</td><td>`+levelHotel+`</td><td>`+bedHotel+`</td><td>`+comboHotel+`</td><td>`+numberHotel+`</td><td>`+valueHotel+`</td><td>`+typeSurcharge+`</td><td>`+amountHotel+`</td><td>`+surcharge+`</td><td><i class="remove fa fa-times removeRow`+index+`" aria-hidden="true" style="cursor: pointer; color: orange"></i></td>
-	    		</tr>`);
-	    	$('.dateHotel, .nameHotel, .levelHotel, .bedHotel, .comboHotel, .numberHotel, .valueHotel, .amountHotel, .typeSurcharge, .surcharge').val('');
+        $('.valueHotel').focusout(function(){
+        	$('.totalValueHotel').text(parseInt($('.totalValueHotel').text()) + parseInt($('.numberHotel').val() != '' ? $('.numberHotel').val() : 0) * parseInt($('.valueHotel').val() != '' ? $('.valueHotel').val() : 0));
+        });
+        $('.surcharge').focusout(function(){
+        	$('.totalValueHotel').text(parseInt($('.totalValueHotel').text()) + parseInt($('.amountHotel').val() != '' ? $('.amountHotel').val() : 0) * parseInt($('.surcharge').val() != '' ? $('.surcharge').val() : 0));
+        });
+	    var indexHotel = 0;
+	    $('body').delegate('.addHotel', 'click', function (){
+	    	++indexHotel;
+	    	$('#tblhotel tbody').append(`
+	    		<tr>
+            		<td>
+            			<input type="text" name="dateHotel`+indexHotel+`" class="form-control dateHotel`+indexHotel+` date">
+            		</td>
+            		<td>
+						<input type="text" name="nameHotel" class="form-control nameHotel">
+            		</td>
+            		<td>
+						<input type="text" name="levelHotel`+indexHotel+`" class="form-control levelHotel`+indexHotel+`">
+            		</td>
+            		<td>
+						<input type="text" name="bedHotel`+indexHotel+`" class="form-control bedHotel`+indexHotel+`">
+            		</td>
+            		<td>
+						<input type="text" name="comboHotel`+indexHotel+`" class="form-control comboHotel`+indexHotel+`">
+            		</td>
+            		<td>
+            			<input type="text" name="numberHotel`+indexHotel+`" class="form-control numberHotel`+indexHotel+` common-numeric">
+            		</td>
+            		<td>
+            			<input type="text" name="valueHotel`+indexHotel+`" class="form-control valueHotel`+indexHotel+` common-currency">
+            		</td>
+            		<td>
+            			<input type="text" name="typeSurcharge`+indexHotel+`" class="form-control typeSurcharge`+indexHotel+`">
+            		</td>
+            		<td>
+            			<input type="text" name="amountHotel`+indexHotel+`" class="form-control amountHotel`+indexHotel+` common-numeric">
+            		</td>
+            		<td><input type="text" name="surcharge`+indexHotel+`" placeholder="nhập tiền" class="form-control common-currency surcharge`+indexHotel+`"></td>
+            		<td>
+            			<i class="remove fa fa-times removeRow`+indexHotel+`" aria-hidden="true" style="cursor: pointer; color: orange"></i>
+            		</td>
+            	</tr>
+	    		`);
+		    $('.valueHotel'+indexHotel).focusout(function(){
+	        	$('.totalValueHotel').text(parseInt($('.totalValueHotel').text()) + parseInt($('.numberHotel'+indexHotel).val() != '' ? $('.numberHotel'+indexHotel).val() : 0) * parseInt($('.valueHotel'+indexHotel).val() != '' ? $('.valueHotel'+indexHotel).val() : 0));
+	        });
+	        $('.surcharge'+indexHotel).focusout(function(){
+	        	$('.totalValueHotel').text(parseInt($('.totalValueHotel').text()) + parseInt($('.amountHotel'+indexHotel).val() != '' ? $('.amountHotel'+indexHotel).val() : 0) * parseInt($('.surcharge'+indexHotel).val() != '' ? $('.surcharge'+indexHotel).val() : 0));
+	        });
+	        $('.numberHotel'+indexHotel+', valueHotel'+indexHotel+', .amountHotel'+indexHotel+', .surcharge'+indexHotel).click(function(){
+	    		var count = $('.totalValueHotel').text() != '' ? $('.totalValueHotel').text() : 0;
+	    		var countChild = parseInt($(this).closest("tr").find("input:eq(5)").val() != '' ? $(this).closest("tr").find("input:eq(5)").val() : 0) * parseInt($(this).closest("tr").find("input:eq(6)").val() != '' ? $(this).closest("tr").find("input:eq(6)").val() : 0) + parseInt($(this).closest("tr").find("input:eq(8)").val() != '' ? $(this).closest("tr").find("input:eq(8)").val() : 0) * parseInt($(this).closest("tr").find("input:eq(9)").val() != '' ? $(this).closest("tr").find("input:eq(9)").val() : 0);
+	    			console.log(count, countChild);
+		    	$(this).focusout(function(){
+			    	var numberHotel = $(this).closest("tr").find("input:eq(5)").val() != '' ? $(this).closest("tr").find("input:eq(5)").val() : 0;
+			    	var valueHotel = $(this).closest("tr").find("input:eq(6)").val() != '' ?$(this).closest("tr").find("input:eq(6)").val() : 0;
+			    	var amountHotel = $(this).closest("tr").find("input:eq(8)").val() != '' ?$(this).closest("tr").find("input:eq(8)").val() : 0;
+			    	var surcharge = $(this).closest("tr").find("input:eq(9)").val() != '' ?$(this).closest("tr").find("input:eq(9)").val() : 0;
+			    	console.log(numberHotel, valueHotel, amountHotel, surcharge);
+			    	$('.totalValueHotel').text(parseInt(count) - parseInt(countChild) + parseInt(numberHotel) * parseInt(valueHotel) + parseInt(amountHotel) *parseInt(surcharge));
+			    });
+	    	});
+	    	$(document).find('.common-number').inputmask({
+		        'mask': '999 999 9999 [99999]',
+		        'groupSeparator': ',',
+		        'autoGroup': true,
+		        'removeMaskOnSubmit': true,
+		        'autoUnmask': true,
+		        'greedy': false 
+		    });
+		    $(document).find('.common-numeric').inputmask({
+		        'alias': 'decimal',
+		        'autoGroup': true,
+		        'removeMaskOnSubmit': true,
+		        'placeholder': "0",
+		        'autoUnmask': true,
+		        'allowMinus': false
+		    });
+		    $(document).find('.common-currency').inputmask({
+		        'alias': 'decimal',
+		        'groupSeparator': ',',
+		        'placeholder': "0",
+		        'autoGroup': true,
+		        'removeMaskOnSubmit': true,
+		        'autoUnmask': true,
+		        'suffix': ' VNĐ',
+		        'allowMinus': false
+		    });
+		    $(".date").inputmask({ 
+		    	'alias': "dd/mm/yyyy",
+		    	"clearIncomplete": true,
+		    });
+		    $(".email").inputmask({ 
+		    	'alias': "email",
+		    	"clearIncomplete": true,
+		    });
 	    });
-	    $('.addOther').click(function(){
-	    	$(this).prop('disabled', true);
-	    	++index;
+	    var indexOther = 0;
+	    $('body').delegate('.addOther', 'click', function (){
+	    	++indexOther;
+	    	$('#tblOther tbody').append(`
+	    		<tr>
+            		<td>
+						<input type="text" name="nameOther`+indexOther+`" class="form-control nameOther`+indexOther+`">
+            		</td>
+            		<td>
+						<input type="text" name="detailOther`+indexOther+`" class="form-control detailOther`+indexOther+`">
+            		</td>
+            		<td>
+            			<input type="text" name="amountOther`+indexOther+`" class="form-control amountOther`+indexOther+` common-numeric">
+            		</td>
+            		<td>
+            			<input type="text" name="princeOther`+indexOther+`" class="form-control princeOther`+indexOther+` common-currency">
+            		</td>
+            		<td>
+            			<input type="text" name="valueOther`+indexOther+`" class="form-control valueOther`+indexOther+` common-currency" disabled="">
+            		</td>
+            		<td>
+            			<input type="text" name="noteOther`+indexOther+`" class="form-control noteOther`+indexOther+`">
+            		</td>
+            		<td><i class="remove fa fa-times removeRow`+indexOther+`" aria-hidden="true" style="cursor: pointer; color: orange"></i></td>
+            	</tr>
+	    		`);
+	    	$('.princeOther'+indexOther+', .amountOther'+indexOther).click(function(){
+	    		var count = $('.totalValueOther').text() != '' ? $('.totalValueOther').text() : 0;
+	    		var countChild = $(this).closest("tr").find("input:eq(4)").val() != '' ?$(this).closest("tr").find("input:eq(4)").val() : 0;
+	    		console.log(count, countChild);
+		    	$(this).focusout(function(){
+			    	var value = $(this).closest("tr").find("input:eq(3)").val() != '' ? $(this).closest("tr").find("input:eq(3)").val() : 0;
+			    	var amount = $(this).closest("tr").find("input:eq(2)").val() != '' ?$(this).closest("tr").find("input:eq(2)").val() : 0;
+			    	$(this).closest("tr").find("input:eq(4)").val(parseInt(value) * parseInt(amount));
+			    	$('.totalValueOther').text(parseInt(count) - parseInt(countChild) + parseInt(value) * parseInt(amount));
+			    });
+	    	});
 	    	var nameOther = $('.nameOther').val();
 	    	var detailOther = $('.detailOther').val();
 	    	var amountOther = $('.amountOther').val();
 	    	var princeOther = $('.princeOther').val();
 	    	var valueOther = $('.valueOther').val();
 	    	var noteOther = $('.noteOther').val();
-	    	$('.totalValueOther').text(parseInt($('.totalValueOther').text()) + parseInt(valueOther));
-	    	$('#tblOther tbody').append(`<tr class='data'>
-	    		<td>`+nameOther+`</td><td>`+detailOther+`</td><td>`+amountOther+`</td><td>`+princeOther+`</td><td>`+valueOther+`</td><td>`+noteOther+`</td><td><i class="remove fa fa-times removeRow`+index+`" aria-hidden="true" style="cursor: pointer; color: orange"></i></td>
-	    		</tr>`);
-	    	$('.nameOther, .detailOther, .amountOther, .princeOther, .valueOther, .noteOther').val('');
-	    });
-	    $('.addPayment').click(function(){
-	    	$(this).prop('disabled', true);
-	    	++index;
+	    	// $('.totalValueOther').text(parseInt($('.totalValueOther').text()) + parseInt(valueOther));
+	    	$(document).find('.common-number').inputmask({
+		        'mask': '999 999 9999 [99999]',
+		        'groupSeparator': ',',
+		        'autoGroup': true,
+		        'removeMaskOnSubmit': true,
+		        'autoUnmask': true,
+		        'greedy': false 
+		    });
+		    $(document).find('.common-numeric').inputmask({
+		        'alias': 'decimal',
+		        'autoGroup': true,
+		        'removeMaskOnSubmit': true,
+		        'placeholder': "0",
+		        'autoUnmask': true,
+		        'allowMinus': false
+		    });
+		    $(document).find('.common-currency').inputmask({
+		        'alias': 'decimal',
+		        'groupSeparator': ',',
+		        'placeholder': "0",
+		        'autoGroup': true,
+		        'removeMaskOnSubmit': true,
+		        'autoUnmask': true,
+		        'suffix': ' VNĐ',
+		        'allowMinus': false
+		    });
+		    $(".date").inputmask({ 
+		    	'alias': "dd/mm/yyyy",
+		    	"clearIncomplete": true,
+		    });
+		    $(".email").inputmask({ 
+		    	'alias': "email",
+		    	"clearIncomplete": true,
+		    });
+		    $('.dateCheck').daterangepicker({
+		      	autoUpdateInput: false,
+		      	locale: {
+		          	cancelLabel: 'Clear'
+		      	}
+		  	});
+		});
+
+	    $('.valuePayment').focusout(function(){
+	    	$('.countPayment').val(parseInt($('.countPayment').val()) + parseInt(($(this).val() != '') ? $(this).val() : 0));
 	    	var countValue = $('.countPayment').val();
 	    	var valuePayment = $('.valuePayment').val();
-	    	$('.countPayment').val(parseInt(valuePayment) + parseInt(countValue));
+	    	// $('.countPayment').val(parseInt(valuePayment) + parseInt(countValue));
 	    	var datePayment = $('.datePayment').val();
 	    	var imagePayment = $('.imagePayment').val();
 	    	var codeFT = $('.codeFT').val();
 	    	var confirm = $('.confirm').val();
 	    	var notePayment = $('.notePayment').val();
-	    	$('#tblPayment tbody').append(`<tr class='data'>
-	    		<td>`+valuePayment+`</td><td>`+datePayment+`</td><td>`+imagePayment.substr(12, imagePayment.length-1)+`<td>`+codeFT+`</td><td>`+confirm+`</td><td>`+notePayment+`</td></td><td><i class="remove fa fa-times removeRow`+index+`" aria-hidden="true" style="cursor: pointer; color: orange"></i></td>
-	    		</tr>`);
-	    	$('.valuePayment, .datePayment, .imagePayment').val('');
 	    	// check input checkbox
 	    	var countValuePayment = $('.countPayment').val();
 	    	if(parseInt($('.airValue').val()) <= parseInt(countValuePayment) && parseInt($('.airValue').val()) > 0){
@@ -706,9 +830,86 @@
 	    		$( ".paymentOther" ).prop( "checked", false );
 	    	}
 	    });
-
-
-
+	    var indexPay = 0;
+	    $('body').delegate('.addPayment', 'click', function (){
+	    	++indexPay;
+	    	$('#tblPayment tbody').append(`
+	    		<tr>
+            		<td>
+            			<input type="text" name="valuePayment`+indexPay+`" class="form-control valuePayment`+indexPay+` common-currency">
+            		</td>
+            		<td>
+            			<input type="date" name="datePayment`+indexPay+`" class="form-control datePayment`+indexPay+` date">
+            		</td>
+            		<td>
+            			<input type="file" name="imagePayment`+indexPay+`" class="form-control imagePayment`+indexPay+`">
+            		</td>
+            		<td>
+            			<input type="text" name="codeFT`+indexPay+`" class="form-control codeFT`+indexPay+`" @if($role != 3) disabled @endif>
+            		</td>
+            		<td>
+            			<select class="browser-default custom-select confirm`+indexPay+`" name="confirm`+indexPay+`" @if($role != 2) disabled @endif>
+						  	<option value="0">Không cho nợ</option>
+						  	<option value="1">Cho nợ</option>
+						</select>
+            		</td>
+            		<td>
+            			<input type="text" name="notePayment`+indexPay+`" class="form-control notePayment`+indexPay+`">
+            		</td>
+            		<td><i class="remove fa fa-times removeRow`+indexPay+`" aria-hidden="true" style="cursor: pointer; color: orange"></i></td
+            	</tr>
+	    		`);
+	    	$('.valuePayment'+indexPay).focusout(function(){
+		    	$('.countPayment').val(parseInt($('.countPayment').val()) + parseInt($(this).val()));
+		    });
+		    $('.valuePayment'+indexPay).click(function(){
+	    		var count = $('.countPayment').val() != '' ? $('.countPayment').val() : 0;
+	    		var countChild = $(this).val() != '' ? $(this).val() : 0;
+		    	$(this).focusout(function(){
+			    	$('.countPayment').val(parseInt(count) - parseInt(countChild) + parseInt($(this).val()));
+			    });
+	    	});
+	    	$(document).find('.common-number').inputmask({
+		        'mask': '999 999 9999 [99999]',
+		        'groupSeparator': ',',
+		        'autoGroup': true,
+		        'removeMaskOnSubmit': true,
+		        'autoUnmask': true,
+		        'greedy': false 
+		    });
+		    $(document).find('.common-numeric').inputmask({
+		        'alias': 'decimal',
+		        'autoGroup': true,
+		        'removeMaskOnSubmit': true,
+		        'placeholder': "0",
+		        'autoUnmask': true,
+		        'allowMinus': false
+		    });
+		    $(document).find('.common-currency').inputmask({
+		        'alias': 'decimal',
+		        'groupSeparator': ',',
+		        'placeholder': "0",
+		        'autoGroup': true,
+		        'removeMaskOnSubmit': true,
+		        'autoUnmask': true,
+		        'suffix': ' VNĐ',
+		        'allowMinus': false
+		    });
+		    $(".date").inputmask({ 
+		    	'alias': "dd/mm/yyyy",
+		    	"clearIncomplete": true,
+		    });
+		    $(".email").inputmask({ 
+		    	'alias': "email",
+		    	"clearIncomplete": true,
+		    });
+		    $('.dateCheck').daterangepicker({
+		      	autoUpdateInput: false,
+		      	locale: {
+		          	cancelLabel: 'Clear'
+		      	}
+		  	});
+	    });
 	    $('.paymentAirline').click(function(){
 	    	if($(this).is(':checked')){
                 if($('.paymentHotel').is(":checked") && $('.paymentOther').is(":not(:checked)")){
@@ -784,14 +985,11 @@
                 }
             }
 	    });
-
-
-
 	    $('body').delegate('#tblhotel .remove', 'click', function (){
 	    	var countValue = $('.totalValueHotel').text();
 	    	console.log(countValue);
 	    	// xóa tổng giá trị đơn hàng
-	    	$('.totalValueHotel').text(parseInt(countValue) - parseInt($(this).closest("tr").find("td:eq(5)").text()) * parseInt($(this).closest("tr").find("td:eq(6)").text())- parseInt($(this).closest("tr").find("td:eq(8)").text()) * parseInt($(this).closest("tr").find("td:eq(9)").text()));
+	    	$('.totalValueHotel').text(parseInt(countValue) - parseInt($(this).closest("tr").find("input:eq(5)").val() != '' ? $(this).closest("tr").find("input:eq(5)").val() : 0) * parseInt($(this).closest("tr").find("input:eq(6)").val() != '' ? $(this).closest("tr").find("input:eq(6)").val() : 0)- parseInt($(this).closest("tr").find("input:eq(8)").val() != '' ? $(this).closest("tr").find("input:eq(8)").val() : 0) * parseInt($(this).closest("tr").find("input:eq(9)").val() != '' ? $(this).closest("tr").find("input:eq(9)").val() : 0));
 	    	$(this).closest("tr").remove();
 	    	if(parseInt($('.totalValueHotel').text()) == 0){
 	    		$('.paymentHotel').prop('disabled', true);
@@ -801,7 +999,7 @@
 	    $('body').delegate('#tblOther .remove', 'click', function (){
 	    	var countValue = $('.totalValueOther').text();
 	    	// xóa tổng giá trị đơn hàng
-	    	$('.totalValueOther').text(parseInt(countValue) - parseInt($(this).closest("tr").find("td:eq(4)").text()));
+	    	$('.totalValueOther').text(parseInt(countValue) - parseInt($(this).closest("tr").find("input:eq(4)").val() != '' ? $(this).closest("tr").find("input:eq(4)").val() : 0));
 	    	$(this).closest("tr").remove();
 	    	if(parseInt($('.totalValueOther').text()) == 0){
 	    		$('.paymentOther').prop('disabled', true);
@@ -812,7 +1010,7 @@
 	    	var countValue = $('.countPayment').val();
 	    	var value = $(this).attr('class');
 	    	// xóa tổng giá trị đơn hàng
-	    	$('.countPayment').val(parseInt(countValue) - parseInt($(this).closest("tr").find("td:eq(0)").text()));
+	    	$('.countPayment').val(parseInt(countValue) - parseInt($(this).closest("tr").find("input:eq(0)").val() != '' ? $(this).closest("tr").find("input:eq(0)").val() : 0));
 	    	$(this).closest("tr").remove();
 	    	var countValuePayment = $('.countPayment').val();
 	    	if(parseInt($('.airValue').val()) <= parseInt(countValuePayment)){
@@ -834,12 +1032,11 @@
 	    		$( ".paymentOther" ).prop( "checked", false );
 	    	}
 	    });
-	    var countOrder = 0;
 	    $('body').delegate('.create_order', 'click', function (){
 	    	$('.paymentAirline').is(":checked") ? airlineStatus = 1 : airlineStatus = 0;
 		    $('.paymentHotel').is(":checked") ? hotelStatus = 1 : hotelStatus = 0;
 		    $('.paymentOther').is(":checked") ? otherStatus = 1 : otherStatus = 0;
-	    	countOrder = countOrder + parseInt($('.totalValueHotel').text()) + parseInt($('.totalValueOther').text()) + parseInt($('.airValue').val());
+	    	var countOrder = parseInt($('.totalValueHotel').text()) + parseInt($('.totalValueOther').text()) +  parseInt(($('.airValue').val() == '') ? 0 : $('.airValue').val());
 	    	var url = '{!! route('order.store') !!}';
 	    	var airLine = {
 	    		'airCode' : $('.airCode').val(),
@@ -848,45 +1045,46 @@
     			'toDate' : $('.toDate').val()
 	    	};
 	    	var hotel = [];
-	    	var $hotel = $('#tblhotel .data');
+	    	var $hotel = $('#tblhotel tbody tr');
 	    	$hotel.each(function(){
 				hotel.push({
-					date: $(this).find("td:eq(0)").text(),
-					name: $(this).find("td:eq(1)").text(),
-					level: $(this).find("td:eq(2)").text(),
-					bed: $(this).find("td:eq(3)").text(),
-					combo: $(this).find("td:eq(4)").text(),
-					number: $(this).find("td:eq(5)").text(),
-					value: $(this).find("td:eq(6)").text(),
-					typeSurcharge: $(this).find("td:eq(7)").text(),
-					amountHotel: $(this).find("td:eq(8)").text(),
-					surcharge: $(this).find("td:eq(9)").text(),
+					date: $(this).find("input:eq(0)").val(),
+					name: $(this).find("input:eq(1)").val(),
+					level: $(this).find("input:eq(2)").val(),
+					bed: $(this).find("input:eq(3)").val(),
+					combo: $(this).find("input:eq(4)").val(),
+					number: $(this).find("input:eq(5)").val(),
+					value: $(this).find("input:eq(6)").val(),
+					typeSurcharge: $(this).find("input:eq(7)").val(),
+					amountHotel: $(this).find("input:eq(8)").val(),
+					surcharge: $(this).find("input:eq(9)").val(),
 				});
 			});
 			var other = [];
-			var $other = $('#tblOther .data');
+			var $other = $('#tblOther tbody tr');
 			$other.each(function(){
 				other.push({
-					nameOther: $(this).find("td:eq(0)").text(),
-					detailOther: $(this).find("td:eq(1)").text(),
-					amountOther: $(this).find("td:eq(2)").text(),
-					princeOther: $(this).find("td:eq(3)").text(),
-					valueOther: $(this).find("td:eq(4)").text(),
-					noteOther: $(this).find("td:eq(5)").text(),
+					nameOther: $(this).find("input:eq(0)").val(),
+					detailOther: $(this).find("input:eq(1)").val(),
+					amountOther: $(this).find("input:eq(2)").val(),
+					princeOther: $(this).find("input:eq(3)").val(),
+					valueOther: $(this).find("input:eq(4)").val(),
+					noteOther: $(this).find("input:eq(5)").val(),
 				});
 			});
 	        var payment = [];
-	        var $payment = $('#tblPayment .data');
+	        var $payment = $('#tblPayment tbody tr');
 	        $payment.each(function(){
 	        	payment.push({
-					valuePayment: $(this).find("td:eq(0)").text(),
-					datePayment: $(this).find("td:eq(1)").text(),
-					imagePayment: $(this).find("td:eq(2)").text(),
-					codeFT: $(this).find("td:eq(3)").text(),
-					confirm: $(this).find("td:eq(4)").text(),
-					notePayment: $(this).find("td:eq(5)").text(),
+					valuePayment: $(this).find("input:eq(0)").val(),
+					datePayment: $(this).find("input:eq(1)").val(),
+					imagePayment: $(this).find("input:eq(2)").val(),
+					codeFT: $(this).find("input:eq(3)").val(),
+					confirm: $(this).find('option:selected').val(),
+					notePayment: $(this).find("input:eq(4)").val(),
 				});
 	        });
+	        console.log(payment);
 	        var listCustomer = $('.listCustomer').val().split('\n');
 		    $.ajax({
 	            url: url,

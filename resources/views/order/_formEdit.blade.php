@@ -317,13 +317,13 @@
 					<table id="tblhotel" class="table table-xs data-table table-bordered">
                     <thead>
                     <tr>
-                        <th width="13%">Ngày<button type="button" class="btn btn-link addHotel" disabled="true"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></th>
+                        <th width="13%">Ngày<button type="button" class="btn btn-link addHotel"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></th>
                         <th width="10%">Tên khách sạn</th>
                         <th width="10%">Hạng phòng</th>
                         <th width="10%">Giường</th>
                         <th width="10%">Gói mua</th>
                         <th width="5%">Số lượng</th>
-                        <th width="10%">Tiền phòng</th>
+                        <th width="10%">Đơn giá phòng</th>
                         <th>Phụ thu loại</th>
                         <th>Số lượng</th>
                         <th>CP phụ thu</th>
@@ -331,101 +331,41 @@
                     </tr>
                     </thead>
                     <tbody>
-                	<tr>
-                		<td>
-                			<input type="text" name="dateHotel" class="form-control dateHotel date" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
-                		</td>
-                		<td>
-                			<!-- <select name="nameHotel" class="browser-default custom-select form-control">
-							  	<option selected value="Vinmart">Vinmart</option>
-							</select> -->
-							<input type="text" name="nameHotel" class="form-control nameHotel" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
-                		</td>
-                		<td>
-                			<!-- <select name="levelHotel" class="browser-default custom-select form-control">
-							  	<option selected value="5 sao">5 sao</option>
-							</select> -->
-							<input type="text" name="levelHotel" class="form-control levelHotel" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
-                		</td>
-                		<td>
-                			<!-- <select name="bedHotel" class="browser-default custom-select form-control">
-							  	<option selected value="Double">Double</option>
-							</select> -->
-							<input type="text" name="bedHotel" class="form-control bedHotel" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
-                		</td>
-                		<td>
-                			<!-- <select name="comboHotel" class="browser-default custom-select">
-							  	<option selected value="BB: ăn sáng">BB: ăn sáng</option>
-							</select> -->
-							<input type="text" name="comboHotel" class="form-control comboHotel" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
-                		</td>
-                		<td>
-                			<input type="text" name="numberHotel" class="form-control numberHotel common-numeric" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
-                		</td>
-                		<td>
-                			<input type="text" name="valueHotel" class="form-control valueHotel common-currency" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
-                		</td>
-                		<td>
-                			<input type="text" name="typeSurcharge" class="form-control typeSurcharge" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
-                		</td>
-                		<td>
-                			<input type="text" name="amountHotel" class="form-control amountHotel common-numeric" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
-                		</td>
-                		<td><input type="text" name="surcharge" placeholder="nhập tiền" class="form-control common-currency surcharge" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif></td>
-                		<td></td>
-                	</tr>
                 	@if($response['hotel'] != null)
 	                	@foreach($response['hotel'] as $key => $res)
-	                	<tr class="hotel{!! $key !!} updateHotel data">
+	                	<tr class="hotel updateHotel data">
 	                		<td>
-		                		<input type="text" name="" class="form-control dateHotel{!! $key !!} date" value="{!! $res['date'] !!}">
-	                			<label class="dateLable{!! $key !!}"> {!! $res['date'] !!}</label>
+		                		<input type="text" name="" class="form-control dateHotel date" value="{!! $res['date'] !!}">
 		                	</td>
 	                		<td>
-		                		
-		                		<input type="text" name="" class="form-control nameHotel{!! $key !!}" value="{!! $res['name'] !!}">
-	                			<label class="name{!! $key !!}"> {!! $res['name'] !!}</label>
+		                		<input type="text" name="" class="form-control nameHotel" value="{!! $res['name'] !!}">
 		                	</td>
 	                		<td>
-		                		
-		                		<input type="text" name="" class="form-control levelHotel{!! $key !!}" value="{!! $res['level'] !!}">
-	                			<label class="level{!! $key !!}"> {!! $res['level'] !!}</label>
+		                		<input type="text" name="" class="form-control levelHotel" value="{!! $res['level'] !!}">
 		                	</td>
 	                		<td>
-		                		
-		                		<input type="text" name="" class="form-control bedHotel{!! $key !!}" value="{!! $res['bed'] !!}">
-	                			<label class="bed{!! $key !!}"> {!! $res['bed'] !!}</label>
+		                		<input type="text" name="" class="form-control bedHotel" value="{!! $res['bed'] !!}">
 		                	</td>
 	                		<td>
-		                		
-		                		<input type="text" name="" class="form-control comboHotel{!! $key !!}" value="{!! $res['combo'] !!}">
-	                			<label class="combo{!! $key !!}"> {!! $res['combo'] !!}</label>
+		                		<input type="text" name="" class="form-control comboHotel" value="{!! $res['combo'] !!}">
 		                	</td>
 	                		<td>
-		                		<input type="text" name="" class="form-control numberHotel{!! $key !!} common-numeric" value="{!! $res['number'] !!}">
-	                			<label class="number{!! $key !!}"> {!! $res['number'] !!}</label>
+		                		<input type="text" name="" class="form-control numberHotel common-numeric" value="{!! $res['number'] !!}">
 		                	</td>
 	                		<td>
-		                		<input type="text" name="" class="form-control valueHotel{!! $key !!} common-currency" value="{!! $res['value'] !!}">
-	                			<label class="value{!! $key !!}"> {!! $res['value'] !!}</label>
+		                		<input type="text" name="" class="form-control valueHotel common-currency" value="{!! $res['value'] !!}">
 		                	</td>
 	                		<td>
-		                		<input type="text" name="" class="form-control typeSurchargeHotel{!! $key !!}" value="{!! $res['typeSurcharge'] !!}">
-	                			<label class="typeSurcharge{!! $key !!}"> {!! $res['typeSurcharge'] !!}</label>
+		                		<input type="text" name="" class="form-control typeSurchargeHotel" value="{!! $res['typeSurcharge'] !!}">
 		                	</td>
 	                		<td>
-		                		<input type="text" name="" class="form-control amountHotel{!! $key !!} common-numeric" value="{!! $res['amountHotel'] !!}">
-	                			<label class="amountlable{!! $key !!}"> {!! $res['amountHotel'] !!}</label>
+		                		<input type="text" name="" class="form-control amountHotel common-numeric" value="{!! $res['amountHotel'] !!}">
 		                	</td>
 	                		<td>
-		                		<input type="text" name="" class="form-control common-currency surchargeHotel{!! $key !!}" value="{!! $res['surcharge'] !!}">
-	                			<label class="surcharge{!! $key !!}"> {!! $res['surcharge'] !!}</label>
+		                		<input type="text" name="" class="form-control common-currency surchargeHotel" value="{!! $res['surcharge'] !!}">
 		                	</td>
 	                		<td>
-	                			<div @if($role == 3 || $role == 4 || $role == 5 || $role == 6) style="display: none;"@endif>
-		                			<i class="fa fa-check-circle saveHotel saveHotel{!! $key !!}" aria-hidden="true" data-id="{!! $key !!}" title="Lưu" style="display: none; cursor: pointer; color: orange"></i>
-			                		<i class="fa fa-minus-circle editHotel" aria-hidden="true" data-id="{!! $key !!}" title="Sửa" style="cursor: pointer; color: orange"></i>
-	                			</div>
+	                			<i class="remove fa fa-times removeRow" aria-hidden="true" style="cursor: pointer; color: orange"></i>
 	                		</td>
 	                	</tr>
 	                	@endforeach
@@ -440,7 +380,7 @@
 			<div class="row">
 				<div class="col-12">
 	                <label>Ghi chú của saler</label>
-	                <input type="text" name="noteHotelSale" class="form-control noteHotelSale" value="{!! ($response['noteHotelSale'] != null) ? $response['noteHotelSale'] : '' !!}" @if($role != 1) disabled="" @endif>
+	                <input type="text" name="noteHotelSale" class="form-control noteHotelSale" value="{!! ($response['noteHotelSale'] != null) ? $response['noteHotelSale'] : '' !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 				</div>
 			</div>
 			<div class="row">
@@ -484,7 +424,7 @@
 					<table id="tblOther" class="table table-xs data-table table-bordered">
 	                    <thead>
 	                    <tr>
-	                        <th>Tên dịch vụ <button type="button" class="btn btn-link addOther" disabled="true"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></th>
+	                        <th>Tên dịch vụ <button type="button" class="btn btn-link addOther"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></th>
 	                        <th>Chi tiết dịch vụ</th>
 	                        <th>Số lượng</th>
 	                        <th>Đơn giá</th>
@@ -494,69 +434,35 @@
 	                    </tr>
 	                    </thead>
 	                    <tbody>
-	                	<tr>
-	                		<td>
-	                			<!-- <select class="browser-default custom-select form-control">
-								  	<option selected >Dịch vụ bãi biển</option>
-								</select> -->
-								<input type="text" name="nameOther" class="form-control nameOther" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
-	                		</td>
-	                		<td>
-	                			<!-- <select class="browser-default custom-select form-control">
-								  	<option selected>Ngắm san hô dưới nước</option>
-								</select> -->
-								<input type="text" name="detailOther" class="form-control detailOther" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
-	                		</td>
-	                		<td>
-	                			<input type="text" name="amountOther" class="form-control amountOther common-numeric" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
-	                		</td>
-	                		<td>
-	                			<input type="text" name="princeOther" class="form-control princeOther common-currency" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
-	                		</td>
-	                		<td>
-	                			<input type="text" name="valueOther" class="form-control valueOther common-currency" disabled="">
-	                		</td>
-	                		<td>
-	                			<input type="text" name="noteOther" class="form-control noteOther" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
-	                		</td>
-	                		<td></td>
-	                	</tr>
-	                		@if($response['other'] != null)
-		                	@foreach($response['other'] as $key => $res)
-	                		<tr class='other{!! $key !!} updateOther data'>
-			                	<td>
-			                		<input type="text" name="" class="form-control nameOther{!! $key !!}" value="{!! $res['nameOther'] !!}">
-		                			<label class="name{!! $key !!}"> {!! $res['nameOther'] !!}</label>
-			                	</td>
-			                	<td>
-			                		<input type="text" name="" class="form-control detailOther{!! $key !!}" value="{!! $res['detailOther'] !!}">
-	                				<label class="detail{!! $key !!}"> {!! $res['detailOther'] !!}</label>
-			                	</td>
-			                	<td>
-			                		<input type="text" name="" class="form-control amountOther{!! $key !!} common-numeric" value="{!! $res['amountOther'] !!}">
-	                				<label class="amount{!! $key !!}"> {!! $res['amountOther'] !!}</label>
-			                	</td>
-			                	<td>
-			                		<input type="text" name="" class="form-control princeOther{!! $key !!} common-currency" value="{!! $res['princeOther'] !!}">
-	                				<label class="prince{!! $key !!}"> {!! $res['princeOther'] !!}</label>
-			                		</td>
-			                	<td>
-			                		<input type="text" name="" class="form-control valueOther{!! $key !!} common-currency" value="{!! $res['valueOther'] !!}" disabled="">
-		                			<label class="valueLable{!! $key !!}"> {!! $res['valueOther'] !!}</label>
-				                </td>
-			                	<td>
-			                		<input type="text" name="" class="form-control noteOther{!! $key !!}" value="{!! $res['noteOther'] !!}">
-		                			<label class="note{!! $key !!}"> {!! $res['noteOther'] !!}</label>
-				                </td>
-			                	<td>
-			                		<div @if($role == 3 || $role == 4 || $role == 5 || $role == 6) style="display: none;"@endif>
-			                			<i class="fa fa-check-circle saveOther saveOther{!! $key !!}" aria-hidden="true" data-id="{!! $key !!}" title="Lưu" style="display: none; cursor: pointer; color: orange"></i>
-				                		<i class="fa fa-minus-circle editOther" aria-hidden="true" data-id="{!! $key !!}" title="Sửa" style="cursor: pointer; color: orange"></i>
-			                		</div>
-			                	</td>
-	                		</tr>
-		                	@endforeach
-		                	@endif
+                		@if($response['other'] != null)
+	                	@foreach($response['other'] as $key => $res)
+                		<tr class='other{!! $key !!} updateOther data'>
+		                	<td>
+		                		<input type="text" name="" class="form-control nameOther" value="{!! $res['nameOther'] !!}">
+		                	</td>
+		                	<td>
+		                		<input type="text" name="" class="form-control detailOther" value="{!! $res['detailOther'] !!}">
+		                	</td>
+		                	<td>
+		                		<input type="text" name="" class="form-control amountOther common-numeric" value="{!! $res['amountOther'] !!}">
+		                	</td>
+		                	<td>
+		                		<input type="text" name="" class="form-control princeOther common-currency" value="{!! $res['princeOther'] !!}">
+		                		</td>
+		                	<td>
+		                		<input type="text" name="" class="form-control valueOther common-currency" value="{!! $res['valueOther'] !!}" disabled="">
+			                </td>
+		                	<td>
+		                		<input type="text" name="" class="form-control noteOther" value="{!! $res['noteOther'] !!}">
+			                </td>
+		                	<td>
+		                		<div @if($role == 3 || $role == 4 || $role == 5 || $role == 6) style="display: none;"@endif>
+		                			<i class="remove fa fa-times removeRow" aria-hidden="true" style="cursor: pointer; color: orange"></i>
+		                		</div>
+		                	</td>
+                		</tr>
+	                	@endforeach
+	                	@endif
 	                    </tbody>
 	                </table>
 				</div>
@@ -569,7 +475,7 @@
 			<div class="row">
 				<div class="col-12">
 	                <label>Ghi chú của saler</label>
-	                <input type="text" name="noteOtherSale" class="form-control noteOtherSale" value="{!! ($response['noteOtherSale'] != null) ? $response['noteOtherSale'] : '' !!}" @if($role != 1) disabled="" @endif>
+	                <input type="text" name="noteOtherSale" class="form-control noteOtherSale" value="{!! ($response['noteOtherSale'] != null) ? $response['noteOtherSale'] : '' !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 				</div>
 			</div>
 			<div class="row">
@@ -618,7 +524,7 @@
 					<table id="tblPayment" class="table table-xs data-table table-bordered">
 	                    <thead>
 	                    <tr>
-	                        <th>Tiền <button type="button" class="btn btn-link addPayment" disabled="true"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></th>
+	                        <th>Tiền <button type="button" class="btn btn-link addPayment"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></th>
 	                        <th>Ngày</th>
 	                        <th>Đính kèm file</th>
 	                        <th>Nhập mã FT</th>
@@ -628,63 +534,32 @@
 	                    </tr>
 	                    </thead>
 	                    <tbody>
-	                	<tr>
-	                		<td>
-	                			<input type="text" name="valuePayment" class="form-control valuePayment common-currency" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
-	                		</td>
-	                		<td>
-	                			<input type="text" name="datePayment" class="form-control datePayment date" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
-	                		</td>
-	                		<td>
-	                			<input type="file" name="imagePayment" class="form-control imagePayment" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
-	                		</td>
-	                		<td>
-	                			<input type="text" name="codeFT" class="form-control codeFT" @if($role != 3) disabled @endif @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
-	                		</td>
-	                		<td>
-	                			<select class="browser-default custom-select confirm" name="confirm" @if($role != 2) disabled @endif @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
-								  	<option value="" selected>--Lựa chọn--</option>
-								  	<option value="0">Chưa xác nhận</option>
-								  	<option value="1">Đã xác nhận</option>
-								</select>
-	                		</td>
-	                		<td>
-	                			<input type="text" name="notePayment" class="form-control notePayment" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
-	                		</td>
-	                	</tr>
 	                	@if($response['payment'] != null)
 	                	@foreach($response['payment'] as $key=>$res)
 	                	<tr class="payment{!! $key !!} updatePayment data">
 	                		<td>
-	                			<input type="text" name="" class="form-control valuePayment{!! $key !!} common-currency" value="{!! $res['valuePayment'] !!}" @if($res['codeFT'] != null) disabled @endif @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
-		                		<label class="valuePayments{!! $key !!}"> {!! $res['valuePayment'] !!}</label>
+	                			<input type="text" name="" class="form-control valuePayment common-currency" value="{!! $res['valuePayment'] !!}" @if($res['codeFT'] != null) disabled @endif @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 	                		</td>
 		                	<td>
-		                		<input type="text" name="" class="form-control datePayment{!! $key !!} date" value="{!! $res['datePayment'] !!}" @if($res['codeFT'] != null) disabled @endif @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
-		                		<label class="datePayments{!! $key !!}"> {!! $res['datePayment'] !!}</label>
+		                		<input type="text" name="" class="form-control datePayment date" value="{!! $res['datePayment'] !!}" @if($res['codeFT'] != null) disabled @endif @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 		                	</td>
 		                	<td>
-		                		<input type="file" name="" class="form-control imagePayment{!! $key !!}" value="{!! $res['imagePayment'] !!}" @if($res['codeFT'] != null) disabled @endif>
-		                		<label class="imagePayments{!! $key !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif> {!! $res['imagePayment'] !!}</label>
+		                		<input type="file" name="" class="form-control imagePayment" value="{!! $res['imagePayment'] !!}" @if($res['codeFT'] != null) disabled @endif>
 		                	</td>
 		                	<td>
-		                		<input type="text" name="" class="form-control codeFT{!! $key !!}" value="{!! $res['codeFT'] !!}" @if($role != 3) disabled @endif>
-		                		<label class="codeFTs{!! $key !!}"> {!! $res['codeFT'] !!}</label>
+		                		<input type="text" name="" class="form-control codeFT" value="{!! $res['codeFT'] !!}" @if($role != 3) disabled @endif>
 		                	</td>
 		                	<td>
-		                		<select class="browser-default custom-select confirm{!! $key !!}" name="confirm" @if($role != 2) disabled @endif>
+		                		<select class="browser-default custom-select confirm" name="confirm" @if($role != 2) disabled @endif>
 								  	<option @if($res['confirm'] == 0) selected @endif value="0">Không cho nợ</option>
 								  	<option @if($res['confirm'] == 1) selected @endif value="1">Cho nợ</option>
 								</select>
-		                		<label class="confirms{!! $key !!}"> {!! $res['confirm'] !!}</label>
 		                	</td>
 		                	<td>
-		                		<input type="text" name="" class="form-control notePayment{!! $key !!}" value="{!! $res['notePayment'] !!}" @if($res['codeFT'] != null) disabled @endif @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
-		                		<label class="notePayments{!! $key !!}"> {!! $res['notePayment'] !!}</label>
+		                		<input type="text" name="" class="form-control notePayment" value="{!! $res['notePayment'] !!}" @if($res['codeFT'] != null) disabled @endif @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 		                	</td>
 		                	<td>
-	                			<i class="fa fa-check-circle savePayment savePayment{!! $key !!}" aria-hidden="true" data-id="{!! $key !!}" title="Lưu" style="display: none; cursor: pointer; color: orange"></i>
-		                		<i class="fa fa-minus-circle editPayment" aria-hidden="true" data-id="{!! $key !!}" title="Sửa" style="cursor: pointer; color: orange"></i>
+	                			<i class="remove fa fa-times removeRow`+indexPay+`" aria-hidden="true" style="cursor: pointer; color: orange"></i>
 		                	</td>
 	                	</tr>
 	                	@endforeach
@@ -952,41 +827,183 @@
         	}
         });
 
-	    var index = 0;
-	    $('.addHotel').click(function(){
-	    	$(this).prop('disabled', true);
-	    	++index;
-	    	var dateHotel = $('.dateHotel').val();
-	    	var nameHotel = $('.nameHotel').val();
-	    	var levelHotel = $('.levelHotel').val();
-	    	var bedHotel = $('.bedHotel').val();
-	    	var comboHotel = $('.comboHotel').val();
-	    	var numberHotel = $('.numberHotel').val();
-	    	var valueHotel = $('.valueHotel').val();
-	    	var typeSurcharge = $('.typeSurcharge').val();
-	    	var amountHotel = ($('.amountHotel').val() != 0) ? $('.amountHotel').val() : 0;
-	    	var surcharge = ($('.surcharge').val() != 0) ? $('.surcharge').val() : 0;
-	    	$('.totalValueHotel').text(parseInt($('.totalValueHotel').text()) + parseInt(valueHotel) * parseInt(numberHotel));
-	    	$('#tblhotel tbody').append(`<tr class='data'>
-	    		<td>`+dateHotel+`</td><td>`+nameHotel+`</td><td>`+levelHotel+`</td><td>`+bedHotel+`</td><td>`+comboHotel+`</td><td>`+numberHotel+`</td><td>`+valueHotel+`</td><td>`+typeSurcharge+`</td><td>`+amountHotel+`</td><td>`+surcharge+`</td><td><i class="remove fa fa-times removeRow`+index+`" aria-hidden="true" style="cursor: pointer; color: orange"></i></td>
-	    		</tr>`);
-	    	$('.dateHotel, .nameHotel, .levelHotel, .bedHotel, .comboHotel, .numberHotel, .valueHotel, .amountHotel, .typeSurcharge, .surcharge').val('');
+	    var indexHotel = 0;
+	    $('body').delegate('.addHotel', 'click', function (){
+	    	++indexHotel;
+	    	$('#tblhotel tbody').append(`
+	    		<tr>
+            		<td>
+            			<input type="text" name="dateHotel`+indexHotel+`" class="form-control dateHotel`+indexHotel+` date">
+            		</td>
+            		<td>
+						<input type="text" name="nameHotel" class="form-control nameHotel">
+            		</td>
+            		<td>
+						<input type="text" name="levelHotel`+indexHotel+`" class="form-control levelHotel`+indexHotel+`">
+            		</td>
+            		<td>
+						<input type="text" name="bedHotel`+indexHotel+`" class="form-control bedHotel`+indexHotel+`">
+            		</td>
+            		<td>
+						<input type="text" name="comboHotel`+indexHotel+`" class="form-control comboHotel`+indexHotel+`">
+            		</td>
+            		<td>
+            			<input type="text" name="numberHotel`+indexHotel+`" class="form-control numberHotel`+indexHotel+` common-numeric">
+            		</td>
+            		<td>
+            			<input type="text" name="valueHotel`+indexHotel+`" class="form-control valueHotel`+indexHotel+` common-currency">
+            		</td>
+            		<td>
+            			<input type="text" name="typeSurcharge`+indexHotel+`" class="form-control typeSurcharge`+indexHotel+`">
+            		</td>
+            		<td>
+            			<input type="text" name="amountHotel`+indexHotel+`" class="form-control amountHotel`+indexHotel+` common-numeric">
+            		</td>
+            		<td><input type="text" name="surcharge`+indexHotel+`" placeholder="nhập tiền" class="form-control common-currency surcharge`+indexHotel+`"></td>
+            		<td>
+            			<i class="remove fa fa-times removeRow`+indexHotel+`" aria-hidden="true" style="cursor: pointer; color: orange"></i>
+            		</td>
+            	</tr>
+	    		`);
+		    $('.valueHotel'+indexHotel).focusout(function(){
+	        	$('.totalValueHotel').text(parseInt($('.totalValueHotel').text()) + parseInt($('.numberHotel'+indexHotel).val() != '' ? $('.numberHotel'+indexHotel).val() : 0) * parseInt($('.valueHotel'+indexHotel).val() != '' ? $('.valueHotel'+indexHotel).val() : 0));
+	        });
+	        $('.surcharge'+indexHotel).focusout(function(){
+	        	$('.totalValueHotel').text(parseInt($('.totalValueHotel').text()) + parseInt($('.amountHotel'+indexHotel).val() != '' ? $('.amountHotel'+indexHotel).val() : 0) * parseInt($('.surcharge'+indexHotel).val() != '' ? $('.surcharge'+indexHotel).val() : 0));
+	        });
+	        $('.numberHotel'+indexHotel+', valueHotel'+indexHotel+', .amountHotel'+indexHotel+', .surcharge'+indexHotel).click(function(){
+	    		var count = $('.totalValueHotel').text() != '' ? $('.totalValueHotel').text() : 0;
+	    		var countChild = parseInt($(this).closest("tr").find("input:eq(5)").val() != '' ? $(this).closest("tr").find("input:eq(5)").val() : 0) * parseInt($(this).closest("tr").find("input:eq(6)").val() != '' ? $(this).closest("tr").find("input:eq(6)").val() : 0) + parseInt($(this).closest("tr").find("input:eq(8)").val() != '' ? $(this).closest("tr").find("input:eq(8)").val() : 0) * parseInt($(this).closest("tr").find("input:eq(9)").val() != '' ? $(this).closest("tr").find("input:eq(9)").val() : 0);
+	    			console.log(count, countChild);
+		    	$(this).focusout(function(){
+			    	var numberHotel = $(this).closest("tr").find("input:eq(5)").val() != '' ? $(this).closest("tr").find("input:eq(5)").val() : 0;
+			    	var valueHotel = $(this).closest("tr").find("input:eq(6)").val() != '' ?$(this).closest("tr").find("input:eq(6)").val() : 0;
+			    	var amountHotel = $(this).closest("tr").find("input:eq(8)").val() != '' ?$(this).closest("tr").find("input:eq(8)").val() : 0;
+			    	var surcharge = $(this).closest("tr").find("input:eq(9)").val() != '' ?$(this).closest("tr").find("input:eq(9)").val() : 0;
+			    	console.log(numberHotel, valueHotel, amountHotel, surcharge);
+			    	$('.totalValueHotel').text(parseInt(count) - parseInt(countChild) + parseInt(numberHotel) * parseInt(valueHotel) + parseInt(amountHotel) *parseInt(surcharge));
+			    });
+	    	});
+	    	$(document).find('.common-number').inputmask({
+		        'mask': '999 999 9999 [99999]',
+		        'groupSeparator': ',',
+		        'autoGroup': true,
+		        'removeMaskOnSubmit': true,
+		        'autoUnmask': true,
+		        'greedy': false 
+		    });
+		    $(document).find('.common-numeric').inputmask({
+		        'alias': 'decimal',
+		        'autoGroup': true,
+		        'removeMaskOnSubmit': true,
+		        'placeholder': "0",
+		        'autoUnmask': true,
+		        'allowMinus': false
+		    });
+		    $(document).find('.common-currency').inputmask({
+		        'alias': 'decimal',
+		        'groupSeparator': ',',
+		        'placeholder': "0",
+		        'autoGroup': true,
+		        'removeMaskOnSubmit': true,
+		        'autoUnmask': true,
+		        'suffix': ' VNĐ',
+		        'allowMinus': false
+		    });
+		    $(".date").inputmask({ 
+		    	'alias': "dd/mm/yyyy",
+		    	"clearIncomplete": true,
+		    });
+		    $(".email").inputmask({ 
+		    	'alias': "email",
+		    	"clearIncomplete": true,
+		    });
 	    });
-	    $('.addOther').click(function(){
-	    	$(this).prop('disabled', true);
-	    	++index;
+	    var indexOther = 0;
+	    $('body').delegate('.addOther', 'click', function (){
+	    	++indexOther;
+	    	$('#tblOther tbody').append(`
+	    		<tr>
+            		<td>
+						<input type="text" name="nameOther`+indexOther+`" class="form-control nameOther`+indexOther+`">
+            		</td>
+            		<td>
+						<input type="text" name="detailOther`+indexOther+`" class="form-control detailOther`+indexOther+`">
+            		</td>
+            		<td>
+            			<input type="text" name="amountOther`+indexOther+`" class="form-control amountOther`+indexOther+` common-numeric">
+            		</td>
+            		<td>
+            			<input type="text" name="princeOther`+indexOther+`" class="form-control princeOther`+indexOther+` common-currency">
+            		</td>
+            		<td>
+            			<input type="text" name="valueOther`+indexOther+`" class="form-control valueOther`+indexOther+` common-currency" disabled="">
+            		</td>
+            		<td>
+            			<input type="text" name="noteOther`+indexOther+`" class="form-control noteOther`+indexOther+`">
+            		</td>
+            		<td><i class="remove fa fa-times removeRow`+indexOther+`" aria-hidden="true" style="cursor: pointer; color: orange"></i></td>
+            	</tr>
+	    		`);
+	    	$('.princeOther'+indexOther+', .amountOther'+indexOther).click(function(){
+	    		var count = $('.totalValueOther').text() != '' ? $('.totalValueOther').text() : 0;
+	    		var countChild = $(this).closest("tr").find("input:eq(4)").val() != '' ?$(this).closest("tr").find("input:eq(4)").val() : 0;
+	    		console.log(count, countChild);
+		    	$(this).focusout(function(){
+			    	var value = $(this).closest("tr").find("input:eq(3)").val() != '' ? $(this).closest("tr").find("input:eq(3)").val() : 0;
+			    	var amount = $(this).closest("tr").find("input:eq(2)").val() != '' ?$(this).closest("tr").find("input:eq(2)").val() : 0;
+			    	$(this).closest("tr").find("input:eq(4)").val(parseInt(value) * parseInt(amount));
+			    	$('.totalValueOther').text(parseInt(count) - parseInt(countChild) + parseInt(value) * parseInt(amount));
+			    });
+	    	});
 	    	var nameOther = $('.nameOther').val();
 	    	var detailOther = $('.detailOther').val();
 	    	var amountOther = $('.amountOther').val();
 	    	var princeOther = $('.princeOther').val();
 	    	var valueOther = $('.valueOther').val();
 	    	var noteOther = $('.noteOther').val();
-	    	$('.totalValueOther').text(parseInt($('.totalValueOther').text()) + parseInt(valueOther));
-	    	$('#tblOther tbody').append(`<tr class='data'>
-	    		<td>`+nameOther+`</td><td>`+detailOther+`</td><td>`+amountOther+`</td><td>`+princeOther+`</td><td>`+valueOther+`</td><td>`+noteOther+`</td><td><i class="remove fa fa-times removeRow`+index+`" aria-hidden="true" style="cursor: pointer; color: orange"></i></td>
-	    		</tr>`);
-	    	$('.nameOther, .detailOther, .amountOther, .princeOther, .valueOther, .noteOther').val('');
-	    });
+	    	// $('.totalValueOther').text(parseInt($('.totalValueOther').text()) + parseInt(valueOther));
+	    	$(document).find('.common-number').inputmask({
+		        'mask': '999 999 9999 [99999]',
+		        'groupSeparator': ',',
+		        'autoGroup': true,
+		        'removeMaskOnSubmit': true,
+		        'autoUnmask': true,
+		        'greedy': false 
+		    });
+		    $(document).find('.common-numeric').inputmask({
+		        'alias': 'decimal',
+		        'autoGroup': true,
+		        'removeMaskOnSubmit': true,
+		        'placeholder': "0",
+		        'autoUnmask': true,
+		        'allowMinus': false
+		    });
+		    $(document).find('.common-currency').inputmask({
+		        'alias': 'decimal',
+		        'groupSeparator': ',',
+		        'placeholder': "0",
+		        'autoGroup': true,
+		        'removeMaskOnSubmit': true,
+		        'autoUnmask': true,
+		        'suffix': ' VNĐ',
+		        'allowMinus': false
+		    });
+		    $(".date").inputmask({ 
+		    	'alias': "dd/mm/yyyy",
+		    	"clearIncomplete": true,
+		    });
+		    $(".email").inputmask({ 
+		    	'alias': "email",
+		    	"clearIncomplete": true,
+		    });
+		    $('.dateCheck').daterangepicker({
+		      	autoUpdateInput: false,
+		      	locale: {
+		          	cancelLabel: 'Clear'
+		      	}
+		  	});
+		});
 	    if(parseInt($('.countPayment').val()) < parseInt($('.airValue').val())){
     		$(".paymentAirline").prop( "disabled", true );
     	}
@@ -996,60 +1013,104 @@
     	if(parseInt($('.countPayment').val()) < parseInt($('.totalValueOther').text())){
     		$(".paymentOther").prop( "disabled", true );
     	}
-	    $('.addPayment').click(function(){
-	    	$(this).prop('disabled', true);
-	    	++index;
-	    	var countValue = $('.countPayment').val();
-	    	var valuePayment = $('.valuePayment').val();
-	    	$('.countPayment').val(parseInt(valuePayment) + parseInt(countValue));
-	    	var datePayment = $('.datePayment').val();
-	    	var imagePayment = $('.imagePayment').val();
-	    	var codeFT = $('.codeFT').val();
-	    	var confirm = $('.confirm').val();
-	    	var notePayment = $('.notePayment').val();
-	    	$('#tblPayment tbody').append(`<tr class='data'>
-	    		<td>`+valuePayment+`</td><td>`+datePayment+`</td><td>`+imagePayment.substr(12, imagePayment.length-1)+`<td>`+codeFT+`</td><td>`+confirm+`</td><td>`+notePayment+`</td></td><td><i class="remove fa fa-times removeRow`+index+`" aria-hidden="true" style="cursor: pointer; color: orange"></i></td>
-	    		</tr>`);
-	    	$('.valuePayment, .datePayment, .imagePayment').val('');
-	    	// check input checkbox
-	    	var countValuePayment = $('.countPayment').val();
-	    	if(parseInt($('.airValue').val()) <= parseInt(countValuePayment)){
-	    		$( ".paymentAirline" ).prop( "disabled", false );
-	    	}else{
-	    		$( ".paymentAirline" ).prop( "disabled", true );
-	    		$( ".paymentAirline" ).prop( "checked", false );
-	    	}
-	    	if(parseInt($('.totalValueHotel').text()) <= parseInt(countValuePayment)){
-	    		$( ".paymentHotel" ).prop( "disabled", false );
-	    	}else{
-	    		$( ".paymentHotel" ).prop( "disabled", true );
-	    		$( ".paymentHotel" ).prop( "checked", false );
-	    	}
-	    	if(parseInt($('.totalValueOther').text()) <= parseInt(countValuePayment)){
-	    		$( ".paymentOther" ).prop( "disabled", false );
-	    	}else{
-	    		$( ".paymentOther" ).prop( "disabled", true );
-	    		$( ".paymentOther" ).prop( "checked", false );
-	    	}
+	    var indexPay = 0;
+	    $('body').delegate('.addPayment', 'click', function (){
+	    	++indexPay;
+	    	$('#tblPayment tbody').append(`
+	    		<tr>
+            		<td>
+            			<input type="text" name="valuePayment`+indexPay+`" class="form-control valuePayment`+indexPay+` common-currency">
+            		</td>
+            		<td>
+            			<input type="date" name="datePayment`+indexPay+`" class="form-control datePayment`+indexPay+` date">
+            		</td>
+            		<td>
+            			<input type="file" name="imagePayment`+indexPay+`" class="form-control imagePayment`+indexPay+`">
+            		</td>
+            		<td>
+            			<input type="text" name="codeFT`+indexPay+`" class="form-control codeFT`+indexPay+`" @if($role != 3) disabled @endif>
+            		</td>
+            		<td>
+            			<select class="browser-default custom-select confirm`+indexPay+`" name="confirm`+indexPay+`" @if($role != 2) disabled @endif>
+						  	<option value="0">Không cho nợ</option>
+						  	<option value="1">Cho nợ</option>
+						</select>
+            		</td>
+            		<td>
+            			<input type="text" name="notePayment`+indexPay+`" class="form-control notePayment`+indexPay+`">
+            		</td>
+            		<td><i class="remove fa fa-times removeRow`+indexPay+`" aria-hidden="true" style="cursor: pointer; color: orange"></i></td
+            	</tr>
+	    		`);
+	    	$('.valuePayment'+indexPay).focusout(function(){
+		    	$('.countPayment').val(parseInt($('.countPayment').val()) + parseInt($(this).val()));
+		    });
+		    $('.valuePayment'+indexPay).click(function(){
+	    		var count = $('.countPayment').val() != '' ? $('.countPayment').val() : 0;
+	    		var countChild = $(this).val() != '' ? $(this).val() : 0;
+		    	$(this).focusout(function(){
+			    	$('.countPayment').val(parseInt(count) - parseInt(countChild) + parseInt($(this).val()));
+			    });
+	    	});
+	    	$(document).find('.common-number').inputmask({
+		        'mask': '999 999 9999 [99999]',
+		        'groupSeparator': ',',
+		        'autoGroup': true,
+		        'removeMaskOnSubmit': true,
+		        'autoUnmask': true,
+		        'greedy': false 
+		    });
+		    $(document).find('.common-numeric').inputmask({
+		        'alias': 'decimal',
+		        'autoGroup': true,
+		        'removeMaskOnSubmit': true,
+		        'placeholder': "0",
+		        'autoUnmask': true,
+		        'allowMinus': false
+		    });
+		    $(document).find('.common-currency').inputmask({
+		        'alias': 'decimal',
+		        'groupSeparator': ',',
+		        'placeholder': "0",
+		        'autoGroup': true,
+		        'removeMaskOnSubmit': true,
+		        'autoUnmask': true,
+		        'suffix': ' VNĐ',
+		        'allowMinus': false
+		    });
+		    $(".date").inputmask({ 
+		    	'alias': "dd/mm/yyyy",
+		    	"clearIncomplete": true,
+		    });
+		    $(".email").inputmask({ 
+		    	'alias': "email",
+		    	"clearIncomplete": true,
+		    });
+		    $('.dateCheck').daterangepicker({
+		      	autoUpdateInput: false,
+		      	locale: {
+		          	cancelLabel: 'Clear'
+		      	}
+		  	});
 	    });
 	    $('body').delegate('#tblhotel .remove', 'click', function (){
 	    	var countValue = $('.totalValueHotel').text();
 	    	console.log(countValue);
 	    	// xóa tổng giá trị đơn hàng
-	    	$('.totalValueHotel').text(parseInt(countValue) - parseInt($(this).closest("tr").find("td:eq(5)").text()) * parseInt($(this).closest("tr").find("td:eq(6)").text()));
+	    	$('.totalValueHotel').text(parseInt(countValue) - parseInt($(this).closest("tr").find("input:eq(5)").val() != '' ? $(this).closest("tr").find("input:eq(5)").val() : 0) * parseInt($(this).closest("tr").find("input:eq(6)").val() != '' ? $(this).closest("tr").find("input:eq(6)").val() : 0)- parseInt($(this).closest("tr").find("input:eq(8)").val() != '' ? $(this).closest("tr").find("input:eq(8)").val() : 0) * parseInt($(this).closest("tr").find("input:eq(9)").val() != '' ? $(this).closest("tr").find("input:eq(9)").val() : 0));
 	    	$(this).closest("tr").remove();
 	    });
 	    $('body').delegate('#tblOther .remove', 'click', function (){
 	    	var countValue = $('.totalValueOther').text();
 	    	// xóa tổng giá trị đơn hàng
-	    	$('.totalValueOther').text(parseInt(countValue) - parseInt($(this).closest("tr").find("td:eq(4)").text()));
+	    	$('.totalValueOther').text(parseInt(countValue) - parseInt($(this).closest("tr").find("input:eq(4)").val() != '' ? $(this).closest("tr").find("input:eq(4)").val() : 0));
 	    	$(this).closest("tr").remove();
 	    });
 	    $('body').delegate('#tblPayment .remove', 'click', function (){
 	    	var countValue = $('.countPayment').val();
 	    	var value = $(this).attr('class');
 	    	// xóa tổng giá trị đơn hàng
-	    	$('.countPayment').val(parseInt(countValue) - parseInt($(this).closest("tr").find("td:eq(0)").text()));
+	    	$('.countPayment').val(parseInt(countValue) - parseInt($(this).closest("tr").find("input:eq(0)").val() != '' ? $(this).closest("tr").find("input:eq(0)").val() : 0));
 	    	$(this).closest("tr").remove();
 	    	var countValuePayment = $('.countPayment').val();
 	    	if(parseInt($('.airValue').val()) <= parseInt(countValuePayment)){
@@ -1150,47 +1211,24 @@
 	    });
 
 
-	    $('.updateHotel label').show();
-	    $('.updateHotel input:text').hide();
-	    $('.editHotel').click(function(){
-	    	var id = $(this).data('id');
-            $('.hotel'+id+' label').toggle();
-            $('.hotel'+id+' input:text').toggle();
-            $('.saveHotel'+id).toggle();
-	    });
-	    $('.saveHotel').click(function(){
-	    	var id = $(this).data('id');
-	    	$(this).toggle();
-	    	console.log(id);
-	    	$('.totalValueHotel').text(parseInt($('.totalValueHotel').text()) - parseInt($('.number'+id).text()) * parseInt($('.value'+id).text())  + parseInt($('.numberHotel'+id).val()) * parseInt($('.valueHotel'+id).val()) - parseInt($('.amountlable'+id).text()) * parseInt($('.surcharge'+id).text())  + parseInt($('.amountHotel'+id).val()) * parseInt($('.surchargeHotel'+id).val()));
-	    	$('.dateLable'+id).text($('.dateHotel'+id).val());
-	    	$('.name'+id).text($('.nameHotel'+id).val());
-	    	$('.level'+id).text($('.levelHotel'+id).val());
-	    	$('.bed'+id).text($('.bedHotel'+id).val());
-	    	$('.combo'+id).text($('.comboHotel'+id).val());
-	    	$('.number'+id).text($('.numberHotel'+id).val());
-	    	$('.value'+id).text($('.valueHotel'+id).val());
-	    	$('.typeSurcharge'+id).text($('.typeSurchargeHotel'+id).val());
-	    	$('.amountlable'+id).text($('.amountHotel'+id).val());
-	    	$('.surcharge'+id).text($('.surchargeHotel'+id).val());
-	    	$('.hotel'+id+' label').toggle();
-            $('.hotel'+id+' input:text').toggle();
-	    });
-
-
-	    $('.updateOther label').show();
-	    $('.updateOther input:text').hide();
-	    $('.editOther').click(function(){
-	    	var id = $(this).data('id');
-            $('.other'+id+' label').toggle();
-            $('.other'+id+' input:text').toggle();
-            $('.saveOther'+id).toggle();
-            $('.princeOther'+id+', .amountOther'+id).keyup(function(){
-		    	var value = $('.princeOther'+id).val();
-		    	var amount = $('.amountOther'+id).val();
-		    	$('.valueOther'+id).val(parseInt(value) * parseInt(amount));
+	    $('.princeOther, .amountOther').click(function(){
+    		var count = $('.totalValueOther').text() != '' ? $('.totalValueOther').text() : 0;
+    		var countChild = $(this).closest("tr").find("input:eq(4)").val() != '' ?$(this).closest("tr").find("input:eq(4)").val() : 0;
+    		console.log(count, countChild);
+	    	$(this).focusout(function(){
+		    	var value = $(this).closest("tr").find("input:eq(3)").val() != '' ? $(this).closest("tr").find("input:eq(3)").val() : 0;
+		    	var amount = $(this).closest("tr").find("input:eq(2)").val() != '' ?$(this).closest("tr").find("input:eq(2)").val() : 0;
+		    	$(this).closest("tr").find("input:eq(4)").val(parseInt(value) * parseInt(amount));
+		    	$('.totalValueOther').text(parseInt(count) - parseInt(countChild) + parseInt(value) * parseInt(amount));
 		    });
-	    });
+    	});
+	    $('.valuePayment').click(function(){
+    		var count = $('.countPayment').val() != '' ? $('.countPayment').val() : 0;
+    		var countChild = $(this).val() != '' ? $(this).val() : 0;
+	    	$(this).focusout(function(){
+		    	$('.countPayment').val(parseInt(count) - parseInt(countChild) + parseInt($(this).val()));
+		    });
+    	});
 	    $('.saveOther').click(function(){
 	    	var id = $(this).data('id');
 	    	$(this).toggle();
@@ -1206,15 +1244,6 @@
             $('.other'+id+' input:text').toggle();
 	    });
 
-	    $('.updatePayment label').show();
-	    $('.updatePayment input:text, .updatePayment input:file, .updatePayment select').hide();
-	    $('.editPayment').click(function(){
-	    	var id = $(this).data('id');
-            $('.payment'+id+' label').toggle();
-            $('.payment'+id+' input:text').toggle();
-            $('.payment'+id+' select').toggle();
-            $('.savePayment'+id).toggle();
-	    });
 	    $('.savePayment').click(function(){
 	    	var id = $(this).data('id');
 	    	$(this).toggle();
@@ -1255,44 +1284,44 @@
 			});
 			console.log(serviceAlir);
 	    	var hotel = [];
-	    	var $hotel = $('#tblhotel .data');
+	    	var $hotel = $('#tblhotel tbody tr');
 	    	$hotel.each(function(){
 				hotel.push({
-					date: $(this).find("td:eq(0)").text(),
-					name: $(this).find("td:eq(1)").text(),
-					level: $(this).find("td:eq(2)").text(),
-					bed: $(this).find("td:eq(3)").text(),
-					combo: $(this).find("td:eq(4)").text(),
-					number: $(this).find("td:eq(5)").text(),
-					value: $(this).find("td:eq(6)").text(),
-					typeSurcharge: $(this).find("td:eq(7)").text(),
-					amountHotel: $(this).find("td:eq(8)").text(),
-					surcharge: $(this).find("td:eq(9)").text(),
+					date: $(this).find("input:eq(0)").val(),
+					name: $(this).find("input:eq(1)").val(),
+					level: $(this).find("input:eq(2)").val(),
+					bed: $(this).find("input:eq(3)").val(),
+					combo: $(this).find("input:eq(4)").val(),
+					number: $(this).find("input:eq(5)").val(),
+					value: $(this).find("input:eq(6)").val(),
+					typeSurcharge: $(this).find("input:eq(7)").val(),
+					amountHotel: $(this).find("input:eq(8)").val(),
+					surcharge: $(this).find("input:eq(9)").val(),
 				});
 			});
 			var other = [];
-			var $other = $('#tblOther .data');
+			var $other = $('#tblOther tbody tr');
 			$other.each(function(){
 				other.push({
-					nameOther: $(this).find("td:eq(0)").text(),
-					detailOther: $(this).find("td:eq(1)").text(),
-					amountOther: $(this).find("td:eq(2)").text(),
-					princeOther: $(this).find("td:eq(3)").text(),
-					valueOther: $(this).find("td:eq(4)").text(),
-					noteOther: $(this).find("td:eq(5)").text(),
+					nameOther: $(this).find("input:eq(0)").val(),
+					detailOther: $(this).find("input:eq(1)").val(),
+					amountOther: $(this).find("input:eq(2)").val(),
+					princeOther: $(this).find("input:eq(3)").val(),
+					valueOther: $(this).find("input:eq(4)").val(),
+					noteOther: $(this).find("input:eq(5)").val(),
 				});
 			});
 	        var payment = [];
-	        var $payment = $('#tblPayment .data');
+	        var $payment = $('#tblPayment tbody tr');
 	        var number = 0;
 	        $payment.each(function(){
 	        	payment.push({
-					valuePayment: $(this).find("td:eq(0)").text(),
-					datePayment: $(this).find("td:eq(1)").text(),
-					imagePayment: $(this).find("td:eq(2)").text(),
-					codeFT: $(this).find("td:eq(3)").text(),
-					confirm: $(this).find("td:eq(4) label").text(),
-					notePayment: $(this).find("td:eq(5)").text(),
+					valuePayment: $(this).find("input:eq(0)").val(),
+					datePayment: $(this).find("input:eq(1)").val(),
+					imagePayment: $(this).find("input:eq(2)").val(),
+					codeFT: $(this).find("input:eq(3)").val(),
+					confirm: $(this).find("option:selected").val(),
+					notePayment: $(this).find("input:eq(4)").val(),
 				});
 	        });
 	        var listCustomer = $('.listCustomer').val().split('\n');
