@@ -418,7 +418,7 @@
 					<label>Tổng giá trị thanh toán</label>
 					<div>
 						<div class="input-group mb-3">
-						  	<input type="text" class="form-control countPayment" disabled="" value="0">
+						  	<input type="text" class="form-control countPayment common-numeric" disabled="" value="0">
 						  	<div class="input-group-append">
 						    	<span class="input-group-text" id="basic-addon2" style="font-size: 12px">VNĐ</span>
 						  	</div>
@@ -541,13 +541,17 @@
 	  	$('.dateCheck').on('cancel.daterangepicker', function(ev, picker) {
 	      	$(this).val('');
 	  	});
-	    $('.princeOther, .amountOther').keyup(function(){
-	    	var value = $('.princeOther').val() != '' ? $('.princeOther').val() : 0;
-	    	var amount = $('.amountOther').val() != '' ? $('.amountOther').val() : 0;
-	    	console.log(value , amount);
-	    	$('.valueOther').val(parseInt(value) * parseInt(amount));
-	    	$('.totalValueOther').text(parseInt(value) * parseInt(amount));
-	    });
+	  	$('.princeOther, .amountOther').click(function(){
+    		var count = $('.totalValueOther').text() != '' ? $('.totalValueOther').text() : 0;
+    		var countChild = $(this).closest("tr").find("input:eq(4)").val() != '' ?$(this).closest("tr").find("input:eq(4)").val() : 0;
+    		console.log(count, countChild);
+	    	$(this).focusout(function(){
+		    	var value = $(this).closest("tr").find("input:eq(3)").val() != '' ? $(this).closest("tr").find("input:eq(3)").val() : 0;
+		    	var amount = $(this).closest("tr").find("input:eq(2)").val() != '' ?$(this).closest("tr").find("input:eq(2)").val() : 0;
+		    	$(this).closest("tr").find("input:eq(4)").val(parseInt(value) * parseInt(amount));
+		    	$('.totalValueOther').text(parseInt(count) - parseInt(countChild) + parseInt(value) * parseInt(amount));
+		    });
+    	});
 	    $('#checkin_out').click(function(){
 	    	var checkin = $('.fromDate ').val();
 	    	var checkout = $('.toDate').val();
@@ -806,38 +810,41 @@
 		      	}
 		  	});
 		});
-
-	    $('.valuePayment').focusout(function(){
-	    	$('.countPayment').val(parseInt($('.countPayment').val()) + parseInt(($(this).val() != '') ? $(this).val() : 0));
-	    	var countValue = $('.countPayment').val();
-	    	var valuePayment = $('.valuePayment').val();
-	    	// $('.countPayment').val(parseInt(valuePayment) + parseInt(countValue));
-	    	var datePayment = $('.datePayment').val();
-	    	var imagePayment = $('.imagePayment').val();
-	    	var codeFT = $('.codeFT').val();
-	    	var confirm = $('.confirm').val();
-	    	var notePayment = $('.notePayment').val();
-	    	// check input checkbox
-	    	var countValuePayment = $('.countPayment').val();
-	    	if(parseInt($('.airValue').val()) <= parseInt(countValuePayment) && parseInt($('.airValue').val()) > 0){
-	    		$( ".paymentAirline" ).prop( "disabled", false );
-	    	}else{
-	    		$( ".paymentAirline" ).prop( "disabled", true );
-	    		$( ".paymentAirline" ).prop( "checked", false );
-	    	}
-	    	if(parseInt($('.totalValueHotel').text()) <= parseInt(countValuePayment) && parseInt($('.totalValueHotel').text()) > 0){
-	    		$( ".paymentHotel" ).prop( "disabled", false );
-	    	}else{
-	    		$( ".paymentHotel" ).prop( "disabled", true );
-	    		$( ".paymentHotel" ).prop( "checked", false );
-	    	}
-	    	if(parseInt($('.totalValueOther').text()) <= parseInt(countValuePayment) && parseInt($('.totalValueOther').text()) > 0){
-	    		$( ".paymentOther" ).prop( "disabled", false );
-	    	}else{
-	    		$( ".paymentOther" ).prop( "disabled", true );
-	    		$( ".paymentOther" ).prop( "checked", false );
-	    	}
-	    });
+	    $('.valuePayment').click(function(){
+    		var count = $('.countPayment').val() != '' ? $('.countPayment').val() : 0;
+    		var countChild = $(this).val() != '' ? $(this).val() : 0;
+	    	$(this).focusout(function(){
+		    	$('.countPayment').val(parseInt(count) - parseInt(countChild) + parseInt($(this).val()));
+		    	var countValue = $('.countPayment').val();
+		    	var valuePayment = $('.valuePayment').val();
+		    	// $('.countPayment').val(parseInt(valuePayment) + parseInt(countValue));
+		    	var datePayment = $('.datePayment').val();
+		    	var imagePayment = $('.imagePayment').val();
+		    	var codeFT = $('.codeFT').val();
+		    	var confirm = $('.confirm').val();
+		    	var notePayment = $('.notePayment').val();
+		    	// check input checkbox
+		    	var countValuePayment = $('.countPayment').val();
+		    	if(parseInt($('.airValue').val()) <= parseInt(countValuePayment) && parseInt($('.airValue').val()) > 0){
+		    		$( ".paymentAirline" ).prop( "disabled", false );
+		    	}else{
+		    		$( ".paymentAirline" ).prop( "disabled", true );
+		    		$( ".paymentAirline" ).prop( "checked", false );
+		    	}
+		    	if(parseInt($('.totalValueHotel').text()) <= parseInt(countValuePayment) && parseInt($('.totalValueHotel').text()) > 0){
+		    		$( ".paymentHotel" ).prop( "disabled", false );
+		    	}else{
+		    		$( ".paymentHotel" ).prop( "disabled", true );
+		    		$( ".paymentHotel" ).prop( "checked", false );
+		    	}
+		    	if(parseInt($('.totalValueOther').text()) <= parseInt(countValuePayment) && parseInt($('.totalValueOther').text()) > 0){
+		    		$( ".paymentOther" ).prop( "disabled", false );
+		    	}else{
+		    		$( ".paymentOther" ).prop( "disabled", true );
+		    		$( ".paymentOther" ).prop( "checked", false );
+		    	}
+		    });
+    	});
 	    var indexPay = 0;
 	    $('body').delegate('.addPayment', 'click', function (){
 	    	++indexPay;

@@ -362,7 +362,7 @@
 		                		<input type="text" name="" class="form-control amountHotel common-numeric" value="{!! $res['amountHotel'] !!}">
 		                	</td>
 	                		<td>
-		                		<input type="text" name="" class="form-control common-currency surchargeHotel" value="{!! $res['surcharge'] !!}">
+		                		<input type="text" name="" class="form-control common-currency surcharge" value="{!! $res['surcharge'] !!}">
 		                	</td>
 	                		<td>
 	                			<i class="remove fa fa-times removeRow" aria-hidden="true" style="cursor: pointer; color: orange"></i>
@@ -826,7 +826,19 @@
         		$('.addPayment').prop('disabled', true);
         	}
         });
-
+        $('.numberHotel, .valueHotel, .amountHotel, .surcharge').click(function(){
+    		var count = $('.totalValueHotel').text() != '' ? $('.totalValueHotel').text() : 0;
+    		var countChild = parseInt($(this).closest("tr").find("input:eq(5)").val() != '' ? $(this).closest("tr").find("input:eq(5)").val() : 0) * parseInt($(this).closest("tr").find("input:eq(6)").val() != '' ? $(this).closest("tr").find("input:eq(6)").val() : 0) + parseInt($(this).closest("tr").find("input:eq(8)").val() != '' ? $(this).closest("tr").find("input:eq(8)").val() : 0) * parseInt($(this).closest("tr").find("input:eq(9)").val() != '' ? $(this).closest("tr").find("input:eq(9)").val() : 0);
+    			console.log(count, countChild);
+	    	$(this).focusout(function(){
+		    	var numberHotel = $(this).closest("tr").find("input:eq(5)").val() != '' ? $(this).closest("tr").find("input:eq(5)").val() : 0;
+		    	var valueHotel = $(this).closest("tr").find("input:eq(6)").val() != '' ?$(this).closest("tr").find("input:eq(6)").val() : 0;
+		    	var amountHotel = $(this).closest("tr").find("input:eq(8)").val() != '' ?$(this).closest("tr").find("input:eq(8)").val() : 0;
+		    	var surcharge = $(this).closest("tr").find("input:eq(9)").val() != '' ?$(this).closest("tr").find("input:eq(9)").val() : 0;
+		    	console.log(numberHotel, valueHotel, amountHotel, surcharge);
+		    	$('.totalValueHotel').text(parseInt(count) - parseInt(countChild) + parseInt(numberHotel) * parseInt(valueHotel) + parseInt(amountHotel) *parseInt(surcharge));
+		    });
+    	});
 	    var indexHotel = 0;
 	    $('body').delegate('.addHotel', 'click', function (){
 	    	++indexHotel;
