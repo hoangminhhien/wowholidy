@@ -39,7 +39,7 @@
 		}
 		.btn-create-order{
 			background: #FFC82E 0% 0% no-repeat padding-box;
-			width: 240px;
+			width: 150px;
 			height: 36;
 			border-radius: 4px;
 			opacity: 1;
@@ -717,12 +717,11 @@
 	            </div>
             </div>
 			<div class="row">
-				<div class="col-3"></div>
-				<div class="col-3"></div>
-				<div class="col-3"></div>
-				<div class="col-3">
+				<div class="col-4"></div>
+				<div class="col-4"></div>
+				<div class="col-4">
+					<button @if($role == 1 || $role == 2 ) style="display: none;" @endif type="button" class="btn-create-order deleteOrder" style="height: 36px; background-color: #f29898" @if($role == 1 || $role == 2 ) style="display: none;" @endif>Xóa đơn hàng</button>
 	                <button type="button" class="btn-create-order update_order" style="height: 36px">Cập nhật</button>
-	                <!-- <button class="btn-create-order">Cập nhật</button> -->
 				</div>
 			</div>
 	</div>
@@ -1413,6 +1412,28 @@
 	        });
 	    });
 	});
+		$('body').delegate('.deleteOrder', 'click', function (){
+			var url = '{!! route('order.destroy') !!}';
+	    	$.ajax({
+	            url: url,
+	            method: 'POST',
+	            data: {
+		            _token: '{{csrf_token()}}',
+		            id: '{!! $response->id !!}',
+		        },
+	        }).done(function(res){
+	        	if(res.httpCode == 200){
+	        		alert(res.message);
+	        		setTimeout(function () {
+                        location='{!! route('order.list') !!}';
+                    }, 2000);
+	        	}else{
+	        		alert('Xóa thất bại')
+	        	}
+	        }).fail(function(){
+
+	        });
+	    });
 	var aaa  = $('.marginHotel').val();
 	var _hotel = 0;
 	var checkHotel = $('.profitHotel').val();

@@ -20,6 +20,7 @@ Route::group(['prefix' => 'order'], function () {
     Route::get('/edit/{id}', 'OrderController@edit')->name('order.edit');
     Route::post('/postOrder', 'OrderController@store')->name('order.store');
     Route::post('/updateOrder', 'OrderController@update')->name('order.update');
+    Route::post('/deleteOrder', 'OrderController@destroy')->name('order.destroy');
     Route::post('/read', 'OrderController@read')->name('order.read');
     Route::get('/export', 'OrderController@export')->name('order.export');
 });

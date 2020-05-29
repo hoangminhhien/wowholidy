@@ -220,6 +220,21 @@ class OrderController extends Controller
             return response()->json(['httpCode'=>500, 'message'=>'Đã có lỗi xảy ra']);
         }
     }
+    public function destroy(Request $request){
+        $id = (int)$request['id'];
+        DB::beginTransaction();
+        try {
+            $find = Order::find($id);
+            $margin = $find->margin()->delete();
+            $find->delete();
+            // all good
+            DB::commit();
+            return response()->json(['httpCode'=>200, 'message'=>'Xóa thành công']);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['httpCode'=>500, 'message'=>'Đã có lỗi xảy ra']);
+        }
+    }
     public function read(Request $request){
         $response = Order::all();
         $count = $response->count();
