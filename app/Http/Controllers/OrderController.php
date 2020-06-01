@@ -252,7 +252,6 @@ class OrderController extends Controller
     }
     public function export(Request $request){
         $results = $this->read($request);
-        dd($results);
         $count = $results['count'];
         if ($count > 5000) {
             return redirect()->back()->with('info', 'Không được export quá 5000 bản ghi!');

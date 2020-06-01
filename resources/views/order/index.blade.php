@@ -62,8 +62,8 @@
 			border-radius: 4px;
 			opacity: 1;
 		}
-		hr{
-			background-color: orange
+		#form_search form{
+			padding: 10px
 		}
 		table thead{
 			background-color: #f8e7b4;
@@ -79,115 +79,116 @@
 	<div id="wrapper">
 		<!-- <div class="header"> -->
 			<label class="title">Quản trị đơn hàng</label>
-			<hr>
-			<form action="{!! route('order.list') !!}">
-				<div class="row">
-					<div class="col-3">
-						<label>Kiểu ngày</label>
-						<div class="input-group mb-3">
-			  				<select class="browser-default custom-select">
-							  	<option value="created_at">Ngày tạo form</option>
-							  	<option value="updated_at">Ngày chăm sóc gần nhất</option>
-							  	<option value="start_date">Ngày khởi hành</option>
-							</select>
+			<div id="form_search" class="table table-xs data-table table-bordered" style="border-top:1px solid orange">
+				<form action="{!! route('order.list') !!}">
+					<div class="row">
+						<div class="col-3">
+							<label>Kiểu ngày</label>
+							<div class="input-group mb-3">
+				  				<select class="browser-default custom-select">
+								  	<option value="created_at">Ngày tạo form</option>
+								  	<option value="updated_at">Ngày chăm sóc gần nhất</option>
+								  	<option value="start_date">Ngày khởi hành</option>
+								</select>
+							</div>
 						</div>
-					</div>
-					<div class="col-3">
-						<label>Khoảng ngày</label>
-						<div class="input-group mb-3">
-			  				<input type="text" name="created_at" class="form-control" value="{!! isset($request['created_at']) ? $request['created_at'] : '' !!}">
-							<div class="input-group-append">
-							    <span class="input-group-text" id="basic-addon2"><i class="fa fa-calendar" aria-hidden="true"></i>
-								</span>
+						<div class="col-3">
+							<label>Khoảng ngày</label>
+							<div class="input-group mb-3">
+				  				<input type="text" name="created_at" class="form-control" value="{!! isset($request['created_at']) ? $request['created_at'] : '' !!}">
+								<div class="input-group-append">
+								    <span class="input-group-text" id="basic-addon2"><i class="fa fa-calendar" aria-hidden="true"></i>
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-3">
+							<label>Tìm kiếm đơn hàng</label>
+							<div class="input-group mb-3">
+				  				<input type="text" name="order" class="form-control" placeholder="Mã combo, Mã contact,.." value="{!! isset($request['order']) ? $request['order'] : '' !!}">
+								<div class="input-group-append">
+								    <span class="input-group-text" id="basic-addon2"><i class="fa fa-search" aria-hidden="true"></i></i>
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-3">
+							<label>Tìm kiếm khách hàng</label>
+							<div class="input-group mb-3">
+				  				<input type="text" name="customer" class="form-control" placeholder="Số điện thoại, email..." value="{!! isset($request['customer']) ? $request['customer'] : '' !!}">
+								<div class="input-group-append">
+								    <span class="input-group-text" id="basic-addon2"><i class="fa fa-user-circle" aria-hidden="true"></i>
+									</span>
+								</div>
 							</div>
 						</div>
 					</div>
-					<div class="col-3">
-						<label>Tìm kiếm đơn hàng</label>
-						<div class="input-group mb-3">
-			  				<input type="text" name="order" class="form-control" placeholder="Mã combo, Mã contact,.." value="{!! isset($request['order']) ? $request['order'] : '' !!}">
-							<div class="input-group-append">
-							    <span class="input-group-text" id="basic-addon2"><i class="fa fa-search" aria-hidden="true"></i></i>
-								</span>
+					<div class="row">
+						<div class="col-3">
+							<label>Level đơn hàng</label>
+							<div class="input-group mb-3">
+				  				<select class="browser-default custom-select" name="levelOrder">
+								  	<option value="" selected>--Tất cả--</option>
+								  	<option value="L3">L3</option>
+								  	<option value="L4">L4</option>
+								  	<option value="L5">L5</option>
+								  	<option value="L3B">L3B</option>
+								  	<option value="L4B">L4B</option>
+								  	<option value="L5B">L5B</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-3">
+							<label>Chương trình khuyến mãi</label>
+							<div class="input-group mb-3">
+				  				<select class="browser-default custom-select">
+								  	<option selected>--Tất cả--</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-3">
+							<label>Dịch vụ khác</label>
+							<div class="input-group mb-3">
+				  				<select class="browser-default custom-select">
+								  	<option selected>--Tất cả--</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-3">
+							<label>Trạng thái xử lý đơn</label>
+							<div class="input-group mb-3">
+				  				<select class="browser-default custom-select">
+								  	<option selected>--Tất cả--</option>
+								  	<option >Không xử lý</option>
+								  	<option >Đang xử lý</option>
+								  	<option >Đã xử lý</option>
+								</select>
 							</div>
 						</div>
 					</div>
-					<div class="col-3">
-						<label>Tìm kiếm khách hàng</label>
-						<div class="input-group mb-3">
-			  				<input type="text" name="customer" class="form-control" placeholder="Số điện thoại, email..." value="{!! isset($request['customer']) ? $request['customer'] : '' !!}">
-							<div class="input-group-append">
-							    <span class="input-group-text" id="basic-addon2"><i class="fa fa-user-circle" aria-hidden="true"></i>
-								</span>
+					<div class="row">
+						<div class="col-3">
+							<label>Loại đơn hàng</label>
+							<div class="input-group mb-3">
+				  				<select class="browser-default custom-select" name="especiallyOrder">
+				  					<option value="especially">Tất cả</option>
+								  	<option value="especially">Đơn hàng đặc biệt</option>
+								  	<option value="especially">Đơn hàng thường</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-3">
+						</div>
+						<div class="col-3">
+						</div>
+						<div class="col-3">
+							<div class="input-group mb-3">
+								<button class="btn btn-warning" style="margin-top: 25px;margin-left: 140px; width: 100px; font-size: 12px; height: 31px">Tìm kiếm</button>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="row">
-					<div class="col-3">
-						<label>Level đơn hàng</label>
-						<div class="input-group mb-3">
-			  				<select class="browser-default custom-select" name="levelOrder">
-							  	<option value="" selected>--Tất cả--</option>
-							  	<option value="L3">L3</option>
-							  	<option value="L4">L4</option>
-							  	<option value="L5">L5</option>
-							  	<option value="L3B">L3B</option>
-							  	<option value="L4B">L4B</option>
-							  	<option value="L5B">L5B</option>
-							</select>
-						</div>
-					</div>
-					<div class="col-3">
-						<label>Chương trình khuyến mãi</label>
-						<div class="input-group mb-3">
-			  				<select class="browser-default custom-select">
-							  	<option selected>--Tất cả--</option>
-							</select>
-						</div>
-					</div>
-					<div class="col-3">
-						<label>Dịch vụ khác</label>
-						<div class="input-group mb-3">
-			  				<select class="browser-default custom-select">
-							  	<option selected>--Tất cả--</option>
-							</select>
-						</div>
-					</div>
-					<div class="col-3">
-						<label>Trạng thái xử lý đơn</label>
-						<div class="input-group mb-3">
-			  				<select class="browser-default custom-select">
-							  	<option selected>--Tất cả--</option>
-							  	<option >Không xử lý</option>
-							  	<option >Đang xử lý</option>
-							  	<option >Đã xử lý</option>
-							</select>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-3">
-						<label>Loại đơn hàng</label>
-						<div class="input-group mb-3">
-			  				<select class="browser-default custom-select" name="especiallyOrder">
-			  					<option value="especially">Tất cả</option>
-							  	<option value="especially">Đơn hàng đặc biệt</option>
-							  	<option value="especially">Đơn hàng thường</option>
-							</select>
-						</div>
-					</div>
-					<div class="col-3">
-					</div>
-					<div class="col-3">
-					</div>
-					<div class="col-3">
-						<div class="input-group mb-3">
-							<button class="btn btn-warning" style="margin-top: 25px;margin-left: 140px; width: 100px; font-size: 12px">Tìm kiếm</button>
-						</div>
-					</div>
-				</div>
-			</form>
+				</form>
+			</div>
 		<!-- </div> -->
 		<div class="row">
 			<div class="col-4">
@@ -201,7 +202,7 @@
 				<!-- <div class="row"> -->
 					<!-- <div class="col-6"> -->
 						<div style="float: right;">
-							@if($role == 2 || $role == 3)
+							@if($role == 2 || $role == 3 || $role == 4 || $role == 5 || $role == 6)
 							<button type="button" style="font-size: 12px;" onclick="window.location = '{{route('order.export')}}'" class="btn bg-success btn-sm mr-2"><i class="icon-add-to-list"></i>
 			                Xuất excel
 			            	</button>

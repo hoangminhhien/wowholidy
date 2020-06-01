@@ -51,8 +51,8 @@
 			border-radius: 4px;
 			opacity: 1;
 		}
-		hr{
-			background-color: orange
+		#form_border{
+			padding: 10px
 		}
 		.error{
 			color: red
@@ -102,154 +102,157 @@
 				</select>
 			</div>
 		</div>
-		<hr>
-		<label style="font-size:14px; font-weight: bolder ">Thông tin đơn hàng</label>
-		<div class="row form-group">
-			<div class="col-3">
-				<label>Loại combo <strong>*</strong></label>
-				<select class="browser-default custom-select typeCombo" name="typeCombo" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
-				  	<option {!! isset($response['typeCustomer']) === 'Vi vu Phú Quốc'  ? 'selected' : '' !!} value="Vi vu Phú Quốc">Vi vu Phú Quốc</option>
-				  	<option {!! isset($response['typeCustomer']) === 'Vi vu Quy Nhơn'  ? 'selected' : '' !!} value="Vi vu Quy Nhơn">Vi vu Quy Nhơn</option>
-				  	<option {!! isset($response['typeCustomer']) === 'Vi vu Hội An'  ? 'selected' : '' !!} value="Vi vu Hội An">Vi vu Hội An</option>
-				  	<option {!! isset($response['typeCustomer']) === 'Vi vu Nha Trang'  ? 'selected' : '' !!} value="Vi vu Nha Trang">Vi vu Nha Trang</option>
-				</select>
-			</div>
-			<div class="col-3">
-				<label>Mã contact <strong>*</strong></label>
-				<input type="text" name="contactCode" class="form-control contactCode" value="{!! $response['contactCode'] !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
-			</div>
-			<div class="col-3">
-				<label>Họ và tên khách đại diện <strong>*</strong></label>
-				<input type="text" name="nameCustomer" class="form-control nameCustomer" value="{!! $response['nameCustomer'] !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
-			</div>
-			<div class="col-3">
-				<label>Số điện thoại khách đại diện <strong>*</strong></label>
-				<input type="text" name="phoneCustomer" class="form-control phoneCustomer common-number" value="{!! $response['phoneCustomer'] !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
-			</div>
-			<div class="col-3">
-				<label>Email khác đại diện <strong>*</strong></label>
-				<input type="text" name="mailCustomer" class="form-control mailCustomer email" value="{!! $response['mailCustomer'] !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
-			</div>
-			<div class="col-3">
-				<label>Quốc tịch <strong>*</strong></label>
-				<input type="text" name="country" class="form-control country" value="{!! $response['country'] !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
-			</div>
-			<div class="col-3">
-				<label>Mã combo</label>
-				<input type="text" name="codeCombo" class="form-control codeCombo" value="{!! isset($response['codeCombo']) ? $response['codeCombo'] : '' !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
-			</div>
-			<div class="col-3">
-				<label>Level đơn hàng</label>
-				<select class="browser-default custom-select levelOrder" name="levelOrder" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
-				  	<option  {!! (isset($response['levelOrder']) && $response['levelOrder'] == 'L3') ? $response['levelOrder'] : '' !!}  value="L3">L3</option>
-				  	<option {!! (isset($response['levelOrder']) && $response['levelOrder'] == 'L4') ? $response['levelOrder'] : '' !!} value="L4">L4</option>
-				  	<option {!! (isset($response['levelOrder']) && $response['levelOrder'] == 'L5') ? $response['levelOrder'] : '' !!} value="L5">L5</option>
-				  	<option {!! (isset($response['levelOrder']) && $response['levelOrder'] == 'L3B') ? $response['levelOrder'] : '' !!} value="L3B">L3B</option>
-				  	<option {!! (isset($response['levelOrder']) && $response['levelOrder'] == 'L4B') ? $response['levelOrder'] : '' !!} value="L4B">L4B</option>
-				  	<option {!! (isset($response['levelOrder']) && $response['levelOrder'] == 'L5B') ? $response['levelOrder'] : '' !!} value="L5B">L5B</option>
-				</select>
-			</div>
-		</div>
-		<hr>
-		<div class="row">
-			<div class="col-3">
-				<label style="font-size:14px; font-weight: bolder ">Thông tin vé máy bay</label>
-			</div>
-			<div class="col-3"></div>
-			<div class="col-3"></div>
-			<div class="col-3">
-				<input type="checkbox" id="paymentAirline" name="paymentAirline" class="form-check-input paymentAirline" {!! $response['airlineStatus'] == 1  ? 'checked' : '' !!} @if($role !=	 1 && $role != 2) disabled="true"   @endif @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
-				<label>Thanh toán cho phần này</label>
-			</div>
-		</div>
-		<div class="row form-group">
-			<div class="col-3">
-				<label>Mã đơn máy bay</label>
-				<input type="text" type="input" name="airCode" class="form-control airCode" value="{!! $response->airLine != null ? $response->airLine['airCode'] : '' !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
-                <div class="form-control-feedback">
-                    <i class="icon-search4 font-size-base text-muted"></i>
-                </div>
-			</div>
-			<div class="col-3">
-				<label>Số lượng vé máy bay</label>
-				<input type="text" name="airQuantity" class="form-control common-numeric airQuantity" value="1" disabled >
-                <div class="form-control-feedback">
-                    <i class="icon-search4 font-size-base text-muted"></i>
-                </div>
-			</div>
-			<div class="col-3">
-				<label>Tiền vé máy bay</label>
-				<div class="input-group mb-3">
-	  				<input type="text" name="airValue" class="form-control common-currency airValue" value="{!! $response->airLine != null ? $response->airLine['airValue'] : '' !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
-					<div class="input-group-append">
-					    <span class="input-group-text" id="basic-addon2" style="font-size: 12px">VNĐ</span>
-					</div>
+		<div id="form_border" class="table table-xs data-table table-bordered" style="border-top:1px solid orange">
+			<label style="font-size:14px; font-weight: bolder ">Thông tin đơn hàng</label>
+			<div class="row form-group">
+				<div class="col-3">
+					<label>Loại combo <strong>*</strong></label>
+					<select class="browser-default custom-select typeCombo" name="typeCombo" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
+					  	<option {!! isset($response['typeCustomer']) === 'Vi vu Phú Quốc'  ? 'selected' : '' !!} value="Vi vu Phú Quốc">Vi vu Phú Quốc</option>
+					  	<option {!! isset($response['typeCustomer']) === 'Vi vu Quy Nhơn'  ? 'selected' : '' !!} value="Vi vu Quy Nhơn">Vi vu Quy Nhơn</option>
+					  	<option {!! isset($response['typeCustomer']) === 'Vi vu Hội An'  ? 'selected' : '' !!} value="Vi vu Hội An">Vi vu Hội An</option>
+					  	<option {!! isset($response['typeCustomer']) === 'Vi vu Nha Trang'  ? 'selected' : '' !!} value="Vi vu Nha Trang">Vi vu Nha Trang</option>
+					</select>
 				</div>
-			</div>
-		</div>
-		<div class="row form-group">
-			<div class="col-3">
-				<label>Ngày bay đi</label>
-				<div class="input-group mb-3">
-	  				<input type="date" name="fromDate" class="form-control fromDate" value="{!! $response->airLine != null ? $response->airLine['fromDate'] : '' !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
-					<div class="input-group-append">
-					    <span class="input-group-text" id="basic-addon2"><i class="fa fa-calendar" aria-hidden="true"></i>
-						</span>
-					</div>
+				<div class="col-3">
+					<label>Mã contact <strong>*</strong></label>
+					<input type="text" name="contactCode" class="form-control contactCode" value="{!! $response['contactCode'] !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 				</div>
-			</div>
-			<div class="col-3">
-				<label>Ngày bay về</label>
-				<div class="input-group mb-3">
-	  				<input type="date" name="toDate" class="form-control toDate" value="{!! $response->airLine != null ? $response->airLine['toDate'] : '' !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
-					<div class="input-group-append">
-					    <span class="input-group-text" id="basic-addon2"><i class="fa fa-calendar" aria-hidden="true"></i>
-						</span>
-					</div>
+				<div class="col-3">
+					<label>Họ và tên khách đại diện <strong>*</strong></label>
+					<input type="text" name="nameCustomer" class="form-control nameCustomer" value="{!! $response['nameCustomer'] !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 				</div>
-			</div>
-			<div class="col-3">
-				<label>Tình trạng xử lý</label>
-				<div class="input-group mb-3">
-	  				<select class="browser-default custom-select statusAir" name="statusAir" @if($role != 4) disabled="" @endif>
-	  					<option {!! ($response['statusAir'] == 0 && $response['airlineStatus'] == 0) ? 'selected' : '' !!} value="0">Không xử lý</option>
-					  	<option {!! ($response['statusAir'] == 1 && $response['airlineStatus'] == 1)  ? 'selected' : '' !!} value="1">Đang xử lý</option>
-					  	<option {!! $response['statusAir'] == 2  ? 'selected' : '' !!} value="2">Đã xử lý</option>
+				<div class="col-3">
+					<label>Số điện thoại khách đại diện <strong>*</strong></label>
+					<input type="text" name="phoneCustomer" class="form-control phoneCustomer common-number" value="{!! $response['phoneCustomer'] !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
+				</div>
+				<div class="col-3">
+					<label>Email khác đại diện <strong>*</strong></label>
+					<input type="text" name="mailCustomer" class="form-control mailCustomer email" value="{!! $response['mailCustomer'] !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
+				</div>
+				<div class="col-3">
+					<label>Quốc tịch <strong>*</strong></label>
+					<input type="text" name="country" class="form-control country" value="{!! $response['country'] !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
+				</div>
+				<div class="col-3">
+					<label>Mã combo</label>
+					<input type="text" name="codeCombo" class="form-control codeCombo" value="{!! isset($response['codeCombo']) ? $response['codeCombo'] : '' !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
+				</div>
+				<div class="col-3">
+					<label>Level đơn hàng</label>
+					<select class="browser-default custom-select levelOrder" name="levelOrder" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
+					  	<option  {!! (isset($response['levelOrder']) && $response['levelOrder'] == 'L3') ? $response['levelOrder'] : '' !!}  value="L3">L3</option>
+					  	<option {!! (isset($response['levelOrder']) && $response['levelOrder'] == 'L4') ? $response['levelOrder'] : '' !!} value="L4">L4</option>
+					  	<option {!! (isset($response['levelOrder']) && $response['levelOrder'] == 'L5') ? $response['levelOrder'] : '' !!} value="L5">L5</option>
+					  	<option {!! (isset($response['levelOrder']) && $response['levelOrder'] == 'L3B') ? $response['levelOrder'] : '' !!} value="L3B">L3B</option>
+					  	<option {!! (isset($response['levelOrder']) && $response['levelOrder'] == 'L4B') ? $response['levelOrder'] : '' !!} value="L4B">L4B</option>
+					  	<option {!! (isset($response['levelOrder']) && $response['levelOrder'] == 'L5B') ? $response['levelOrder'] : '' !!} value="L5B">L5B</option>
 					</select>
 				</div>
 			</div>
-			<div class="col-3">
-				<label>Ghi chú vận hành</label>
-				<div class="input-group mb-3">
-					<textarea class="form-control rounded-0 noteAdminAir" style="font-size: 12px" name="noteAdminAir" rows="2" @if($role != 4) disabled="" @endif>{!! ($response['noteAdminAir'] != null) ? $response['noteAdminAir'] : '' !!}</textarea>
-				</div>
-			</div>
+			
 		</div>
-		<div class="groupService">
+		<div id="form_border" class="table table-xs data-table table-bordered" style="border-top:1px solid orange">
 			<div class="row">
 				<div class="col-3">
-					<label>Loại dịch vụ  <i class="fa fa-plus-circle addService" aria-hidden="true" style="color: blue; cursor: pointer;" @if($role != 4) disabled="" @endif></i></label>
+					<label style="font-size:14px; font-weight: bolder ">Thông tin vé máy bay</label>
 				</div>
+				<div class="col-3"></div>
+				<div class="col-3"></div>
 				<div class="col-3">
-					<label>Chi phí dịch vụ</label>
+					<input type="checkbox" id="paymentAirline" name="paymentAirline" class="form-check-input paymentAirline" {!! $response['airlineStatus'] == 1  ? 'checked' : '' !!} @if($role !=	 1 && $role != 2) disabled="true"   @endif @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
+					<label>Thanh toán cho phần này</label>
 				</div>
 			</div>
-			@if($response['service'] != null)
-			@foreach($response['service'] as $service)
-			<div class="row">
-				<div class="col-3 input-group mb-3">
-	  				<input type="text" name="noteAdminAir" class="form-control" value="{!! $service['name'] !!}" @if($role != 4) disabled="" @endif>
+			<div class="row form-group">
+				<div class="col-3">
+					<label>Mã đơn máy bay</label>
+					<input type="text" type="input" name="airCode" class="form-control airCode" value="{!! $response->airLine != null ? $response->airLine['airCode'] : '' !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
+	                <div class="form-control-feedback">
+	                    <i class="icon-search4 font-size-base text-muted"></i>
+	                </div>
 				</div>
 				<div class="col-3">
+					<label>Số lượng vé máy bay</label>
+					<input type="text" name="airQuantity" class="form-control common-numeric airQuantity" value="1" disabled >
+	                <div class="form-control-feedback">
+	                    <i class="icon-search4 font-size-base text-muted"></i>
+	                </div>
+				</div>
+				<div class="col-3">
+					<label>Tiền vé máy bay</label>
 					<div class="input-group mb-3">
-		  				<input type="text" name="noteAdminAir" class="form-control common-currency" value="{!! $service['value'] !!}" @if($role != 4) disabled="" @endif>
+		  				<input type="text" name="airValue" class="form-control common-currency airValue" value="{!! $response->airLine != null ? $response->airLine['airValue'] : '' !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
+						<div class="input-group-append">
+						    <span class="input-group-text" id="basic-addon2" style="font-size: 12px">VNĐ</span>
+						</div>
 					</div>
 				</div>
 			</div>
-			@endforeach
-			@endif
+			<div class="row form-group">
+				<div class="col-3">
+					<label>Ngày bay đi</label>
+					<div class="input-group mb-3">
+		  				<input type="date" name="fromDate" class="form-control fromDate" value="{!! $response->airLine != null ? $response->airLine['fromDate'] : '' !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
+						<div class="input-group-append">
+						    <span class="input-group-text" id="basic-addon2"><i class="fa fa-calendar" aria-hidden="true"></i>
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="col-3">
+					<label>Ngày bay về</label>
+					<div class="input-group mb-3">
+		  				<input type="date" name="toDate" class="form-control toDate" value="{!! $response->airLine != null ? $response->airLine['toDate'] : '' !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
+						<div class="input-group-append">
+						    <span class="input-group-text" id="basic-addon2"><i class="fa fa-calendar" aria-hidden="true"></i>
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="col-3">
+					<label>Tình trạng xử lý</label>
+					<div class="input-group mb-3">
+		  				<select class="browser-default custom-select statusAir" name="statusAir" @if($role != 4) disabled="" @endif>
+		  					<option {!! ($response['statusAir'] == 0 && $response['airlineStatus'] == 0) ? 'selected' : '' !!} value="0">Không xử lý</option>
+						  	<option {!! ($response['statusAir'] == 1 && $response['airlineStatus'] == 1)  ? 'selected' : '' !!} value="1">Đang xử lý</option>
+						  	<option {!! $response['statusAir'] == 2  ? 'selected' : '' !!} value="2">Đã xử lý</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-3">
+					<label>Ghi chú vận hành</label>
+					<div class="input-group mb-3">
+						<textarea class="form-control rounded-0 noteAdminAir" style="font-size: 12px" name="noteAdminAir" rows="2" @if($role != 4) disabled="" @endif>{!! ($response['noteAdminAir'] != null) ? $response['noteAdminAir'] : '' !!}</textarea>
+					</div>
+				</div>
+			</div>
+			<div class="groupService">
+				<div class="row">
+					<div class="col-3">
+						<label>Loại dịch vụ  <i class="fa fa-plus-circle addService" aria-hidden="true" style="color: blue; cursor: pointer;" @if($role != 4) disabled="" @endif></i></label>
+					</div>
+					<div class="col-3">
+						<label>Chi phí dịch vụ</label>
+					</div>
+				</div>
+				@if($response['service'] != null)
+				@foreach($response['service'] as $service)
+				<div class="row">
+					<div class="col-3 input-group mb-3">
+		  				<input type="text" name="noteAdminAir" class="form-control" value="{!! $service['name'] !!}" @if($role != 4) disabled="" @endif>
+					</div>
+					<div class="col-3">
+						<div class="input-group mb-3">
+			  				<input type="text" name="noteAdminAir" class="form-control common-currency" value="{!! $service['value'] !!}" @if($role != 4) disabled="" @endif>
+						</div>
+					</div>
+				</div>
+				@endforeach
+				@endif
+			</div>
 		</div>
-		<hr>
+		<div id="form_border" class="table table-xs data-table table-bordered" style="border-top:1px solid orange">
 			<div class="row">
 				<div class="col-3">
 					<label style="font-size:14px; font-weight: bolder ">Thông tin khách sạn</label>
@@ -409,7 +412,8 @@
 					</div>
 				</div>
 			</div>
-			<hr>
+		</div>
+		<div id="form_border" class="table table-xs data-table table-bordered" style="border-top:1px solid orange">
 			<div class="row">
 				<div class="col-3">
 					<label style="font-size:14px; font-weight: bolder ">Dịch vụ khác</label>
@@ -502,7 +506,9 @@
 				<div class="col-4"></div>
 				<div class="col-4"></div>
             </div>
+		</div>
 			<hr>
+		<div id="form_border" class="table table-xs data-table table-bordered" style="border-top:1px solid orange">
 			<div class="row">
 				<div class="col-3">
 					<label style="font-size:14px; font-weight: bolder ">Thông tin thanh toán</label>
@@ -576,146 +582,148 @@
 				<div class="col-4"></div>
 				<div class="col-4"></div>
             </div>
+		</div>
 
             <div @if($role == 1) style="display: none;"@endif>
-	            <hr>
-	            <div class="form-group">
-					<label style="font-size:14px; font-weight: bolder ">Thông tin margin</label>
+	            <div id="form_border" class="table table-xs data-table table-bordered" style="border-top:1px solid orange">
+		            <div class="form-group">
+						<label style="font-size:14px; font-weight: bolder ">Thông tin margin</label>
+		            </div>
+		            <div class="form-group">
+						<label style="font-size:12px; font-weight: bolder "><strong style="color: yellow; font-weight: bold;">| </strong>Vé máy bay</label>
+		            </div>
+		            <div class="row">
+		            	<div class="col-3">
+		            		<label>Tổng giá nhập vé máy bay</label>
+		            		<input type="text" name="" class="form-control airNhap common-currency" disabled="true" value="{!! $response->airLine != null ? $response->airLine['airValue'] - $profit : 0 !!}">
+		            	</div>
+		            	<div class="col-3">
+		            		<label>Tổng giá bán vé máy bay</label>
+		            		<input type="text" name="" class="form-control airBan common-currency" disabled="true" value="{!! $response->airLine != null ? $response->airLine['airValue'] : 0 !!}">
+		            	</div>
+		            	<div class="col-3">
+		            		<label>Tổng lợi nhuận vé máy bay</label>
+		            		<input type="text" name="" class="form-control airPrifit common-currency" disabled="true" value="{!! $profit !!}">
+		            	</div>
+		            </div>
+		            @if($response['hotel'] != null)
+		            <div class="form-group">
+						<label style="font-size:12px; font-weight: bolder; padding-top: 15px"><strong style="color: yellow; font-weight: bold;">| </strong>Phòng khách sạn</label>
+		            </div>
+		            <table id="tblhotelMargin" class="table table-xs data-table table-bordered">
+		                <thead>
+		                <tr>
+		                    <th>Ngày</th>
+		                    <th>Tên khách sạn</th>
+		                    <th>Hạng phòng</th>
+		                    <th>Giường</th>
+		                    <th>Gói mua</th>
+		                    <th>Tiền phòng (Giá cost)</th>
+		                </tr>
+		                </thead>
+		                <tbody>
+		                	@foreach($response['hotel'] as $key => $res)
+		                	<tr class="hotel{!! $key !!} updateHotel data">
+		                		<td>
+		                			<label class="dateLable{!! $key !!}"> {!! $res['date'] !!}</label>
+			                	</td>
+		                		<td>
+		                			<label class="name{!! $key !!}"> {!! $res['name'] !!}</label>
+			                	</td>
+		                		<td>
+		                			<label class="level{!! $key !!}"> {!! $res['level'] !!}</label>
+			                	</td>
+		                		<td>
+		                			<label class="bed{!! $key !!}"> {!! $res['bed'] !!}</label>
+			                	</td>
+		                		<td>
+		                			<label class="combo{!! $key !!}"> {!! $res['combo'] !!}</label>
+			                	</td>
+		                		<td>
+		                			<input type="" name="" class="form-control common-currency countProfitHotel" style="font-size: 12px" value="{!! ($margin != null) ? $margin->hotel[$key]['cost'] : '' !!}">
+			                	</td>
+		                	</tr>
+		                	@endforeach
+		                </tbody>
+		            </table>
+		            <div class="row">
+		            	<div class="col-3">
+		            		<label>Tổng giá nhập khách sạn</label>
+		            		<input type="text" name="" class="form-control marginHotel common-currency" disabled="true" value="{!! ($margin != null && $margin->countHotel != null) ? $margin->countHotel[0]['nhap'] : $countSurcharge !!}">
+		            	</div>
+		            	<div class="col-3">
+		            		<label>Tổng giá bán khách sạn</label>
+		            		<input type="text" name="" class="form-control cin common-currency" disabled="true" value="{!! $couthHotel !!}">
+		            	</div>
+		            	<div class="col-3">
+		            		<label>Tổng lợi nhuận khách sạn</label>
+		            		<input type="text" name="" class="form-control profitHotel common-currency" disabled="true" value=" {!! ($margin != null) ? $margin->countHotel[0]['profitHotel'] : '' !!}">
+		            	</div>
+		            </div>
+		            @endif
+		            @if($response['other'] != null)
+			        <div class="form-group">
+						<label style="font-size:12px; font-weight: bolder; padding-top: 15px"><strong style="color: yellow; font-weight: bold;">| </strong>Dịch vụ khác</label>
+		            </div>
+		            <table id="tblOtherMargin" class="table table-xs data-table table-bordered">
+		                <thead>
+		                <tr>
+		                    <th style="width: 30%">Tên dịch vụ</th>
+		                    <th style="width: 30%">Giá bán</th>
+		                    <th style="width: 40%">Giá tiền (Giá cost)</th>
+		                </tr>
+		                </thead>
+		                <tbody>
+		            		
+		                	@foreach($response['other'] as $key => $res)
+		            		<tr class='other{!! $key !!} updateOther data'>
+			                	<td>
+		                			<label class="name{!! $key !!}"> {!! $res['nameOther'] !!}</label>
+			                	</td>
+			                	<td>
+		            				<label class="amount{!! $key !!}"> {!! $res['valueOther'] !!}</label>
+			                	</td>
+			                	<td>
+			                		<input type="" name="" class="form-control inCostOther common-currency" style="font-size: 12px" value="{!! ($margin != null) ? $margin->other[$key]['cost'] : '' !!}">
+			                	</td>
+		            		</tr>
+		                	@endforeach
+		                </tbody>
+		            </table>
+		            <div class="row">
+		            	<div class="col-3">
+		            		<label>Tổng giá nhập dịch vụ</label>
+		            		<input type="text" name="" class="form-control costOther common-currency" disabled="true" value="{!! ($margin != null) ? $margin->countOther[0]['ban'] : '' !!}">
+		            	</div>
+		            	<div class="col-3">
+		            		<label>Tổng giá dịch vụ</label>
+		            		<input type="text" name="" class="form-control marginOther common-currency" disabled="true" value="{!! ($margin != null && $margin->countOther != null) ? $margin->countOther[0]['nhap'] : $countOther !!}">
+		            	</div>
+		            	<div class="col-3">
+		            		<label>Tổng lợi nhuận dịch vụ</label>
+		            		<input type="text" name="" class="form-control profitOther common-currency" disabled="true" value="{!! ($margin != null) ? $margin->countOther[0]['profitOther'] : '' !!}">
+		            	</div>
+		            </div>
+		            @endif
+		            <div class="form-group">
+						<label style="font-size:12px; font-weight: bolder; padding-top: 15px"><strong style="color: yellow; font-weight: bold;">| </strong>Tổng lợi nhuận đơn hàng</label>
+		            </div>
+		            <div class="row">
+		            	<div class="col-3">
+		            		<label>Tổng giá nhập</label>
+		            		<input type="text" name="" class="form-control countNhap common-currency" disabled="true" value="{!! ($margin != null) ? $margin->count[0]['countNhap'] : $response->airLine['airValue'] - $profit !!}">
+		            	</div>
+		            	<div class="col-3">
+		            		<label>Tổng giá bán</label>
+		            		<input type="text" name="" class="form-control countBan common-currency" disabled="true" value="{!! ($margin != null) ? $margin->count[0]['countBan'] : $response->airLine['airValue'] !!}">
+		            	</div>
+		            	<div class="col-3">
+		            		<label>Tổng lợi nhuận đơn hàng</label>
+		            		<input type="text" name="" class="form-control countProfit common-currency" disabled="true" value="{!! ($margin != null) ? $margin->count[0]['countProfit'] : $profit !!}">
+		            	</div>
+		            </div>
 	            </div>
-	            <div class="form-group">
-					<label style="font-size:12px; font-weight: bolder "><strong style="color: yellow; font-weight: bold;">| </strong>Vé máy bay</label>
 	            </div>
-	            <div class="row">
-	            	<div class="col-3">
-	            		<label>Tổng giá nhập vé máy bay</label>
-	            		<input type="text" name="" class="form-control airNhap common-currency" disabled="true" value="{!! $response->airLine != null ? $response->airLine['airValue'] - $profit : 0 !!}">
-	            	</div>
-	            	<div class="col-3">
-	            		<label>Tổng giá bán vé máy bay</label>
-	            		<input type="text" name="" class="form-control airBan common-currency" disabled="true" value="{!! $response->airLine != null ? $response->airLine['airValue'] : 0 !!}">
-	            	</div>
-	            	<div class="col-3">
-	            		<label>Tổng lợi nhuận vé máy bay</label>
-	            		<input type="text" name="" class="form-control airPrifit common-currency" disabled="true" value="{!! $profit !!}">
-	            	</div>
-	            </div>
-	            @if($response['hotel'] != null)
-	            <div class="form-group">
-					<label style="font-size:12px; font-weight: bolder; padding-top: 15px"><strong style="color: yellow; font-weight: bold;">| </strong>Phòng khách sạn</label>
-	            </div>
-	            <table id="tblhotelMargin" class="table table-xs data-table table-bordered">
-	                <thead>
-	                <tr>
-	                    <th>Ngày</th>
-	                    <th>Tên khách sạn</th>
-	                    <th>Hạng phòng</th>
-	                    <th>Giường</th>
-	                    <th>Gói mua</th>
-	                    <th>Tiền phòng (Giá cost)</th>
-	                </tr>
-	                </thead>
-	                <tbody>
-	                	@foreach($response['hotel'] as $key => $res)
-	                	<tr class="hotel{!! $key !!} updateHotel data">
-	                		<td>
-	                			<label class="dateLable{!! $key !!}"> {!! $res['date'] !!}</label>
-		                	</td>
-	                		<td>
-	                			<label class="name{!! $key !!}"> {!! $res['name'] !!}</label>
-		                	</td>
-	                		<td>
-	                			<label class="level{!! $key !!}"> {!! $res['level'] !!}</label>
-		                	</td>
-	                		<td>
-	                			<label class="bed{!! $key !!}"> {!! $res['bed'] !!}</label>
-		                	</td>
-	                		<td>
-	                			<label class="combo{!! $key !!}"> {!! $res['combo'] !!}</label>
-		                	</td>
-	                		<td>
-	                			<input type="" name="" class="form-control common-currency countProfitHotel" style="font-size: 12px" value="{!! ($margin != null) ? $margin->hotel[$key]['cost'] : '' !!}">
-		                	</td>
-	                	</tr>
-	                	@endforeach
-	                </tbody>
-	            </table>
-	            <div class="row">
-	            	<div class="col-3">
-	            		<label>Tổng giá nhập khách sạn</label>
-	            		<input type="text" name="" class="form-control marginHotel common-currency" disabled="true" value="{!! ($margin != null && $margin->countHotel != null) ? $margin->countHotel[0]['nhap'] : $countSurcharge !!}">
-	            	</div>
-	            	<div class="col-3">
-	            		<label>Tổng giá bán khách sạn</label>
-	            		<input type="text" name="" class="form-control cin common-currency" disabled="true" value="{!! $couthHotel !!}">
-	            	</div>
-	            	<div class="col-3">
-	            		<label>Tổng lợi nhuận khách sạn</label>
-	            		<input type="text" name="" class="form-control profitHotel common-currency" disabled="true" value=" {!! ($margin != null) ? $margin->countHotel[0]['profitHotel'] : '' !!}">
-	            	</div>
-	            </div>
-	            @endif
-	            @if($response['other'] != null)
-		        <div class="form-group">
-					<label style="font-size:12px; font-weight: bolder; padding-top: 15px"><strong style="color: yellow; font-weight: bold;">| </strong>Dịch vụ khác</label>
-	            </div>
-	            <table id="tblOtherMargin" class="table table-xs data-table table-bordered">
-	                <thead>
-	                <tr>
-	                    <th style="width: 30%">Tên dịch vụ</th>
-	                    <th style="width: 30%">Giá bán</th>
-	                    <th style="width: 40%">Giá tiền (Giá cost)</th>
-	                </tr>
-	                </thead>
-	                <tbody>
-	            		
-	                	@foreach($response['other'] as $key => $res)
-	            		<tr class='other{!! $key !!} updateOther data'>
-		                	<td>
-	                			<label class="name{!! $key !!}"> {!! $res['nameOther'] !!}</label>
-		                	</td>
-		                	<td>
-	            				<label class="amount{!! $key !!}"> {!! $res['valueOther'] !!}</label>
-		                	</td>
-		                	<td>
-		                		<input type="" name="" class="form-control inCostOther common-currency" style="font-size: 12px" value="{!! ($margin != null) ? $margin->other[$key]['cost'] : '' !!}">
-		                	</td>
-	            		</tr>
-	                	@endforeach
-	                </tbody>
-	            </table>
-	            <div class="row">
-	            	<div class="col-3">
-	            		<label>Tổng giá nhập dịch vụ</label>
-	            		<input type="text" name="" class="form-control costOther common-currency" disabled="true" value="{!! ($margin != null) ? $margin->countOther[0]['ban'] : '' !!}">
-	            	</div>
-	            	<div class="col-3">
-	            		<label>Tổng giá dịch vụ</label>
-	            		<input type="text" name="" class="form-control marginOther common-currency" disabled="true" value="{!! ($margin != null && $margin->countOther != null) ? $margin->countOther[0]['nhap'] : $countOther !!}">
-	            	</div>
-	            	<div class="col-3">
-	            		<label>Tổng lợi nhuận dịch vụ</label>
-	            		<input type="text" name="" class="form-control profitOther common-currency" disabled="true" value="{!! ($margin != null) ? $margin->countOther[0]['profitOther'] : '' !!}">
-	            	</div>
-	            </div>
-	            @endif
-	            <div class="form-group">
-					<label style="font-size:12px; font-weight: bolder; padding-top: 15px"><strong style="color: yellow; font-weight: bold;">| </strong>Tổng lợi nhuận đơn hàng</label>
-	            </div>
-	            <div class="row">
-	            	<div class="col-3">
-	            		<label>Tổng giá nhập</label>
-	            		<input type="text" name="" class="form-control countNhap common-currency" disabled="true" value="{!! ($margin != null) ? $margin->count[0]['countNhap'] : $response->airLine['airValue'] - $profit !!}">
-	            	</div>
-	            	<div class="col-3">
-	            		<label>Tổng giá bán</label>
-	            		<input type="text" name="" class="form-control countBan common-currency" disabled="true" value="{!! ($margin != null) ? $margin->count[0]['countBan'] : $response->airLine['airValue'] !!}">
-	            	</div>
-	            	<div class="col-3">
-	            		<label>Tổng lợi nhuận đơn hàng</label>
-	            		<input type="text" name="" class="form-control countProfit common-currency" disabled="true" value="{!! ($margin != null) ? $margin->count[0]['countProfit'] : $profit !!}">
-	            	</div>
-	            </div>
-            </div>
 			<div class="row" style="padding-top: 20px">
 				<div class="col-4"></div>
 				<div class="col-4"></div>

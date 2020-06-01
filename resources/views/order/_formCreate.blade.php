@@ -51,8 +51,8 @@
 			border-radius: 4px;
 			opacity: 1;
 		}
-		hr{
-			background-color: orange
+		#form_border{
+			padding: 10px
 		}
 		.error{
 			color: red
@@ -97,110 +97,112 @@
 				</select>
 			</div>
 		</div>
-		<hr>
-		<label style="font-size:14px; font-weight: bolder " >Thông tin đơn hàng</label>
-		<div class="row form-group">
-			<div class="col-3">
-				<label>Loại combo <strong>*</strong></label>
-				<select class="browser-default custom-select typeCombo" name="typeCombo">
-				  	<option value="" selected>--Lựa chọn--</option>
-				  	<option value="Vi vu Phú Quốc">Vi vu Phú Quốc</option>
-				  	<option value="Vi vu Quy Nhơn">Vi vu Quy Nhơn</option>
-				  	<option value="Vi vu Hội An">Vi vu Hội An</option>
-				  	<option value="Vi vu Nha Trang">Vi vu Nha Trang</option>
-				</select>
-			</div>
-			<div class="col-3">
-				<label>Mã contact <strong>*</strong></label>
-				<input type="text" name="contactCode" class="form-control contactCode">
-			</div>
-			<div class="col-3">
-				<label>Họ và tên khách đại diện <strong>*</strong></label>
-				<input type="text" name="nameCustomer" class="form-control nameCustomer">
-			</div>
-			<div class="col-3">
-				<label>Số điện thoại khách đại diện <strong>*</strong></label>
-				<input type="text" name="phoneCustomer" class="form-control phoneCustomer common-number">
-			</div>
-			<div class="col-3">
-				<label>Email khác đại diện <strong>*</strong></label>
-				<input type="text" name="mailCustomer" class="form-control mailCustomer email">
-			</div>
-			<div class="col-3">
-				<label>Quốc tịch <strong>*</strong></label>
-				<input type="text" name="country" class="form-control country" value="Việt Nam">
-			</div>
-			<div class="col-3">
-				<label>Mã combo</label>
-				<input type="text" name="codeCombo" class="form-control codeCombo">
-			</div>
-			<div class="col-3">
-				<label>Level đơn hàng</label>
-				<div class="input-group mb-3">
-	  				<select class="browser-default custom-select levelOrder" name="levelOrder">
-					  	<option value="" selected>--Tất cả--</option>
-					  	<option value="L3">L3</option>
-					  	<option value="L4">L4</option>
-					  	<option value="L5">L5</option>
-					  	<option value="L3B">L3B</option>
-					  	<option value="L4B">L4B</option>
-					  	<option value="L5B">L5B</option>
+		<div id="form_border" class="table table-xs data-table table-bordered" style="border-top:1px solid orange">
+			<label style="font-size:14px; font-weight: bolder " >Thông tin đơn hàng</label>
+			<div class="row form-group">
+				<div class="col-3">
+					<label>Loại combo <strong>*</strong></label>
+					<select class="browser-default custom-select typeCombo" name="typeCombo">
+					  	<option value="" selected>--Lựa chọn--</option>
+					  	<option value="Vi vu Phú Quốc">Vi vu Phú Quốc</option>
+					  	<option value="Vi vu Quy Nhơn">Vi vu Quy Nhơn</option>
+					  	<option value="Vi vu Hội An">Vi vu Hội An</option>
+					  	<option value="Vi vu Nha Trang">Vi vu Nha Trang</option>
 					</select>
 				</div>
-			</div>
-		</div>
-		<hr>
-		<div class="row">
-			<div class="col-3">
-				<label style="font-size:14px; font-weight: bolder " >Thông tin vé máy bay</label>
-			</div>
-			<div class="col-3"></div>
-			<div class="col-3"></div>
-			<div class="col-3">
-				<input type="checkbox" id="paymentAirline" name="paymentAirline" class="form-check-input paymentAirline" disabled="true">
-				<label>Thanh toán cho phần này</label>
-			</div>
-		</div>
-		<div class="row form-group">
-			<div class="col-3">
-				<label>Mã đơn máy bay</label>
-				<input type="text" type="input" name="airCode" class="form-control airCode">
-                <div class="form-control-feedback">
-                    <i class="icon-search4 font-size-base text-muted"></i>
-                </div>
-			</div>
-			<div class="col-3">
-				<label>Tiền vé máy bay</label>
-				<div class="input-group mb-3">
-	  				<input type="text" name="airValue" class="form-control common-currency airValue">
-					<div class="input-group-append">
-					    <span class="input-group-text" id="basic-addon2" style="font-size: 12px">VNĐ</span>
-					</div>
+				<div class="col-3">
+					<label>Mã contact <strong>*</strong></label>
+					<input type="text" name="contactCode" class="form-control contactCode">
 				</div>
-			</div>
-			<div class="col-3">
-				<label>Ngày bay đi</label>
-				<div class="input-group mb-3">
-	  				<input type="date" name="fromDate" class="form-control fromDate">
-					<div class="input-group-append">
-					    <span class="input-group-text" id="basic-addon2"><i class="fa fa-calendar" aria-hidden="true"></i>
-						</span>
-					</div>
+				<div class="col-3">
+					<label>Họ và tên khách đại diện <strong>*</strong></label>
+					<input type="text" name="nameCustomer" class="form-control nameCustomer">
 				</div>
-			</div>
-			<div class="col-3">
-				<label>Ngày bay về</label>
-				<div class="input-group mb-3">
-	  				<input type="date" name="toDate" class="form-control toDate">
-					<div class="input-group-append">
-					    <span class="input-group-text" id="basic-addon2"><i class="fa fa-calendar" aria-hidden="true"></i>
-						</span>
+				<div class="col-3">
+					<label>Số điện thoại khách đại diện <strong>*</strong></label>
+					<input type="text" name="phoneCustomer" class="form-control phoneCustomer common-number">
+				</div>
+				<div class="col-3">
+					<label>Email khác đại diện <strong>*</strong></label>
+					<input type="text" name="mailCustomer" class="form-control mailCustomer email">
+				</div>
+				<div class="col-3">
+					<label>Quốc tịch <strong>*</strong></label>
+					<input type="text" name="country" class="form-control country" value="Việt Nam">
+				</div>
+				<div class="col-3">
+					<label>Mã combo</label>
+					<input type="text" name="codeCombo" class="form-control codeCombo">
+				</div>
+				<div class="col-3">
+					<label>Level đơn hàng</label>
+					<div class="input-group mb-3">
+		  				<select class="browser-default custom-select levelOrder" name="levelOrder">
+						  	<option value="" selected>--Tất cả--</option>
+						  	<option value="L3">L3</option>
+						  	<option value="L4">L4</option>
+						  	<option value="L5">L5</option>
+						  	<option value="L3B">L3B</option>
+						  	<option value="L4B">L4B</option>
+						  	<option value="L5B">L5B</option>
+						</select>
 					</div>
 				</div>
 			</div>
 		</div>
 		<hr>
-		
+		<div id="form_border" class="table table-xs data-table table-bordered" style="border-top:1px solid orange">
+			<div class="row">
+				<div class="col-3">
+					<label style="font-size:14px; font-weight: bolder " >Thông tin vé máy bay</label>
+				</div>
+				<div class="col-3"></div>
+				<div class="col-3"></div>
+				<div class="col-3">
+					<input type="checkbox" id="paymentAirline" name="paymentAirline" class="form-check-input paymentAirline" disabled="true">
+					<label>Thanh toán cho phần này</label>
+				</div>
+			</div>
+			<div class="row form-group">
+				<div class="col-3">
+					<label>Mã đơn máy bay</label>
+					<input type="text" type="input" name="airCode" class="form-control airCode">
+	                <div class="form-control-feedback">
+	                    <i class="icon-search4 font-size-base text-muted"></i>
+	                </div>
+				</div>
+				<div class="col-3">
+					<label>Tiền vé máy bay</label>
+					<div class="input-group mb-3">
+		  				<input type="text" name="airValue" class="form-control common-currency airValue">
+						<div class="input-group-append">
+						    <span class="input-group-text" id="basic-addon2" style="font-size: 12px">VNĐ</span>
+						</div>
+					</div>
+				</div>
+				<div class="col-3">
+					<label>Ngày bay đi</label>
+					<div class="input-group mb-3">
+		  				<input type="date" name="fromDate" class="form-control fromDate">
+						<div class="input-group-append">
+						    <span class="input-group-text" id="basic-addon2"><i class="fa fa-calendar" aria-hidden="true"></i>
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="col-3">
+					<label>Ngày bay về</label>
+					<div class="input-group mb-3">
+		  				<input type="date" name="toDate" class="form-control toDate">
+						<div class="input-group-append">
+						    <span class="input-group-text" id="basic-addon2"><i class="fa fa-calendar" aria-hidden="true"></i>
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="form_border" class="table table-xs data-table table-bordered" style="border-top:1px solid orange">
 			<div class="row">
 				<div class="col-3">
 					<label style="font-size:14px; font-weight: bolder " >Thông tin khách sạn</label>
@@ -340,7 +342,9 @@
 	                <input type="text" name="noteHotel" class="form-control">
 				</div>
 			</div>
+		</div>
 			<hr>
+		<div id="form_border" class="table table-xs data-table table-bordered" style="border-top:1px solid orange">
 			<div class="row">
 				<div class="col-3">
 					<label style="font-size:14px; font-weight: bolder " >Dịch vụ khác</label>
@@ -407,71 +411,75 @@
 				<div class="col-4"></div>
 				<div class="col-4"></div>
             </div>
+		</div>
 			<hr>
-			<div class="row">
-				<div class="col-3">
-					<label style="font-size:14px; font-weight: bolder " >Thông tin thanh toán</label>
+			<div id="form_border" class="table table-xs data-table table-bordered" style="border-top:1px solid orange">
+				<div class="row">
+					<div class="col-3">
+						<label style="font-size:14px; font-weight: bolder " >Thông tin thanh toán</label>
+					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-3">
-					<label>Tổng giá trị thanh toán</label>
-					<div>
-						<div class="input-group mb-3">
-						  	<input type="text" class="form-control countPayment common-numeric" disabled="" value="0">
-						  	<div class="input-group-append">
-						    	<span class="input-group-text" id="basic-addon2" style="font-size: 12px">VNĐ</span>
-						  	</div>
+				<div class="row">
+					<div class="col-3">
+						<label>Tổng giá trị thanh toán</label>
+						<div>
+							<div class="input-group mb-3">
+							  	<input type="text" class="form-control countPayment common-numeric" disabled="" value="0">
+							  	<div class="input-group-append">
+							    	<span class="input-group-text" id="basic-addon2" style="font-size: 12px">VNĐ</span>
+							  	</div>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-12">
-					<table id="tblPayment" class="table table-xs data-table table-bordered">
-	                    <thead>
-	                    <tr>
-	                        <th>Tiền <button type="button" class="btn btn-link addPayment"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></th>
-	                        <th>Ngày</th>
-	                        <th>Đính kèm file</th>
-	                        <th>Nhập mã FT</th>
-	                        <th>Xác nhận cho nợ</th>
-	                        <th>Ghi chú</th>
-	                        <th></th>
-	                    </tr>
-	                    </thead>
-	                    <tbody>
-	                	<tr>
-	                		<td>
-	                			<input type="text" name="valuePayment" class="form-control valuePayment common-currency">
-	                		</td>
-	                		<td>
-	                			<input type="date" name="datePayment" class="form-control datePayment date">
-	                		</td>
-	                		<td>
-	                			<input type="file" name="imagePayment" class="form-control imagePayment">
-	                		</td>
-	                		<td>
-	                			<input type="text" name="codeFT" class="form-control codeFT" @if($role != 3) disabled @endif>
-	                		</td>
-	                		<td>
-	                			<select class="browser-default custom-select confirm" name="confirm" @if($role != 2) disabled @endif>
-								  	<option value="0">Không cho nợ</option>
-								  	<option value="1">Cho nợ</option>
-								</select>
-	                		</td>
-	                		<td>
-	                			<input type="text" name="notePayment" class="form-control notePayment">
-	                		</td>
-	                	</tr>
-	                    </tbody>
-	                </table>
+				<div class="row">
+					<div class="col-12">
+						<table id="tblPayment" class="table table-xs data-table table-bordered">
+		                    <thead>
+		                    <tr>
+		                        <th>Tiền <button type="button" class="btn btn-link addPayment"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></th>
+		                        <th>Ngày</th>
+		                        <th>Đính kèm file</th>
+		                        <th>Nhập mã FT</th>
+		                        <th>Xác nhận cho nợ</th>
+		                        <th>Ghi chú</th>
+		                        <th></th>
+		                    </tr>
+		                    </thead>
+		                    <tbody>
+		                	<tr>
+		                		<td>
+		                			<input type="text" name="valuePayment" class="form-control valuePayment common-currency">
+		                		</td>
+		                		<td>
+		                			<input type="date" name="datePayment" class="form-control datePayment date">
+		                		</td>
+		                		<td>
+		                			<input type="file" name="imagePayment" class="form-control imagePayment">
+		                		</td>
+		                		<td>
+		                			<input type="text" name="codeFT" class="form-control codeFT" @if($role != 3) disabled @endif>
+		                		</td>
+		                		<td>
+		                			<select class="browser-default custom-select confirm" name="confirm" @if($role != 2) disabled @endif>
+									  	<option value="0">Không cho nợ</option>
+									  	<option value="1">Cho nợ</option>
+									</select>
+		                		</td>
+		                		<td>
+		                			<input type="text" name="notePayment" class="form-control notePayment">
+		                		</td>
+		                		<td></td>
+		                	</tr>
+		                    </tbody>
+		                </table>
+					</div>
 				</div>
+				<div class="row">
+					<div class="col-4"></div>
+					<div class="col-4"></div>
+	            </div>
 			</div>
-			<div class="row">
-				<div class="col-4"></div>
-				<div class="col-4"></div>
-            </div>
 			<div class="row">
 				<div class="col-3"></div>
 				<div class="col-3"></div>
