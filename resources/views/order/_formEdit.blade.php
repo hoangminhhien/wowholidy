@@ -209,7 +209,7 @@
 				</div>
 			</div>
 			<div class="col-3">
-				<label>Trạng thái</label>
+				<label>Tình trạng xử lý</label>
 				<div class="input-group mb-3">
 	  				<select class="browser-default custom-select statusAir" name="statusAir" @if($role != 4) disabled="" @endif>
 	  					<option {!! ($response['statusAir'] == 0 && $response['airlineStatus'] == 0) ? 'selected' : '' !!} value="0">Không xử lý</option>
@@ -381,7 +381,7 @@
 			</div>
 			<div class="row">
 				<div class="col-12">
-	                <label>Ghi chú của saler</label>
+	                <label>Ghi chú của sale</label>
 	                <input type="text" name="noteHotelSale" class="form-control noteHotelSale" value="{!! ($response['noteHotelSale'] != null) ? $response['noteHotelSale'] : '' !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 				</div>
 			</div>
@@ -393,7 +393,7 @@
 					</div>
 				</div>
 				<div class="col-3">
-					<label>Trạng thái</label>
+					<label>Tình trạng xử lý</label>
 					<div class="input-group mb-3">
 		  				<select class="browser-default custom-select statusHotel" name="statusHotel" @if($role != 5) disabled="" @endif>
 						  	<option {!! ($response['statusHotel'] == 0 && $response['hotelStatus'] == 0) ? 'selected' : '' !!} value="0">Không xử lý</option>
@@ -402,7 +402,7 @@
 						</select>
 					</div>
 				</div>
-				<div class="col-3">
+				<div class="col-6">
 					<label>Ghi chú vận hành</label>
 					<div class="input-group mb-3">
 		  				<input type="text" name="noteAdminHotel" class="form-control noteAdminHotel" value="{!! ($response['noteAdminHotel'] != null) ? $response['noteAdminHotel'] : '' !!}" @if($role != 5) disabled="" @endif>
@@ -476,13 +476,13 @@
 			</div>
 			<div class="row">
 				<div class="col-12">
-	                <label>Ghi chú của saler</label>
+	                <label>Ghi chú của sale</label>
 	                <input type="text" name="noteOtherSale" class="form-control noteOtherSale" value="{!! ($response['noteOtherSale'] != null) ? $response['noteOtherSale'] : '' !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-3">
-					<label>Trạng thái</label>
+					<label>Tình trạng xử lý</label>
 					<div class="input-group mb-3">
 		  				<select class="browser-default custom-select statusOther" name="statusOther" @if($role != 6) disabled="" @endif>
 						  	<option {!! ($response['statusOther'] == 0 && $response['otherStatus'] == 0) ? 'selected' : '' !!} value="0">Không xử lý</option>
@@ -491,7 +491,7 @@
 						</select>
 					</div>
 				</div>
-				<div class="col-3">
+				<div class="col-9">
 					<label>Ghi chú vận hành</label>
 					<div class="input-group mb-3">
 		  				<input type="text" name="noteAdminOther" class="form-control noteAdminOther" value="{!! ($response['noteAdminOther'] != null) ? $response['noteAdminOther'] : '' !!}" @if($role != 6) disabled="" @endif>
@@ -546,7 +546,7 @@
 		                		<input type="text" name="" class="form-control datePayment date" value="{!! $res['datePayment'] !!}" @if($res['codeFT'] != null) disabled @endif @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 		                	</td>
 		                	<td>
-		                		<input type="file" name="" class="form-control imagePayment" value="{!! $res['imagePayment'] !!}" @if($res['codeFT'] != null) disabled @endif>
+		                		<input type="file" name="" class="form-control imagePayment" value="{!! $res['imagePayment'] !!}" @if($res['codeFT'] != null) disabled @endif @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 		                	</td>
 		                	<td>
 		                		<input type="text" name="" class="form-control codeFT" value="{!! $res['codeFT'] !!}" @if($role != 3) disabled @endif>
@@ -577,13 +577,13 @@
 				<div class="col-4"></div>
             </div>
 
-            <div @if($role == 1 || $role == 2 ) style="display: none;"@endif>
+            <div @if($role == 1) style="display: none;"@endif>
 	            <hr>
 	            <div class="form-group">
 					<label style="font-size:14px; font-weight: bolder ">Thông tin margin</label>
 	            </div>
 	            <div class="form-group">
-					<label style="font-size:12px; font-weight: bolder ">Vé máy bay</label>
+					<label style="font-size:12px; font-weight: bolder "><strong style="color: yellow; font-weight: bold;">| </strong>Vé máy bay</label>
 	            </div>
 	            <div class="row">
 	            	<div class="col-3">
@@ -601,7 +601,7 @@
 	            </div>
 	            @if($response['hotel'] != null)
 	            <div class="form-group">
-					<label style="font-size:12px; font-weight: bolder">Vé khách sạn</label>
+					<label style="font-size:12px; font-weight: bolder; padding-top: 15px"><strong style="color: yellow; font-weight: bold;">| </strong>Phòng khách sạn</label>
 	            </div>
 	            <table id="tblhotelMargin" class="table table-xs data-table table-bordered">
 	                <thead>
@@ -656,7 +656,7 @@
 	            @endif
 	            @if($response['other'] != null)
 		        <div class="form-group">
-					<label style="font-size:12px; font-weight: bolder">Dịch vụ khác</label>
+					<label style="font-size:12px; font-weight: bolder; padding-top: 15px"><strong style="color: yellow; font-weight: bold;">| </strong>Dịch vụ khác</label>
 	            </div>
 	            <table id="tblOtherMargin" class="table table-xs data-table table-bordered">
 	                <thead>
@@ -685,12 +685,12 @@
 	            </table>
 	            <div class="row">
 	            	<div class="col-3">
-	            		<label>Tổng giá dịch vụ</label>
-	            		<input type="text" name="" class="form-control marginOther common-currency" disabled="true" value="{!! ($margin != null && $margin->countOther != null) ? $margin->countOther[0]['nhap'] : $countOther !!}">
-	            	</div>
-	            	<div class="col-3">
 	            		<label>Tổng giá nhập dịch vụ</label>
 	            		<input type="text" name="" class="form-control costOther common-currency" disabled="true" value="{!! ($margin != null) ? $margin->countOther[0]['ban'] : '' !!}">
+	            	</div>
+	            	<div class="col-3">
+	            		<label>Tổng giá dịch vụ</label>
+	            		<input type="text" name="" class="form-control marginOther common-currency" disabled="true" value="{!! ($margin != null && $margin->countOther != null) ? $margin->countOther[0]['nhap'] : $countOther !!}">
 	            	</div>
 	            	<div class="col-3">
 	            		<label>Tổng lợi nhuận dịch vụ</label>
@@ -699,7 +699,7 @@
 	            </div>
 	            @endif
 	            <div class="form-group">
-					<label style="font: Bold 14px Avenir Next Rounded Pro;">Tổng lợi nhuận đơn hàng</label>
+					<label style="font-size:12px; font-weight: bolder; padding-top: 15px"><strong style="color: yellow; font-weight: bold;">| </strong>Tổng lợi nhuận đơn hàng</label>
 	            </div>
 	            <div class="row">
 	            	<div class="col-3">
@@ -716,7 +716,7 @@
 	            	</div>
 	            </div>
             </div>
-			<div class="row">
+			<div class="row" style="padding-top: 20px">
 				<div class="col-4"></div>
 				<div class="col-4"></div>
 				<div class="col-4">
@@ -1434,53 +1434,41 @@
 
 	        });
 	    });
-	var aaa  = $('.marginHotel').val();
-	var _hotel = 0;
-	var checkHotel = $('.profitHotel').val();
 	$('.countProfitHotel').click(function(){
-		first = $(this).val();
-		firstCost = $('.marginHotel').val()
-	});
-	$('.countProfitHotel').focusout(function(){
-		if(checkHotel != 0){
-			console.log(1111)
-			_hotel = parseInt(firstCost) - parseInt(first) + parseInt($(this).val());
-			$('.marginHotel').val(parseInt(_hotel));
-		}else{
-			_hotel += parseInt($(this).val());
-			$('.marginHotel').val(parseInt(_hotel) + parseInt(aaa));
-		}
-		$('.profitHotel').val(parseInt($('.cin').val()) - parseInt($('.marginHotel ').val()))
+		var __countNhap = $('.countNhap').val() != '' ? $('.countNhap').val() : 0;
+		var __countBan = $('.countBan').val() != '' ? $('.countBan').val() : 0;
+		var __countProfit = $('.countProfit').val() != '' ? $('.countProfit').val() : 0;
+		first = $(this).val() != '' ? $(this).val() : 0;
+		firstCost = $('.marginHotel').val() != '' ? $('.marginHotel').val() : 0;
+		var __profitHotel = $('.profitHotel').val() != '' ? $('.profitHotel').val() : 0;
+		$(this).focusout(function(){
+			$('.marginHotel').val(parseInt(firstCost) - parseInt(first) + parseInt($(this).val()));
+			$('.profitHotel').val(parseInt($('.cin').val()) - parseInt($('.marginHotel').val()));
+
+			// xem lai
+			$('.countBan').val(parseInt(__countBan) + parseInt($('.cin').val() != '' ? $('.cin').val() : 0));
+			$('.countNhap').val(parseInt(__countNhap) + (parseInt($('.marginHotel').val() != '' ? $('.marginHotel').val() : 0)));
+			$('.countProfit').val(parseInt(__countProfit) + (parseInt($('.profitHotel').val() != '' ? $('.profitHotel').val() : 0)));
+			///
+		});
 	});
 	var marginOther = $('.marginOther').val();
-	var _other = 0;
-	var checkOther = $('.costOther').val();
 	$('.inCostOther').click(function(){
-		first = $(this).val();
-		firstCost = $('.costOther ').val()
-	});
-	$('.inCostOther').focusout(function(){
-		if(checkOther != 0){
-			console.log(111)
-			_other = parseInt(firstCost) - parseInt(first) + parseInt($(this).val());
-			$('.costOther').val(parseInt(_other));
-		}else{
-			console.log(124)
-			_other += parseInt($(this).val());
-			$('.costOther').val(parseInt(_other));
-		}
-		$('.profitOther').val(parseInt(marginOther) - parseInt(_other));
-	});
-	$('.countProfitHotel, .inCostOther').focusout(function(){
-		// console.log($('.costOther').val() != 0);
-		if($('.costOther').val() == 0){
-			var cost = 0;
-		}else{
-			var cost = $('.costOther').val();
-		}
-		$('.countNhap').val(parseInt($('.airNhap').val()) + parseInt($('.marginHotel').val()) + parseInt($('.marginOther').val()));
-		$('.countBan').val(parseInt($('.airBan').val()) + parseInt($('.cin').val()) + parseInt(cost));
-		$('.countProfit').val(parseInt($('.countBan').val()) - parseInt($('.countNhap').val()))
+		var __countNhap = $('.countNhap').val() != '' ? $('.countNhap').val() : 0;
+		var __countBan = $('.countBan').val() != '' ? $('.countBan').val() : 0;
+		var __countProfit = $('.countProfit').val() != '' ? $('.countProfit').val() : 0;
+		first = $(this).val() != '' ? $(this).val() : 0;
+		firstCost = $('.costOther').val() != '' ? $('.costOther ').val() : 0;
+		$(this).focusout(function(){
+			$('.costOther').val(parseInt(firstCost) - parseInt(first) + parseInt($(this).val()))
+			$('.profitOther').val(parseInt(marginOther) - parseInt($('.costOther').val()));
+
+			// xem lai
+			$('.countBan').val(parseInt(__countBan) + parseInt($('.marginOther').val() != '' ? $('.marginOther').val() : 0));
+			$('.countNhap').val(parseInt(__countNhap) + (parseInt($('.costOther').val() != '' ? $('.costOther').val() : 0)));
+			$('.countProfit').val(parseInt(__countProfit) + (parseInt($('.profitOther').val() != '' ? $('.profitOther').val() : 0)));
+			//
+		});
 	});
 	$('body').delegate('.addService', 'click', function (){
 		$('.groupService').append(`

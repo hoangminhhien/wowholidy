@@ -17,6 +17,7 @@ class OrderController extends Controller
         }
         $role = Auth::user()->role;
         $request = $request->all();
+        // dd($request);
         $data = [];
         $order = isset($request['order']) ? $request['order'] : '';
         if(isset($request['created_at']) && $request['created_at'] != null){
@@ -24,12 +25,17 @@ class OrderController extends Controller
             $data[] = ['created_at', '>=', $created_at[0]];
             $data[] = ['created_at', '<=', $created_at[1]];
         }
+        if(isset($request['levelOrder']) && $request['levelOrder'] != null){
+            $levelOrder = $request['levelOrder'];
+            $data[] = ['levelOrder', $levelOrder];
+        }
         $query = Order::where($data);
         if(isset($request['order']) && $request['order'] != null){
             $order = $request['order'];
             $query = $query->Where(function($query) use ($order){
                 $query->orWhere('contactCode', $order)
-                    ->orWhere('typeCombo', $order);
+                    ->orWhere('typeCombo', $order)
+                    ->orWhere('codeCombo', $order);
             });
         }
         if(isset($request['customer']) && $request['customer'] != null){
