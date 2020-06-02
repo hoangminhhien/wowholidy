@@ -134,7 +134,9 @@ class OrderController extends Controller
             'children'=> $request['children'],
             'baby'=> $request['baby'],
             'checkin'=> $checkin,
-            'checkout' => $checkout
+            'checkout' => $checkout,
+            'noteHotelSale' => $request['noteHotelSale'],
+            'noteOtherSale' => $request['noteOtherSale'],
     	]);
     	return response()->json(['httpCode'=>200,'message'=>'Tạo thành công']);
     }

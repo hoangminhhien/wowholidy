@@ -339,7 +339,7 @@
 			<div class="row">
 				<div class="col-12">
 	                <label>Ghi chú cho sale</label>
-	                <input type="text" name="noteHotel" class="form-control">
+	                <input type="text" name="noteHotel" class="form-control noteHotelSale">
 				</div>
 			</div>
 		</div>
@@ -405,6 +405,12 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="">Tổng giá trị: <input type="text" name="" class="totalValueOther common-currency" value="0" style="border: 0; background-color: transparent;" disabled=""></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+	                <label>Ghi chú cho sale</label>
+	                <input type="text" name="noteHotel" class="form-control noteOtherSale">
 				</div>
 			</div>
 			<div class="row">
@@ -1134,7 +1140,9 @@
 				    adult: $('.adult').val(),
 				    children: $('.children').val(),
 				    baby: $('.baby').val(),
-				    checkin_out: $('.dateCheck').val()
+				    checkin_out: $('.dateCheck').val(),
+				    noteOtherSale: $('.noteOtherSale').val(),
+				   	noteHotelSale: $('.noteHotelSale').val(),
 		        },
 	        }).done(function(res){
 	        	if(res.httpCode == 200){
