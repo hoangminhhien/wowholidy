@@ -141,9 +141,31 @@ class OrderController extends Controller
     	return response()->json(['httpCode'=>200,'message'=>'Tạo thành công']);
     }
     public function update(Request $request){
-        $role = Auth::user()->role;
-        $listCustomer = [];
         $id = $request['id'];
+        $role = Auth::user()->role;
+        $check = Order::where('id',$id)->first();
+        if($role == 4 && $check->statusAir == ''){
+            $statusAir = $request['statusAir'];
+        }elseif($role != 4 && $check->statusAir != ''){
+            $statusAir = $check->statusAir;
+        }else{
+            $statusAir = '';
+        }
+        if($role == 5 && $check->statusHotel == ''){
+            $statusHotel = $request['statusHotel'];
+        }elseif($role != 5 && $check->statusHotel != ''){
+            $statusHotel = $check->statusHotel;
+        }else{
+            $statusHotel = '';
+        }
+        if($role == 6 && $check->statusOther == ''){
+            $statusOther = $request['statusOther'];
+        }elseif($role != 6 && $check->statusOther != ''){
+            $statusOther = $check->statusOther;
+        }else{
+            $statusOther = '';
+        }
+        $listCustomer = [];
         if(isset($request['listCustomer'])){
             foreach($request['listCustomer'] as $list){
                 if($list != null){
@@ -202,9 +224,9 @@ class OrderController extends Controller
                 'airlineStatus' => (int)$request['airlineStatus'],
                 'hotelStatus' => (int)$request['hotelStatus'],
                 'otherStatus' => (int)$request['otherStatus'],
-                'statusAir' => (int)$request['statusAir'],
-                'statusHotel' => (int)$request['statusHotel'],
-                'statusOther' => (int)$request['statusOther'],
+                'statusAir' => $statusAir != '' ? (int)$statusAir : $statusAir,
+                'statusHotel' => $statusHotel != '' ? (int)$statusHotel : $statusHotel,
+                'statusOther' => $statusOther != '' ? (int)$statusOther : $statusOther,
                 'listCustomer' => $listCustomer,
                 'ctkm' => $request['ctkm'],
                 'adult'=> $request['adult'],

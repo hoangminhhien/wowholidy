@@ -7,6 +7,7 @@
 	<style type="text/css">
 		body{
 			font-size: 12px;
+			background-color: #dadada
 		}
 		input[type="text"] {
 		    font-size:12px;
@@ -27,6 +28,10 @@
 			padding-left: 194px;
 			padding-top: 32px;
 			padding-right: 165px;
+			background-color: #dadada
+		}
+		#form_border{
+			background-color: #FFFFFF
 		}
 		.title{
 			width: 451px;
@@ -214,8 +219,8 @@
 					<label>Tình trạng xử lý</label>
 					<div class="input-group mb-3">
 		  				<select class="browser-default custom-select statusAir" name="statusAir" @if($role != 4) disabled="" @endif>
-		  					<option {!! ($response['statusAir'] == 0 && $response['airlineStatus'] == 0) ? 'selected' : '' !!} value="0">Không xử lý</option>
-						  	<option {!! ($response['statusAir'] == 1 && $response['airlineStatus'] == 1)  ? 'selected' : '' !!} value="1">Đang xử lý</option>
+		  					<option {!! ($response['statusAir'] == 0 || $response['airlineStatus'] == 0 && $response['statusAir'] == '') ? 'selected' : '' !!} value="0">Không xử lý</option>
+						  	<option {!! ($response['statusAir'] == 1 || $response['airlineStatus'] == 1 && $response['statusAir'] == '')  ? 'selected' : '' !!} value="1">Đang xử lý</option>
 						  	<option {!! $response['statusAir'] == 2  ? 'selected' : '' !!} value="2">Đã xử lý</option>
 						</select>
 					</div>
@@ -249,6 +254,17 @@
 					</div>
 				</div>
 				@endforeach
+				@else
+				<div class="row">
+					<div class="col-3 input-group mb-3">
+		  				<input type="text" name="noteAdminAir" class="form-control" @if($role != 4) disabled="" @endif>
+					</div>
+					<div class="col-3">
+						<div class="input-group mb-3">
+			  				<input type="text" name="noteAdminAir" class="form-control common-currency" @if($role != 4) disabled="" @endif>
+						</div>
+					</div>
+				</div>
 				@endif
 			</div>
 		</div>
@@ -399,8 +415,8 @@
 					<label>Tình trạng xử lý</label>
 					<div class="input-group mb-3">
 		  				<select class="browser-default custom-select statusHotel" name="statusHotel" @if($role != 5) disabled="" @endif>
-						  	<option {!! ($response['statusHotel'] == 0 && $response['hotelStatus'] == 0) ? 'selected' : '' !!} value="0">Không xử lý</option>
-						  	<option {!! ($response['statusHotel'] == 1 && $response['hotelStatus'] == 1)  ? 'selected' : '' !!} value="1">Đang xử lý</option>
+						  	<option {!! ($response['statusHotel'] == 0 || $response['hotelStatus'] == 0 && $response['statusHotel'] == '') ? 'selected' : '' !!} value="0">Không xử lý</option>
+						  	<option {!! ($response['statusHotel'] == 1 || $response['hotelStatus'] == 1 && $response['statusHotel'] == '')  ? 'selected' : '' !!} value="1">Đang xử lý</option>
 						  	<option {!! $response['statusHotel'] == 2  ? 'selected' : '' !!} value="2">Đã xử lý</option>
 						</select>
 					</div>
@@ -489,8 +505,8 @@
 					<label>Tình trạng xử lý</label>
 					<div class="input-group mb-3">
 		  				<select class="browser-default custom-select statusOther" name="statusOther" @if($role != 6) disabled="" @endif>
-						  	<option {!! ($response['statusOther'] == 0 && $response['otherStatus'] == 0) ? 'selected' : '' !!} value="0">Không xử lý</option>
-						  	<option {!! ($response['statusOther'] == 1 && $response['otherStatus'] == 1)  ? 'selected' : '' !!} value="1">Đang xử lý</option>
+						  	<option {!! ($response['statusOther'] == 0 || $response['otherStatus'] == 0 && $response['statusOther'] == '') ? 'selected' : '' !!} value="0">Không xử lý</option>
+						  	<option {!! ($response['statusOther'] == 1 || $response['otherStatus'] == 1 && $response['statusOther'] == '')  ? 'selected' : '' !!} value="1">Đang xử lý</option>
 						  	<option {!! $response['statusOther'] == 2  ? 'selected' : '' !!} value="2">Đã xử lý</option>
 						</select>
 					</div>
@@ -520,9 +536,14 @@
 					<div>
 						<div class="input-group mb-3">
 						  	<input type="text" class="form-control countPayment common-currency" disabled="" value="{!! $coutPayment !!}">
-						  	<!-- <div class="input-group-append">
-						    	<span class="input-group-text" id="basic-addon2" style="font-size: 12px">VNĐ</span>
-						  	</div> -->
+						</div>
+					</div>
+				</div>
+				<div class="col-3">
+					<label>Tổng giá trị đơn hàng</label>
+					<div>
+						<div class="input-group mb-3">
+						  	<input type="text" class="form-control countOrder common-currency" disabled="" value="{!! $response->countValue !!}">
 						</div>
 					</div>
 				</div>
@@ -590,7 +611,7 @@
 						<label style="font-size:14px; font-weight: bolder ">Thông tin margin</label>
 		            </div>
 		            <div class="form-group">
-						<label style="font-size:12px; font-weight: bolder "><strong style="color: yellow; font-weight: bold;">| </strong>Vé máy bay</label>
+						<label style="font-size:12px; font-weight: bolder "><strong style="color: orange; font-weight: bold;">| </strong>Vé máy bay</label>
 		            </div>
 		            <div class="row">
 		            	<div class="col-3">
@@ -608,7 +629,7 @@
 		            </div>
 		            @if($response['hotel'] != null)
 		            <div class="form-group">
-						<label style="font-size:12px; font-weight: bolder; padding-top: 15px"><strong style="color: yellow; font-weight: bold;">| </strong>Phòng khách sạn</label>
+						<label style="font-size:12px; font-weight: bolder; padding-top: 15px"><strong style="color: orange; font-weight: bold;">| </strong>Phòng khách sạn</label>
 		            </div>
 		            <table id="tblhotelMargin" class="table table-xs data-table table-bordered">
 		                <thead>
@@ -663,7 +684,7 @@
 		            @endif
 		            @if($response['other'] != null)
 			        <div class="form-group">
-						<label style="font-size:12px; font-weight: bolder; padding-top: 15px"><strong style="color: yellow; font-weight: bold;">| </strong>Dịch vụ khác</label>
+						<label style="font-size:12px; font-weight: bolder; padding-top: 15px"><strong style="color: orange; font-weight: bold;">| </strong>Dịch vụ khác</label>
 		            </div>
 		            <table id="tblOtherMargin" class="table table-xs data-table table-bordered">
 		                <thead>
@@ -706,7 +727,7 @@
 		            </div>
 		            @endif
 		            <div class="form-group">
-						<label style="font-size:12px; font-weight: bolder; padding-top: 15px"><strong style="color: yellow; font-weight: bold;">| </strong>Tổng lợi nhuận đơn hàng</label>
+						<label style="font-size:12px; font-weight: bolder; padding-top: 15px"><strong style="color: orange; font-weight: bold;">| </strong>Tổng lợi nhuận đơn hàng</label>
 		            </div>
 		            <div class="row">
 		            	<div class="col-3">
@@ -807,6 +828,14 @@
                 $('.dateCheck').val('');
             }
 	    });
+	    $('.airValue').click(function(){
+	    	var firstVal = $(this).val() != '' ? $(this).val() : 0;
+	    	var count = $('.countOrder').val();
+	    	$(this).focusout(function(){
+	    		var val = $(this).val() != '' ? $(this).val() : 0;
+	    		$('.countOrder').val(parseInt(count) - parseInt(firstVal) + parseInt(val));
+	    	});
+	    });
 	    if(parseInt($('.totalValueHotel').val()) == 0){
 	    	$('.paymentHotel').prop('disabled', true);
 	    }
@@ -838,6 +867,7 @@
         });
         $('.numberHotel, .valueHotel, .amountHotel, .surcharge').click(function(){
     		var count = $('.totalValueHotel').val() != '' ? $('.totalValueHotel').val() : 0;
+    		var countOrder = $('.countOrder').val() != '' ? $('.countOrder').val() : 0;
     		var countChild = parseInt($(this).closest("tr").find("input:eq(5)").val() != '' ? $(this).closest("tr").find("input:eq(5)").val() : 0) * parseInt($(this).closest("tr").find("input:eq(6)").val() != '' ? $(this).closest("tr").find("input:eq(6)").val() : 0) + parseInt($(this).closest("tr").find("input:eq(8)").val() != '' ? $(this).closest("tr").find("input:eq(8)").val() : 0) * parseInt($(this).closest("tr").find("input:eq(9)").val() != '' ? $(this).closest("tr").find("input:eq(9)").val() : 0);
     			console.log(count, countChild);
 	    	$(this).focusout(function(){
@@ -847,6 +877,7 @@
 		    	var surcharge = $(this).closest("tr").find("input:eq(9)").val() != '' ?$(this).closest("tr").find("input:eq(9)").val() : 0;
 		    	console.log(numberHotel, valueHotel, amountHotel, surcharge);
 		    	$('.totalValueHotel').val(parseInt(count) - parseInt(countChild) + parseInt(numberHotel) * parseInt(valueHotel) + parseInt(amountHotel) *parseInt(surcharge));
+		    	$('.countOrder').val(parseInt(countOrder) - parseInt(count) + parseInt($('.totalValueHotel').val()));
 		    });
     	});
 	    var indexHotel = 0;
@@ -895,6 +926,7 @@
 	        });
 	        $('.numberHotel'+indexHotel+', .valueHotel'+indexHotel+', .amountHotel'+indexHotel+', .surcharge'+indexHotel).click(function(){
 	    		var count = $('.totalValueHotel').val() != '' ? $('.totalValueHotel').val() : 0;
+	    		var countOrder = $('.countOrder').val() != '' ? $('.countOrder').val() : 0;
 	    		var countChild = parseInt($(this).closest("tr").find("input:eq(5)").val() != '' ? $(this).closest("tr").find("input:eq(5)").val() : 0) * parseInt($(this).closest("tr").find("input:eq(6)").val() != '' ? $(this).closest("tr").find("input:eq(6)").val() : 0) + parseInt($(this).closest("tr").find("input:eq(8)").val() != '' ? $(this).closest("tr").find("input:eq(8)").val() : 0) * parseInt($(this).closest("tr").find("input:eq(9)").val() != '' ? $(this).closest("tr").find("input:eq(9)").val() : 0);
 	    			console.log(count, countChild);
 		    	$(this).focusout(function(){
@@ -904,6 +936,7 @@
 			    	var surcharge = $(this).closest("tr").find("input:eq(9)").val() != '' ?$(this).closest("tr").find("input:eq(9)").val() : 0;
 			    	console.log(numberHotel, valueHotel, amountHotel, surcharge);
 			    	$('.totalValueHotel').val(parseInt(count) - parseInt(countChild) + parseInt(numberHotel) * parseInt(valueHotel) + parseInt(amountHotel) *parseInt(surcharge));
+			    	$('.countOrder').val(parseInt(countOrder) - parseInt(count) + parseInt($('.totalValueHotel').val()));
 			    });
 	    	});
 	    	$(document).find('.common-number').inputmask({
@@ -968,6 +1001,7 @@
 	    		`);
 	    	$('.princeOther'+indexOther+', .amountOther'+indexOther).click(function(){
 	    		var count = $('.totalValueOther').val() != '' ? $('.totalValueOther').val() : 0;
+	    		var countOrder = $('.countOrder').val() != '' ? $('.countOrder').val() : 0;
 	    		var countChild = $(this).closest("tr").find("input:eq(4)").val() != '' ?$(this).closest("tr").find("input:eq(4)").val() : 0;
 	    		console.log(count, countChild);
 		    	$(this).focusout(function(){
@@ -975,6 +1009,7 @@
 			    	var amount = $(this).closest("tr").find("input:eq(2)").val() != '' ?$(this).closest("tr").find("input:eq(2)").val() : 0;
 			    	$(this).closest("tr").find("input:eq(4)").val(parseInt(value) * parseInt(amount));
 			    	$('.totalValueOther').val(parseInt(count) - parseInt(countChild) + parseInt(value) * parseInt(amount));
+			    	$('.countOrder').val(parseInt(countOrder) - parseInt(countChild) + parseInt(value) * parseInt(amount));
 			    });
 	    	});
 	    	var nameOther = $('.nameOther').val();
@@ -1117,12 +1152,14 @@
 	    	console.log(countValue);
 	    	// xóa tổng giá trị đơn hàng
 	    	$('.totalValueHotel').val(parseInt(countValue) - parseInt($(this).closest("tr").find("input:eq(5)").val() != '' ? $(this).closest("tr").find("input:eq(5)").val() : 0) * parseInt($(this).closest("tr").find("input:eq(6)").val() != '' ? $(this).closest("tr").find("input:eq(6)").val() : 0)- parseInt($(this).closest("tr").find("input:eq(8)").val() != '' ? $(this).closest("tr").find("input:eq(8)").val() : 0) * parseInt($(this).closest("tr").find("input:eq(9)").val() != '' ? $(this).closest("tr").find("input:eq(9)").val() : 0));
+	    	$('.countOrder').val(parseInt($('.countOrder').val()) - parseInt($(this).closest("tr").find("input:eq(5)").val() != '' ? $(this).closest("tr").find("input:eq(5)").val() : 0) * parseInt($(this).closest("tr").find("input:eq(6)").val() != '' ? $(this).closest("tr").find("input:eq(6)").val() : 0)- parseInt($(this).closest("tr").find("input:eq(8)").val() != '' ? $(this).closest("tr").find("input:eq(8)").val() : 0) * parseInt($(this).closest("tr").find("input:eq(9)").val() != '' ? $(this).closest("tr").find("input:eq(9)").val() : 0));
 	    	$(this).closest("tr").remove();
 	    });
 	    $('body').delegate('#tblOther .remove', 'click', function (){
 	    	var countValue = $('.totalValueOther').val();
 	    	// xóa tổng giá trị đơn hàng
 	    	$('.totalValueOther').val(parseInt(countValue) - parseInt($(this).closest("tr").find("input:eq(4)").val() != '' ? $(this).closest("tr").find("input:eq(4)").val() : 0));
+	    	$('.countOrder').val(parseInt($('.countOrder').val()) - parseInt($(this).closest("tr").find("input:eq(4)").val() != '' ? $(this).closest("tr").find("input:eq(4)").val() : 0));
 	    	$(this).closest("tr").remove();
 	    });
 	    $('body').delegate('#tblPayment .remove', 'click', function (){
@@ -1232,6 +1269,7 @@
 
 	    $('.princeOther, .amountOther').click(function(){
     		var count = $('.totalValueOther').val() != '' ? $('.totalValueOther').val() : 0;
+    		var countOrder = $('.countOrder').val() != '' ? $('.countOrder').val() : 0;
     		var countChild = $(this).closest("tr").find("input:eq(4)").val() != '' ?$(this).closest("tr").find("input:eq(4)").val() : 0;
     		console.log(count, countChild);
 	    	$(this).focusout(function(){
@@ -1239,6 +1277,7 @@
 		    	var amount = $(this).closest("tr").find("input:eq(2)").val() != '' ?$(this).closest("tr").find("input:eq(2)").val() : 0;
 		    	$(this).closest("tr").find("input:eq(4)").val(parseInt(value) * parseInt(amount));
 		    	$('.totalValueOther').val(parseInt(count) - parseInt(countChild) + parseInt(value) * parseInt(amount));
+		    	$('.countOrder').val(parseInt(countOrder) - parseInt(countChild) + parseInt(value) * parseInt(amount));
 		    });
     	});
 	    $('.valuePayment').click(function(){
@@ -1246,6 +1285,7 @@
     		var countChild = $(this).val() != '' ? $(this).val() : 0;
 	    	$(this).focusout(function(){
 		    	$('.countPayment').val(parseInt(count) - parseInt(countChild) + parseInt($(this).val()));
+		    	$( ".paymentAirline, .paymentHotel, .paymentOther" ).prop( "checked", false);
 		    });
     	});
 	    $('body').delegate('.update_order', 'click', function (){
@@ -1379,7 +1419,7 @@
 		            airLine: airLine,
 		            hotel: hotel,
 		            other: other,
-		            countValue: countOrder,
+		            countValue: $('.countOrder').val(),
 		            payment: payment,
 		            airlineStatus: airlineStatus,
 				    hotelStatus: hotelStatus,

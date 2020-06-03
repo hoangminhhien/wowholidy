@@ -8,6 +8,7 @@
 	<style type="text/css">
 		body{
 			font-size: 12px;
+			background-color: #dadada
 		}
 		button{
 			font-size: 12px;
@@ -28,6 +29,7 @@
 			padding-left: 194px;
 			padding-top: 32px;
 			padding-right: 165px;
+			background-color: #dadada
 		}
 		.header{
 			top: 111px;
@@ -63,7 +65,8 @@
 			opacity: 1;
 		}
 		#form_search form{
-			padding: 10px
+			padding: 10px;
+			background-color: #FFFFFF
 		}
 		table thead{
 			background-color: #f8e7b4;
@@ -345,7 +348,7 @@
 		            			@endforeach
 		            			@if($order->statusAir == 0 || $order->statusHotel == 0 || $order->statusOther == 0 || $check > 0)
 		            			<span class="badge badge-danger">Sales</span>
-		            			@elseif($order->statusAir == 2 || $order->statusHotel == 2 || $order->statusOther == 2)
+		            			@elseif($order->statusAir == 2 && $order->statusHotel == 2 && $order->statusOther == 2)
 		            			<span class="badge badge-success">Sales</span>
 		            			@else
 		            			<span class="badge badge-secondary">Sales</span>

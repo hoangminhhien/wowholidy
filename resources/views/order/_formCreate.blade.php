@@ -7,6 +7,7 @@
 	<style type="text/css">
 		body{
 			font-size: 12px;
+			background-color: #dadada
 		}
 		input[type="text"] {
 		    font-size:12px;
@@ -27,6 +28,10 @@
 			padding-left: 194px;
 			padding-top: 32px;
 			padding-right: 165px;
+			background-color: #dadada
+		}
+		#form_border{
+			background-color: #FFFFFF
 		}
 		.title{
 			width: 451px;
@@ -431,9 +436,14 @@
 						<div>
 							<div class="input-group mb-3">
 							  	<input type="text" class="form-control countPayment common-currency" disabled="" value="0">
-							  	<div class="input-group-append">
-							    	<span class="input-group-text" id="basic-addon2" style="font-size: 12px">VNĐ</span>
-							  	</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-3">
+						<label>Tổng giá trị đơn hàng</label>
+						<div>
+							<div class="input-group mb-3">
+							  	<input type="text" class="form-control countOrder common-currency" disabled="" value="0">
 							</div>
 						</div>
 					</div>
@@ -556,13 +566,15 @@
 	  	});
 	  	$('.princeOther, .amountOther').click(function(){
     		var count = $('.totalValueOther').val() != '' ? $('.totalValueOther').val() : 0;
-    		var countChild = $(this).closest("tr").find("input:eq(4)").val() != '' ?$(this).closest("tr").find("input:eq(4)").val() : 0;
+    		var countOrder = $('.countOrder').val() != '' ? $('.countOrder').val() : 0;
+    		var countChild = $(this).closest("tr").find("input:eq(4)").val() != '' ? $(this).closest("tr").find("input:eq(4)").val() : 0;
     		console.log(count, countChild);
 	    	$(this).focusout(function(){
 		    	var value = $(this).closest("tr").find("input:eq(3)").val() != '' ? $(this).closest("tr").find("input:eq(3)").val() : 0;
 		    	var amount = $(this).closest("tr").find("input:eq(2)").val() != '' ?$(this).closest("tr").find("input:eq(2)").val() : 0;
 		    	$(this).closest("tr").find("input:eq(4)").val(parseInt(value) * parseInt(amount));
 		    	$('.totalValueOther').val(parseInt(count) - parseInt(countChild) + parseInt(value) * parseInt(amount));
+		    	$('.countOrder').val(parseInt(countOrder) - parseInt(countChild) + parseInt(value) * parseInt(amount));
 		    });
     	});
 	    $('#checkin_out').click(function(){
@@ -575,6 +587,14 @@
             else if($(this).prop("checked") == false){
                 $('.dateCheck').val('');
             }
+	    });
+	    $('.airValue').click(function(){
+	    	var firstVal = $(this).val() != '' ? $(this).val() : 0;
+	    	var count = $('.countOrder').val();
+	    	$(this).focusout(function(){
+	    		var val = $(this).val() != '' ? $(this).val() : 0;
+	    		$('.countOrder').val(parseInt(count) - parseInt(firstVal) + parseInt(val));
+	    	});
 	    });
 	    $('#formOrder').validate({
             rules: {
@@ -635,6 +655,7 @@
 
         $('.numberHotel, .valueHotel, .amountHotel, .surcharge').click(function(){
     		var count = $('.totalValueHotel').val() != '' ? $('.totalValueHotel').val() : 0;
+    		var countOrder = $('.countOrder').val() != '' ? $('.countOrder').val() : 0;
     		var countChild = parseInt($(this).closest("tr").find("input:eq(5)").val() != '' ? $(this).closest("tr").find("input:eq(5)").val() : 0) * parseInt($(this).closest("tr").find("input:eq(6)").val() != '' ? $(this).closest("tr").find("input:eq(6)").val() : 0) + parseInt($(this).closest("tr").find("input:eq(8)").val() != '' ? $(this).closest("tr").find("input:eq(8)").val() : 0) * parseInt($(this).closest("tr").find("input:eq(9)").val() != '' ? $(this).closest("tr").find("input:eq(9)").val() : 0);
     			console.log(count, countChild);
 	    	$(this).focusout(function(){
@@ -644,6 +665,7 @@
 		    	var surcharge = $(this).closest("tr").find("input:eq(9)").val() != '' ?$(this).closest("tr").find("input:eq(9)").val() : 0;
 		    	console.log(numberHotel, valueHotel, amountHotel, surcharge);
 		    	$('.totalValueHotel').val(parseInt(count) - parseInt(countChild) + parseInt(numberHotel) * parseInt(valueHotel) + parseInt(amountHotel) *parseInt(surcharge));
+		    	$('.countOrder').val(parseInt(countOrder) - parseInt(count) + parseInt($('.totalValueHotel').val()));
 		    });
     	});
 	    var indexHotel = 0;
@@ -692,6 +714,7 @@
 	        });
 	        $('.numberHotel'+indexHotel+', .valueHotel'+indexHotel+', .amountHotel'+indexHotel+', .surcharge'+indexHotel).click(function(){
 	    		var count = $('.totalValueHotel').val() != '' ? $('.totalValueHotel').val() : 0;
+	    		var countOrder = $('.countOrder').val() != '' ? $('.countOrder').val() : 0;
 	    		var countChild = parseInt($(this).closest("tr").find("input:eq(5)").val() != '' ? $(this).closest("tr").find("input:eq(5)").val() : 0) * parseInt($(this).closest("tr").find("input:eq(6)").val() != '' ? $(this).closest("tr").find("input:eq(6)").val() : 0) + parseInt($(this).closest("tr").find("input:eq(8)").val() != '' ? $(this).closest("tr").find("input:eq(8)").val() : 0) * parseInt($(this).closest("tr").find("input:eq(9)").val() != '' ? $(this).closest("tr").find("input:eq(9)").val() : 0);
 	    			console.log(count, countChild);
 		    	$(this).focusout(function(){
@@ -701,6 +724,7 @@
 			    	var surcharge = $(this).closest("tr").find("input:eq(9)").val() != '' ?$(this).closest("tr").find("input:eq(9)").val() : 0;
 			    	console.log(numberHotel, valueHotel, amountHotel, surcharge);
 			    	$('.totalValueHotel').val(parseInt(count) - parseInt(countChild) + parseInt(numberHotel) * parseInt(valueHotel) + parseInt(amountHotel) *parseInt(surcharge));
+			    	$('.countOrder').val(parseInt(countOrder) - parseInt(count) + parseInt($('.totalValueHotel').val()));
 			    });
 	    	});
 	    	$(document).find('.common-number').inputmask({
@@ -765,6 +789,7 @@
 	    		`);
 	    	$('.princeOther'+indexOther+', .amountOther'+indexOther).click(function(){
 	    		var count = $('.totalValueOther').val() != '' ? $('.totalValueOther').val() : 0;
+	    		var countOrder = $('.countOrder').val() != '' ? $('.countOrder').val() : 0;
 	    		var countChild = $(this).closest("tr").find("input:eq(4)").val() != '' ?$(this).closest("tr").find("input:eq(4)").val() : 0;
 	    		console.log(count, countChild);
 		    	$(this).focusout(function(){
@@ -772,6 +797,7 @@
 			    	var amount = $(this).closest("tr").find("input:eq(2)").val() != '' ?$(this).closest("tr").find("input:eq(2)").val() : 0;
 			    	$(this).closest("tr").find("input:eq(4)").val(parseInt(value) * parseInt(amount));
 			    	$('.totalValueOther').val(parseInt(count) - parseInt(countChild) + parseInt(value) * parseInt(amount));
+			    	$('.countOrder').val(parseInt(countOrder) - parseInt(countChild) + parseInt(value) * parseInt(amount));
 			    });
 	    	});
 	    	var nameOther = $('.nameOther').val();
@@ -828,7 +854,7 @@
 		    	$('.countPayment').val(parseInt(count) - parseInt(countChild) + parseInt($(this).val()));
 		    	var countValue = $('.countPayment').val();
 		    	var valuePayment = $('.valuePayment').val();
-		    	// $('.countPayment').val(parseInt(valuePayment) + parseInt(countValue));
+		    	$( ".paymentAirline, .paymentHotel, .paymentOther" ).prop( "checked", false);
 		    	var datePayment = $('.datePayment').val();
 		    	var imagePayment = $('.imagePayment').val();
 		    	var codeFT = $('.codeFT').val();
@@ -1015,6 +1041,7 @@
 	    	console.log(countValue);
 	    	// xóa tổng giá trị đơn hàng
 	    	$('.totalValueHotel').val(parseInt(countValue) - parseInt($(this).closest("tr").find("input:eq(5)").val() != '' ? $(this).closest("tr").find("input:eq(5)").val() : 0) * parseInt($(this).closest("tr").find("input:eq(6)").val() != '' ? $(this).closest("tr").find("input:eq(6)").val() : 0)- parseInt($(this).closest("tr").find("input:eq(8)").val() != '' ? $(this).closest("tr").find("input:eq(8)").val() : 0) * parseInt($(this).closest("tr").find("input:eq(9)").val() != '' ? $(this).closest("tr").find("input:eq(9)").val() : 0));
+	    	$('.countOrder').val(parseInt($('.countOrder').val()) - parseInt($(this).closest("tr").find("input:eq(5)").val() != '' ? $(this).closest("tr").find("input:eq(5)").val() : 0) * parseInt($(this).closest("tr").find("input:eq(6)").val() != '' ? $(this).closest("tr").find("input:eq(6)").val() : 0)- parseInt($(this).closest("tr").find("input:eq(8)").val() != '' ? $(this).closest("tr").find("input:eq(8)").val() : 0) * parseInt($(this).closest("tr").find("input:eq(9)").val() != '' ? $(this).closest("tr").find("input:eq(9)").val() : 0));
 	    	$(this).closest("tr").remove();
 	    	if(parseInt($('.totalValueHotel').val()) == 0){
 	    		$('.paymentHotel').prop('disabled', true);
@@ -1025,6 +1052,7 @@
 	    	var countValue = $('.totalValueOther').val();
 	    	// xóa tổng giá trị đơn hàng
 	    	$('.totalValueOther').val(parseInt(countValue) - parseInt($(this).closest("tr").find("input:eq(4)").val() != '' ? $(this).closest("tr").find("input:eq(4)").val() : 0));
+	    	$('.countOrder').val(parseInt($('.countOrder').val()) - parseInt($(this).closest("tr").find("input:eq(4)").val() != '' ? $(this).closest("tr").find("input:eq(4)").val() : 0));
 	    	$(this).closest("tr").remove();
 	    	if(parseInt($('.totalValueOther').val()) == 0){
 	    		$('.paymentOther').prop('disabled', true);
@@ -1061,7 +1089,6 @@
 	    	$('.paymentAirline').is(":checked") ? airlineStatus = 1 : airlineStatus = 0;
 		    $('.paymentHotel').is(":checked") ? hotelStatus = 1 : hotelStatus = 0;
 		    $('.paymentOther').is(":checked") ? otherStatus = 1 : otherStatus = 0;
-	    	var countOrder = parseInt($('.totalValueHotel').val()) + parseInt($('.totalValueOther').val()) +  parseInt(($('.airValue').val() == '') ? 0 : $('.airValue').val());
 	    	var url = '{!! route('order.store') !!}';
 	    	var airLine = {
 	    		'airCode' : $('.airCode').val(),
@@ -1130,7 +1157,7 @@
 		            airLine: airLine,
 		            hotel: hotel,
 		            other: other,
-		            countValue: countOrder,
+		            countValue: $('.countOrder').val(),
 		            payment: payment,
 		            airlineStatus: airlineStatus,
 				    hotelStatus: hotelStatus,
