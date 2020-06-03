@@ -312,14 +312,17 @@
 	            		<td>
 	            			@if($order->hotel != null)
 	            				@foreach($order->hotel as $hotel)
+	            				@php
+	            					$count = $hotel['number'] * $hotel['value'] + $hotel['amountHotel'] * $hotel['surcharge'];
+	            				@endphp
 	            				<lable class="tblTitle">Tên khách sạn :</lable> {!!  $hotel['name'] !!}<br>
 	            				<lable class="tblTitle">Check in: </lable>{!!  $order['checkin'] !!}<br>
 	            				<lable class="tblTitle">Check out: </lable>{!!  $order['checkout'] !!}<br>
+	            				@endforeach
 	            				<lable class="tblTitle">Tổng tiền : </lable>
 	            				<lable class="common-currency">
-	            				{!!  $hotel['value'] !!}<br>
+	            				{!!  $count !!}<br>
 	            				</lable>
-	            				@endforeach<br>
 	            			@endif
 	            		</td>
 	            		<td>

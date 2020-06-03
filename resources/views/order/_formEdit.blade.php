@@ -1099,6 +1099,7 @@
 	    		`);
 	    	$('.valuePayment'+indexPay).focusout(function(){
 		    	$('.countPayment').val(parseInt($('.countPayment').val()) + parseInt($(this).val()));
+		    	$( ".paymentAirline, .paymentHotel, .paymentOther" ).prop( "checked", false);
 		    });
 		    $('.valuePayment'+indexPay).click(function(){
 	    		var count = $('.countPayment').val() != '' ? $('.countPayment').val() : 0;
@@ -1167,6 +1168,7 @@
 	    	var value = $(this).attr('class');
 	    	// xóa tổng giá trị đơn hàng
 	    	$('.countPayment').val(parseInt(countValue) - parseInt($(this).closest("tr").find("input:eq(0)").val() != '' ? $(this).closest("tr").find("input:eq(0)").val() : 0));
+	    	$( ".paymentAirline, .paymentHotel, .paymentOther" ).prop( "checked", false);
 	    	$(this).closest("tr").remove();
 	    	var countValuePayment = $('.countPayment').val();
 	    	if(parseInt($('.airValue').val()) <= parseInt(countValuePayment)){
