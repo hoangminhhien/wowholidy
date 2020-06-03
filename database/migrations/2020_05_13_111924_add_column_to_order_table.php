@@ -14,9 +14,9 @@ class AddColumnToOrderTable extends Migration
     public function up()
     {
         Schema::table('order', function (Blueprint $table) {
-            $table->integer('statusAir')->default(0);
-            $table->integer('statusHotel')->default(0);
-            $table->integer('statusOther')->default(0);
+            $table->string('statusAir')->nullable();
+            $table->string('statusHotel')->nullable();
+            $table->string('statusOther')->nullable();
         });
     }
 

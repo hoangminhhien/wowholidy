@@ -1128,6 +1128,8 @@
 			});
 	        var payment = [];
 	        var $payment = $('#tblPayment tbody tr');
+	        // var formData = new FormData();
+	        // console.log((formData.append("image", $(this).find("input:eq(2)").[0].files[0])));
 	        $payment.each(function(){
 	        	payment.push({
 					valuePayment: $(this).find("input:eq(0)").val(),

@@ -94,6 +94,7 @@ class OrderController extends Controller
         return view('order._formEdit', compact('response', 'couthHotel', 'countOther', 'coutPayment', 'countSurcharge','profit' , 'role', 'margin'));
     }
     public function store(Request $request){
+        // dd($request->all());
         if(isset($request['checkin_out'])){
             $check = explode('~', $request['checkin_out']);
             $checkin = $check[0] != null  ? $check[0] : null;
