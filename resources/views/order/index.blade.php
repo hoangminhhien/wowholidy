@@ -311,13 +311,16 @@
 	            		</td>
 	            		<td>
 	            			@if($order->hotel != null)
+	            				@php
+	            				$countIn = count($order->hotel);
+	            				@endphp
 	            				@foreach($order->hotel as $hotel)
 	            				@php
 	            					$count = $hotel['number'] * $hotel['value'] + $hotel['amountHotel'] * $hotel['surcharge'];
 	            				@endphp
 	            				<lable class="tblTitle">Tên khách sạn :</lable> {!!  $hotel['name'] !!}<br>
-	            				<lable class="tblTitle">Check in: </lable>{!!  $order['checkin'] !!}<br>
-	            				<lable class="tblTitle">Check out: </lable>{!!  $order['checkout'] !!}<br>
+	            				<lable class="tblTitle">Check in: {!! $order->hotel[0]['date'] !!}</lable><br>
+	            				<lable class="tblTitle">Check out: {!! $order->hotel[$countIn - 1]['date'] !!}</lable><br>
 	            				@endforeach
 	            				<lable class="tblTitle">Tổng tiền : </lable>
 	            				<lable class="common-currency">
@@ -390,6 +393,7 @@
 	            				@php
 	            					$check = 0;
 	            					$count = 0;
+	            					$confirm = 0;
 	            				@endphp
 		            			@foreach($order->payment as $key => $payments)
 		            				@php
@@ -400,8 +404,13 @@
 			            					$check += $payments['valuePayment'];
 			            				@endphp
 		            				@endif
+			            			@if($payments['confirm'] == 1)
+			            				@php
+			            					++$confirm;
+			            				@endphp
+			            			@endif
 		            			@endforeach
-		            			@if($check == $count && $order->airlineStatus == 1 && $order->statusAir != 2)
+		            			@if($check == $count && $order->airlineStatus == 1 && $order->statusAir != 2 || $confirm >0)
 		            				<span class="badge badge-danger">VH vé</span>
 		            			@elseif($order->statusAir == 2 )
 		            				<span class="badge badge-success">VH vé</span>
@@ -420,6 +429,7 @@
 	            				@php
 	            					$check = 0;
 	            					$count = 0;
+	            					$confirm = 0;
 	            				@endphp
 		            			@foreach($order->payment as $key => $payments)
 		            				@php
@@ -430,10 +440,15 @@
 			            					$check += $payments['valuePayment'];
 			            				@endphp
 		            				@endif
+		            				@if($payments['confirm'] == 1)
+			            				@php
+			            					++$confirm;
+			            				@endphp
+			            			@endif
 		            			@endforeach
-		            			@if($check == $count && $order->hotelStatus == 1 && $order->statusHotel != 2)
+		            			@if($check == $count && $order->hotelStatus == 1 && $order->statusHotel != 2 || $confirm >0)
 		            				<span class="badge badge-danger">VH phòng</span>
-		            			@elseif($order->statusHotel == 2 )
+		            			@elseif($order->statusHotel == 2)
 		            				<span class="badge badge-success">VH phòng</span>
 		            			@elseif($check < $count && $order->hotelStatus == 0)
 		            				<span class="badge badge-secondary">VH phòng</span>
@@ -450,6 +465,7 @@
 	            				@php
 	            					$check = 0;
 	            					$count = 0;
+	            					$confirm = 0;
 	            				@endphp
 		            			@foreach($order->payment as $key => $payments)
 		            				@php
@@ -460,10 +476,15 @@
 			            					$check += $payments['valuePayment'];
 			            				@endphp
 		            				@endif
+		            				@if($payments['confirm'] == 1)
+			            				@php
+			            					++$confirm;
+			            				@endphp
+			            			@endif
 		            			@endforeach
-		            			@if($check == $count && $order->otherStatus == 1 && $order->statusOther != 2)
+		            			@if($check == $count && $order->otherStatus == 1 && $order->statusOther != 2 || $confirm >0)
 		            				<span class="badge badge-danger">VH DV khác</span>
-		            			@elseif($order->statusOther == 2 )
+		            			@elseif($order->statusOther == 2)
 		            				<span class="badge badge-success">VH DV khác</span>
 		            			@elseif($check < $count && $order->otherStatus == 0)
 		            				<span class="badge badge-secondary">VH DV khác</span>

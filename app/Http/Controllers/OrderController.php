@@ -94,21 +94,31 @@ class OrderController extends Controller
         return view('order._formEdit', compact('response', 'couthHotel', 'countOther', 'coutPayment', 'countSurcharge','profit' , 'role', 'margin'));
     }
     public function store(Request $request){
-        // dd($request->all());
+        $listCustomerArr = $request['listCustomer'] != '' ? explode(',', $request['listCustomer']) : '';
+        $listCustomer = [];
+        if($listCustomerArr != null){
+           foreach($listCustomerArr as $list){
+               if($list != null){
+                   array_push($listCustomer, $list);
+                }
+           }
+        }
         if(isset($request['checkin_out'])){
             $check = explode('~', $request['checkin_out']);
             $checkin = $check[0] != null  ? $check[0] : null;
             $checkout = $check[0] != null  ? $check[1] : null;
         }
-    	// if($request['payment'] != null){
-	    // 	foreach($request['payment'] as $image){
-		   //  	$image_url = '';
-		   //      if(isset($image['imagePayment'])){
-		   //          $image_url = FileHelper::uploadFile($file = $image['imagePayment'], null, $base_path = 'uploads/file_payment');
-		   //      }
-	    // 	}
-
-    	// }
+        $payment = [];
+    	if($request['payment'] != null){
+	    	foreach($request['payment'] as $image){
+		    	$image_url = '';
+		        if($image['imagePayment'] != "undefined"){
+		            $image_url = FileHelper::uploadFile($file = $image['imagePayment'], null, $base_path = 'uploads/file_payment');
+		        }
+                $image['imagePayment'] = $image_url;
+                array_push($payment, $image);
+	    	}
+    	}
     	Order::create([
     		'nameSaler'=> $request['nameSaler'],
             'teamSaler'=> $request['teamSaler'],
@@ -124,12 +134,12 @@ class OrderController extends Controller
     		'airLine' => $request['airLine'],
     		'hotel' => $request['hotel'],
     		'other' => $request['other'],
-    		'payment' => $request['payment'],
+    		'payment' => $payment,
     		'countValue' => $request['countValue'],
             'airlineStatus' => (int)$request['airlineStatus'],
             'hotelStatus' => (int)$request['hotelStatus'],
             'otherStatus' => (int)$request['otherStatus'],
-            'listCustomer' => $request['listCustomer'],
+            'listCustomer' => $listCustomer,
             'ctkm' => $request['ctkm'],
             'adult'=> $request['adult'],
             'children'=> $request['children'],
@@ -142,6 +152,17 @@ class OrderController extends Controller
     	return response()->json(['httpCode'=>200,'message'=>'Tạo thành công']);
     }
     public function update(Request $request){
+        $payment = [];
+        if($request['payment'] != null){
+            foreach($request['payment'] as $image){
+                $image_url = '';
+                if($image['imagePayment'] != "undefined"){
+                    $image_url = FileHelper::uploadFile($file = $image['imagePayment'], null, $base_path = 'uploads/file_payment');
+                }
+                $image['imagePayment'] = $image_url;
+                array_push($payment, $image);
+            }
+        }
         $id = $request['id'];
         $role = Auth::user()->role;
         $check = Order::where('id',$id)->first();
@@ -166,14 +187,23 @@ class OrderController extends Controller
         }else{
             $statusOther = '';
         }
+        $listCustomerArr = $request['listCustomer'] != '' ? explode(',', $request['listCustomer']) : '';
         $listCustomer = [];
-        if(isset($request['listCustomer'])){
-            foreach($request['listCustomer'] as $list){
-                if($list != null){
-                    array_push($listCustomer, $list);
+        if($listCustomerArr != null){
+           foreach($listCustomerArr as $list){
+               if($list != null && $list != "  "){
+                   array_push($listCustomer, $list);
                 }
-            }
+           }
         }
+        $countAirline = [];
+        array_push($countAirline, $request['countAirline']);
+        $countHotel = [];
+        array_push($countHotel, $request['countHotel']);
+        $countOther = [];
+        array_push($countOther, $request['countOther']);
+        $count = [];
+        array_push($count, $request['count']);
         if(isset($request['checkin_out'])){
             $check = explode('~', $request['checkin_out']);
             $checkin = $check[0] != null  ? $check[0] : null;
@@ -184,24 +214,23 @@ class OrderController extends Controller
             if($role == 3 || $role == 4 || $role == 5 || $role == 6){
                 $check = Margin::where('id_order', $id)->first();
                 if($check == null){
-                    // dd($request['_marginHotel'], $request['_marginOther']);
                     Margin::create([
                         'id_order' => $id,
                         'hotel'=> $request['_marginHotel'],
                         'other'=> $request['_marginOther'],
-                        'countAirline' => $request['countAirline'],
-                        'countHotel' => $request['countHotel'],
-                        'countOther' => $request['countOther'],
-                        'count' => $request['count'],
+                        'countAirline' => $countAirline,
+                        'countHotel' => $countHotel,
+                        'countOther' => $countOther,
+                        'count' => $count,
                     ]);
                 }else{
                     $update = Margin::where('id_order', $id)->first();
                     $update->hotel = $request['_marginHotel'];
                     $update->other = $request['_marginOther'];
-                    $update->countAirline = $request['countAirline'];
-                    $update->countHotel = $request['countHotel'];
-                    $update->countOther = $request['countOther'];
-                    $update->count = $request['count'];
+                    $update->countAirline = $countAirline;
+                    $update->countHotel = $countHotel;
+                    $update->countOther = $countOther;
+                    $update->count = $count;
                     $update->save();
                 }
             }
@@ -220,7 +249,7 @@ class OrderController extends Controller
                 'airLine' => $request['airLine'],
                 'hotel' => $request['hotel'],
                 'other' => $request['other'],
-                'payment' => $request['payment'],
+                'payment' => $payment,
                 'countValue' => $request['countValue'],
                 'airlineStatus' => (int)$request['airlineStatus'],
                 'hotelStatus' => (int)$request['hotelStatus'],

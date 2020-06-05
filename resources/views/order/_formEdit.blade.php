@@ -235,7 +235,7 @@
 			<div class="groupService">
 				<div class="row">
 					<div class="col-3">
-						<label>Loại dịch vụ  <i class="fa fa-plus-circle addService" aria-hidden="true" style="color: blue; cursor: pointer;" @if($role != 4) disabled="" @endif></i></label>
+						<label>Loại dịch vụ  <i class="fa fa-plus-circle addService" aria-hidden="true" style="color: blue; cursor: pointer;" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled="" @endif></i></label>
 					</div>
 					<div class="col-3">
 						<label>Chi phí dịch vụ</label>
@@ -243,25 +243,25 @@
 				</div>
 				@if($response['service'] != null)
 				@foreach($response['service'] as $service)
-				<div class="row">
+				<div class="row data">
 					<div class="col-3 input-group mb-3">
-		  				<input type="text" name="noteAdminAir" class="form-control" value="{!! $service['name'] !!}" @if($role != 4) disabled="" @endif>
+		  				<input type="text" name="nameService" class="form-control nameService" value="{!! $service['name'] !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled="" @endif>
 					</div>
 					<div class="col-3">
 						<div class="input-group mb-3">
-			  				<input type="text" name="noteAdminAir" class="form-control common-currency" value="{!! $service['value'] !!}" @if($role != 4) disabled="" @endif>
+			  				<input type="text" name="valueService" class="form-control valueService common-currency" value="{!! $service['value'] !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled="" @endif>
 						</div>
 					</div>
 				</div>
 				@endforeach
 				@else
-				<div class="row">
+				<div class="row data">
 					<div class="col-3 input-group mb-3">
-		  				<input type="text" name="noteAdminAir" class="form-control" @if($role != 4) disabled="" @endif>
+		  				<input type="text" name="nameService" class="form-control" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled="" @endif>
 					</div>
 					<div class="col-3">
 						<div class="input-group mb-3">
-			  				<input type="text" name="noteAdminAir" class="form-control common-currency" @if($role != 4) disabled="" @endif>
+			  				<input type="text" name="valueService" class="form-control common-currency" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled="" @endif>
 						</div>
 					</div>
 				</div>
@@ -310,14 +310,14 @@
 			</div>
 			<div class="row">
 				<div class="col-3" style="padding-left: 45px; padding-top: 16px">
-					<input type="checkbox" id="checkin_out" name="checkin_out" class="form-check-input" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
+					<input type="checkbox" id="checkin_out" name="checkin_out" class="form-check-input" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif @if($response['checkin'] != null) checked @endif>
 				    <label class="form-check-label" for="gridCheck">
 				    	Chọn trùng theo vé máy bay
 				    </label>
 				</div>
 				<div class="col-3">
 					<div class="input-group mb-3">
-		  				<input type="text" class="form-control dateCheck" value="{!! $response['checkin'] != null ? $response['checkin'].'~'.$response['checkout'] : '' !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
+		  				<input type="text" class="form-control dateCheck" value="{!! $response['checkin'] != null ? $response['checkin'].'~'.$response['checkout'] : '' !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif disabled="">
 						<div class="input-group-append">
 						    <span class="input-group-text" id="basic-addon2"><i class="fa fa-calendar" aria-hidden="true"></i>
 							</span>
@@ -354,7 +354,7 @@
 	                	@foreach($response['hotel'] as $key => $res)
 	                	<tr class="hotel updateHotel data">
 	                		<td>
-		                		<input type="text" name="" class="form-control dateHotel date" value="{!! $res['date'] !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
+		                		<input type="date" name="" class="form-control dateHotel" value="{!! $res['date'] !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 		                	</td>
 	                		<td>
 		                		<input type="text" name="" class="form-control nameHotel" value="{!! $res['name'] !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
@@ -573,6 +573,9 @@
 		                		<input type="text" name="" class="form-control datePayment date" value="{!! $res['datePayment'] !!}" @if($res['codeFT'] != null) disabled @endif @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 		                	</td>
 		                	<td>
+		                		@if($res['imagePayment'] != null || $res['image'] != null)
+		                		<a href="{{ asset($res['imagePayment'] != '' ? $res['imagePayment'] : $res['image']) }}" target="_blank" data-name="{!! $res['imagePayment'] !!}"> Xem ảnh </a>
+		                		@endif
 		                		<input type="file" name="" class="form-control imagePayment" value="{!! $res['imagePayment'] !!}" @if($res['codeFT'] != null) disabled @endif @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 		                	</td>
 		                	<td>
@@ -639,6 +642,7 @@
 		                    <th>Hạng phòng</th>
 		                    <th>Giường</th>
 		                    <th>Gói mua</th>
+		                    <th>Số lượng</th>
 		                    <th>Tiền phòng (Giá cost)</th>
 		                </tr>
 		                </thead>
@@ -659,6 +663,9 @@
 			                	</td>
 		                		<td>
 		                			<label class="combo{!! $key !!}"> {!! $res['combo'] !!}</label>
+			                	</td>
+			                	<td>
+		                			<label class="number{!! $key !!}"> {!! $res['number'] !!}</label>
 			                	</td>
 		                		<td>
 		                			<input type="" name="" class="form-control common-currency countProfitHotel" style="font-size: 12px" value="{!! ($margin != null) ? $margin->hotel[$key]['cost'] : '' !!}">
@@ -689,9 +696,10 @@
 		            <table id="tblOtherMargin" class="table table-xs data-table table-bordered">
 		                <thead>
 		                <tr>
-		                    <th style="width: 30%">Tên dịch vụ</th>
-		                    <th style="width: 30%">Giá bán</th>
-		                    <th style="width: 40%">Giá tiền (Giá cost)</th>
+		                    <th style="width: 25%">Tên dịch vụ</th>
+		                    <th style="width: 25%">Số lượng</th>
+		                    <th style="width: 25%">Giá bán</th>
+		                    <th style="width: 25%">Giá tiền (Giá cost)</th>
 		                </tr>
 		                </thead>
 		                <tbody>
@@ -700,6 +708,9 @@
 		            		<tr class='other{!! $key !!} updateOther data'>
 			                	<td>
 		                			<label class="name{!! $key !!}"> {!! $res['nameOther'] !!}</label>
+			                	</td>
+			                	<td>
+		                			<label class="name{!! $key !!}"> {!! $res['amountOther'] !!}</label>
 			                	</td>
 			                	<td>
 		            				<label class="amount{!! $key !!}"> {!! $res['valueOther'] !!}</label>
@@ -886,7 +897,7 @@
 	    	$('#tblhotel tbody').append(`
 	    		<tr>
             		<td>
-            			<input type="text" name="dateHotel`+indexHotel+`" class="form-control dateHotel`+indexHotel+` date">
+            			<input type="date" name="dateHotel`+indexHotel+`" class="form-control dateHotel`+indexHotel+`">
             		</td>
             		<td>
 						<input type="text" name="nameHotel" class="form-control nameHotel">
@@ -1303,151 +1314,134 @@
     			'fromDate' : $('.fromDate').val(),
     			'toDate' : $('.toDate').val()
 	    	};
-	    	var serviceAlir = [];
-			var $service = $('.groupService .row');
-			console.log($service);
-			$service.each(function(){
-				serviceAlir.push({
-					name: $(this).find("input:eq(0)").val(),
-					value: $(this).find("input:eq(1)").val(),
-				});
+	    	var formData = new FormData();
+	    	formData.append("airLine[airCode]", $('.airCode').val());
+	    	formData.append("airLine[airValue]", $('.airValue').val());
+	    	formData.append("airLine[fromDate]", $('.fromDate').val());
+	    	formData.append("airLine[toDate]", $('.toDate').val());
+			var $service = $('.groupService .data');
+			$service.each(function(key, value){
+				formData.append("service["+key+"][name]", $(this).find("input:eq(0)").val());
+	        	formData.append("service["+key+"][value]",  $(this).find("input:eq(1)").val());
 			});
-			console.log(serviceAlir);
-	    	var hotel = [];
 	    	var $hotel = $('#tblhotel tbody tr');
-	    	$hotel.each(function(){
-				hotel.push({
-					date: $(this).find("input:eq(0)").val(),
-					name: $(this).find("input:eq(1)").val(),
-					level: $(this).find("input:eq(2)").val(),
-					bed: $(this).find("input:eq(3)").val(),
-					combo: $(this).find("input:eq(4)").val(),
-					number: $(this).find("input:eq(5)").val(),
-					value: $(this).find("input:eq(6)").val(),
-					typeSurcharge: $(this).find("input:eq(7)").val(),
-					amountHotel: $(this).find("input:eq(8)").val(),
-					surcharge: $(this).find("input:eq(9)").val(),
-				});
+	    	$hotel.each(function(key, value){
+	    		formData.append("hotel["+key+"][date]", $(this).find("input:eq(0)").val());
+	        	formData.append("hotel["+key+"][name]",  $(this).find("input:eq(1)").val());
+	        	formData.append("hotel["+key+"][level]", $(this).find("input:eq(2)").val());
+	        	formData.append("hotel["+key+"][bed]", $(this).find("input:eq(3)").val());
+	        	formData.append("hotel["+key+"][combo]", $(this).find("input:eq(4)").val());
+	        	formData.append("hotel["+key+"][number]", $(this).find("input:eq(5)").val());
+	        	formData.append("hotel["+key+"][value]", $(this).find("input:eq(6)").val());
+	        	formData.append("hotel["+key+"][typeSurcharge]", $(this).find("input:eq(7)").val());
+	        	formData.append("hotel["+key+"][amountHotel]", $(this).find("input:eq(8)").val());
+	        	formData.append("hotel["+key+"][surcharge]", $(this).find("input:eq(9)").val());
 			});
-			var other = [];
 			var $other = $('#tblOther tbody tr');
-			$other.each(function(){
-				other.push({
-					nameOther: $(this).find("input:eq(0)").val(),
-					detailOther: $(this).find("input:eq(1)").val(),
-					amountOther: $(this).find("input:eq(2)").val(),
-					princeOther: $(this).find("input:eq(3)").val(),
-					valueOther: $(this).find("input:eq(4)").val(),
-					noteOther: $(this).find("input:eq(5)").val(),
-				});
+			$other.each(function(key, value){
+				formData.append("other["+key+"][nameOther]", $(this).find("input:eq(0)").val());
+	        	formData.append("other["+key+"][detailOther]",  $(this).find("input:eq(1)").val());
+	        	formData.append("other["+key+"][amountOther]", $(this).find("input:eq(2)").val());
+	        	formData.append("other["+key+"][princeOther]", $(this).find("input:eq(3)").val());
+	        	formData.append("other["+key+"][valueOther]", $(this).find("input:eq(4)").val());
+	        	formData.append("other["+key+"][noteOther]", $(this).find("input:eq(5)").val());
 			});
-	        var payment = [];
 	        var $payment = $('#tblPayment tbody tr');
-	        var number = 0;
-	        $payment.each(function(){
-	        	payment.push({
-					valuePayment: $(this).find("input:eq(0)").val(),
-					datePayment: $(this).find("input:eq(1)").val(),
-					imagePayment: $(this).find("input:eq(2)").val(),
-					codeFT: $(this).find("input:eq(3)").val(),
-					confirm: $(this).find("option:selected").val(),
-					notePayment: $(this).find("input:eq(4)").val(),
-				});
+	        $payment.each(function(key, value){
+	        	formData.append("payment["+key+"][valuePayment]", $(this).find("input:eq(0)").val());
+	        	formData.append("payment["+key+"][datePayment]",  $(this).find("input:eq(1)").val());
+	        	formData.append("payment["+key+"][imagePayment]", $(this).find("input:eq(2)")[0].files[0]);
+	        	formData.append("payment["+key+"][codeFT]", $(this).find("input:eq(3)").val());
+	        	formData.append("payment["+key+"][confirm]", $(this).find('option:selected').val());
+	        	formData.append("payment["+key+"][notePayment]", $(this).find("input:eq(4)").val());
+	        	formData.append("payment["+key+"][image]", $(this).closest("tr").find("td:eq(2) a").attr('data-name'));
 	        });
 	        var listCustomer = $('.listCustomer').val().split('\n');
+	        formData.append("nameSaler", $('.nameSaler').val());
+	        formData.append("teamSaler", $('.nameTeam').val());
+	        formData.append("typeCustomer", $('.typeCustomer').val());
+	        formData.append("typeCombo" , $('.typeCombo').val());
+	        formData.append("contactCode" , $('.contactCode').val());
+	        formData.append("nameCustomer" , $('.nameCustomer').val());
+	        formData.append("phoneCustomer" , $('.phoneCustomer').val());
+	        formData.append("mailCustomer" , $('.mailCustomer').val());
+	        formData.append("country" , $('.country').val());
+	        formData.append("mailCustomer" , $('.mailCustomer').val());
+	        formData.append("codeCombo", $('.codeCombo').val());
+	        formData.append("levelOrder", $('.levelOrder').val());
+	        formData.append("countValue", $('.countOrder').val());
+	        formData.append("airlineStatus", airlineStatus);
+	        formData.append("hotelStatus", hotelStatus);
+	        formData.append("otherStatus", otherStatus);
+	        formData.append("listCustomer", listCustomer);
+	        formData.append("ctkm", $('.ctkm').val());
+	        formData.append("adult", $('.adult').val());
+	        formData.append("children", $('.children').val());
+	        formData.append("baby", $('.baby').val());
+	        formData.append("checkin_out", $('.dateCheck').val());
+	        formData.append("noteOtherSale", $('.noteOtherSale').val());
+	        formData.append("noteHotelSale", $('.noteHotelSale').val());
 	        var _marginHotel = [];
 	        var $_marginHotel = $('#tblhotelMargin .data');
-	        $_marginHotel.each(function(){
-	        	_marginHotel.push({
-					date: $(this).find("td:eq(0)").text(),
-					name: $(this).find("td:eq(1)").text(),
-					level: $(this).find("td:eq(2)").text(),
-					bad: $(this).find("td:eq(3)").text(),
-					combo: $(this).find("td:eq(4)").text(),
-					cost: $(this).find("td:eq(5) .countProfitHotel").val(),
-				});
+	        $_marginHotel.each(function(key, value){
+	        	formData.append("_marginHotel["+key+"][date]", $(this).closest("tr").find("td:eq(0)").text());
+	        	formData.append("_marginHotel["+key+"][name]",  $(this).closest("tr").find("td:eq(1)").text());
+	        	formData.append("_marginHotel["+key+"][level]", $(this).closest("tr").find("td:eq(2)").text());
+	        	formData.append("_marginHotel["+key+"][bad]",  $(this).closest("tr").find("td:eq(3)").text());
+	        	formData.append("_marginHotel["+key+"][combo]",  $(this).closest("tr").find("td:eq(4)").text());
+	        	formData.append("_marginHotel["+key+"][amount]",  $(this).closest("tr").find("td:eq(5)").text());
+	        	formData.append("_marginHotel["+key+"][cost]",  $(this).closest("tr").find("input:eq(0)").val());
 	        });
 	        var _marginOther = [];
 	        var $_marginOther = $('#tblOtherMargin .data');
-	        $_marginOther.each(function(){
-	        	_marginOther.push({
-					name: $(this).find("td:eq(0)").text(),
-					prince: $(this).find("td:eq(1)").text(),
-					cost: $(this).find("td:eq(2) .inCostOther").val(),
-				});
+	        $_marginOther.each(function(key, value){
+	        	formData.append("_marginOther["+key+"][name]", $(this).closest("tr").find("td:eq(0)").text());
+	        	formData.append("_marginOther["+key+"][amount]",  $(this).closest("tr").find("td:eq(1)").text());
+	        	formData.append("_marginOther["+key+"][prince]",  $(this).closest("tr").find("td:eq(2)").text());
+	        	formData.append("_marginOther["+key+"][cost]", $(this).closest("tr").find("input:eq(0)").val());
 	        });
 	        var countAirline =[];
-	        countAirline.push({
-	        	nhap: $('.airNhap ').val(),
-	        	ban: $('.airBan ').val(),
-	        	airPrifit: $('.airPrifit').val()
-	        });
+	        formData.append("countAirline[nhap]", $('.airNhap ').val());
+        	formData.append("countAirline[ban]",  $('.airBan ').val());
+        	formData.append("countAirline[airPrifit]",  $('.airPrifit').val());
 	        var countHotel =[];
-	        countHotel.push({
-	        	nhap: $('.marginHotel').val(),
-	        	ban: $('.cin').val(),
-	        	profitHotel: $('.profitHotel').val()
-	        });
+	        formData.append("countHotel[nhap]", $('.marginHotel').val());
+        	formData.append("countHotel[ban]",  $('.cin').val());
+        	formData.append("countHotel[profitHotel]",  $('.profitHotel').val());
 	        var countOther =[];
-	        countOther.push({
-	        	nhap: $('.marginOther').val(),
-	        	ban: $('.costOther').val(),
-	        	profitOther: $('.profitOther').val()
-	        });
+	        formData.append("countOther[nhap]", $('.marginOther').val());
+        	formData.append("countOther[ban]",  $('.costOther').val());
+        	formData.append("countOther[profitOther]", $('.profitOther').val());
 	        var count =[];
-	        count.push({
-	        	countNhap: $('.countNhap ').val(),
-	        	countBan: $('.countBan').val(),
-	        	countProfit: $('.countProfit').val()
+	        formData.append("count[countNhap]", $('.countNhap ').val());
+        	formData.append("count[countBan]",  $('.countBan').val());
+        	formData.append("count[countProfit]", $('.countProfit').val());
+
+        	formData.append("statusAir", $('.statusAir').val());
+        	formData.append("statusHotel", $('.statusHotel').val());
+        	formData.append("statusOther", $('.statusOther').val());
+        	formData.append("adult", $('.adult').val());
+        	formData.append("children", $('.children').val());
+        	formData.append("baby", $('.baby').val());
+        	formData.append("checkin_out", $('.dateCheck').val());
+        	formData.append("noteAdminAir", $('.noteAdminAir').val());
+        	formData.append("noteHotelSale", $('.noteHotelSale').val());
+        	formData.append("codeHotel", $('.codeHotel').val());
+        	formData.append("noteAdminHotel", $('.noteAdminHotel').val());
+        	formData.append("noteOtherSale", $('.noteOtherSale').val());
+        	formData.append("noteAdminOther", $('.noteAdminOther').val());
+        	formData.append("id", '{!! $response->id !!}');
+        	$.ajaxSetup({
+	        	headers: {
+	        		'X-CSRF-TOKEN': '{{csrf_token()}}',
+	        	}
 	        });
 		    $.ajax({
 	            url: url,
 	            method: 'POST',
-	            data: {
-		            _token: '{{csrf_token()}}',
-		            id: '{!! $response->id !!}',
-		            nameSaler: $('.nameSaler').val(),
-		            teamSaler: $('.nameTeam').val(),
-		            typeCustomer: $('.typeCustomer').val(),
-		            typeCombo : $('.typeCombo').val(),
-	    			contactCode : $('.contactCode').val(),
-	    			nameCustomer : $('.nameCustomer').val(),
-	    			phoneCustomer : $('.phoneCustomer').val(),
-	    			mailCustomer : $('.mailCustomer').val(),
-	    			country : $('.country').val(),
-	    			codeCombo: $('.codeCombo').val(),
-	    			levelOrder: $('.levelOrder').val(),
-	    			ctkm: $('.ctkm').val(),
-		            airLine: airLine,
-		            hotel: hotel,
-		            other: other,
-		            countValue: $('.countOrder').val(),
-		            payment: payment,
-		            airlineStatus: airlineStatus,
-				    hotelStatus: hotelStatus,
-				    otherStatus: otherStatus,
-				    statusAir: $('.statusAir').val(),
-				    statusHotel: $('.statusHotel').val(),
-				    statusOther: $('.statusOther').val(),
-				    listCustomer: listCustomer,
-				    _marginHotel: _marginHotel,
-				    _marginOther: _marginOther,
-				    countAirline: countAirline,
-				    countHotel: countHotel,
-				    countOther: countOther,
-				    count: count,
-				    adult: $('.adult').val(),
-				    children: $('.children').val(),
-				    baby: $('.baby').val(),
-				    checkin_out: $('.dateCheck').val(),
-				    service: serviceAlir,
-				    noteAdminAir: $('.noteAdminAir').val(),
-				    noteHotelSale: $('.noteHotelSale').val(),
-				    codeHotel: $('.codeHotel').val(),
-				    noteAdminHotel: $('.noteAdminHotel').val(),
-				    noteOtherSale: $('.noteOtherSale').val(),
-				    noteAdminOther: $('.noteAdminOther').val()
-		        },
+	            data: formData,
+		        contentType: false,
+	            processData: false,
 	        }).done(function(res){
 	        	if(res.httpCode == 200){
 	        		alert(res.message);
@@ -1492,7 +1486,7 @@
 		firstCost = $('.marginHotel').val() != '' ? $('.marginHotel').val() : 0;
 		var __profitHotel = $('.profitHotel').val() != '' ? $('.profitHotel').val() : 0;
 		$(this).focusout(function(){
-			$('.marginHotel').val(parseInt(firstCost) - parseInt(first) + parseInt($(this).val()));
+			$('.marginHotel').val(parseInt(firstCost) - parseInt(first) * parseInt($(this).closest("tr").find("label:eq(5)").text()) + parseInt($(this).val()) * parseInt($(this).closest("tr").find("label:eq(5)").text()));
 			$('.profitHotel').val(parseInt($('.cin').val()) - parseInt($('.marginHotel').val()));
 
 			// xem lai
@@ -1510,7 +1504,7 @@
 		first = $(this).val() != '' ? $(this).val() : 0;
 		firstCost = $('.costOther').val() != '' ? $('.costOther ').val() : 0;
 		$(this).focusout(function(){
-			$('.costOther').val(parseInt(firstCost) - parseInt(first) + parseInt($(this).val()))
+			$('.costOther').val(parseInt(firstCost) - parseInt(first * parseInt($(this).closest("tr").find("label:eq(1)").text())) + parseInt($(this).val()) * parseInt($(this).closest("tr").find("label:eq(1)").text()));
 			$('.profitOther').val(parseInt(marginOther) - parseInt($('.costOther').val()));
 
 			// xem lai

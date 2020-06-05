@@ -247,14 +247,14 @@
 			</div>
 			<div class="row">
 				<div class="col-3" style="padding-left: 45px; padding-top: 16px">
-					<input type="checkbox" id="checkin_out" name="checkin_out" class="form-check-input">
+					<input type="checkbox" id="checkin_out" name="checkin_out" class="form-check-input" disabled="true">
 				    <label class="form-check-label" for="gridCheck">
 				    	Chọn trùng theo vé máy bay
 				    </label>
 				</div>
 				<div class="col-3">
 					<div class="input-group mb-3">
-		  				<input type="text" class="form-control dateCheck">
+		  				<input type="text" class="form-control dateCheck" disabled="true">
 						<div class="input-group-append">
 						    <span class="input-group-text" id="basic-addon2"><i class="fa fa-calendar" aria-hidden="true"></i>
 							</span>
@@ -287,32 +287,20 @@
 	                    </tr>
 	                    </thead>
 	                    <tbody>
-	                	<tr>
+	      <!--           	<tr>
 	                		<td>
-	                			<input type="text" name="dateHotel" class="form-control dateHotel date">
+	                			<input type="date" name="dateHotel" class="form-control dateHotel ">
 	                		</td>
 	                		<td>
-	                			<!-- <select name="nameHotel" class="browser-default custom-select form-control">
-								  	<option selected value="Vinmart">Vinmart</option>
-								</select> -->
 								<input type="text" name="nameHotel" class="form-control nameHotel">
 	                		</td>
 	                		<td>
-	                			<!-- <select name="levelHotel" class="browser-default custom-select form-control">
-								  	<option selected value="5 sao">5 sao</option>
-								</select> -->
 								<input type="text" name="levelHotel" class="form-control levelHotel">
 	                		</td>
 	                		<td>
-	                			<!-- <select name="bedHotel" class="browser-default custom-select form-control">
-								  	<option selected value="Double">Double</option>
-								</select> -->
 								<input type="text" name="bedHotel" class="form-control bedHotel">
 	                		</td>
 	                		<td>
-	                			<!-- <select name="comboHotel" class="browser-default custom-select">
-								  	<option selected value="BB: ăn sáng">BB: ăn sáng</option>
-								</select> -->
 								<input type="text" name="comboHotel" class="form-control comboHotel">
 	                		</td>
 	                		<td>
@@ -331,7 +319,7 @@
 	                		<td>
 	                			
 	                		</td>
-	                	</tr>
+	                	</tr> -->
 	                    </tbody>
 	                </table>
 				</div>
@@ -471,7 +459,7 @@
 		                			<input type="date" name="datePayment" class="form-control datePayment date">
 		                		</td>
 		                		<td>
-		                			<input type="file" name="imagePayment" class="form-control imagePayment">
+		                			<input type="file" name="imagePayment" class="form-control imagePayment" style="font-size: 12px">
 		                		</td>
 		                		<td>
 		                			<input type="text" name="codeFT" class="form-control codeFT" @if($role != 3) disabled @endif>
@@ -577,16 +565,116 @@
 		    	$('.countOrder').val(parseInt(countOrder) - parseInt(countChild) + parseInt(value) * parseInt(amount));
 		    });
     	});
-	    $('#checkin_out').click(function(){
+	    $('body').delegate('#checkin_out', 'click', function (){
 	    	var checkin = $('.fromDate ').val();
 	    	var checkout = $('.toDate').val();
 	    	// console.log(checkin, checkout, 111);
 	    	if($(this).prop("checked") == true){
                 $('.dateCheck').val(checkin+'~' +checkout);
+                $('#tblhotel tbody').append(`
+	    		<tr class="checkin">
+            		<td>
+            			<input type="date" name="dateHotel_in" class="form-control dateHotel_in" disabled="">
+            		</td>
+            		<td>
+						<input type="text" name="nameHotel" class="form-control nameHotel">
+            		</td>
+            		<td>
+						<input type="text" name="levelHotel" class="form-control levelHotel">
+            		</td>
+            		<td>
+						<input type="text" name="bedHotel" class="form-control bedHotel">
+            		</td>
+            		<td>
+						<input type="text" name="comboHotel" class="form-control comboHotel">
+            		</td>
+            		<td>
+            			<input type="text" name="numberHotel" class="form-control numberHotel common-numeric">
+            		</td>
+            		<td>
+            			<input type="text" name="valueHotel" class="form-control valueHotel common-currency">
+            		</td>
+            		<td>
+            			<input type="text" name="typeSurcharge" class="form-control typeSurcharge">
+            		</td>
+            		<td>
+            			<input type="text" name="amountHotel" class="form-control amountHotel common-numeric">
+            		</td>
+            		<td><input type="text" name="surcharge" placeholder="nhập tiền" class="form-control common-currency surcharge"></td>
+            		<td>
+            			<i class="remove fa fa-times removeRow" aria-hidden="true" style="cursor: pointer; color: orange"></i>
+            		</td>
+            	</tr>
+            	<tr class="checkout">
+            		<td>
+            			<input type="date" name="dateHotel_out" class="form-control dateHotel_out" disabled="">
+            		</td>
+            		<td>
+						<input type="text" name="nameHotel" class="form-control nameHotel">
+            		</td>
+            		<td>
+						<input type="text" name="levelHotel" class="form-control levelHotel">
+            		</td>
+            		<td>
+						<input type="text" name="bedHotel" class="form-control bedHotel">
+            		</td>
+            		<td>
+						<input type="text" name="comboHotel" class="form-control comboHotel">
+            		</td>
+            		<td>
+            			<input type="text" name="numberHotel" class="form-control numberHotel common-numeric">
+            		</td>
+            		<td>
+            			<input type="text" name="valueHotel" class="form-control valueHotel common-currency">
+            		</td>
+            		<td>
+            			<input type="text" name="typeSurcharge" class="form-control typeSurcharge">
+            		</td>
+            		<td>
+            			<input type="text" name="amountHotel" class="form-control amountHotel common-numeric">
+            		</td>
+            		<td><input type="text" name="surcharge" placeholder="nhập tiền" class="form-control common-currency surcharge"></td>
+            		<td>
+            			<i class="remove fa fa-times removeRow" aria-hidden="true" style="cursor: pointer; color: orange"></i>
+            		</td>
+            	</tr>
+	    		`);
+            	$('.dateHotel_in').val(checkin);
+                $('.dateHotel_out').val(checkout);
+	    		$(document).find('.common-numeric').inputmask({
+		        'alias': 'decimal',
+		        'autoGroup': true,
+		        'removeMaskOnSubmit': true,
+		        'autoUnmask': true,
+		        'allowMinus': false
+			    });
+			    $(document).find('.common-currency').inputmask({
+			        'alias': 'decimal',
+			        'groupSeparator': ',',
+			        'placeholder': "0",
+			        'autoGroup': true,
+			        'removeMaskOnSubmit': true,
+			        'autoUnmask': true,
+			        'suffix': ' VNĐ',
+			        'allowMinus': false
+			    });
             }
             else if($(this).prop("checked") == false){
+            	var _checkin = $('#tblhotel tbody .checkin');
+            	var _checkout = $('#tblhotel tbody .checkout');
+            	var _value = parseInt(_checkin.find("input:eq(5)").val() != '' ? _checkin.find("input:eq(5)").val() : 0)*parseInt(_checkin.find("input:eq(6)").val() != '' ? _checkin.find("input:eq(6)").val() : 0)+parseInt(_checkin.find("input:eq(8)").val() != '' ? _checkin.find("input:eq(8)").val() : 0)*parseInt(_checkin.find("input:eq(9)").val() != '' ? _checkin.find("input:eq(9)").val() : 0) + parseInt(_checkout.find("input:eq(5)").val() != '' ? _checkout.find("input:eq(5)").val() : 0)*parseInt(_checkout.find("input:eq(6)").val() != '' ? _checkout.find("input:eq(6)").val() : 0)+parseInt(_checkout.find("input:eq(8)").val() != '' ? _checkout.find("input:eq(8)").val() : 0)*parseInt(_checkout.find("input:eq(9)").val() != '' ? _checkout.find("input:eq(9)").val() : 0);
+            	$('.totalValueHotel').val(parseInt($('.totalValueHotel').val() != '' ? $('.totalValueHotel').val() : 0) - parseInt(_value));
+            	$('.countOrder').val(parseInt($('.countOrder').val() != '' ? $('.countOrder').val() : 0) - parseInt(_value));
+            	$('#tblhotel tbody .checkin, #tblhotel tbody .checkout').remove();
                 $('.dateCheck').val('');
             }
+	    });
+	    $('.fromDate, .toDate').change(function(){
+	    	if($(this).val() != null){
+	    		$('#checkin_out').prop('disabled', false);
+	    	}else{
+	    		$('#checkin_out').prop('disabled', true);
+	    	}
 	    });
 	    $('.airValue').click(function(){
 	    	var firstVal = $(this).val() != '' ? $(this).val() : 0;
@@ -653,7 +741,7 @@
         	}
         });
 
-        $('.numberHotel, .valueHotel, .amountHotel, .surcharge').click(function(){
+        $('body').delegate('.numberHotel, .valueHotel, .amountHotel, .surcharge', 'click', function (){
     		var count = $('.totalValueHotel').val() != '' ? $('.totalValueHotel').val() : 0;
     		var countOrder = $('.countOrder').val() != '' ? $('.countOrder').val() : 0;
     		var countChild = parseInt($(this).closest("tr").find("input:eq(5)").val() != '' ? $(this).closest("tr").find("input:eq(5)").val() : 0) * parseInt($(this).closest("tr").find("input:eq(6)").val() != '' ? $(this).closest("tr").find("input:eq(6)").val() : 0) + parseInt($(this).closest("tr").find("input:eq(8)").val() != '' ? $(this).closest("tr").find("input:eq(8)").val() : 0) * parseInt($(this).closest("tr").find("input:eq(9)").val() != '' ? $(this).closest("tr").find("input:eq(9)").val() : 0);
@@ -674,7 +762,7 @@
 	    	$('#tblhotel tbody').append(`
 	    		<tr>
             		<td>
-            			<input type="text" name="dateHotel`+indexHotel+`" class="form-control dateHotel`+indexHotel+` date">
+            			<input type="date" name="dateHotel`+indexHotel+`" class="form-control dateHotel`+indexHotel+`">
             		</td>
             		<td>
 						<input type="text" name="nameHotel" class="form-control nameHotel">
@@ -1098,83 +1186,78 @@
     			'fromDate' : $('.fromDate').val(),
     			'toDate' : $('.toDate').val()
 	    	};
-	    	var hotel = [];
+	        var formData = new FormData();
+	    	formData.append("airLine[airCode]", $('.airCode').val());
+	    	formData.append("airLine[airValue]", $('.airValue').val());
+	    	formData.append("airLine[fromDate]", $('.fromDate').val());
+	    	formData.append("airLine[toDate]", $('.toDate').val());
 	    	var $hotel = $('#tblhotel tbody tr');
-	    	$hotel.each(function(){
-				hotel.push({
-					date: $(this).find("input:eq(0)").val(),
-					name: $(this).find("input:eq(1)").val(),
-					level: $(this).find("input:eq(2)").val(),
-					bed: $(this).find("input:eq(3)").val(),
-					combo: $(this).find("input:eq(4)").val(),
-					number: $(this).find("input:eq(5)").val(),
-					value: $(this).find("input:eq(6)").val(),
-					typeSurcharge: $(this).find("input:eq(7)").val(),
-					amountHotel: $(this).find("input:eq(8)").val(),
-					surcharge: $(this).find("input:eq(9)").val(),
-				});
+	    	$hotel.each(function(key, value){
+	    		formData.append("hotel["+key+"][date]", $(this).find("input:eq(0)").val());
+	        	formData.append("hotel["+key+"][name]",  $(this).find("input:eq(1)").val());
+	        	formData.append("hotel["+key+"][level]", $(this).find("input:eq(2)").val());
+	        	formData.append("hotel["+key+"][bed]", $(this).find("input:eq(3)").val());
+	        	formData.append("hotel["+key+"][combo]", $(this).find("input:eq(4)").val());
+	        	formData.append("hotel["+key+"][number]", $(this).find("input:eq(5)").val());
+	        	formData.append("hotel["+key+"][value]", $(this).find("input:eq(6)").val());
+	        	formData.append("hotel["+key+"][typeSurcharge]", $(this).find("input:eq(7)").val());
+	        	formData.append("hotel["+key+"][amountHotel]", $(this).find("input:eq(8)").val());
+	        	formData.append("hotel["+key+"][surcharge]", $(this).find("input:eq(9)").val());
 			});
-			var other = [];
 			var $other = $('#tblOther tbody tr');
-			$other.each(function(){
-				other.push({
-					nameOther: $(this).find("input:eq(0)").val(),
-					detailOther: $(this).find("input:eq(1)").val(),
-					amountOther: $(this).find("input:eq(2)").val(),
-					princeOther: $(this).find("input:eq(3)").val(),
-					valueOther: $(this).find("input:eq(4)").val(),
-					noteOther: $(this).find("input:eq(5)").val(),
-				});
+			$other.each(function(key, value){
+				formData.append("other["+key+"][nameOther]", $(this).find("input:eq(0)").val());
+	        	formData.append("other["+key+"][detailOther]",  $(this).find("input:eq(1)").val());
+	        	formData.append("other["+key+"][amountOther]", $(this).find("input:eq(2)").val());
+	        	formData.append("other["+key+"][princeOther]", $(this).find("input:eq(3)").val());
+	        	formData.append("other["+key+"][valueOther]", $(this).find("input:eq(4)").val());
+	        	formData.append("other["+key+"][noteOther]", $(this).find("input:eq(5)").val());
 			});
-	        var payment = [];
 	        var $payment = $('#tblPayment tbody tr');
-	        // var formData = new FormData();
-	        // console.log((formData.append("image", $(this).find("input:eq(2)").[0].files[0])));
-	        $payment.each(function(){
-	        	payment.push({
-					valuePayment: $(this).find("input:eq(0)").val(),
-					datePayment: $(this).find("input:eq(1)").val(),
-					imagePayment: $(this).find("input:eq(2)").val(),
-					codeFT: $(this).find("input:eq(3)").val(),
-					confirm: $(this).find('option:selected').val(),
-					notePayment: $(this).find("input:eq(4)").val(),
-				});
+	        $payment.each(function(key, value){
+	        	formData.append("payment["+key+"][valuePayment]", $(this).find("input:eq(0)").val());
+	        	formData.append("payment["+key+"][datePayment]",  $(this).find("input:eq(1)").val());
+	        	formData.append("payment["+key+"][imagePayment]", $(this).find("input:eq(2)")[0].files[0]);
+	        	formData.append("payment["+key+"][codeFT]", $(this).find("input:eq(3)").val());
+	        	formData.append("payment["+key+"][confirm]", $(this).find('option:selected').val());
+	        	formData.append("payment["+key+"][notePayment]", $(this).find("input:eq(4)").val());
 	        });
-	        console.log(payment);
 	        var listCustomer = $('.listCustomer').val().split('\n');
+	        formData.append("nameSaler", $('.nameSaler').val());
+	        formData.append("teamSaler", $('.nameTeam').val());
+	        formData.append("typeCustomer", $('.typeCustomer').val());
+	        formData.append("typeCombo" , $('.typeCombo').val());
+	        formData.append("contactCode" , $('.contactCode').val());
+	        formData.append("nameCustomer" , $('.nameCustomer').val());
+	        formData.append("phoneCustomer" , $('.phoneCustomer').val());
+	        formData.append("mailCustomer" , $('.mailCustomer').val());
+	        formData.append("country" , $('.country').val());
+	        formData.append("mailCustomer" , $('.mailCustomer').val());
+	        formData.append("codeCombo", $('.codeCombo').val());
+	        formData.append("levelOrder", $('.levelOrder').val());
+	        formData.append("countValue", $('.countOrder').val());
+	        formData.append("airlineStatus", airlineStatus);
+	        formData.append("hotelStatus", hotelStatus);
+	        formData.append("otherStatus", otherStatus);
+	        formData.append("listCustomer", listCustomer);
+	        formData.append("ctkm", $('.ctkm').val());
+	        formData.append("adult", $('.adult').val());
+	        formData.append("children", $('.children').val());
+	        formData.append("baby", $('.baby').val());
+	        formData.append("checkin_out", $('.dateCheck').val());
+	        formData.append("noteOtherSale", $('.noteOtherSale').val());
+	        formData.append("noteHotelSale", $('.noteHotelSale').val());
+	        $.ajaxSetup({
+	        	headers: {
+	        		'X-CSRF-TOKEN': '{{csrf_token()}}',
+	        	}
+	        });
 		    $.ajax({
 	            url: url,
 	            method: 'POST',
-	            data: {
-		            _token: '{{csrf_token()}}',
-		            nameSaler: $('.nameSaler').val(),
-		            teamSaler: $('.nameTeam').val(),
-		            typeCustomer: $('.typeCustomer').val(),
-		            typeCombo : $('.typeCombo').val(),
-	    			contactCode : $('.contactCode').val(),
-	    			nameCustomer : $('.nameCustomer').val(),
-	    			phoneCustomer : $('.phoneCustomer').val(),
-	    			mailCustomer : $('.mailCustomer').val(),
-	    			country : $('.country').val(),
-	    			codeCombo: $('.codeCombo').val(),
-	    			levelOrder: $('.levelOrder').val(),
-		            airLine: airLine,
-		            hotel: hotel,
-		            other: other,
-		            countValue: $('.countOrder').val(),
-		            payment: payment,
-		            airlineStatus: airlineStatus,
-				    hotelStatus: hotelStatus,
-				    otherStatus: otherStatus,
-				    listCustomer: listCustomer,
-				    ctkm: $('.ctkm').val(),
-				    adult: $('.adult').val(),
-				    children: $('.children').val(),
-				    baby: $('.baby').val(),
-				    checkin_out: $('.dateCheck').val(),
-				    noteOtherSale: $('.noteOtherSale').val(),
-				   	noteHotelSale: $('.noteHotelSale').val(),
-		        },
+	            data: formData,
+	            contentType: false,
+	            processData: false,
 	        }).done(function(res){
 	        	if(res.httpCode == 200){
 	        		alert(res.message);
