@@ -109,7 +109,7 @@ class OrderController extends Controller
             $checkout = $check[0] != null  ? $check[1] : null;
         }
         $payment = [];
-    	if($request['payment'] != null){
+    	if($request['payment'][0]['valuePayment'] != null || $request['payment'][0]['datePayment'] != null){
 	    	foreach($request['payment'] as $image){
 		    	$image_url = '';
 		        if($image['imagePayment'] != "undefined"){
@@ -123,6 +123,7 @@ class OrderController extends Controller
     		'nameSaler'=> $request['nameSaler'],
             'teamSaler'=> $request['teamSaler'],
             'typeCustomer'=> $request['typeCustomer'],
+            'channels'=> $request['channels'],
             'typeCombo'=> $request['typeCombo'],
             'contactCode'=> $request['contactCode'],
             'nameCustomer'=> $request['nameCustomer'],
@@ -153,7 +154,7 @@ class OrderController extends Controller
     }
     public function update(Request $request){
         $payment = [];
-        if($request['payment'] != null){
+        if($request['payment'][0]['valuePayment'] != null || $request['payment'][0]['datePayment'] != null){
             foreach($request['payment'] as $image){
                 $image_url = '';
                 if($image['imagePayment'] != "undefined"){
@@ -163,6 +164,7 @@ class OrderController extends Controller
                 array_push($payment, $image);
             }
         }
+        // dd($payment);
         $id = $request['id'];
         $role = Auth::user()->role;
         $check = Order::where('id',$id)->first();
@@ -238,6 +240,7 @@ class OrderController extends Controller
                 'nameSaler' => $request['nameSaler'],
                 'teamSaler' => $request['teamSaler'],
                 'typeCustomer' => $request['typeCustomer'],
+                'channels'=> $request['channels'],
                 'typeCombo' => $request['typeCombo'],
                 'contactCode' => $request['contactCode'],
                 'nameCustomer' => $request['nameCustomer'],

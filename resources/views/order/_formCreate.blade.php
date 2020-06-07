@@ -72,34 +72,34 @@
 		@csrf
 	<div id="wrapper">
 			<label class="title">Form nhập thông tin đơn hàng</label>
-		<div class="row form-group">
-			<div class="col-3"></div>
-			<div class="col-3">Tên sale</div>
-			<div class="col-3">Team</div>
-			<div class="col-3">Loại khách hàng</div>
-		</div>
-		<div class="row form-group">
-			<div class="col-3"><label style="font-size:14px; font-weight: bolder ">Thông tin chung</label></div>
-			<div class="col-3">
-				<!-- <select class="browser-default custom-select">
-				  	<option selected>Nguyễn Văn A</option>
-				  	<option value="1">Nguyễn Văn B</option>
-				  	<option value="2">Nguyễn Văn C</option>
-				  	<option value="3">Nguyễn Văn D</option>
-				</select> -->
-				<input type="text" name="nameSaler" class="form-control nameSaler" value="{!! $email !!}" disabled="true">
-			</div>
-			<div class="col-3">
-				<input type="text" name="nameTeam" class="form-control nameTeam" >
-				<!-- <input type="" name="" value="Nguyễn Văn A" disabled="" class="form-control" > -->
-			</div>
-			<div class="col-3">
-				<!-- <input type="text" name="typeCustomer" class="form-control typeCustomer" > -->
-				<select class="browser-default custom-select typeCustomer" name="typeCustomer">
-				  	<option value="" selected>--Lựa chọn--</option>
-				  	<option value="B2B">B2B</option>
-				  	<option value="B2B">B2C</option>
-				</select>
+		<div id="form_border" class="table table-xs data-table table-bordered" style="border-top:1px solid orange">
+			<label style="font-size:14px; font-weight: bolder " >Thông tin chung</label>
+			<div class="row form-group">
+				<div class="col-3">
+					<label>Tên sale</label>
+					<input type="text" name="nameSaler" class="form-control nameSaler" value="{!! $email !!}" disabled="true">
+				</div>
+				<div class="col-3">
+					<label>Team</label>
+					<input type="text" name="nameTeam" class="form-control nameTeam" >
+				</div>
+				<div class="col-3">
+					<label>Loại khách hàng</label>
+					<select class="browser-default custom-select typeCustomer" name="typeCustomer">
+					  	<option value="" selected>--Lựa chọn--</option>
+					  	<option value="FIT">FIT</option>
+					  	<option value="GIT">GIT</option>
+					</select>
+				</div>
+				<div class="col-3">
+					<label>Kênh bán</label>
+					<select class="browser-default custom-select channels" name="channels">
+					  	<option value="" selected>--Lựa chọn--</option>
+					  	<option value="0">Combo</option>
+					  	<option value="1">TA</option>
+					  	<option value="2">SA</option>
+					</select>
+				</div>
 			</div>
 		</div>
 		<div id="form_border" class="table table-xs data-table table-bordered" style="border-top:1px solid orange">
@@ -155,7 +155,6 @@
 				</div>
 			</div>
 		</div>
-		<hr>
 		<div id="form_border" class="table table-xs data-table table-bordered" style="border-top:1px solid orange">
 			<div class="row">
 				<div class="col-3">
@@ -336,7 +335,6 @@
 				</div>
 			</div>
 		</div>
-			<hr>
 		<div id="form_border" class="table table-xs data-table table-bordered" style="border-top:1px solid orange">
 			<div class="row">
 				<div class="col-3">
@@ -411,7 +409,6 @@
 				<div class="col-4"></div>
             </div>
 		</div>
-			<hr>
 			<div id="form_border" class="table table-xs data-table table-bordered" style="border-top:1px solid orange">
 				<div class="row">
 					<div class="col-3">
@@ -1226,6 +1223,7 @@
 	        formData.append("nameSaler", $('.nameSaler').val());
 	        formData.append("teamSaler", $('.nameTeam').val());
 	        formData.append("typeCustomer", $('.typeCustomer').val());
+	        formData.append("channels", $('.channels').val());
 	        formData.append("typeCombo" , $('.typeCombo').val());
 	        formData.append("contactCode" , $('.contactCode').val());
 	        formData.append("nameCustomer" , $('.nameCustomer').val());

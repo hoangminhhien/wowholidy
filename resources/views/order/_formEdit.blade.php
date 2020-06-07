@@ -76,35 +76,34 @@
 	<form method="POST" enctype="multipart/form-data" id="formOrder">
 		@csrf
 	<div id="wrapper">
-			<label class="title">Form cập nhật thông tin đơn hàng</label>
-		<div class="row form-group">
-			<div class="col-3"></div>
-			<div class="col-3">Tên sale</div>
-			<div class="col-3">Team</div>
-			<div class="col-3">Loại khách hàng</div>
-		</div>
-		<div class="row form-group">
-			<div class="col-3">
-				<label style="font-size:14px; font-weight: bolder ">Thông tin chung</label></div>
-			<div class="col-3">
-				<!-- <select class="browser-default custom-select">
-				  	<option selected>Nguyễn Văn A</option>
-				  	<option value="1">Nguyễn Văn B</option>
-				  	<option value="2">Nguyễn Văn C</option>
-				  	<option value="3">Nguyễn Văn D</option>
-				</select> -->
-				<input type="text" name="nameSaler" class="form-control nameSaler" value="{!! $response['nameSaler'] !!}" disabled="true" >
-			</div>
-			<div class="col-3">
-				<input type="text" name="nameTeam" class="form-control nameTeam" value="{!! $response['teamSaler'] !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
-				<!-- <input type="" name="" value="Nguyễn Văn A" disabled="" class="form-control" > -->
-			</div>
-			<div class="col-3">
-				<!-- <input type="text" name="typeCustomer" class="form-control typeCustomer" > -->
-				<select class="browser-default custom-select typeCustomer" name="typeCustomer" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
-				  	<option {!! isset($response['typeCustomer']) === 'B2B'  ? 'selected' : '' !!} value="B2B">B2B</option>
-				  	<option {!! isset($response['typeCustomer']) === 'B2C'  ? 'selected' : '' !!} value="B2C">B2C</option>
+		<label class="title">Form cập nhật thông tin đơn hàng</label>
+		<div id="form_border" class="table table-xs data-table table-bordered" style="border-top:1px solid orange">
+			<label style="font-size:14px; font-weight: bolder ">Thông tin chung</label>
+			<div class="row form-group">
+				<div class="col-3">
+					<label>Tên sale</label>
+					<input type="text" name="nameSaler" class="form-control nameSaler" value="{!! $response['nameSaler'] !!}" disabled="true" >
+				</div>
+				<div class="col-3">
+					<label>Team</label>
+					<input type="text" name="nameTeam" class="form-control nameTeam" value="{!! $response['teamSaler'] !!}" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
+				</div>
+				<div class="col-3">
+					<label>Loại khách hàng</label>
+					<select class="browser-default custom-select typeCustomer" name="typeCustomer" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
+				  	<option {!! isset($response['typeCustomer']) === 'FIT'  ? 'selected' : '' !!} value="FIT">FIT</option>
+				  	<option {!! isset($response['typeCustomer']) === 'GIT'  ? 'selected' : '' !!} value="GIT">GIT</option>
 				</select>
+				</div>
+				<div class="col-3">
+					<label>Kênh bán</label>
+					<select class="browser-default custom-select channels" name="channels" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
+					  	<option  value="" selected>--Lựa chọn--</option>
+					  	<option {!! isset($response['channels']) == '0'  ? 'selected' : '' !!} value="0">Combo</option>
+					  	<option {!! isset($response['channels']) == '1'  ? 'selected' : '' !!} value="1">TA</option>
+					  	<option {!! isset($response['channels']) == '2'  ? 'selected' : '' !!} value="2">SA</option>
+					</select>
+				</div>
 			</div>
 		</div>
 		<div id="form_border" class="table table-xs data-table table-bordered" style="border-top:1px solid orange">
@@ -235,7 +234,7 @@
 			<div class="groupService">
 				<div class="row">
 					<div class="col-3">
-						<label>Loại dịch vụ  <i class="fa fa-plus-circle addService" aria-hidden="true" style="color: blue; cursor: pointer;" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled="" @endif></i></label>
+						<label>Loại dịch vụ  <button type="button" class="btn btn-link addService" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled="" @endif><i class="fa fa-plus-circle" aria-hidden="true" style="color: blue; cursor: pointer;"></i></button></label>
 					</div>
 					<div class="col-3">
 						<label>Chi phí dịch vụ</label>
@@ -573,7 +572,7 @@
 		                		<input type="text" name="" class="form-control datePayment date" value="{!! $res['datePayment'] !!}" @if($res['codeFT'] != null) disabled @endif @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
 		                	</td>
 		                	<td>
-		                		@if($res['imagePayment'] != null || $res['image'] != null)
+		                		@if($res['imagePayment'] != null || $res['image'] != 'undefined')
 		                		<a href="{{ asset($res['imagePayment'] != '' ? $res['imagePayment'] : $res['image']) }}" target="_blank" data-name="{!! $res['imagePayment'] !!}"> Xem ảnh </a>
 		                		@endif
 		                		<input type="file" name="" class="form-control imagePayment" value="{!! $res['imagePayment'] !!}" @if($res['codeFT'] != null) disabled @endif @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
@@ -597,6 +596,35 @@
 		                	</td>
 	                	</tr>
 	                	@endforeach
+	                	@else
+	                	<tr class="payment updatePayment data">
+	                		<td>
+	                			<input type="text" name="" class="form-control valuePayment common-currency" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
+	                		</td>
+		                	<td>
+		                		<input type="text" name="" class="form-control datePayment date" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
+		                	</td>
+		                	<td>
+		                		<input type="file" name="" class="form-control imagePayment" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
+		                	</td>
+		                	<td>
+		                		<input type="text" name="" class="form-control codeFT" @if($role != 3) disabled @endif>
+		                	</td>
+		                	<td>
+		                		<select class="browser-default custom-select confirm" name="confirm" @if($role != 2) disabled @endif>
+								  	<option value="0">Không cho nợ</option>
+								  	<option value="1">Cho nợ</option>
+								</select>
+		                	</td>
+		                	<td>
+		                		<input type="text" name="" class="form-control notePayment" @if($role == 3 || $role == 4 || $role == 5 || $role == 6) disabled @endif>
+		                	</td>
+		                	<td>
+		                		<div @if($role == 3 || $role == 4 || $role == 5 || $role == 6) style="display: none;" @endif>
+	                				<i class="remove fa fa-times removeRow`+indexPay+`" aria-hidden="true" style="cursor: pointer; color: orange"></i>
+		                		</div>
+		                	</td>
+	                	</tr>
 	                	@endif
 	                    </tbody>
 	                </table>
@@ -1517,12 +1545,12 @@
 	$('body').delegate('.addService', 'click', function (){
 		$('.groupService').append(`
 			<div class="row">
-				<div class="col-3" @if($role != 4) style="display: none" @endif>
+				<div class="col-3">
 					<div class="input-group mb-3">
 		  				<input type="text" name="" class="form-control">
 					</div>
 				</div>
-				<div class="col-3" @if($role != 4) style="display: none" @endif>
+				<div class="col-3">
 					<div class="input-group mb-3">
 		  				<input type="text" name="" class="form-control common-currency">
 					</div>
